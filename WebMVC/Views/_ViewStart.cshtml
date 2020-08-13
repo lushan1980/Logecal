@@ -1,0 +1,36 @@
+﻿@*@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+
+
+@{
+    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+    string cLayout = "~/Views/Shared/_HomeLayout.cshtml";
+
+    switch (controller)
+    {
+        case "Home":
+            cLayout = "~/Views/Shared/_HomeLayout.cshtml";
+            break;
+        case "COVID19":
+            cLayout = "~/Views/Shared/_COVID19Layout.cshtml";
+            break;
+        case "VAS":
+            cLayout = "~/Views/Shared/_VASLayout.cshtml";
+            break;
+    }
+
+    //if (controller == "COVID19")
+    //{
+    //    cLayout = "~/Views/Shared/_COVID19Layout.cshtml";
+    //}
+    //else if (controller == "HOME")
+    //{
+    //    cLayout = "~/Views/Shared/_HomeLayout.cshtml";
+    //}
+    //else {
+    //    cLayout = "~/Views/Shared/_VASLayout.cshtml";
+    //}
+
+    Layout = cLayout;
+}

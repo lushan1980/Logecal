@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "joinmailinglist";
+}
+
+@{
+    Layout = null;
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="~/assets/scripts/ContactForm.js"></script>
+
+
+<form action="" id="ContactForm">
+    <div class="grid" id="Formgird">
+        <div class="grid__column grid__column--12 grid__column--12--lg">
+            <div class="control">
+                <label for="contact-name" class="control__label control__label--is-required">Name</label>
+                <input type="text" class="control__input" id="contact-name">
+                <p id="msg-name" style="color:#ff0000; margin:0px; font-style:italic"></p>
+            </div>
+            <p id="demo"></p>
+        </div>
+        <div class="grid__column grid__column--12 grid__column--12--lg">
+            <div class="control">
+                <label for="contact-email" class="control__label control__label--is-required">Email Address</label>
+                <input type="email" class="control__input" id="contact-email">
+                <p id="msg-email" style="color:#ff0000; margin:0px; font-style:italic"></p>
+            </div>
+        </div>
+
+        <div class="grid__column grid__column--12 grid__column--12--lg">
+            <button class="btn" id="btnSignup" type="submit">Sign up now!</button>
+        </div>
+    </div>
+</form>
+

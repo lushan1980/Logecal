@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - COVID-19 Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        #loader {
+            border: 12px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 12px solid #444444;
+            width: 70px;
+            height: 70px;
+            animation: spin 1s linear infinite;
+        }
+
+        @@keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .center {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>*@
+    <script type="text/javascript" src="~/Scripts/render.js"></script>
+
+</head>
+<body>
+
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-4">
+                <center><img src="~/Sources/Coronavirus_update-teaser.jpg" alt="COVID-19" style="vertical-align:middle" width="130" height="130"></center>
+            </div>
+            <div class="col-md-4">
+                <center><h2>COVID-19</h2></center>
+                <center><h2>An analysis of a pandemic</h2></center>
+                <center><h3>Powered by Logecal Data Analytics</h3></center>
+            </div>
+            <div class="col-md-4">
+                <center><img src="~/Sources/logo-blue.jpg" alt="Logecal" style="vertical-align:middle" width="250" height="80"></center>
+            </div>
+        </div>
+    </div>
+ 
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("COVID-19", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("USA", "USA", "Home")</li>
+                    <li>@Html.ActionLink("Canada", "Canada", "Home")</li>
+                    <li>@Html.ActionLink("Europe", "Europe", "Home")</li>
+                    <li>@Html.ActionLink("Africa", "Africa", "Home")</li>
+                    <li>@Html.ActionLink("Asia", "Asia", "Home")</li>
+                    <li>@Html.ActionLink("Middle East", "MiddleEast", "Home")</li>
+                    <li>@Html.ActionLink("South America", "SouthAmerica", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()      
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - COVID-19 Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

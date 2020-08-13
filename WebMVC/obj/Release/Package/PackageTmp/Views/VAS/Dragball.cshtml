@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Dragball";
+}
+
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Visual Analog Scale</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <link href="~/assets/styles/VAScss.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>       
+    
+    <div class="container"> 
+        <h2>@*Extend VAS into Two Dimensions*@</h2>        
+        <div class="canvas-container">            
+            
+            <canvas id="myCanvas" width="400" height="400"></canvas>
+            
+            <div class="bottom-left">&#128532;</div>
+            <div class="top-left">&#128529;</div>
+            <div class="top-right">&#128522;</div>
+            <div class="bottom-right">&#128529;</div>
+            @*No Benefit   No adverse effect    Best Benefit & No adverse effect   Best Benefit*@
+            
+        </div>
+        <input id="coords1">
+        <input id="coords2"> 
+        
+    </div>
+    <img src="~/assets/images/crosshair.svg" id="ball" />
+    
+
+
+    <script>
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+
+        // Create gradient
+        var grd = ctx.createLinearGradient(0, myCanvas.height, myCanvas.width, 0);
+        grd.addColorStop(.0, 'red');
+        grd.addColorStop(.4, 'orange');
+        grd.addColorStop(1, 'green');
+
+        // Fill with gradient
+        ctx.fillStyle = grd;
+        ctx.fillRect(50, 50, 300, 300);
+
+        let currentDroppable = null;
+        var rect = myCanvas.getBoundingClientRect();
+
+        ball.style.position = 'absolute';
+        ball.style.zIndex = 1000;
+        ball.style.left = rect.left + 190 + 'px';
+        ball.style.top = rect.top + 190 + 'px';
+
+
+        ball.onmousedown = function (event) {
+
+            let shiftX = event.clientX - ball.getBoundingClientRect().left;
+            let shiftY = event.clientY - ball.getBoundingClientRect().top;
+
+            function moveAt(pageX, pageY) {
+                ball.style.left = pageX - shiftX + 'px';
+                ball.style.top = pageY - shiftY + 'px';
+            }
+
+            function onMouseMove(event) {
+                moveAt(event.pageX, event.pageY);
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+
+            ball.onmouseup = function () {
+                document.removeEventListener('mousemove', onMouseMove);
+                ball.onmouseup = null;
+                //if (ball.style.left < rect.left + 40) { rect.left + 40 }
+                //else { ball.style.left = ball.style.left }
+                //if (ball.style.top < rect.left + 40) { rect.left + 40 }
+                //else { ball.style.top = ball.style.top }
+            };
+
+        };
+
+        ball.ondragstart = function () {
+            return false;
+        };
+    </script>
+
+
+</body>
+</html>

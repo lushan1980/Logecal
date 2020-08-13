@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\Coronavirus graph\Coronavirus\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\Coronavirus graph\Coronavirus\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{04786841-A291-42F5-AF5C-573F38453091}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebMVC</RootNamespace>
+    <AssemblyName>WebMVC</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44343</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="String-Deployment" Order="1" Enabled="True">
+          <Destination Path="Data Source=logecaldatabase.database.windows.net%3bInitial Catalog=CoronaVirus%3bUser ID=logecal%3bPassword=Lushan2020%24" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source= logecaldatabase.database.windows.net%3b Initial Catalog=CoronaVirus%3b User ID=logecal%3bPassword=Lushan2020%24" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\String-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.WebSockets, Version=0.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Coronavirus graph\Coronavirus\packages\Microsoft.WebSockets.0.2.3.1\lib\net45\Microsoft.WebSockets.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\Coronavirus graph\Coronavirus\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\Coronavirus graph\Coronavirus\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\Coronavirus graph\Coronavirus\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\..\Coronavirus graph\Coronavirus\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\Coronavirus graph\Coronavirus\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\Coronavirus graph\Coronavirus\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\Coronavirus graph\Coronavirus\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\Coronavirus graph\Coronavirus\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\Coronavirus graph\Coronavirus\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\..\Coronavirus graph\Coronavirus\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\..\Coronavirus graph\Coronavirus\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\..\Coronavirus graph\Coronavirus\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AllowSameSiteAttribute.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\COVID19Controller.cs" />
+    <Compile Include="Controllers\DataController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\VASController.cs" />
+    <Compile Include="Controllers\VASValueController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomHtmlHelepers.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\Survey.cs" />
+    <Compile Include="Models\TestSample.cs" />
+    <Compile Include="Models\typeplotData.cs" />
+    <Compile Include="Models\Samples.cs" />
+    <Compile Include="Models\VASUser.cs" />
+    <Compile Include="Models\VASValue.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sample1.cs" />
+    <Compile Include="StateData.cs" />
+    <Compile Include="TestWebsocketHandler.cs" />
+    <Compile Include="USA.ashx.cs">
+      <DependentUpon>USA.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="USAHandler.cs" />
+    <Compile Include="USASamples.cs" />
+    <Compile Include="Ws.ashx.cs">
+      <DependentUpon>Ws.ashx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\images\banner-about.jpg" />
+    <Content Include="assets\images\banner-background.jpg" />
+    <Content Include="assets\images\banner-contact.jpg" />
+    <Content Include="assets\images\banner-services.jpg" />
+    <Content Include="assets\images\bigdata.jpg" />
+    <Content Include="assets\images\checkmark-list-item.png" />
+    <Content Include="assets\images\Coronavirus_update-teaser.jpg" />
+    <Content Include="assets\images\COVID19_without_background.png" />
+    <Content Include="assets\images\crosshair.svg" />
+    <Content Include="assets\images\curved-shape-right.svg" />
+    <Content Include="assets\images\curved-shape.svg" />
+    <Content Include="assets\images\email-logo.jpg" />
+    <Content Include="assets\images\loading.gif" />
+    <Content Include="assets\images\logo-blue.png" />
+    <Content Include="assets\images\logo-white.png" />
+    <Content Include="assets\images\man-on-computer.jpg" />
+    <Content Include="assets\images\Maryland.jpg" />
+    <Content Include="assets\images\mockup-transparency-redux.png" />
+    <Content Include="assets\images\news.jpg" />
+    <Content Include="assets\images\Physician Outlook.JPG" />
+    <Content Include="assets\images\projecting.JPG" />
+    <Content Include="assets\images\Risk-Benefit.JPG" />
+    <Content Include="assets\images\screenshot-01.jpg" />
+    <Content Include="assets\images\screenshot-02.jpg" />
+    <Content Include="assets\images\screenshot-03.jpg" />
+    <Content Include="assets\images\screenshot-04.PNG" />
+    <Content Include="assets\images\screenshot-05.PNG" />
+    <Content Include="assets\images\smiling-face.png" />
+    <Content Include="assets\images\testimonial-quote.png" />
+    <Content Include="assets\scripts\App.js" />
+    <Content Include="assets\scripts\ContactForm.js" />
+    <Content Include="assets\scripts\VASSurvey1.js" />
+    <Content Include="assets\scripts\VASValue.js" />
+    <Content Include="assets\scripts\Vendor.js" />
+    <Content Include="assets\scripts\VerifyEmail.js" />
+    <Content Include="assets\styles\site.css" />
+    <Content Include="assets\styles\styles.css" />
+    <Content Include="assets\styles\VAScss.css" />
+    <Content Include="assets\styles\StylesMultiLine.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap4.min.css" />
+    <Content Include="Content\styles.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="images\banner-about.jpg" />
+    <Content Include="images\banner-background.jpg" />
+    <Content Include="images\banner-contact.jpg" />
+    <Content Include="images\banner-services.jpg" />
+    <Content Include="images\curved-shape-right.svg" />
+    <Content Include="images\curved-shape.svg" />
+    <Content Include="images\mockup-transparency-redux.png" />
+    <Content Include="images\screenshot-01.jpg" />
+    <Content Include="images\screenshot-02.jpg" />
+    <Content Include="images\screenshot-03.jpg" />
+    <Content Include="images\screenshot-04.PNG" />
+    <Content Include="images\screenshot-05.PNG" />
+    <Content Include="images\testimonial-quote.png" />
+    <Content Include="logo.ico" />
+    <Content Include="Scripts\App.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\CaesarDressing.woff2" />
+    <Content Include="assets\images\CaesarDressing.woff2" />
+    <Content Include="assets\fonts\CaesarDressing.woff2" />
+    <None Include="Properties\PublishProfiles\IISPublish.pubxml" />
+    <None Include="Properties\PublishProfiles\Logecal - Web Deploy.pubxml" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\render.js" />
+    <Content Include="Scripts\samplerender.js" />
+    <Content Include="Scripts\scrolldownhideNav.js" />
+    <Content Include="Scripts\testrender.js" />
+    <Content Include="Scripts\USA.js" />
+    <Content Include="images\Coronavirus_update-teaser.jpg" />
+    <Content Include="images\loading.gif" />
+    <Content Include="images\logo-blue.png" />
+    <Content Include="images\logo-white.png" />
+    <Content Include="Scripts\Vendor-d51e336ec0.js" />
+    <Content Include="styles\styleCOVID19.css" />
+    <Content Include="styles\styles.css" />
+    <Content Include="Web.config" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_HomeLayout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Ws.ashx" />
+    <Content Include="USA.ashx" />
+    <Content Include="Views\COVID19\Index.cshtml" />
+    <Content Include="Views\Shared\_COVID19Layout.cshtml" />
+    <Content Include="Views\COVID19\Africa.cshtml" />
+    <Content Include="Views\COVID19\Asia.cshtml" />
+    <Content Include="Views\COVID19\Canada.cshtml" />
+    <Content Include="Views\COVID19\Europe.cshtml" />
+    <Content Include="Views\COVID19\MiddleEast.cshtml" />
+    <Content Include="Views\COVID19\SouthAmerica.cshtml" />
+    <Content Include="Views\COVID19\USA.cshtml" />
+    <Content Include="Views\COVID19\USACities.cshtml" />
+    <Content Include="Views\COVID19\USAStates.cshtml" />
+    <Content Include="Views\COVID19\Test.cshtml" />
+    <Content Include="Views\Home\Services.cshtml" />
+    <Content Include="Views\Home\ContactForm.cshtml" />
+    <Content Include="Views\Home\sitemap.cshtml" />
+    <Content Include="Views\Home\termsofuse.cshtml" />
+    <Content Include="Views\Home\privacypolicy.cshtml" />
+    <Content Include="Views\Home\mailinglist.cshtml" />
+    <Content Include="Views\Home\joinmailinglist.cshtml" />
+    <Content Include="Views\Home\IndexNew.cshtml" />
+    <Content Include="Views\COVID19\Navbar.cshtml" />
+    <Content Include="Views\Home\Logecal.cshtml" />
+    <Content Include="Views\Home\Form.cshtml" />
+    <Content Include="Views\Home\VAS.cshtml" />
+    <Content Include="Views\VAS\Signin.cshtml" />
+    <Content Include="Views\Shared\_VASLayout.cshtml" />
+    <Content Include="Views\VAS\OneDimension.cshtml" />
+    <Content Include="Views\VAS\TwoDimensions.cshtml" />
+    <Content Include="Views\VAS\test.cshtml" />
+    <Content Include="Views\VAS\Dragball.cshtml" />
+    <Content Include="Views\VAS\test2.cshtml" />
+    <Content Include="Views\VAS\Survey1.cshtml" />
+    <Content Include="Views\VAS\VerifyEmail.cshtml" />
+    <Content Include="Views\VAS\SurveyList.cshtml" />
+    <Content Include="Views\VAS\Survey2.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Data\" />
+    <Folder Include="Views\Message\" />
+    <Folder Include="Views\VASValue\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51478</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44343/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:51478/" workingDir="" />
+          </servers>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\Coronavirus graph\Coronavirus\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\Coronavirus graph\Coronavirus\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

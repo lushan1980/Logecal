@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Contact Logecal";
+}
+
+<!-- BANNER
+================================================== -->
+<div class="banner banner--small" role="banner">
+    <div class="banner__background" style="background-image:url(/assets/images/banner-contact.jpg);" data-type="background"></div>
+    <div class="banner__content">
+        <h1 class="banner__headline alpha">Contact Us</h1>
+    </div>
+</div><!--/banner -->
+
+<main role="main" id="main">
+
+    <div class="container two-column__container">
+        <div class="grid two-column contact">
+
+            <!-- CONTACT INFORMATION
+            ================================================== -->
+            <div class="grid__column grid__column--12 grid__column--5--md two-column__section two-column__section--blue">
+                <img src="/assets/images/logo-white.png" alt="Logecal" class="contact__logo">
+                <address>
+                    <ul class="address-list address-list--white" aria-label="Contact Information">
+                        <li class="address-list__item">
+                            <div class="address-list__title">Address</div>
+                            <div class="address-list__information">
+                                996 Old Eagle School Road<br />
+                                Suite 1106<br />
+                                Wayne, PA 19087
+                            </div>
+                        </li>
+                        <li class="address-list__item">
+                            <div class="address-list__title">Phone</div>
+                            <div class="address-list__information">
+                                <a href="tel:14846541801" class="text-link text-link--white">484.654.1801</a>
+                            </div>
+                        </li>
+                        <li class="address-list__item">
+                            <div class="address-list__title">Email</div>
+                            <div class="address-list__information">
+                                <a href="mailto:info@logecal.com" class="text-link text-link--white">info@logecal.com</a>
+                            </div>
+                        </li>
+                    </ul>
+                </address>
+
+                <iframe class="contact__map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3053.0645652382927!2d-75.41526518435863!3d40.07397188433718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6946082bdf30d%3A0x73903b31753c9967!2s996+Old+Eagle+School+Rd+%231106%2C+Wayne%2C+PA+19087!5e0!3m2!1sen!2sus!4v1563311631892!5m2!1sen!2sus" width="600" height="450" style="border:0" allowfullscreen></iframe>
+
+            </div><!--/contact information-->
+            <!-- CONTACT FORM
+            ================================================== -->
+            <div class="grid__column grid__column--12 grid__column--7--md two-column__section">
+                <h2 class="h3 alpha">Request Info or Schedule a Demo</h2>
+                <p class="lead">To request more information or to schedule a demo, please complete the form below.</p>
+                <div>
+                    @Html.Action("ContactForm", "Home", new { @path = Url.Content("~/Views/Home/ContactForm") })
+                </div>
+   
+            </div><!--/contact form-->
+
+        </div>
+    </div>
+
+</main>

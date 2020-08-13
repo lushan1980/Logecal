@@ -1,0 +1,213 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+
+        ws = new WebSocket("wss://" + "localhost:44343" + "/Ws.ashx");
+        //ws = new WebSocket("ws://" + "localhost/Coronavirus" + "/WebSocket.ashx");
+        //ws = new WebSocket("ws://" + "192.168.0.22/Coronavirus" + "/WebSocket.ashx");
+
+        //ws = new WebSocket("ws://" + "68.81.221.35/Coronavirus" + "/WebSocket.ashx");
+        //ws = new WebSocket("wss://logecal.azurewebsites.net/Ws.ashx");
+        ws.onopen = function () {
+
+        };
+
+        ws.onmessage = function (e) {              // when a message was receiev from server
+
+            var data = JSON.parse(e.data);
+
+            var dataPoints1 = data.map(function (val) {
+                return {
+                    label: val.Date,
+                    y: val.Spline_Interpolation
+                }
+            });
+            var dataPoints2 = data.map(function (val) {
+                return {
+                    label: val.Date,
+                    y: val.New_Cases
+                }
+            });
+            var dataPoints3 = data.map(function (val) {
+                return {
+                    label: val.Date,
+                    y: val.Inflection_Regression
+                }
+            });
+            var dataPoints4 = data.map(function (val) {
+                return {
+                    label: val.Date,
+                    y: val.Projected_New_Cases
+                }
+            });
+            var dataPoints5 = data.map(function (val) {
+                return {
+                    label: val.Date,
+                    y: val.Projected_New_Cases_Upper_Bound
+                }
+            });
+            var dataPoints6 = data.map(function (val) {
+                return {
+                    label: val.Date,
+                    y: val.Projected_New_Cases_Lower_Bound
+                }
+            })
+
+            var dataPoints7 = data.map(function (val) {
+                return {
+                    label: val.Date,
+                    y: [val.Projected_New_Cases_Lower_Bound, val.Projected_New_Cases_Upper_Bound]
+                }
+            })
+
+            ;
+            var chart = new CanvasJS.Chart("chartContainer", {
+
+            colorSet: "colorSet2",
+            title: {
+                text: "Italy Total Cases"
+            },
+            axisY: {
+                title: "Number of New Daily Cases",
+                includeZero: false,
+                crosshair: {
+			        enabled: true
+                },
+                gridThickness: 1
+                //Prefix: "$"
+            },
+            axisX: {
+                interval: 5,
+                //intervalType: "Month",
+                valueFormatString: "DD MMM YYYY",
+                //gridThickness: 0,
+                crosshair: {
+			        enabled: true,
+			        snapToDataPoint: true
+                },
+            //      stripLines: [{
+			        // value: 27,
+			        // label: " ",
+			        // labelFontColor: "#808080",
+			        // labelAlign: "near"
+		        //}]
+                labelAngle: -45
+            },
+            legend: {
+		        cursor: "pointer",
+		        verticalAlign: "top",
+		        horizontalAlign: "center",
+		        dockInsidePlotArea: false,
+		        //itemclick: toogleDataSeries
+	        },
+            data: [{
+                    type: "line",
+                    name: "Spline Interpolation",
+                    showInLegend: true,
+                    color: "blue",
+                    markerSize: 0,
+                    dataPoints: dataPoints1
+                },
+                {
+                    type: "scatter",
+                    name: "New Cases",
+                    showInLegend: true,
+                    markerType: "circle",
+                    markerSize: 8,
+                    color: "gray",
+
+                    dataPoints: dataPoints2
+                },
+                {
+                    type: "scatter",
+
+                    name: "Inflection Regression",
+                    showInLegend: true,
+                    markerType: "circle",
+                    color: "red",
+                    markerSize: 15,
+                    dataPoints: dataPoints3
+                },
+                {
+                    type: "line",
+
+                    name: "Projected New Cases",
+                    showInLegend: true,
+                    color: "red",
+                    markerSize: 0,
+                    dataPoints: dataPoints4
+                },
+                //{
+                //    type: "line",
+                //    lineDashType: "dash",
+                //    name: "Projected New Cases Upper Bound",
+                //    showInLegend: false,
+                //    //color: "red",
+                //    markerSize: 0,
+                //    dataPoints: dataPoints5
+                //},
+                //{
+                //    type: "line",
+                //    lineDashType: "dash",
+                //    name: "Projected New Cases Lower Bound",
+                //    showInLegend: false,
+                //    //color: "red",
+                //    markerSize: 0,
+                //    dataPoints: dataPoints6
+                //},
+                {
+                    type: "rangeSplineArea",
+                    lineDashType: "dash",
+
+                    fillOpacity: 0.1,
+                    //name: "Projected New Cases Region",
+                    showInLegend: false,
+                    color: "red",
+                    markerSize: 0,
+                    dataPoints: dataPoints7
+                }
+            ]
+
+        });
+            //chart.options.data[0].dataPoints = dataPoints;
+
+        chart.render();
+
+        };
+
+        ws.onclose = function () {
+
+        };
+
+        ws.onerror = function (e) {
+
+        };
+    });
+    </script>
+</head>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>COVID-19</h2>
+        <div>test</div>
+        <center><div id="chartContainer" style="height: 500px; width: 90%;"></div></center>
+    </div>
+    @*<div class="col-md-4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>*@
+</div>

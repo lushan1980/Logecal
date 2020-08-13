@@ -1,0 +1,175 @@
+﻿
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        ws.onopen = function () {
+        };
+
+        ws.onmessage = function (e) {              // when a message was receiev from server
+
+            var data = JSON.parse(e.data);
+
+            var charts = [];
+
+            for (i = 0; i < data.length; i++) {
+                //for (var key in data) {
+                var statesample = data[i].ListSamples;
+
+                    var Proj = statesample.map(function (val) {
+                        return {
+                            label: val.Date,
+                            y: val.Proj
+                        }
+                    });
+                    var Dotted_proj = statesample.map(function (val) {
+                        return {
+                            label: val.Date,
+                            y: val.Dotted_proj
+                        }
+                    });
+                    var Dcases = statesample.map(function (val) {
+                        return {
+                            label: val.Date,
+                            y: val.Dcases
+                        }
+                    });
+                    var Proj_Region = statesample.map(function (val) {
+                        return {
+                            label: val.Date,
+                            y: [val.Proj_lower, val.Proj_upper]
+                        }
+                    });
+                    var Inflection = statesample.map(function (val) {
+                        return {
+                            label: val.Date,
+                            y: val.Inflection
+                        }
+                    });
+
+                    var chartDiv = document.createElement('div');
+                    chartDiv.setAttribute('id', 'chartContainer' + i);
+                    chartDiv.style.cssText = 'height: 500px; width: 100%;';
+                    document.getElementsByTagName('body')[0].appendChild(chartDiv);
+
+                    var titles = [];
+                    titles[i] = data[i].Plot;
+
+                    charts[i] = new CanvasJS.Chart(chartDiv.id, {
+
+                        colorSet: "colorSet2",
+                        title: {
+                            text: titles[i]
+                        },
+                        axisY: {
+                            title: "Number of New Daily Cases",
+                            includeZero: false,
+                            crosshair: {
+                                enabled: true
+                            },
+                            gridThickness: 1
+                            //Prefix: "$"
+                        },
+                        axisX: {
+                            interval: 5,
+                            //intervalType: "Month",
+                            valueFormatString: "DD MMM YYYY",
+                            //gridThickness: 0,
+                            crosshair: {
+                                enabled: true,
+                                snapToDataPoint: true
+                            },
+                            //      stripLines: [{
+                            // value: 27,
+                            // label: " ",
+                            // labelFontColor: "#808080",
+                            // labelAlign: "near"
+                            //}]
+                            labelAngle: -45
+                        },
+                        legend: {
+                            cursor: "pointer",
+                            verticalAlign: "top",
+                            horizontalAlign: "center",
+                            dockInsidePlotArea: false,
+                            //itemclick: toogleDataSeries
+                        },
+                        data: [{
+                            type: "line",
+                            name: "New Case Projections",
+                            showInLegend: true,
+                            color: "blue",
+                            markerSize: 0,
+                            dataPoints: Proj
+                        },
+                        {
+                            type: "line",
+                            lineDashType: "dash",
+                            name: "Dotted Projection",
+                            showInLegend: true,
+                            color: "red",
+                            markerSize: 0,
+                            dataPoints: Dotted_proj
+                        },
+                        {
+                            type: "scatter",
+                            name: "Daily Cases",
+                            showInLegend: true,
+                            markerType: "circle",
+                            markerSize: 8,
+                            color: "gray",
+                            dataPoints: Dcases
+                        },
+                        {
+                            type: "rangeSplineArea",
+                            lineDashType: "dash",
+                            fillOpacity: 0.1,
+                            //name: "Projected New Cases Region",
+                            showInLegend: false,
+                            color: "red",
+                            markerSize: 0,
+                            dataPoints: Proj_Region
+                        },
+                        {
+                            type: "scatter",
+                            name: "Inflection Point",
+                            showInLegend: true,
+                            markerType: "circle",
+                            color: "red",
+                            markerSize: 15,
+                            dataPoints: Inflection
+                        }
+                        ]
+
+                    });
+
+                    charts[i].render();
+
+            };
+
+        };
+
+        ws.onclose = function () {
+
+        };
+
+        ws.onerror = function (e) {
+
+        };
+
+    });
+</script>
+
+
+<body>
+    @*<div class="row">
+            <div class="col-md-12">
+                        <h2>COVID-19</h2>
+                        <div>test</div>
+                        <center><div id="chartContainer" style="height: 500px; width: 100%;"></div></center>
+                </div>
+
+        </div>*@
+</body>
+

@@ -1,0 +1,156 @@
+﻿@{
+    ViewBag.Title = "Logecal Statistical Software for Complex Trial Designs";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <title>@ViewBag.Title - Logecal Application</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,500,700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    @Styles.Render("~/Assets/css")
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    @*<script src="~/assets/scripts/Vendor.js"></script>*@
+
+
+
+</head>
+<body>
+
+    <!-- NAVBAR
+        ================================================== -->
+    <div class="navbar">
+        <div class="container navbar__container">
+            <div class="navbar__left">
+                <a href="/" class="navbar__logo">
+                    <img class="navbar__logo-file navbar__logo-file--white" src="/assets/images/logo-white.png" alt="Logecal">
+                </a>
+            </div>
+            <div class="navbar__mobile-buttons">
+                <button class="navbar__toggle navicon" aria-label="Show Menu">
+                    <span class="navicon__holder">
+                        <span class="navicon__line"></span>
+                        <span class="navicon__line"></span>
+                        <span class="navicon__line"></span>
+                    </span>
+                </button>
+            </div>
+            <nav class="navbar__nav">
+                <ul class="nav navbar__nav-list">
+                    <li class="nav__item"><a href="/Home/About" class="nav__link">About</a></li>
+                    <li class="nav__item"><a href="/HOME/services" class="nav__link">Services</a></li>
+                    <li class="nav__item"><a href="/COVID19/Index" class="nav__link">COVID&#8209;19</a></li>
+                    <li class="nav__item"><a href="/VAS/SurveyList" class="nav__link">VAS</a></li>
+                    <li class="nav__item"><a href="/HOME/contact" class="nav__link">Contact</a></li>
+                    <li class="nav__item nav__item--mobile-only">
+                        <a href="https://www.linkedin.com/company/logecal" class="nav__link" aria-label="LinkedIn" target="_blank"><i class="fa fa-linkedin nav__link-icon"></i><span class="nav__link-label" aria-hidden="true">Follow Us On LinkedIn</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <nav class="fixed-nav" role="navigation" aria-hidden="true">
+            <div class="container fixed-nav__container">
+                <ul class="fixed-nav__nav">
+                    <li class="fixed-nav__nav">
+                        <a href="/" class="fixed-nav__link" tabIndex="-1">
+                            <img class="fixed-nav__logo" src="/assets/images/logo-white.png" alt="">
+                        </a>
+                    </li>
+                    <li class="fixed-nav__nav"><a href="/Home/About" class="fixed-nav__link" tabIndex="-1">About</a></li>
+                    <li class="fixed-nav__nav"><a href="/Home/services" class="fixed-nav__link" tabIndex="-1">Services</a></li>
+                    <li class="fixed-nav__nav"><a href="/COVID19/Index" class="fixed-nav__link" tabIndex="-1">COVID-19</a></li>
+                    <li class="fixed-nav__nav"><a href="/VAS/SurveyList" class="fixed-nav__link" tabIndex="-1">VAS</a></li>
+                    <li class="fixed-nav__nav"><a href="/Home/contact" class="fixed-nav__link" tabIndex="-1">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div><!--/navbar -->
+
+
+
+    <div class="container--fluid">
+        @RenderBody()
+    </div>
+
+
+    <!-- FOOTER
+    ================================================== -->
+    <footer role="contentinfo">
+        <div class="footer__top">
+            <div class="container">
+                <div class="grid">
+                    <div class="grid__column grid__column--12 grid__column--4--lg footer__column">
+                        <a href="/" class="footer__logo">
+                            <img src="/assets/images/logo-blue.png" alt="Logecal">
+                        </a>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--4--lg footer__column">
+                        <h3 class="footer__heading">Join Our Mailing List</h3>
+                        <p class="footer__paragraph">Stay on top of our latest software updates and other company news.</p>
+                        <a href="/Home/mailinglist" class="btn">Sign Up Today</a>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--4--lg footer__column">
+                        <address>
+                            <ul class="address-list footer__address" aria-label="Contact Information">
+                                <li class="address-list__item">
+                                    <div class="address-list__title">Address</div>
+                                    <div class="address-list__information">
+                                        1974 Sproul Road<br />
+                                        Suite 204<br />
+                                        Broomall, PA 19008
+                                    </div>
+                                </li>
+                                <li class="address-list__item">
+                                    <div class="address-list__title">Phone</div>
+                                    <div class="address-list__information">
+                                        <a href="tel:14846541801" class="text-link">484.654.1801</a>
+                                    </div>
+                                </li>
+                                <li class="address-list__item">
+                                    <div class="address-list__title">Email</div>
+                                    <div class="address-list__information">
+                                        <a href="mailto:info@logecal.com" class="text-link">info@logecal.com</a>
+                                    </div>
+                                </li>
+                                <li class="address-list__item address-list__item--center">
+                                    <div class="address-list__title">
+                                        <a href="https://www.linkedin.com/company/logecal" class="social-icon" aria-label="LinkedIn" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                    </div>
+                                    <div class="address-list__information">
+                                        <a href="https://www.linkedin.com/company/logecal" target="_blank" class="text-link">Follow Us</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                <div class="grid">
+                    <div class="grid__column grid__column--12 grid__column--6--lg">
+                        <ul class="copyright__list" aria-label="Copyright Information and Helpful Links">
+                            <li>&copy; 2020 Logecal</li>
+                            <li><a href="/Home/sitemap" class="text-link text-link--gray">Sitemap</a></li>
+                            <li><a href="/Home/termsofuse" class="text-link text-link--gray">Terms of Use</a></li>
+                            <li><a href="/Home/privacypolicy" class="text-link text-link--gray">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--6--lg copyright__developer">
+                        <p>Website Designed & Developed by <a href="http://www.logecal.us" class="text-link" target="_blank">Logecal Inc.</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer><!--/footer-->
+    @*<script src="~/assets/scripts/App.js"></script>*@
+    @Scripts.Render(System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bundles/App", true))
+    @RenderSection("scripts", required: false)
+</body>
+</html>

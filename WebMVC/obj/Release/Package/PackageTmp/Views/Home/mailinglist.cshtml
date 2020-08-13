@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "mailinglist";
+}
+
+<!-- BANNER
+================================================== -->
+<div class="banner banner--small banner--gradient" role="banner">
+    <div class="banner__content">
+        <h1 class="banner__headline alpha">Mailing List</h1>
+    </div>
+</div><!--/banner -->
+
+<main role="main" id="main">
+
+    <!-- MAILING LIST
+    ================================================== -->
+    <article class="section section--small">
+        <div class="container container--small">
+
+            <div class="section__header section__header--centered">
+                <h2 class="section__heading">Join Our Mailing List</h2>
+                <p class="lead" style="text-align: left">Join our mailing list and receive the latest software updates and other company news.</p>
+            </div>
+
+            <div>
+                @Html.Action("joinmailinglist", "Home", new { @path = Url.Content("~/Views/Home/joinmailinglist") })
+            </div>
+
+        </div>
+    </article><!--/mailing list-->
+
+</main>
+

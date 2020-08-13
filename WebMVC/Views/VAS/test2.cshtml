@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "test2";
+}
+
+
+
+<div class="container">
+    <h1>Extend VAS into Two Dimensions</h1>
+    
+
+    <div class="row">
+        <div class="col-md-6" style="text-align:left">
+            <label for="fname">Frist Name: </label><br>
+            <input type="text" id="fname" name="fname" value="John" /><br>
+            <label for="lname">Last Name: </label><br>
+            <input type="text" id="fname" name="lname" value="Doe" /><br>
+            <label>Gender</label><br>
+
+            <select id="Gender" name="Gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select><br>
+                <label>Age</label>
+                <br>
+                <input />
+                <br>
+                <button>Submit</button>
+        </div>
+        <div class="col-md-6">
+            <div class="VASbox-container">
+                <div id="VASbox">
+                    <div id="item"></div>
+                </div>
+                <div class="bottom-left">&#128532;</div>
+                <div class="top-left">&#128529;</div>
+                <div class="top-right">&#128522;</div>
+                <div class="bottom-right">&#128529;</div>
+            </div>
+            <input id="coords1">
+            <input id="coords2">
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+<script>
+    var dragItem = document.querySelector("#item");
+    var container = document.querySelector("#VASbox");
+
+    var active = false;
+    var currentX;
+    var currentY;
+    var initialX;
+    var initialY;
+    var xOffset = 0;
+    var yOffset = 0;
+    var F1, F2;
+
+    container.addEventListener("touchstart", dragStart, false);
+    container.addEventListener("touchend", dragEnd, false);
+    container.addEventListener("touchmove", drag, false);
+
+    container.addEventListener("mousedown", dragStart, false);
+    container.addEventListener("mouseup", dragEnd, false);
+    container.addEventListener("mousemove", drag, false);
+
+    function dragStart(e) {
+        if (e.type === "touchstart") {
+            initialX = e.touches[0].clientX - xOffset;
+            initialY = e.touches[0].clientY - yOffset;
+        } else {
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+        }
+
+        if (e.target === dragItem) {
+            active = true;
+        }
+    }
+
+    function dragEnd(e) {
+        initialX = currentX;
+        initialY = currentY;
+        var x = (initialX + 200) / 40
+        var y = 10 - (initialY + 200) / 40;
+        if (x < 0) x = 0;
+        if (x > 10) x = 10;
+        if (y < 0) y = 0;
+        if (y > 10) y = 10;
+        var F1 = (Math.sqrt(x ** 2 + y ** 2) / (10 * Math.sqrt(2))).toFixed(2);
+        var F2 = (((10 - y + 0.5) / (x + 0.5) - (0.5 / (10.5))) / 21).toFixed(2);
+        document.getElementById("coords1").value = F1;
+        document.getElementById("coords2").value = F2;
+        active = false;
+    }
+
+    function drag(e) {
+        if (active) {
+
+            e.preventDefault();
+
+            if (e.type === "touchmove") {
+                currentX = e.touches[0].clientX - initialX;
+                currentY = e.touches[0].clientY - initialY;
+            } else {
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+            }
+
+            xOffset = currentX;
+            yOffset = currentY;
+
+            setTranslate(currentX, currentY, dragItem);
+        }
+    }
+
+    function setTranslate(xPos, yPos, el) {
+        el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+    }
+</script>

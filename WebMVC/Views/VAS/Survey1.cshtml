@@ -1,0 +1,188 @@
+﻿
+@{
+    ViewBag.Title = "test3";
+}
+
+<script src="~/assets/scripts/VASSurvey1.js?812"></script>
+
+
+<!-- BANNER
+================================================== -->
+<div class="banner banner--small" role="banner">
+    <div class="banner__background" style="background-image:url(/assets/images/banner-contact.jpg);" data-type="background"></div>
+    <div class="banner__content">
+        <h2 class="banner__headline alpha">Visual Analog Scale (VAS)</h2>
+    </div>
+</div><!--/banner -->
+
+
+<div class="section section--white">
+    <form action="" id="SurveyForm" name="SurveyForm">
+        <div class="container container--large">
+            <div class="grid" id="Formgird">
+                @*<div class="grid__column grid__column--12 grid__column--3--lg">
+                        <div class="control">
+                            <label for="Fname" class="control__label control__label--is-required">Fisrt Name</label>
+                            <input type="text" class="control__input" id="Fname">
+                            <p id="msg-name" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--3--lg">
+                        <div class="control">
+                            <label for="Lname" class="control__label control__label--is-required">Last Name</label>
+                            <input type="text" class="control__input" id="Lname">
+                            <p id="msg-name" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                    </div>
+                        <div class="grid__column grid__column--12 grid__column--6--lg">
+                        <div class="control">
+                            <label for="age" class="control__label control__label--is-required">Age</label>
+                            <input type="text" class="control__input" id="age">
+                            <p id="msg-age" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                    </div>*@
+
+                <div class="grid__column grid__column--12 grid__column--12--lg">
+                    <div class="control" style="width: 10%">
+                        <label for="age" class="control__label control__label--is-required">Age</label>
+                        <select class="control__input" id="age"></select>
+                    </div>
+                </div>
+
+                @*<div class="grid__column grid__column--12 grid__column--6--lg">
+                        <div class="control">
+                            <label for="gender" class="control__label control__label--is-required">Gender</label>
+                            <input type="text" class="control__input" id="gender">
+                        </div>
+                    </div>*@
+                <div class="grid__column grid__column--12 grid__column--12--lg">
+                    <div class="control">
+                        <label for="gender" class="control__label control__label--is-required">Gender</label>
+                        <label for="male">
+                            <input type="radio" id="male" value="Male" name="gender" /> Male
+                        </label>
+                        <label for="female">
+                            <input type="radio" id="female" value="Female" name="gender" /> Female
+                        </label>
+                        <label for="other">
+                            <input type="radio" id="other" value="Other" name="gender" /> Other
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <h4>Visual Analog Scale (VAS)</h4>
+                        <div class="slidecontainer">
+                            <input type="range" min="0" max="10" value="5" step="any" class="slider1">
+                            <label class="sliderlabelleft">
+                                No Pain
+                            </label>
+                            <label class="sliderlabelright">
+                                Pain as Bad as it Could Possible Be
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4>
+                            How would you rate the efficacy of the product over the time from the first use of it till now?
+                        </h4>
+                        <div class="slidecontainer">
+                            <input type="range" min="0" max="10" value="5" step="any" class="slider2">
+                            <label class="sliderlabelleft">
+                                No efficacy
+                            </label>
+                            <label class="sliderlabelright">
+                                Best efficacy
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>
+                            Think about the adverse effect you experienced since starting to use the product.
+                        </h4>
+                        <div class="slidecontainer">
+                            <input type="range" min="0" max="10" value="5" step="any" class="slider3">
+                            <label class="sliderlabelleft">
+                                No adverse reactions
+                            </label>
+                            <label class="sliderlabelright">
+                                Worst adverse reactions imaginable
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>
+                            Think about how much pain you experienced in the last 24 hours.
+                        </h4>
+                        <div class="slidecontainer">
+                            <input type="range" min="0" max="10" value="5" step="any" class="slider3">
+                            <label class="sliderlabelleft">
+                                No Pain
+                            </label>
+                            <label class="sliderlabelright">
+                                Worst pain imaginable
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>
+                            Did the product improve or worsen your symptoms since you started using it?
+                        </h4>
+                        <div class="slidecontainer">
+                            <input type="range" min="0" max="10" value="5" step="any" class="slider">
+                            <label class="sliderlabelleft">
+                                Much worsening
+                            </label>
+                            <label class="sliderlabelright">
+                                Much improvement
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>
+                            How would you rate the product?
+                        </h4>
+                        <div class="slidecontainer">
+                            <input type="range" min="0" max="10" value="5" step="any" class="slider" id="myRange">
+                            <label class="sliderlabelleft">
+                                Worst product I ever used
+                            </label>
+                            <label class="sliderlabelright">
+                                Best product I ever used
+                            </label>
+                        </div>
+                    </div>
+
+                    <h4>Extend VAS into Two Dimensions</h4>
+                    <div class="VASbox-container">
+                        <input type="range" min="0" max="10" value="5" step="any" class="slider4" id="VerticalSlider">
+                        <input type="range" min="0" max="10" value="5" step="any" class="slider5" id="HorizontalSlider">
+
+                        <div id="VASbox">
+                            <div id="diamond"></div>
+                        </div>
+                        <div class="bottom-left">&#128577;</div>
+                        <div class="top-left">&#128529;</div>
+                        <div class="top-right">&#128522;</div>
+                        <div class="bottom-right">&#128529;</div>
+                    </div>
+                    @*<p>Vertical Value: <span id="demoV"></span></p>
+                        <p>Horizontal Value: <span id="demoH"></span></p>
+                        <p style="text-align:center">Formula 1</p><input style="text-align: center" id="coords1">
+                        <p style="text-align:center">Formula 1 Value: <span id="coords1"></span></p>
+                        <p style="text-align:center">Formula 2 Value: <span id="coords2"></span></p>*@
+                </div>
+
+                <div class="grid__column grid__column--12 grid__column--12--lg" style="text-align:center">
+                    <button class="btn" id="btnSubmit" type="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+

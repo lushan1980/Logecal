@@ -1,0 +1,47 @@
+﻿<script src="~/assets/scripts/VASValue.js"></script>
+@*<img src="~/assets/images/smiling-face.png" id="ball">*@
+
+<form action="" id="VASForm" name="VASForm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+
+                <h2>VAS One Dimensions</h2>
+                <div class="slidecontainer">
+                    <input type="range" min="0" max="10" value="5" class="slider" id="myRange" style="width:80%; background: linear-gradient(135deg, red, orange 50%, green)">
+                    <label class="sliderlabelleft">
+                        The Adverse Reactions Associated with this Product Completely Outweigh the Benefits
+                    </label>
+                    <label class="sliderlabelright">
+                        The Benefits of this Product Completely Outweigh the Adverse Reactions
+                    </label>
+
+                    <p>Value: <span id="demo"></span></p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2>Extend VAS into Two Dimensions</h2>
+                <div class="canvas-container">
+                    <div>
+                        <canvas id="myCanvas" width="400" height="400" style="cursor:crosshair"></canvas>
+                    </div>
+
+                    <div class="bottom-left">&#128532;</div>
+                    <div class="top-left">&#128529;</div>
+                    <div class="top-right">&#128522;</div>
+                    <div class="bottom-right">&#128529;</div>
+                    @*No Benefit   No adverse effect    Best Benefit & No adverse effect   Best Benefit*@
+                </div>
+                @*<div id="coords1">(click coordinates show up here)</div>
+                <div id="coords2">(click coordinates show up here)</div>*@
+                <input id="coords1">
+                <input id="coords2">
+            </div>
+        </div>
+        <div class="row">
+            <button type="button" style="margin:auto" class="btn btn-success" id="btnsubmit">Submit</button>
+        </div>
+    </div>
+    <div id="diamond"></div>
+</form>
+

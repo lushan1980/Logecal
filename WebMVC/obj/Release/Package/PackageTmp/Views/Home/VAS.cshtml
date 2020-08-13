@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "VAS";
+}
+@{
+    Layout = null;
+}
+<!doctype html>
+<html lang = "en">
+   <head>
+      <meta charset = "utf-8">
+      <title>jQuery UI Slider functionality</title>
+      <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      <!-- Javascript -->
+      <script>
+         $(function() {
+            $( "#slider" ).slider({
+                orientation: "horizontal",
+                value: 5,
+                min: 0,
+                max: 10,
+                step: 1,
+                slide: function (event, ui) {
+                    $("#val").val(ui.value);
+                },
+
+            });
+            $("#val").val($("#slider").slider("value"));
+         });
+      </script>
+   </head>
+   
+   <body>
+      <!-- HTML --> 
+       <p>
+           <label for="val">Value:</label>
+           <input type="text" id="val"
+                  style="border:0; color:#b9cd6d; font-weight:bold;">
+       </p>
+      <div id = "slider" style="background: linear-gradient(to right, #ff0000 0%, #00ff21 99%)"></div>
+   </body>
+</html>

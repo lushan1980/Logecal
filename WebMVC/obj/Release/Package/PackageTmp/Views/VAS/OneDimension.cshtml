@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "VAS";
+}
+@{ 
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Visual Analog Scale</title>
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <link href="~/assets/styles/VAScss.css" type="text/css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>*@
+
+</head>
+<body>
+
+    <h1 class="center">VAS One Dimensions</h1>
+    <p>
+            <label for="val">Value:</label>
+            <input type="text" id="val" style="border:0; color:#b9cd6d; font-weight:bold;">
+        </p>
+    <div class="center" id="slider" style="width: 500px;
+    background: linear-gradient(135deg, red, orange 50%, green)"></div>
+    <p class="center">
+        Worst Efficacy & Severe Adverse Reaction &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Best Efficacy & No Adverse Reaction
+    </p>
+
+    <script>
+        $(function () {
+            $("#slider").slider({
+                orientation: "horizontal",
+                value: 5,
+                min: 0,
+                max: 10,
+                step: 1,
+                slide: function (event, ui) {
+                    $("#val").val(ui.value);
+                },
+            });
+
+            $("#val").val($("#slider").slider("value"));
+
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+
+            // Create gradient
+            var grd = ctx.createLinearGradient(0, myCanvas.height, myCanvas.width, 0);
+            //grd.addColorStop(0, "red");
+            //grd.addColorStop(1, "green");
+            grd.addColorStop(.0, 'red');
+            grd.addColorStop(.3, 'orange');
+            grd.addColorStop(1, 'green');
+
+            // Fill with gradient
+            ctx.fillStyle = grd;
+            ctx.fillRect(50, 50, 300, 300);
+
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,279 @@
+﻿
+@{
+    ViewBag.Title = "Logecal";
+}
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Logecal Statistical Software for Complex Trial Designs</title>
+    <meta name="keywords" content="Logecal, S.M.A.R.T, complex, pharmaceutical trials, analysis">
+    <meta name="description" content="Devoted to the development of innovative software solutions for the design and analysis of pharmaceutical trials.">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,500,700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <meta name="msvalidate.01" content="70586A6F573F6A043C90108F913ED6ED" />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="icon" href="/assets/images/favicon.ico" sizes="16x16">
+    <link rel="icon" href="/assets/images/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/assets/images/favicon-48.png" sizes="48x48" type="image/png">
+    <link rel="icon" href="/assets/images/favicon-62.png" sizes="62x62" type="image/png">
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
+    
+    <link rel="stylesheet" href="~/assets/styles/styles.css">
+    <script src="~/assets/scripts/Vendor.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144570594-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-144570594-1');
+    </script>
+
+
+    <meta property="og:url" content="https://logecal.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Logecal Statistical Software for Complex Trial Designs">
+    <meta property="og:image" content="https://logecal.com/assets/images/share-image.jpg">
+    <meta property="og:description" content="Devoted to the development of innovative software solutions for the design and analysis of pharmaceutical trials.">
+    <meta property="og:site_name" content="Logecal">
+    <meta property="og:locale" content="en_US">
+
+</head>
+<body>
+
+    <!-- IE BROWSER WARNING
+    ================================================== -->
+    <div class="browser-warning hide">
+        <div class="container">
+            <div class="grid">
+                <div class="grid__column--12 grid__column--6--sm">
+                    <p>Your website browser is no longer supported.</p>
+                </div>
+                <div class="grid__column--12 grid__column--6--sm">
+                    <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" class="btn btn--secondary">Upgrade</a>
+                    <button class="btn btn--white close-notice">Close Notice <i class="fa fa-close"></i></button>
+                </div>
+            </div>
+        </div>
+    </div><!-- /browser-warning -->
+    <!-- OUTDATED-IOS-WARNING
+    ================================================== -->
+    <div class="ios-warning hide figure--shadow">
+        <p>Your device’s Operating System is outdated. Please update for better rendering.</p>
+        <a href="https://support.apple.com/ios/update" class="btn btn--secondary">Upgrade Now</a>
+    </div><!-- /browser-warning -->
+
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- NAVBAR
+    ================================================== -->
+    <div class="navbar">
+        <div class="container navbar__container">
+            <div class="navbar__left">
+                <a href="/" class="navbar__logo">
+                    <img class="navbar__logo-file navbar__logo-file--white" src="/assets/images/logo-white.png" alt="Logecal">
+                </a>
+            </div>
+            <div class="navbar__mobile-buttons">
+                <button class="navbar__toggle navicon" aria-label="Show Menu">
+                    <span class="navicon__holder">
+                        <span class="navicon__line"></span>
+                        <span class="navicon__line"></span>
+                        <span class="navicon__line"></span>
+                    </span>
+                </button>
+            </div>
+            <nav class="navbar__nav">
+                <ul class="nav main-nav navbar__nav-list">
+                    <li class="nav__item"><a href="/about" class="nav__link">About</a></li>
+                    <li class="nav__item"><a href="/services" class="nav__link">Services</a></li>
+                    <li class="nav__item"><a href="/contact" class="nav__link">Contact</a></li>
+                    <li class="nav__item nav__item--mobile-only">
+                        <a href="https://www.linkedin.com/company/logecal" class="nav__link" aria-label="LinkedIn" target="_blank"><i class="fa fa-linkedin nav__link-icon"></i> <span class="nav__link-label" aria-hidden="true">Follow Us On LinkedIn</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <nav class="fixed-nav" role="navigation" aria-hidden="true">
+            <div class="container fixed-nav__container">
+                <ul class="fixed-nav__nav">
+                    <li class="fixed-nav__nav">
+                        <a href="/" class="fixed-nav__link" tabIndex="-1">
+                            <img class="fixed-nav__logo" src="/assets/images/logo-white.png" alt="">
+                        </a>
+                    </li>
+                    <li class="fixed-nav__nav"><a href="/about" class="fixed-nav__link" tabIndex="-1">About</a></li>
+                    <li class="fixed-nav__nav"><a href="/services" class="fixed-nav__link" tabIndex="-1">Services</a></li>
+                    <li class="fixed-nav__nav"><a href="/contact" class="fixed-nav__link" tabIndex="-1">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div><!--/navbar -->
+    <!-- BANNER
+    ================================================== -->
+    <div class="banner" role="banner">
+        <div class="banner__background" style="background-image:url(/assets/images/banner-background.jpg);" data-type="background"></div>
+        <div class="banner__content">
+            <h1 class="banner__headline alpha">The Power of <span class="caesar-text">S.M.A.R.T.&trade;</span> Clinical Software</h1>
+            <a href="/contact" class="btn btn--light-blue banner__button">Request Information</a>
+        </div>
+    </div><!--/banner -->
+
+    <main role="main" id="main">
+
+        <!-- WHAT IS SMART?
+        ================================================== -->
+        <div class="section section--small section--blue section--centered section--is-overlaid">
+            <div class="container container--small">
+                <h2 class="alpha">What is <span class="caesar-text">S.M.A.R.T.&trade;</span>?</h2>
+                <p class="lead subheadline">Statistical Software for Complex Clinical Trial Designs</p>
+                <a href="/services" class="btn btn--light-blue">View Applications</a>
+            </div>
+        </div><!--/what is smart?-->
+        <!-- UNIQUE SOFTWARE
+        ================================================== -->
+        <div class="section section--centered">
+            <div class="mockup overlay-above">
+                <div id="mockup-carousel" class="mockup__frame owl-carousel mockup-carousel" data-mockup-number="3">
+                    <img class="mockup__image" src="/assets/images/screenshot-01.jpg" alt="">
+                    <img class="mockup__image" src="/assets/images/screenshot-02.jpg" alt="">
+                    <img class="mockup__image" src="/assets/images/screenshot-03.jpg" alt="">
+                </div>
+            </div>
+            <div class="container container--medium">
+                <h2 class="alpha">What is Unique About Our Software?</h2>
+                <p class="lead">Most statistical calculations rely on approximations for planning and analyzing clinical trials. <span class="caesar-text">S.M.A.R.T.&trade;</span> is using a cutting-edge methodology that provides the exact solutions for clinical trial designs. Our methodologies, published in leading statistical journals, ensure their advantage over traditional approaches.</p>
+            </div>
+
+        </div><!--/unique software-->
+        <!-- CLIENT TESTIMONIALS
+        ================================================== -->
+        <div class="section section--blue section--blue-reversed masked-section">
+            <div class="container">
+                <div class="grid grid--reversed-medium">
+                    <div class="grid__column grid__column--12 grid__column--5--md masked-section__mask masked-section__padding">
+                        <div class="masked-section__content">
+                            <h2 class="alpha masked-section__heading">Helping Our Customers Solve Complex Problems</h2>
+                        </div>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--7--md masked-section__padding">
+                        <div class="testimonial">
+                            <p class="testimonial__text">This group is founded on deep industry expertise, coupled with some of the smartest and most creative  development professionals in the business, and led by distinguished and tested leaders ... always generating outstanding technological products, tools and platforms.</p>
+                            <div class="testimonial__meta">
+                                <p class="testimonial__author">
+                                    Hani Zaki
+                                    <span class="testimonial__title">Founder & Managing Director</span>
+                                </p>
+                                <p class="testimonial__company">Clinical Development Outsourcing Strategies&trade;, LLC</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/client testimonials -->
+        <!-- REQUEST MORE INFORMATION
+        ================================================== -->
+        <div class="section section--gray section--centered">
+            <div class="container container--small">
+                <h2 class="alpha">Request More Information or Schedule a Demo</h2>
+                <a href="/contact" class="btn">Contact Us</a>
+            </div>
+        </div><!--/request more information -->
+
+    </main>
+
+    <!-- FOOTER
+    ================================================== -->
+    <footer role="contentinfo">
+        <div class="footer__top">
+            <div class="container">
+                <div class="grid">
+                    <div class="grid__column grid__column--12 grid__column--4--lg footer__column">
+                        <a href="/" class="footer__logo">
+                            <img src="/assets/images/logo-blue.png" alt="Logecal">
+                        </a>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--4--lg footer__column">
+                        <h3 class="footer__heading">Join Our Mailing List</h3>
+                        <p class="footer__paragraph">Stay on top of our latest software updates and other company news.</p>
+                        <a href="/mailing-list" class="btn">Sign Up Today</a>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--4--lg footer__column">
+                        <address>
+                            <ul class="address-list footer__address" aria-label="Contact Information">
+                                <li class="address-list__item">
+                                    <div class="address-list__title">Address</div>
+                                    <div class="address-list__information">
+                                        996 Old Eagle School Road<br />
+                                        Suite 1106<br />
+                                        Wayne, PA 19087
+                                    </div>
+                                </li>
+                                <li class="address-list__item">
+                                    <div class="address-list__title">Phone</div>
+                                    <div class="address-list__information">
+                                        <a href="tel:14846541801" class="text-link">484.654.1801</a>
+                                    </div>
+                                </li>
+                                <li class="address-list__item">
+                                    <div class="address-list__title">Email</div>
+                                    <div class="address-list__information">
+                                        <a href="mailto:info@logecal.com" class="text-link">info@logecal.com</a>
+                                    </div>
+                                </li>
+                                <li class="address-list__item address-list__item--center">
+                                    <div class="address-list__title">
+                                        <a href="https://www.linkedin.com/company/logecal" class="social-icon" aria-label="LinkedIn" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                    </div>
+                                    <div class="address-list__information">
+                                        <a href="https://www.linkedin.com/company/logecal" target="_blank" class="text-link">Follow Us</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                <div class="grid">
+                    <div class="grid__column grid__column--12 grid__column--6--lg">
+                        <ul class="copyright__list" aria-label="Copyright Information and Helpful Links">
+                            <li>&copy; 2019 Logecal</li>
+                            <li><a href="/sitemap" class="text-link text-link--gray">Sitemap</a></li>
+                            <li><a href="/terms-of-use" class="text-link text-link--gray">Terms of Use</a></li>
+                            <li><a href="/privacy-policy" class="text-link text-link--gray">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--6--lg copyright__developer">
+                        <p>Website Designed & Developed by <a href="https://agmsolutions.com" class="text-link" target="_blank">AG Marketing Solutions</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer><!--/footer-->
+
+    <script src="~/assets/scripts/App.js"></script>
+
+
+</body>
+</html>
+

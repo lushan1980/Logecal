@@ -1,0 +1,158 @@
+﻿@{
+    ViewBag.Title = "COVID-19";
+}
+
+@using CustomeHelper.CustomHelper;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - COVID-19 Application</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,500,700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    @Styles.Render("~/Assets/css")
+    @*@Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    <script src="~/assets/scripts/Vendor.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/samplerender.js?624"></script>
+    <style>
+
+        .navbar-brand {
+            padding: 5px 40px;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- NAVBAR
+    ================================================== -->
+    <div class="navbar">
+        <div class="container navbar__container">
+            <div class="navbar__left">
+                <a href="/" class="navbar__logo">
+                    <img src="/assets/images/logo-white.png" alt="Logecal">
+                </a>
+            </div>
+            <div class="navbar__mobile-buttons">
+                <button class="navbar__toggle navicon" aria-label="Show Menu">
+                    <span class="navicon__holder">
+                        <span class="navicon__line"></span>
+                        <span class="navicon__line"></span>
+                        <span class="navicon__line"></span>
+                    </span>
+                </button>
+            </div>
+            <nav class="navbar__nav" style="padding: 0px">
+                <ul class="nav navbar__nav-list">
+                    <li class="nav__item"><a href="/COVID19/Index" class="nav__link">COVID&#8209;19</a></li>
+                    <li class="nav__item"><a href="/COVID19/USA" class="nav__link">USA</a></li>
+                    <li class="nav__item"><a href="/COVID19/Canada" class="nav__link">Canada</a></li>
+                    <li class="nav__item"><a href="/COVID19/Europe" class="nav__link">Europe</a></li>
+                    <li class="nav__item"><a href="/COVID19/Africa" class="nav__link">Africa</a></li>
+                    <li class="nav__item"><a href="/COVID19/Asia" class="nav__link">Asia</a></li>
+                    <li class="nav__item"><a href="/COVID19/MiddleEast" class="nav__link">Middle&nbsp;East</a></li>
+                    <li class="nav__item"><a href="/COVID19/SouthAmerica" class="nav__link">South&nbsp;America</a></li>
+                    <li class="nav__item"><a href="/COVID19/Test" class="nav__link">Test</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div><!--/navbar -->
+    <!-- BANNER
+    ================================================== -->
+    <div class="banner banner--small" role="banner">
+        <div class="banner__background" style="background-image:url(/assets/images/banner-about.jpg);" data-type="background"></div>
+        <div class="banner__content">
+            <div class="grid">
+                <div class="grid__column grid__column--12 grid__column--2--lg" style="position: relative; padding:10px 0px; vertical-align:middle">
+                    <img class="banner__headline navbar__logo" src="/assets/images/COVID19_without_background.png" alt="COVID-19" width="400" height="400" style="float:right; padding:10px 0px; vertical-align:middle">
+                </div>
+                <div class="grid__column grid__column--12 grid__column--8--lg">
+                    <h2 class="banner__headline alpha">COVID-19</h2>
+                    <h3 class="banner__headline alpha">An analysis of a pandemic</h3>
+                    <h4 class="banner__headline alpha">Powered by Logecal Data Analytics</h4>
+                </div>
+                <div class="grid__column grid__column--12 grid__column--2--lg" style="position: relative; padding:10px 0px; vertical-align:middle">
+                    <img class="banner__headline navbar__logo" src="/assets/images/COVID19_without_background.png" alt="Logecal" width="400" height="400" style="float:right; padding:10px 0px; vertical-align:middle">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container" style="text-align: center;" id="main">
+        @RenderBody()
+    </div>
+
+    <div class="container">
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - COVID-19 Application</p>
+        </footer>
+    </div>
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
+    @Scripts.Render(System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bundles/App", true))
+</body>
+</html>
+
+
+
+
+
+
+
+
+@*<div class="jumbotron">
+    <div class="navbar navbar-inverse navbar-expand-md navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ImageActionLink("Logecal", "Index", "Home", null, new { @class = "navbar-brand" }, "~/assets/images/logo-white.png", "40")
+            </div>
+
+            <div class="navbar-collapse collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("COVID-19", "Index", "COVID19")</li>
+                    <li>@Html.ActionLink("USA", "USA", "COVID19")</li>
+                    <li>@Html.ActionLink("Canada", "Canada", "COVID19")</li>
+                    <li>@Html.ActionLink("Europe", "Europe", "COVID19")</li>
+                    <li>@Html.ActionLink("Africa", "Africa", "COVID19")</li>
+                    <li>@Html.ActionLink("Asia", "Asia", "COVID19")</li>
+                    <li>@Html.ActionLink("Middle East", "MiddleEast", "COVID19")</li>
+                    <li>@Html.ActionLink("South America", "SouthAmerica", "COVID19")</li>
+                    <li>@Html.ActionLink("Test", "Test", "COVID19")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <center><img src="~/assets/images/Coronavirus_update-teaser.jpg" alt="COVID-19" style="vertical-align:middle" width="130" height="130"></center>
+        </div>
+        <div class="col-md-4">
+            <center><h2 style="color: white">COVID-19</h2></center>
+            <center><h2 style="color: white">An analysis of a pandemic</h2></center>
+            <center><h3 style="color: white">Powered by Logecal Data Analytics</h3></center>
+        </div>
+        <div class="col-md-4">
+            <center><img src="~/assets/images/logo-white.png" alt="Logecal" style="vertical-align:middle" width="250" height="80"></center>
+        </div>
+    </div>
+</div>*@

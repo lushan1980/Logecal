@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="logecal" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\SLu\\Documents\\WebMVC\\WebMVC\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\SLu\\Documents\\WebMVC\\WebMVC\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="String-Web.config Connection String" description="String Connection String used in web.config by the application to access the database." value="Data Source=CEL-LT03\MSSQLSERVER02 ;Initial Catalog=CoronaVirus;User ID=sa;Password=sa" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\SLu\\Documents\\WebMVC\\WebMVC\\obj\\Release\\Package\\PackageTmp\\Views\\Web\.config$" match="/configuration/connectionStrings/add[@name='String']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\SLu\\Documents\\WebMVC\\WebMVC\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='String']/@connectionString" />
+  </parameter>
+</parameters>

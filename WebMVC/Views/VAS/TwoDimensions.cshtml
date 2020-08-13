@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "TwoDimensions";
+}
+@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Visual Analog Scale</title>
+    <link href="~/assets/styles/VAScss.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="container">
+        <h1>Extend VAS into Two Dimensions</h1>
+        <div class="canvas-container">
+            <div style="padding:50px">
+                <canvas id="myCanvas" width="300" height="300" style="cursor:crosshair"></canvas>
+            </div>
+
+            <div class="bottom-left">No Benefit</div>
+            <div class="top-left">No adverse effect</div>
+            <div class="top-right">Best Benefit & No adverse effect</div>
+            <div class="bottom-right">Best Benefit</div>
+        </div>
+        <div id="coords1">(click coordinates show up here)</div>
+        <div id="coords2">(click coordinates show up here)</div>
+    </div>
+    <script>
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+
+        // Create gradient
+        var grd = ctx.createLinearGradient(0, myCanvas.height, myCanvas.width, 0);
+        grd.addColorStop(.0, 'red');
+        grd.addColorStop(.4, 'orange');
+        grd.addColorStop(1, 'green');
+
+        // Fill with gradient
+        ctx.fillStyle = grd;
+        ctx.fillRect(0, 0, 300, 300);
+
+        var rect = myCanvas.getBoundingClientRect();
+
+        myCanvas.onclick = function (e) { // shows click coordinates
+            var x = parseFloat(((e.clientX - rect.left) / 30));
+            var y = parseFloat((10 - (e.clientY - rect.top) / 30));
+            var z1 = (Math.sqrt(x ** 2 + y ** 2) / (10 * Math.sqrt(2))).toFixed(2);
+            var z2 = (((10 - y + 0.5) / (x + 0.5) - (0.5 / (10.5))) / 21).toFixed(2);
+
+            //coords.innerHTML = x + ':' + y;
+            coords1.innerHTML = z1;
+            coords2.innerHTML = z2;
+        };
+
+    </script>
+</body>
+</html>
+
+
+

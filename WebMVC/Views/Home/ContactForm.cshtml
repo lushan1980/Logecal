@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "ContactForm";
+}
+@{
+    Layout = null;
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>*@
+
+<script src="~/assets/scripts/ContactForm.js"></script>
+
+<form action="" id="ContactForm" name="ContactForm">
+    <div class="grid" id="Formgird">
+        <div class="grid__column grid__column--12 grid__column--12--lg">
+            <div class="control">
+                <label for="contact-name" class="control__label control__label--is-required">Name</label>
+                <input type="text" class="control__input" id="contact-name" name="contact-name">
+                <p id="msg-name" style="color:#ff0000; margin:0px; font-style:italic"></p>
+            </div>
+            
+        </div>
+        <div class="grid__column grid__column--12 grid__column--6--lg">
+            <div class="control">
+                <label for="contact-email" class="control__label control__label--is-required">Email Address</label>
+                <input type="email" class="control__input" id="contact-email" name="contact-email" >
+                <p id="msg-email" style="color:#ff0000; margin:0px; font-style:italic"></p>
+            </div>
+        </div>
+        <div class="grid__column grid__column--12 grid__column--6--lg">
+            <div class="control">
+                <label for="contactphone" class="control__label">Phone</label>
+                <input type="text" class="control__input" id="contactphone">
+            </div>
+        </div>
+        <div class="grid__column grid__column--12 grid__column--12--lg">
+            <div class="control">
+                <label for="contactcompany" class="control__label">Company</label>
+                <input type="text" class="control__input" id="contactcompany">
+            </div>
+        </div>
+        <div class="grid__column grid__column--12 grid__column--12--lg">
+            <div class="control">
+                <label for="contactreferral" class="control__label">How did you hear about us?</label>
+                <input type="text" class="control__input" id="contactreferral">
+            </div>
+        </div>
+        <div class="grid__column grid__column--12 grid__column--12--lg">
+            <div class="control">
+                <label for="contact-message" class="control__label control__label--is-required">Questions, comments, or describe your needs.</label>
+                <textarea class="control__input" id="contact-message" name="contact-message" ></textarea>
+                <p id="msg-question" style="color:#ff0000; margin:0px; font-style:italic"></p>
+            </div>
+        </div>
+        <div class="grid__column grid__column--12 grid__column--12--lg">
+            <p class="control__paragraph">* Required</p>
+        </div>
+        <div class="grid__column grid__column--12 grid__column--12--lg">
+            <div class="control control--checkbox">
+                <input class="control__checkbox" type="checkbox" id="contactmailing-list">
+                <label class="control__label control__label--checkbox" for="contactmailing-list">
+                    Sign me up for news about Logecal Software.
+                </label>
+            </div>
+        </div>
+
+        <div class="grid__column grid__column--12 grid__column--12--lg">
+            <button class="btn" id="btnSendMsg" type="submit">Submit Message</button>
+        </div>
+    </div>
+</form>
+

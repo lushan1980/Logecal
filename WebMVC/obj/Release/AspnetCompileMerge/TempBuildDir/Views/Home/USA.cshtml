@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <p>Towards the end of March, the USA has become the worldwide epicenter of the pandemic. While the number of daily infections has grown exponentially over the past two weeks, it appears to be slowing down in some states and cities due to social distancing, 'stay at home' orders, more testing, and other measures. Assuming the trend follows the European trajectory, the number of daily inflections will begin curving downwards within 5-10 days. A statistical analysis of number of deaths reveals a strong correlation between the number of daily deaths and  number of new daily infections that occurred up to 10 days before. The figure below shows the trailing numbers for the USA s a whole, and similarly, for cities and states linked below.</p>
+    </div>
+    @*<div class="col-md-6">
+        <center><div id="chartContainer1" style="height: 300px; width: 100%;"></div></center>
+    </div>
+    <div class="col-md-6">
+        <center><div id="chartContainer2" style="height: 300px; width: 100%;"></div></center>
+    </div>*@
+</div>
+
+<div class="row" id="gif"></div>
+
+<div class="row" id="casegraph">
+    @*<div><img id="loading-image" src="~/Sources/loading.gif" alt="Loading..." /></div>*@
+    
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>States</h2>
+        <p>
+            Most states have implemented by now strict control measures, including 'stay at home' orders, mandatory quarantines, social distancing, and wide spread testing. The spread of the corona virus continues through the country, with higher speed along the coasts, and in an around major metropolitan area.
+        </p>
+        <p><a class="btn btn-default" href="USAStates">Check the status of all states &raquo;</a></p>
+    </div>
+    <div class="col-md-6">
+        <h2>Cities</h2>
+        <p>NYC city is  the epicenter of the epidemic in the United States. The number of new daily infections has been accelarating through March, and has reached levels much higher, relative to its population, than Italy. But in the last few days, the acceleration has slowed down, indicating that an inflection point was reached in the first part of April. </p>
+        <p><a class="btn btn-default" href="USACities">Check the status of major cities &raquo;</a></p>
+    </div>
+</div>
