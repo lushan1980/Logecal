@@ -558,11 +558,8 @@ namespace WebMVC.Controllers
                     {
                         UserID = rdr["UserID"].ToString();
                     }
-                }
-
-
+                }                                
                 
-                string l = UserID;
                 con.Close();
                 return Json(new { returnvalue = UserID });
 
