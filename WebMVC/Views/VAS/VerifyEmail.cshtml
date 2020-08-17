@@ -18,28 +18,31 @@
     <article class="section section--small">
         <div class="container container--small">
             <div class="section__header section__header--centered">
-                <img src="~/assets/images/email-logo.jpg" width="200"/>
-                <h2 class="section__heading">Email Verfication</h2>
-                <p class="lead" style="text-align: left">Please enter your Email. We will send you a one time Varification code as the password for your first login.</p>
+                <img src="~/assets/images/email-logo.jpg" width="200" />
+                <h2 class="section__heading">Verfication</h2>
+                <p class="lead" style="text-align: left">@*Please enter your Email. We will send you a one time Varification code as the password for your first login.*@</p>
+                @*<p class="lead" style="text-align: left">Please enter your invite code.</p>*@
+
             </div>
 
             <form action="" id="VerifyEmail">
                 <div class="grid" id="Formgird">
+                    @*invite code*@
                     <div class="grid__column grid__column--12 grid__column--12--lg">
-                        <div class="control">
-                            <label for="User-Email" class="control__label control__label--is-required">Email Address</label>
-                            <input type="email" class="control__input" id="User-Email">
-                            <p id="msg-email" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                        </div>
-                    </div>
-                    <div class="grid__column grid__column--12 grid__column--12--lg">
-                        <div class="control">
+                        <div class="control" id="divVerifyCode">
                             <label for="User-code" class="control__label control__label--is-required">Invite code</label>
                             <input type="text" class="control__input" id="User-code">
                             <p id="msg-code" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         </div>
                     </div>
-
+                    @*Email Address*@
+                    <div class="grid__column grid__column--12 grid__column--12--lg">
+                        <div class="control" id="divEmail">
+                            @*<label for="User-Email" class="control__label control__label--is-required">Email Address</label>
+                <input type="email" class="control__input" id="User-Email">
+                <p id="msg-email" style="color:#ff0000; margin:0px; font-style:italic"></p>*@
+                        </div>
+                    </div>
                     <div class="grid__column grid__column--12 grid__column--12--lg">
                         <div class="control" id="divPwd">
 
@@ -49,8 +52,11 @@
                     <div class="grid__column grid__column--12 grid__column--12--lg">
                         <button class="btn" id="btnSubmit" type="submit" value="btnSubmit">Verify</button>
                     </div>
-                    <div class="grid__column grid__column--12 grid__column--12--lg">
+                    <div class="grid__column grid__column--12 grid__column--6--lg">
                         <button class="btn" id="btnSignin" type="submit" style="display:none" value="btnSignin">Sign in</button>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--6--lg">
+                        <button class="btn" id="btnSignup" type="submit" style="display: none; float: right; color: #b74d4d" value="btnSignin">Sign Up</button>
                     </div>
                 </div>
             </form>

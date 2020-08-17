@@ -8,9 +8,10 @@ namespace WebMVC.Models
 {
     public class VASUser
     {
-        public int ID { get; set; }
+        public int SurveyID { get; set; }
+        public int UserID { get; set; }
         public string Email { get; set; }
-        public string VerifyCode { get; set; }
+        public string InviteCode { get; set; }
         public string Password { get; set; }
     }
 }

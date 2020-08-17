@@ -87,8 +87,8 @@ namespace WebMVC.Controllers
             }
         }
 
-        public ActionResult InsertVASUser(VASUser user)
-        {            
+        public ActionResult InsertVASUser111(VASUser user)
+        {
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
             {
@@ -200,11 +200,7 @@ namespace WebMVC.Controllers
                     Value = user.Email
                 });
 
-                cmd.Parameters.Add(new SqlParameter()
-                {
-                    ParameterName = "@Verifycode",
-                    Value = user.VerifyCode
-                });
+
 
                 //int record = (int)cmd.ExecuteScalar();
                 object record = cmd.ExecuteScalar();
@@ -224,6 +220,8 @@ namespace WebMVC.Controllers
             }
 
         }
+
+
 
         //check VAS user return record
         [HttpPost]
@@ -246,11 +244,6 @@ namespace WebMVC.Controllers
                     Value = user.Email
                 });
 
-                cmd.Parameters.Add(new SqlParameter()
-                {
-                    ParameterName = "@VerifyCode",
-                    Value = user.VerifyCode
-                });
 
                 cmd.Parameters.Add(new SqlParameter()
                 {
@@ -262,9 +255,8 @@ namespace WebMVC.Controllers
                 {
                     VASUser VASUser = new VASUser
                     {
-                        ID = (int)GetInt(rdr["ID"]),
+                        UserID = (int)GetInt(rdr["ID"]),
                         Email = GetString(rdr["Email"]),
-                        VerifyCode = GetString(rdr["VerifyCode"]),
                         Password = GetString(rdr["Password"])
                     };
                     userinfo.Add(VASUser);
@@ -274,7 +266,7 @@ namespace WebMVC.Controllers
             JavaScriptSerializer js = new JavaScriptSerializer();
             return Json(js.Serialize(userinfo), JsonRequestBehavior.AllowGet);
         }
-        //end 
+        //end
 
         //using session
         [HttpPost]
@@ -376,12 +368,117 @@ namespace WebMVC.Controllers
 
 
 
-        public ActionResult UpdateVASUser(VASUser user)   //give a record a password and send a temporary password to his Email
+        //public ActionResult UpdateVASUser(VASUser user)   //give a record a password and send a temporary password to his Email
+        //{
+        //    string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+        //    using (SqlConnection con = new SqlConnection(CS))
+        //    {
+        //        SqlCommand cmd = new SqlCommand("UpdatePwd", con)
+        //        {
+        //            CommandType = CommandType.StoredProcedure
+        //        };
+
+        //        con.Open();
+
+        //        cmd.Parameters.Add(new SqlParameter()
+        //        {
+        //            ParameterName = "@Email",
+        //            Value = user.Email
+        //        });
+
+        //        cmd.Parameters.Add(new SqlParameter()
+        //        {
+        //            ParameterName = "@VerifyCode",
+        //            Value = user.VerifyCode
+        //        });
+
+        //        cmd.Parameters.Add(new SqlParameter()
+        //        {
+        //            ParameterName = "@Password",
+        //            Value = user.Password
+        //        });
+
+        //        int result = cmd.ExecuteNonQuery();
+        //        bool insertData;
+        //        if (result > 0)
+        //        {
+        //            insertData = true;
+        //        }
+        //        else
+        //        {
+        //            insertData = false;
+        //        }
+
+        //        //send a temporary passwork to an Email
+        //        SqlCommand cmd2 = new SqlCommand("CheckVASUser", con)
+        //        {
+        //            CommandType = CommandType.StoredProcedure
+        //        };
+
+
+        //        cmd2.Parameters.Add(new SqlParameter()
+        //        {
+        //            ParameterName = "@Email",
+        //            Value = user.Email
+        //        });
+
+        //        cmd2.Parameters.Add(new SqlParameter()
+        //        {
+        //            ParameterName = "@VerifyCode",
+        //            Value = user.VerifyCode
+        //        });
+
+        //        cmd2.Parameters.Add(new SqlParameter()
+        //        {
+        //            ParameterName = "@Password",
+        //            Value = user.Password
+        //        });
+
+        //        var reader = cmd2.ExecuteReader();
+
+        //        if (reader.HasRows)
+        //        {
+        //            reader.Read();
+
+        //            string to = user.Email;
+        //            string from = "s.lu@logecal.com";
+        //            MailMessage mail = new MailMessage(from, to)
+        //            {
+        //                Subject = "Temporary Password",
+        //                Body = $"this is your Temprorary Password : {reader.GetString(3)}"
+        //            };
+
+        //            SmtpClient client = new SmtpClient("smtp.office365.com", 587)
+        //            {
+        //                Credentials = new NetworkCredential("s.lu@logecal.com", "TaGha_6W"),
+        //                EnableSsl = true
+        //            };
+
+        //            try
+        //            {
+        //                client.Send(mail);
+        //            }
+        //            catch (SmtpException ex)
+        //            {
+        //                Console.WriteLine(ex.ToString());
+        //            }
+
+        //        }
+
+        //        //end send a temporary passwork to an Email
+
+        //        con.Close();
+        //        return Json(new { returnvalue = insertData });
+        //    }
+        //}
+
+
+        public ActionResult CheckInviteCode(VASUser user)
         {
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
             {
-                SqlCommand cmd = new SqlCommand("UpdatePwd", con)
+                SqlCommand cmd = new SqlCommand("CheckSurvey", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -390,14 +487,49 @@ namespace WebMVC.Controllers
 
                 cmd.Parameters.Add(new SqlParameter()
                 {
-                    ParameterName = "@Email",
-                    Value = user.Email
+                    ParameterName = "@SurveyID",
+                    Value = user.SurveyID
+                });            
+
+                string record = (string)cmd.ExecuteScalar();
+                bool result;
+                if (record == user.InviteCode)
+                {
+                    result = true;
+                }
+                else
+                {
+                    result = false;
+                }
+
+                con.Close();
+                return Json(new { returnvalue = result });
+
+            }
+        }
+
+        public JsonResult InsertVASUser(VASUser user)
+        {
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("InsertVASUser", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@SurveyID",
+                    Value = user.SurveyID
                 });
 
                 cmd.Parameters.Add(new SqlParameter()
                 {
-                    ParameterName = "@VerifyCode",
-                    Value = user.VerifyCode
+                    ParameterName = "@Email",
+                    Value = user.Email
                 });
 
                 cmd.Parameters.Add(new SqlParameter()
@@ -407,76 +539,33 @@ namespace WebMVC.Controllers
                 });
 
                 int result = cmd.ExecuteNonQuery();
-                bool insertData;
-                if (result > 0)
-                {
-                    insertData = true;
-                }
-                else
-                {
-                    insertData = false;
-                }
 
-                //send a temporary passwork to an Email
                 SqlCommand cmd2 = new SqlCommand("CheckVASUser", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-
-
                 cmd2.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "@Email",
                     Value = user.Email
                 });
+                SqlDataReader rdr = cmd2.ExecuteReader();
 
-                cmd2.Parameters.Add(new SqlParameter()
+                string UserID = "";
+                if (rdr.HasRows)
                 {
-                    ParameterName = "@VerifyCode",
-                    Value = user.VerifyCode
-                });
-
-                cmd2.Parameters.Add(new SqlParameter()
-                {
-                    ParameterName = "@Password",
-                    Value = user.Password
-                });
-
-                var reader = cmd2.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    reader.Read();
-
-                    string to = user.Email;
-                    string from = "s.lu@logecal.com";
-                    MailMessage mail = new MailMessage(from, to)
+                    while (rdr.Read())
                     {
-                        Subject = "Temporary Password",
-                        Body = $"this is your Temprorary Password : {reader.GetString(3)}"
-                    };
-
-                    SmtpClient client = new SmtpClient("smtp.office365.com", 587)
-                    {
-                        Credentials = new NetworkCredential("s.lu@logecal.com", "TaGha_6W"),
-                        EnableSsl = true
-                    };
-
-                    try
-                    {
-                        client.Send(mail);
+                        UserID = rdr["UserID"].ToString();
                     }
-                    catch (SmtpException ex)
-                    {
-                        Console.WriteLine(ex.ToString());
-                    }
-
                 }
 
-                //end send a temporary passwork to an Email
 
+                
+                string l = UserID;
                 con.Close();
-                return Json(new { returnvalue = insertData });
+                return Json(new { returnvalue = UserID });
+
             }
         }
 
