@@ -1,8 +1,8 @@
 ﻿
 var arr = document.referrer.split("/");
 var url = arr.slice(-1)[0] ;
-if (url !== "VerifyEmail?SurveyNum=1") {
-    window.location.replace("/VAS/VerifyEmail?SurveyNum=1");
+if (url !== "VerifyEmail?SurveyID=1") {
+    window.location.replace("/VAS/VerifyEmail?SurveyID=1");
 }     
 
 $(document).ready(function () { 
@@ -118,10 +118,10 @@ $(document).ready(function () {
 
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-            const ID = urlParams.get('ID');
-            console.log(ID);
+            const UserID = urlParams.get('UserID');
+            //console.log(UserID);
             var obj = {
-                ID : ID,
+                UserID: UserID,
                 Age : $('#age').val(),
                 //Gender: $('#gender').val(),
                 Gender: displayRadioValue(),

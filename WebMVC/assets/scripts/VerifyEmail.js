@@ -12,8 +12,8 @@
         })
         $('#VerifyEmail').submit(function (event) {
             event.preventDefault();
-            if (buttonpressed === "btnSubmit") {
-                Submit();
+            if (buttonpressed === "btnVerify") {
+                Verify();
             }
             else if (buttonpressed === "btnSignin") {
                 Signin();
@@ -23,7 +23,7 @@
             }
         })
 
-        function Submit () {
+        function Verify () {
 
             var i, inputs, messages;
             inputs = document.querySelectorAll('[id ^= "User-"]');
@@ -43,8 +43,6 @@
             if (!isValid) { return };
 
             var pwd = randPass(5, 3);
-
-
 
             var obj = {
                 SurveyID: SurveyID,
@@ -81,8 +79,8 @@
                         $("#divPwd").append(divPwdLabel);
                         $("#divPwd").append(divPwdInput);
                         $("#divPwd").append(divPwdMsg);
-                        document.getElementById("btnSubmit").style.display = "none";
-                        document.getElementById("btnSubmit").disabled = true;
+                        document.getElementById("btnVerify").style.display = "none";
+                        document.getElementById("btnVerify").disabled = true;
                         document.getElementById("btnSignin").style.display = "block";
                         document.getElementById("btnSignup").style.display = "block";
 
@@ -117,8 +115,8 @@
                 }
             })
         }
+
         function Signin () {
-            //event.preventDefault();
             var i, inputs, messages;
             inputs = document.querySelectorAll('[id ^= "User-"]');
             messages = document.querySelectorAll('[id ^= "msg-"]');
@@ -143,15 +141,14 @@
             
             $.ajax({
                 type: "POST",
-                url: "/VASValue/CheckVASUser1",
+                url: "/VASValue/CheckVASUser",
                 dataType: "json",
                 data: JSON.stringify(obj),
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    if (data != "[]") {
-                        var user = JSON.parse(data);
-                        var ID = user[0].ID;
-                        window.location.replace(url+"?ID="+ID)
+                    if (data.returnvalue != "") {
+                        var UserID = data.returnvalue;
+                        window.location.replace(url + "?UserID=" + UserID)
                     } else {
                         alert("Your Email or Password are wrong");
                         Response.redirect(url)
@@ -160,8 +157,7 @@
             })
         }
 
-        function Signup() {
-            //event.preventDefault();
+        function Signup() {            
             var i, inputs, messages;
             inputs = document.querySelectorAll('[id ^= "User-"]');
             messages = document.querySelectorAll('[id ^= "msg-"]');
@@ -194,9 +190,9 @@
                     if (data.returnvalue != null) {
                         alert("Success");
                         //var user = JSON.parse(data);
-                        //var ID = user;
-                        ////var ID = user[0].ID;
-                        //window.location.replace(url + "?ID=" + ID)
+                        var UserID = data.returnvalue;
+                        //var ID = user[0].ID;
+                        window.location.replace(url + "?UserID=" + UserID)
                     } else {
                         alert("Your Email or Password are wrong");
                         Response.redirect(url)

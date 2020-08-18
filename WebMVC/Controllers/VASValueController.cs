@@ -187,7 +187,7 @@ namespace WebMVC.Controllers
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
             {
-                SqlCommand cmd = new SqlCommand("CheckVerify", con)
+                SqlCommand cmd = new SqlCommand("CheckVASUser", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -199,28 +199,29 @@ namespace WebMVC.Controllers
                     ParameterName = "@Email",
                     Value = user.Email
                 });
-
-
-
-                //int record = (int)cmd.ExecuteScalar();
-                object record = cmd.ExecuteScalar();
-                bool result;
-                if (record == null || record == DBNull.Value)
+                cmd.Parameters.Add(new SqlParameter()
                 {
-                    result = false;
-                }
-                else
+                    ParameterName = "@Password",
+                    Value = user.Password
+                });
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                string UserID = "";
+                if (rdr.HasRows)
                 {
-                    result = true;
+                    while (rdr.Read())
+                    {
+                        UserID = rdr["UserID"].ToString();
+                    }
                 }
 
                 con.Close();
-                return Json(new { returnvalue = result });
+                return Json(new { returnvalue = UserID });
 
             }
 
         }
-
 
 
         //check VAS user return record
@@ -244,12 +245,12 @@ namespace WebMVC.Controllers
                     Value = user.Email
                 });
 
-
                 cmd.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "@Password",
                     Value = user.Password
                 });
+
                 SqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -326,8 +327,8 @@ namespace WebMVC.Controllers
 
                 cmd.Parameters.Add(new SqlParameter()
                 {
-                    ParameterName = "ID",
-                    Value = val.ID
+                    ParameterName = "UserID",
+                    Value = val.UserID
                 });
                 cmd.Parameters.Add(new SqlParameter()
                 {
@@ -538,18 +539,18 @@ namespace WebMVC.Controllers
                     Value = user.Password
                 });
 
-                int result = cmd.ExecuteNonQuery();
+                //int result = cmd.ExecuteNonQuery();
 
-                SqlCommand cmd2 = new SqlCommand("CheckVASUser", con)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd2.Parameters.Add(new SqlParameter()
-                {
-                    ParameterName = "@Email",
-                    Value = user.Email
-                });
-                SqlDataReader rdr = cmd2.ExecuteReader();
+                //SqlCommand cmd2 = new SqlCommand("CheckVASUser", con)
+                //{
+                //    CommandType = CommandType.StoredProcedure
+                //};
+                //cmd2.Parameters.Add(new SqlParameter()
+                //{
+                //    ParameterName = "@Email",
+                //    Value = user.Email
+                //});
+                SqlDataReader rdr = cmd.ExecuteReader();
 
                 string UserID = "";
                 if (rdr.HasRows)
