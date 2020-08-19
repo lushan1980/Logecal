@@ -223,7 +223,6 @@ namespace WebMVC.Controllers
 
         }
 
-
         //check VAS user return record
         [HttpPost]
         public JsonResult CheckVASUser1(VASUser user)
@@ -273,7 +272,7 @@ namespace WebMVC.Controllers
         [HttpPost]
         public ActionResult CheckVASUser2(VASUser user)
         {
-            
+
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
             {
@@ -309,7 +308,6 @@ namespace WebMVC.Controllers
             return View(user);
         }
         //end 
-
 
         [HttpPost]
         public ActionResult InsertASurvey(Survey val)
@@ -367,113 +365,6 @@ namespace WebMVC.Controllers
             }
         }
 
-
-
-        //public ActionResult UpdateVASUser(VASUser user)   //give a record a password and send a temporary password to his Email
-        //{
-        //    string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
-        //    using (SqlConnection con = new SqlConnection(CS))
-        //    {
-        //        SqlCommand cmd = new SqlCommand("UpdatePwd", con)
-        //        {
-        //            CommandType = CommandType.StoredProcedure
-        //        };
-
-        //        con.Open();
-
-        //        cmd.Parameters.Add(new SqlParameter()
-        //        {
-        //            ParameterName = "@Email",
-        //            Value = user.Email
-        //        });
-
-        //        cmd.Parameters.Add(new SqlParameter()
-        //        {
-        //            ParameterName = "@VerifyCode",
-        //            Value = user.VerifyCode
-        //        });
-
-        //        cmd.Parameters.Add(new SqlParameter()
-        //        {
-        //            ParameterName = "@Password",
-        //            Value = user.Password
-        //        });
-
-        //        int result = cmd.ExecuteNonQuery();
-        //        bool insertData;
-        //        if (result > 0)
-        //        {
-        //            insertData = true;
-        //        }
-        //        else
-        //        {
-        //            insertData = false;
-        //        }
-
-        //        //send a temporary passwork to an Email
-        //        SqlCommand cmd2 = new SqlCommand("CheckVASUser", con)
-        //        {
-        //            CommandType = CommandType.StoredProcedure
-        //        };
-
-
-        //        cmd2.Parameters.Add(new SqlParameter()
-        //        {
-        //            ParameterName = "@Email",
-        //            Value = user.Email
-        //        });
-
-        //        cmd2.Parameters.Add(new SqlParameter()
-        //        {
-        //            ParameterName = "@VerifyCode",
-        //            Value = user.VerifyCode
-        //        });
-
-        //        cmd2.Parameters.Add(new SqlParameter()
-        //        {
-        //            ParameterName = "@Password",
-        //            Value = user.Password
-        //        });
-
-        //        var reader = cmd2.ExecuteReader();
-
-        //        if (reader.HasRows)
-        //        {
-        //            reader.Read();
-
-        //            string to = user.Email;
-        //            string from = "s.lu@logecal.com";
-        //            MailMessage mail = new MailMessage(from, to)
-        //            {
-        //                Subject = "Temporary Password",
-        //                Body = $"this is your Temprorary Password : {reader.GetString(3)}"
-        //            };
-
-        //            SmtpClient client = new SmtpClient("smtp.office365.com", 587)
-        //            {
-        //                Credentials = new NetworkCredential("s.lu@logecal.com", "TaGha_6W"),
-        //                EnableSsl = true
-        //            };
-
-        //            try
-        //            {
-        //                client.Send(mail);
-        //            }
-        //            catch (SmtpException ex)
-        //            {
-        //                Console.WriteLine(ex.ToString());
-        //            }
-
-        //        }
-
-        //        //end send a temporary passwork to an Email
-
-        //        con.Close();
-        //        return Json(new { returnvalue = insertData });
-        //    }
-        //}
-
-
         public ActionResult CheckInviteCode(VASUser user)
         {
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
@@ -490,7 +381,7 @@ namespace WebMVC.Controllers
                 {
                     ParameterName = "@SurveyID",
                     Value = user.SurveyID
-                });            
+                });
 
                 string record = (string)cmd.ExecuteScalar();
                 bool result;
@@ -539,17 +430,6 @@ namespace WebMVC.Controllers
                     Value = user.Password
                 });
 
-                //int result = cmd.ExecuteNonQuery();
-
-                //SqlCommand cmd2 = new SqlCommand("CheckVASUser", con)
-                //{
-                //    CommandType = CommandType.StoredProcedure
-                //};
-                //cmd2.Parameters.Add(new SqlParameter()
-                //{
-                //    ParameterName = "@Email",
-                //    Value = user.Email
-                //});
                 SqlDataReader rdr = cmd.ExecuteReader();
 
                 string UserID = "";
@@ -559,13 +439,149 @@ namespace WebMVC.Controllers
                     {
                         UserID = rdr["UserID"].ToString();
                     }
-                }                                
-                
+                }
+
                 con.Close();
                 return Json(new { returnvalue = UserID });
 
             }
         }
 
+        public ActionResult UpdatePwd1111111(VASUser user)   //give a record a password and send a temporary password to his Email
+        {
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("UpdatePwd", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Email",
+                    Value = user.Email
+                });
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Password",
+                    Value = user.Password
+                });
+
+                int result = cmd.ExecuteNonQuery();
+                bool insertData;
+                if (result > 0)
+                {
+                    insertData = true;
+                }
+                else
+                {
+                    insertData = false;
+                }
+
+                //send a temporary passwork to an Email
+                SqlCommand cmd2 = new SqlCommand("CheckVASUser", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+
+                cmd2.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Email",
+                    Value = user.Email
+                });
+
+                cmd2.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Password",
+                    Value = user.Password
+                });
+
+                var reader = cmd2.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+
+                    string to = user.Email;
+                    string from = "s.lu@logecal.com";
+                    MailMessage mail = new MailMessage(from, to)
+                    {
+                        Subject = "Temporary Password",
+                        Body = $"this is your Temprorary Password : {reader.GetString(3)}"
+                    };
+
+                    SmtpClient client = new SmtpClient("smtp.office365.com", 587)
+                    {
+                        Credentials = new NetworkCredential("s.lu@logecal.com", "TaGha_6W"),
+                        EnableSsl = true
+                    };
+
+                    try
+                    {
+                        client.Send(mail);
+                    }
+                    catch (SmtpException ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                    }
+
+                }
+
+                //end send a temporary passwork to an Email
+
+                con.Close();
+                return Json(new { returnvalue = insertData });
+            }
+        }
+        public ActionResult SendEmailSecurityCode(VASUser user)   //give a record a password and send a temporary password to his Email
+        {
+            string SecurityCode = CreateRandomPassword();
+            string to = user.Email;
+            string from = "s.lu@logecal.com";
+            MailMessage mail = new MailMessage(from, to)
+            {
+                Subject = "Temporary Password",
+                Body = $"This is your Temprorary Password : {SecurityCode}"
+            };
+
+            SmtpClient client = new SmtpClient("smtp.office365.com", 587)
+            {
+                Credentials = new NetworkCredential("s.lu@logecal.com", "TaGha_6W"),
+                EnableSsl = true
+            };
+            string result = "";
+            try
+            {
+                client.Send(mail);
+                result = "1";
+            }
+            catch (SmtpException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return Json(new { returnvalue = result });
+        }
+
+        private static string CreateRandomPassword(int length = 8)
+        {
+            // Create a string of characters, numbers, special characters that allowed in the password  
+            string validChars = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            Random random = new Random();
+
+            // Select one random character at a time from the string  
+            // and create an array of chars  
+            char[] chars = new char[length];
+            for (int i = 0; i < length; i++)
+            {
+                chars[i] = validChars[random.Next(0, validChars.Length)];
+            }
+            return new string(chars);
+
+        }
     }
 }

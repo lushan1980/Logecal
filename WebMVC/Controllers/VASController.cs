@@ -50,5 +50,9 @@ namespace WebMVC.Controllers
         {
             return View();
         }
+        public ActionResult ResetPwd()
+        {
+            return View();
+        }
     }
 }

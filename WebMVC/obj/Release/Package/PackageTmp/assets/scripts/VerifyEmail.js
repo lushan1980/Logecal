@@ -1,6 +1,10 @@
 ﻿$(document).ready(function () {
     
     $(function () {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const SurveyID = urlParams.get('SurveyID');
+        var url = "/VAS/Survey" + SurveyID;
 
         var buttonpressed;
         $('.btn').click(function () {
@@ -8,55 +12,111 @@
         })
         $('#VerifyEmail').submit(function (event) {
             event.preventDefault();
-            if (buttonpressed === "btnSubmit") {
-                Submit();
+            if (buttonpressed === "btnVerify") {
+                Verify();
             }
-            else {
+            else if (buttonpressed === "btnSignin") {
                 Signin();
             }
-        })
-        function Submit () {
-            //event.preventDefault();
-            var isValid = true;
-            if ($('#User-Email').val() == null || $('#User-Email').val() === "") {
-                document.getElementById("msg-email").innerHTML = "This field is requied";
-                isValid = false;
+            else {
+                Signup();
             }
-            else { document.getElementById("msg-email").innerHTML = ""; };
+        })
+
+        function Verify () {
+
+            var i, inputs, messages;
+            inputs = document.querySelectorAll('[id ^= "User-"]');
+            messages = document.querySelectorAll('[id ^= "msg-"]');
+            for (i = 0; i < inputs.length; i++) {
+                messages[i].innerHTML = "";
+            }
+            for (i = 0; i < inputs.length; i++) {
+                var isValid = true;
+                var currentInputValue = inputs[i].value;
+                if (currentInputValue == null || currentInputValue === "") {
+                    messages[i].innerHTML = "This field is required";
+                    isValid = false;
+                }
+            }
+
             if (!isValid) { return };
+
             var pwd = randPass(5, 3);
 
             var obj = {
-                Email: $('#User-Email').val(),
+                SurveyID: SurveyID,
+                InviteCode: $('#User-code').val(),
+                Email: $('#User-Email').val()                
+            }
+
+            var obj2 = {
+                InviteCode: $('#User-code').val(),
+                Email: $('#User-Email').val(),                
                 Password: pwd
             }
         
             $.ajax({
                 type: "POST",
-                url: "/VASValue/InsertVASUser",
+                url: "/VASValue/CheckInviteCode",
                 dataType: "json",
                 data: JSON.stringify(obj),
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
+
                     if (data.returnvalue) {
-                        divPwdlabel = '<label for="User-Password" class="control__label control__label--is-required">Temporary Password</label>';
+                        //alert("success");
+                        $("#divVerifyCode").remove();
+                        divEmailLabel = '<label for="User-Email" class="control__label control__label--is-required">Email Address</label>';
+                        divEmailInput = '<input type="email" class="control__input" id="User-Email">';
+                        divEmailMsg = '<p id="msg-email" style="color:#ff0000; margin:0px; font-style:italic"></p>';
+                        divPwdLabel = '<label for="User-Password" class="control__label control__label--is-required">Password</label>';
                         divPwdInput = '<input type = "password" class="control__input" id = "User-Password">';
                         divPwdMsg = '<p id="msg-password" style="color:#ff0000; margin:0px; font-style:italic"></p>';
-                        $("#divPwd").append(divPwdlabel);
+                        $("#divEmail").append(divEmailLabel);
+                        $("#divEmail").append(divEmailInput);
+                        $("#divEmail").append(divEmailMsg);
+                        $("#divPwd").append(divPwdLabel);
                         $("#divPwd").append(divPwdInput);
                         $("#divPwd").append(divPwdMsg);
-                        document.getElementById("btnSubmit").style.display = "none";
-                        document.getElementById("btnSubmit").disabled = true;
+                        document.getElementById("btnVerify").style.display = "none";
+                        document.getElementById("btnVerify").disabled = true;
                         document.getElementById("btnSignin").style.display = "block";
+                        document.getElementById("btnSignup").style.display = "block";
+
+                        //$.ajax({
+                        //    type: "POST",
+                        //    url: "/VASValue/UpdateVASUser",
+                        //    dataType: "json",
+                        //    data: JSON.stringify(obj2),
+                        //    contentType: "application/json; charset=utf-8",
+                        //    success: function (data) {
+                        //        if (data.returnvalue) {
+                        //            divPwdlabel = '<label for="User-Password" class="control__label control__label--is-required">Temporary Password</label>';
+                        //            divPwdInput = '<input type = "password" class="control__input" id = "User-Password">';
+                        //            divPwdMsg = '<p id="msg-password" style="color:#ff0000; margin:0px; font-style:italic"></p>';
+                        //            $("#divPwd").append(divPwdlabel);
+                        //            $("#divPwd").append(divPwdInput);
+                        //            $("#divPwd").append(divPwdMsg);
+                        //            document.getElementById("btnSubmit").style.display = "none";
+                        //            document.getElementById("btnSubmit").disabled = true;
+                        //            document.getElementById("btnSignin").style.display = "block";
+                        //        }
+                        //        else {
+                        //            alert("wrong");
+                        //        }
+                        //    }
+                        //})
+                                                
                     }
                     else {
-                        alert("bad");
+                        alert("You were not invited to take part in this Survey!");
                     }
                 }
             })
         }
+
         function Signin () {
-            //event.preventDefault();
             var i, inputs, messages;
             inputs = document.querySelectorAll('[id ^= "User-"]');
             messages = document.querySelectorAll('[id ^= "msg-"]');
@@ -74,24 +134,21 @@
             if (!isValid) { return };
         
             var obj = {
+                SurveyID: SurveyID,
                 Email: $('#User-Email').val(),
                 Password: $('#User-Password').val()
             }
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const SurveyNum = urlParams.get('SurveyNum');
-            var url = "/VAS/Survey"+SurveyNum;
+            
             $.ajax({
                 type: "POST",
-                url: "/VASValue/CheckVASUser1",
+                url: "/VASValue/CheckVASUser",
                 dataType: "json",
                 data: JSON.stringify(obj),
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    if (data != "[]") {
-                        var user = JSON.parse(data);
-                        var ID = user[0].ID;
-                        window.location.replace(url+"?ID="+ID)
+                    if (data.returnvalue != "") {
+                        var UserID = data.returnvalue;
+                        window.location.replace(url + "?UserID=" + UserID)
                     } else {
                         alert("Your Email or Password are wrong");
                         Response.redirect(url)
@@ -99,6 +156,51 @@
                 }
             })
         }
+
+        function Signup() {            
+            var i, inputs, messages;
+            inputs = document.querySelectorAll('[id ^= "User-"]');
+            messages = document.querySelectorAll('[id ^= "msg-"]');
+            for (i = 0; i < inputs.length; i++) {
+                messages[i].innerHTML = "";
+            }
+            for (i = 0; i < inputs.length; i++) {
+                var isValid = true;
+                var currentInputValue = inputs[i].value;
+                if (currentInputValue == null || currentInputValue === "") {
+                    messages[i].innerHTML = "This field is required";
+                    isValid = false;
+                }
+            }
+            if (!isValid) { return };
+
+            var obj = {
+                SurveyID: SurveyID,
+                Email: $('#User-Email').val(),
+                Password: $('#User-Password').val()
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/VASValue/InsertVASUser",
+                dataType: "json",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data.returnvalue != null) {
+                        alert("Success");
+                        //var user = JSON.parse(data);
+                        var UserID = data.returnvalue;
+                        //var ID = user[0].ID;
+                        window.location.replace(url + "?UserID=" + UserID)
+                    } else {
+                        alert("Your Email or Password are wrong");
+                        Response.redirect(url)
+                    }
+                }
+            })
+        }
+
         function randPass(lettersLength, numbersLength) {
                 var j, x, i;
                 var result = '';

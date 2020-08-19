@@ -203,6 +203,7 @@
     <Content Include="assets\images\testimonial-quote.png" />
     <Content Include="assets\scripts\App.js" />
     <Content Include="assets\scripts\ContactForm.js" />
+    <Content Include="assets\scripts\ResetPwd.js" />
     <Content Include="assets\scripts\VASSurvey1.js" />
     <Content Include="assets\scripts\VASValue.js" />
     <Content Include="assets\scripts\Vendor.js" />
@@ -425,6 +426,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\VAS\ResetPwd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -476,7 +478,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

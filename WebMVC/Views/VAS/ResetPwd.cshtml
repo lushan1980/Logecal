@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "ChangePwd";
+}
+<script src="~/assets/scripts/ResetPwd.js"></script>
+<!-- BANNER
+================================================== -->
+<div class="banner banner--small" role="banner">
+    <div class="banner__background" style="background-image:url(/assets/images/banner-contact.jpg);" data-type="background"></div>
+    <div class="banner__content">
+        <h2 class="banner__headline alpha">Visual Analog Scale (VAS)</h2>
+    </div>
+</div><!--/banner -->
+
+
+<main role="main" id="main">
+    <!--Verify Email
+    ================================================== -->
+    <article class="section section--small">
+        <div class="container container--small">
+            <div class="section__header section__header--centered">
+                <img src="~/assets/images/email-logo.jpg" width="200" />
+                <h2 class="section__heading" id="head1">Reset Your Password</h2>
+                <p class="lead" id="head2">Let's make a brand new password!</p>
+            </div>
+
+            <form action="" id="VerifyEmail">
+                <div class="grid" id="Formgird">
+
+                    <div class="grid__column grid__column--12 grid__column--12--lg">
+                        <div class="control" id="divEmail">
+                            <label for="User-code" class="control__label control__label--is-required">Email Address</label>
+                            <input type="email" class="control__input" id="User-Email">
+                            <p id="msg-Email" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                    </div>
+
+                    <div class="grid__column grid__column--12 grid__column--12--lg">
+                        <div class="control" id="divSecurityCode">
+                            
+                        </div>
+                    </div>
+
+                    <div class="grid__column grid__column--12 grid__column--6--lg">
+                        <div class="control" id="divNewPwd">
+                            
+                        </div>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--6--lg">
+                        <div class="control"  id="divConfirmPwd">
+                            
+                        </div>
+                    </div>
+
+                    <div class="grid__column grid__column--12 grid__column--6--lg" id="btnCancel">
+                        <button class="btn" type="submit" value="btnCancel">Cancel</button>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--6--lg" id="btnContinue">
+                        <button class="btn" type="submit" style="float: right" value="btnContinue">Continue</button>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--6--lg" id="btnSubmit" style="display:none">
+                        <button class="btn" type="submit" style="float: right" value="btnSubmit">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </article><!--/Verify Email-->
+</main>

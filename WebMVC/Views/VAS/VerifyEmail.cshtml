@@ -19,9 +19,9 @@
         <div class="container container--small">
             <div class="section__header section__header--centered">
                 <img src="~/assets/images/email-logo.jpg" width="200" />
-                <h2 class="section__heading">Verfication</h2>
-                <p class="lead" style="text-align: left">@*Please enter your Email. We will send you a one time Varification code as the password for your first login.*@</p>
-                @*<p class="lead" style="text-align: left">Please enter your invite code.</p>*@
+                <h2 class="section__heading" id="head1">Verfication</h2>
+                @*<p class="lead" style="text-align: left">Please enter your Email. We will send you a one time Varification code as the password for your first login.</p>*@
+                <p class="lead" id="head2">Please enter your invitation code.</p>
 
             </div>
 
@@ -38,9 +38,7 @@
                     @*Email Address*@
                     <div class="grid__column grid__column--12 grid__column--12--lg">
                         <div class="control" id="divEmail">
-                            @*<label for="User-Email" class="control__label control__label--is-required">Email Address</label>
-                <input type="email" class="control__input" id="User-Email">
-                <p id="msg-email" style="color:#ff0000; margin:0px; font-style:italic"></p>*@
+                            
                         </div>
                     </div>
                     <div class="grid__column grid__column--12 grid__column--12--lg">
@@ -53,7 +51,8 @@
                         <button class="btn" id="btnVerify" type="submit" value="btnSubmit">Verify</button>
                     </div>
                     <div class="grid__column grid__column--12 grid__column--6--lg">
-                        <button class="btn" id="btnSignin" type="submit" style="display:none" value="btnSignin">Sign in</button>
+                        <button class="btn" id="btnSignin" type="submit" style="display:none" value="btnSignin">Log in</button>
+                        <a href="ResetPwd" id="forgetlink" class="text-link" style="display:none; padding-top:30px">Forgot user name and / or password?   &#9002;</a>
                     </div>
                     <div class="grid__column grid__column--12 grid__column--6--lg">
                         <button class="btn" id="btnSignup" type="submit" style="display: none; float: right; color: #b74d4d" value="btnSignin">Sign Up</button>
