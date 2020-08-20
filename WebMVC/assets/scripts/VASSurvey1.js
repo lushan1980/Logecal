@@ -119,6 +119,7 @@ $(document).ready(function () {
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             const UserID = urlParams.get('UserID');
+            //var now = new Date().toLocaleString();
             //console.log(UserID);
             var obj = {
                 UserID: UserID,
@@ -126,7 +127,8 @@ $(document).ready(function () {
                 //Gender: $('#gender').val(),
                 Gender: displayRadioValue(),
                 F1 : F1,
-                F2 : F2
+                F2: F2,
+
             };
 
             $.ajax({

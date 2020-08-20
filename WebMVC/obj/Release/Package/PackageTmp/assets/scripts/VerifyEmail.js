@@ -42,19 +42,11 @@
 
             if (!isValid) { return };
 
-            var pwd = randPass(5, 3);
-
             var obj = {
                 SurveyID: SurveyID,
-                InviteCode: $('#User-code').val(),
-                Email: $('#User-Email').val()                
+                InviteCode: $('#User-code').val()           
             }
 
-            var obj2 = {
-                InviteCode: $('#User-code').val(),
-                Email: $('#User-Email').val(),                
-                Password: pwd
-            }
         
             $.ajax({
                 type: "POST",
@@ -66,6 +58,8 @@
 
                     if (data.returnvalue) {
                         //alert("success");
+                        document.getElementById("head1").innerHTML = "Welcome to take part in our Survey";
+                        document.getElementById("head2").innerHTML = "If you do not have an account, please sign up first. If you are an existing user, please enter your Email and password then Login. ";
                         $("#divVerifyCode").remove();
                         divEmailLabel = '<label for="User-Email" class="control__label control__label--is-required">Email Address</label>';
                         divEmailInput = '<input type="email" class="control__input" id="User-Email">';
@@ -82,31 +76,8 @@
                         document.getElementById("btnVerify").style.display = "none";
                         document.getElementById("btnVerify").disabled = true;
                         document.getElementById("btnSignin").style.display = "block";
+                        document.getElementById("forgetlink").style.display = "block";
                         document.getElementById("btnSignup").style.display = "block";
-
-                        //$.ajax({
-                        //    type: "POST",
-                        //    url: "/VASValue/UpdateVASUser",
-                        //    dataType: "json",
-                        //    data: JSON.stringify(obj2),
-                        //    contentType: "application/json; charset=utf-8",
-                        //    success: function (data) {
-                        //        if (data.returnvalue) {
-                        //            divPwdlabel = '<label for="User-Password" class="control__label control__label--is-required">Temporary Password</label>';
-                        //            divPwdInput = '<input type = "password" class="control__input" id = "User-Password">';
-                        //            divPwdMsg = '<p id="msg-password" style="color:#ff0000; margin:0px; font-style:italic"></p>';
-                        //            $("#divPwd").append(divPwdlabel);
-                        //            $("#divPwd").append(divPwdInput);
-                        //            $("#divPwd").append(divPwdMsg);
-                        //            document.getElementById("btnSubmit").style.display = "none";
-                        //            document.getElementById("btnSubmit").disabled = true;
-                        //            document.getElementById("btnSignin").style.display = "block";
-                        //        }
-                        //        else {
-                        //            alert("wrong");
-                        //        }
-                        //    }
-                        //})
                                                 
                     }
                     else {
@@ -187,41 +158,19 @@
                 data: JSON.stringify(obj),
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    if (data.returnvalue != null) {
+                    if (data.returnvalue !== "") {
                         alert("Success");
                         //var user = JSON.parse(data);
                         var UserID = data.returnvalue;
                         //var ID = user[0].ID;
                         window.location.replace(url + "?UserID=" + UserID)
                     } else {
-                        alert("Your Email or Password are wrong");
-                        Response.redirect(url)
+                        alert("You already have an account, please sign in directly.");                        
                     }
                 }
             })
         }
 
-        function randPass(lettersLength, numbersLength) {
-                var j, x, i;
-                var result = '';
-                var letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-                var numbers = '0123456789';
-                for (i = 0; i < lettersLength; i++) {
-                    result += letters.charAt(Math.floor(Math.random() * letters.length));
-                }
-                for (i = 0; i < numbersLength; i++) {
-                    result += numbers.charAt(Math.floor(Math.random() * numbers.length));
-                }
-                result = result.split("");
-                for (i = result.length - 1; i > 0; i--) {
-                    j = Math.floor(Math.random() * (i + 1));
-                    x = result[i];
-                    result[i] = result[j];
-                    result[j] = x;
-                }
-                result = result.join("");
-                return result
-            }
     })
 })
 

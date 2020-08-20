@@ -9,6 +9,7 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Web.UI.WebControls;
 using WebMVC.Models;
 
 namespace WebMVC.Controllers
@@ -349,6 +350,7 @@ namespace WebMVC.Controllers
                     ParameterName = "@F2",
                     Value = val.F2
                 });
+                
                 int result = cmd.ExecuteNonQuery();
 
                 bool insertData;
@@ -364,7 +366,6 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = insertData });
             }
         }
-
         public ActionResult CheckInviteCode(VASUser user)
         {
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
@@ -399,7 +400,6 @@ namespace WebMVC.Controllers
 
             }
         }
-
         public JsonResult InsertVASUser(VASUser user)
         {
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
@@ -446,7 +446,6 @@ namespace WebMVC.Controllers
 
             }
         }
-
         public ActionResult UpdatePwd1111111(VASUser user)   //give a record a password and send a temporary password to his Email
         {
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
@@ -538,9 +537,34 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = insertData });
             }
         }
-        public ActionResult SendEmailSecurityCode(VASUser user)   //give a record a password and send a temporary password to his Email
+        public ActionResult SendEmailSecurityCode(VASUser user)   
         {
             string SecurityCode = CreateRandomPassword();
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("UpdateSecurityCode", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Email",
+                    Value = user.Email
+                });
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@SecurityCode",
+                    Value = SecurityCode
+                });
+
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            
             string to = user.Email;
             string from = "s.lu@logecal.com";
             MailMessage mail = new MailMessage(from, to)
@@ -567,12 +591,54 @@ namespace WebMVC.Controllers
             return Json(new { returnvalue = result });
         }
 
+        public ActionResult UpdatePwd(VASUser user)
+        {
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("UpdatePwd", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Email",
+                    Value = user.Email
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@SecurityCode",
+                    Value = user.SecurityCode
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Password",
+                    Value = user.Password
+                });
+
+                int result = cmd.ExecuteNonQuery();
+                bool resetPwd;
+                if (result > 0)
+                {
+                    resetPwd = true;
+                }
+                else
+                {
+                    resetPwd = false;
+                }
+
+                con.Close();
+                return Json(new { returnvalue = resetPwd });
+            }
+        }
         private static string CreateRandomPassword(int length = 8)
         {
             // Create a string of characters, numbers, special characters that allowed in the password  
             string validChars = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             Random random = new Random();
-
             // Select one random character at a time from the string  
             // and create an array of chars  
             char[] chars = new char[length];
@@ -581,7 +647,6 @@ namespace WebMVC.Controllers
                 chars[i] = validChars[random.Next(0, validChars.Length)];
             }
             return new string(chars);
-
         }
     }
 }
