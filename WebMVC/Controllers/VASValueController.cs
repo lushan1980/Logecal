@@ -569,8 +569,8 @@ namespace WebMVC.Controllers
             string from = "s.lu@logecal.com";
             MailMessage mail = new MailMessage(from, to)
             {
-                Subject = "Temporary Password",
-                Body = $"This is your Temprorary Password : {SecurityCode}"
+                Subject = "Security Code",
+                Body = $"This is your Security Code: {SecurityCode}"
             };
 
             SmtpClient client = new SmtpClient("smtp.office365.com", 587)
@@ -590,7 +590,6 @@ namespace WebMVC.Controllers
             }
             return Json(new { returnvalue = result });
         }
-
         public ActionResult UpdatePwd(VASUser user)
         {
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;

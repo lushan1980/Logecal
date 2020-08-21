@@ -232,6 +232,7 @@
     <Content Include="images\curved-shape-right.svg" />
     <Content Include="images\curved-shape.svg" />
     <Content Include="images\mockup-transparency-redux.png" />
+    <Content Include="images\news.png" />
     <Content Include="images\screenshot-01.jpg" />
     <Content Include="images\screenshot-02.jpg" />
     <Content Include="images\screenshot-03.jpg" />
@@ -251,6 +252,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="assets\fonts\CaesarDressing.woff" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\IISPublish.pubxml" />
     <None Include="Properties\PublishProfiles\Logecal - Web Deploy.pubxml" />
