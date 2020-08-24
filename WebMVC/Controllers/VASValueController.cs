@@ -223,7 +223,42 @@ namespace WebMVC.Controllers
             }
 
         }
+        public ActionResult CheckVASUserEmail(VASUser user)
+        {
 
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("CheckVASUserEmail", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Email",
+                    Value = user.Email
+                });
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                string UserID = "";
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        UserID = rdr["UserID"].ToString();
+                    }
+                }
+
+                con.Close();
+                return Json(new { returnvalue = UserID });
+
+            }
+
+        }
         //check VAS user return record
         [HttpPost]
         public JsonResult CheckVASUser1(VASUser user)

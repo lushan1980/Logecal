@@ -43,31 +43,48 @@
                 Email: $('#User-Email').val()
             }
 
+
             $.ajax({
                 type: "POST",
-                url: "/VASValue/SendEmailSecurityCode",
+                url: "/VASValue/CheckVASUserEmail",
                 dataType: "json",
                 data: JSON.stringify(obj),
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    if (data.returnvalue == "1") {
-                        //alert("success");
-                        divSecurityCode = '<label for="User-SecurityCode" class="control__label control__label--is-required">Security Code</label><input type="password" class="control__input" id="User-SecurityCode"><p id="msg-VerifyCode" style="color:#ff0000; margin:0px; font-style:italic"></p><p style="color:black; margin:0px; font-style:italic">Just make sure it is you! We have sent a Email with a single use security code to you.Please check your Email now.</p>';
-                        divNewPwd = '<label for="User-code" class="control__label control__label--is-required">New Password</label><input type="password" class="control__input" id="User-Pwd"><p id="msg-Pwd" style="color:#ff0000; margin:0px; font-style:italic"></p>';
-                        divConfirmPwd = '<label for="User-code" class="control__label control__label--is-required">Confirm Password</label><input type ="password" class="control__input" id="User-ConfirmPwd"><p id="msg-ConfirmPwd" style="color:#ff0000; margin:0px; font-style:italic"></p>';
-
-                        $("#divSecurityCode").append(divSecurityCode);
-                        $("#divNewPwd").append(divNewPwd);
-                        $("#divConfirmPwd").append(divConfirmPwd);
-                        $("#divbtnContinue").remove();
-                        
-                        document.getElementById("divbtnSubmit").style.display = "block";
+                    if (data.returnvalue == "") {
+                        alert("You are not our user yet, please register first.")
+                        window.location.replace(document.referrer)
                     }
                     else {
-                        alert("You were not invited to take part in this Survey!");
+                        $.ajax({
+                            type: "POST",
+                            url: "/VASValue/SendEmailSecurityCode",
+                            dataType: "json",
+                            data: JSON.stringify(obj),
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
+                                if (data.returnvalue == "1") {
+                                    //alert("success");
+                                    divSecurityCode = '<p style="color:black; margin:0px; font-style:italic">We have sent a Email with a single use security code to you. Please check your Email now. Then type your security code into the text box below.</p><label for="User-SecurityCode" class="control__label control__label--is-required">Security Code</label><input type="password" class="control__input" id="User-SecurityCode"><p id="msg-VerifyCode" style="color:#ff0000; margin:0px; font-style:italic"></p>';
+                                    divNewPwd = '<label for="User-code" class="control__label control__label--is-required">New Password</label><input type="password" class="control__input" id="User-Pwd"><p id="msg-Pwd" style="color:#ff0000; margin:0px; font-style:italic"></p>';
+                                    divConfirmPwd = '<label for="User-code" class="control__label control__label--is-required">Confirm Password</label><input type ="password" class="control__input" id="User-ConfirmPwd"><p id="msg-ConfirmPwd" style="color:#ff0000; margin:0px; font-style:italic"></p>';
+
+                                    $("#divSecurityCode").append(divSecurityCode);
+                                    $("#divNewPwd").append(divNewPwd);
+                                    $("#divConfirmPwd").append(divConfirmPwd);
+                                    $("#divbtnContinue").remove();
+                        
+                                    document.getElementById("divbtnSubmit").style.display = "block";
+                                }
+                                else {
+                                    alert("You were not invited to take part in this Survey!");
+                                }
+                            }
+                        })
                     }
+
                 }
-            })
+            })            
         }
 
         function Submit() {
@@ -117,7 +134,7 @@
                         window.location.replace(document.referrer)
                     }
                     else {
-                        alert("Your Security is wrong, Please check your Email again.");
+                        alert("Your Security Code is wrong, Please check your Email again.");
                     }
                 }
             })

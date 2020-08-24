@@ -1,9 +1,11 @@
 ﻿$(document).ready(function () {
     
     $(function () {
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const SurveyID = urlParams.get('SurveyID');
+        //const queryString = location.search;        
+        //const urlParams = new URLSearchParams(queryString);
+        //const SurveyID = urlParams.get('SurveyID');
+
+        const SurveyID = getParameterByName('SurveyID');;
         var url = "/VAS/Survey" + SurveyID;
 
         var buttonpressed;
@@ -159,7 +161,7 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     if (data.returnvalue !== "") {
-                        alert("Success");
+                        //alert("Success");
                         //var user = JSON.parse(data);
                         var UserID = data.returnvalue;
                         //var ID = user[0].ID;
@@ -170,6 +172,18 @@
                 }
             })
         }
+
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
 
     })
 })

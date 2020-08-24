@@ -116,9 +116,11 @@ $(document).ready(function () {
             var F1 = (Math.sqrt(HValue * HValue + VValue * VValue) / (10 * Math.sqrt(2))).toFixed(2);
             var F2 = (((10 - parseFloat(VValue) + 0.5) / (parseFloat(HValue) + 0.5) - (0.5 / (10.5))) / 21).toFixed(2);
 
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const UserID = urlParams.get('UserID');
+            //const queryString = window.location.search;
+            //const urlParams = new URLSearchParams(queryString);
+            //const UserID = urlParams.get('UserID');
+            const UserID = getParameterByName('UserID');;
+            
             //var now = new Date().toLocaleString();
             //console.log(UserID);
             var obj = {
@@ -148,6 +150,15 @@ $(document).ready(function () {
             })
         })
 
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
     })
 
 })
