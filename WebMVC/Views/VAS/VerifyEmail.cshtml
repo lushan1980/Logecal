@@ -28,7 +28,7 @@
             <form action="" id="VerifyEmail">
                 <div class="grid" id="Formgird">
                     @*invite code*@
-                    <div class="grid__column grid__column--12 grid__column--12--lg">
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
                         <div class="control" id="divVerifyCode">
                             <label for="User-code" class="control__label control__label--is-required">Invite code</label>
                             <input type="text" class="control__input" id="User-code">
@@ -36,26 +36,28 @@
                         </div>
                     </div>
                     @*Email Address*@
-                    <div class="grid__column grid__column--12 grid__column--12--lg">
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
                         <div class="control" id="divEmail">
-                            
+
                         </div>
                     </div>
-                    <div class="grid__column grid__column--12 grid__column--12--lg">
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
                         <div class="control" id="divPwd">
 
                         </div>
                     </div>
 
-                    <div class="grid__column grid__column--12 grid__column--12--lg">
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
                         <button class="btn" id="btnVerify" type="submit" value="btnSubmit">Verify</button>
                     </div>
-                    <div class="grid__column grid__column--12 grid__column--6--lg">
+                    <div class="grid__column grid__column--12 grid__column--6--sm">
                         <button class="btn" id="btnSignin" type="submit" style="display:none" value="btnSignin">Log in</button>
-                        <a href="ResetPwd" id="forgetlink" class="text-link" style="display:none; padding-top:30px">Forgot user name and / or password?   &#9002;</a>
                     </div>
-                    <div class="grid__column grid__column--12 grid__column--6--lg">
+                    <div class="grid__column grid__column--12 grid__column--6--sm">
                         <button class="btn" id="btnSignup" type="submit" style="display: none; float: right; color: #b74d4d" value="btnSignin">Sign Up</button>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                        <a href="ResetPwd" id="forgetlink" class="text-link" style="display:none; padding-top:30px">Forgot user name and / or password?   &#9002;</a>
                     </div>
                 </div>
             </form>

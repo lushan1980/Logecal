@@ -1,7 +1,7 @@
 ﻿
 var arr = document.referrer.split("/");
 var url = arr.slice(-1)[0] ;
-if (url !== "VerifyEmail?SurveyID=1") {
+if (url !== "VerifyEmail?SurveyID=1" && url !== "Signup?SurveyID=1") {
     window.location.replace("/VAS/VerifyEmail?SurveyID=1");
 }     
 
@@ -119,7 +119,7 @@ $(document).ready(function () {
             //const queryString = window.location.search;
             //const urlParams = new URLSearchParams(queryString);
             //const UserID = urlParams.get('UserID');
-            const UserID = getParameterByName('UserID');;
+            const UserID = getParameterByName('UserID');
             
             //var now = new Date().toLocaleString();
             //console.log(UserID);

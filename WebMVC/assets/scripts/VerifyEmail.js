@@ -130,47 +130,50 @@
             })
         }
 
-        function Signup() {            
-            var i, inputs, messages;
-            inputs = document.querySelectorAll('[id ^= "User-"]');
-            messages = document.querySelectorAll('[id ^= "msg-"]');
-            for (i = 0; i < inputs.length; i++) {
-                messages[i].innerHTML = "";
-            }
-            for (i = 0; i < inputs.length; i++) {
-                var isValid = true;
-                var currentInputValue = inputs[i].value;
-                if (currentInputValue == null || currentInputValue === "") {
-                    messages[i].innerHTML = "This field is required";
-                    isValid = false;
-                }
-            }
-            if (!isValid) { return };
+        function Signup() {   
+            var urlSignup = "/VAS/Signup?SurveyID="+SurveyID;
+            window.location.replace(urlSignup)
 
-            var obj = {
-                SurveyID: SurveyID,
-                Email: $('#User-Email').val(),
-                Password: $('#User-Password').val()
-            }
+            //var i, inputs, messages;
+            //inputs = document.querySelectorAll('[id ^= "User-"]');
+            //messages = document.querySelectorAll('[id ^= "msg-"]');
+            //for (i = 0; i < inputs.length; i++) {
+            //    messages[i].innerHTML = "";
+            //}
+            //for (i = 0; i < inputs.length; i++) {
+            //    var isValid = true;
+            //    var currentInputValue = inputs[i].value;
+            //    if (currentInputValue == null || currentInputValue === "") {
+            //        messages[i].innerHTML = "This field is required";
+            //        isValid = false;
+            //    }
+            //}
+            //if (!isValid) { return };
 
-            $.ajax({
-                type: "POST",
-                url: "/VASValue/InsertVASUser",
-                dataType: "json",
-                data: JSON.stringify(obj),
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    if (data.returnvalue !== "") {
-                        //alert("Success");
-                        //var user = JSON.parse(data);
-                        var UserID = data.returnvalue;
-                        //var ID = user[0].ID;
-                        window.location.replace(url + "?UserID=" + UserID)
-                    } else {
-                        alert("You already have an account, please sign in directly.");                        
-                    }
-                }
-            })
+            //var obj = {
+            //    SurveyID: SurveyID,
+            //    Email: $('#User-Email').val(),
+            //    Password: $('#User-Password').val()
+            //}
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/VASValue/InsertVASUser",
+            //    dataType: "json",
+            //    data: JSON.stringify(obj),
+            //    contentType: "application/json; charset=utf-8",
+            //    success: function (data) {
+            //        if (data.returnvalue !== "") {
+            //            //alert("Success");
+            //            //var user = JSON.parse(data);
+            //            var UserID = data.returnvalue;
+            //            //var ID = user[0].ID;
+            //            window.location.replace(url + "?UserID=" + UserID)
+            //        } else {
+            //            alert("You already have an account, please sign in directly.");                        
+            //        }
+            //    }
+            //})
         }
 
 

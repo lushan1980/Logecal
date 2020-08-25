@@ -66,8 +66,8 @@
                                 if (data.returnvalue == "1") {
                                     //alert("success");
                                     divSecurityCode = '<p style="color:black; margin:0px; font-style:italic">We have sent a Email with a single use security code to you. Please check your Email now. Then type your security code into the text box below.</p><label for="User-SecurityCode" class="control__label control__label--is-required">Security Code</label><input type="password" class="control__input" id="User-SecurityCode"><p id="msg-VerifyCode" style="color:#ff0000; margin:0px; font-style:italic"></p>';
-                                    divNewPwd = '<label for="User-code" class="control__label control__label--is-required">New Password</label><input type="password" class="control__input" id="User-Pwd"><p id="msg-Pwd" style="color:#ff0000; margin:0px; font-style:italic"></p>';
-                                    divConfirmPwd = '<label for="User-code" class="control__label control__label--is-required">Confirm Password</label><input type ="password" class="control__input" id="User-ConfirmPwd"><p id="msg-ConfirmPwd" style="color:#ff0000; margin:0px; font-style:italic"></p>';
+                                    divNewPwd = '<label for="User-Pwd" class="control__label control__label--is-required">New Password</label><input type="password" class="control__input" id="User-Pwd"><p id="msg-Pwd" style="color:#ff0000; margin:0px; font-style:italic"></p>';
+                                    divConfirmPwd = '<label for="User-ConfirmPwd" class="control__label control__label--is-required">Confirm Password</label><input type ="password" class="control__input" id="User-ConfirmPwd"><p id="msg-ConfirmPwd" style="color:#ff0000; margin:0px; font-style:italic"></p>';
 
                                     $("#divSecurityCode").append(divSecurityCode);
                                     $("#divNewPwd").append(divNewPwd);
