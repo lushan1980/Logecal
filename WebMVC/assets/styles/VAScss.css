@@ -504,4 +504,10 @@ canvas {
         border: 10px solid transparent;
         border-top-color: yellow;
     }
-  
+.field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-top: -30px;
+    position: relative;
+    z-index: 2;
+}

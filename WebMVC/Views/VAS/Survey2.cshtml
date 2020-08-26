@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Survey2";
 }
-
+<script src="~/assets/scripts/VASSurvey2.js?826"></script>
 <!-- BANNER
 ================================================== -->
 <div class="banner banner--small" role="banner">
@@ -12,11 +12,90 @@
     </div>
 </div><!--/banner -->
 
-<h2>Survey 2</h2>
 <div class="section section--white">
-    <p>    </p>
-    <p>    </p>
-    <p>    </p>
-    <p>    </p>
-    <p>    </p>
+    <form action="" id="SurveyForm" name="SurveyForm">
+        <div class="container container--large">
+            <div class="grid" id="Formgird">
+
+                <div class="grid__column grid__column--12 grid__column--6--sm"> 
+                    <div class="control" style="width: 50%">
+                        <label for="age" class="control__label control__label--is-required">Age</label>
+                        <select class="control__input" id="age"></select>
+                    
+                
+                        <label for="gender" class="control__label control__label--is-required">Gender</label>
+                        <fieldset>
+                            <label for="male">
+                                <input type="radio" id="male" value="Male" name="gender" /> Male
+                            </label>
+                            <label for="female">
+                                <input type="radio" id="female" value="Female" name="gender" /> Female
+                            </label>
+                        </fieldset>
+                
+                    
+                        <label for="Ethnicity" class="control__label control__label--is-required">Ethnicity</label>
+                        <fieldset>
+                            <input type="radio" id="HoL" value="Hispanic or Latino" name="Ethnicity" />
+                            <label for="HoL">
+                                Hispanic or Latino
+                            </label><br>
+                            <input type="radio" id="NHoL" value="Not Hispanic nor Latino" name="Ethnicity" />
+                            <label for="NHoL">
+                                Not Hispanic nor Latino
+                            </label><br>
+                        </fieldset>                        
+                    </div>
+                </div>
+                <div class="grid__column grid__column--12 grid__column--6--sm">
+                    <div class="control">
+                        <label for="Race" class="control__label control__label--is-required">Race</label>
+                        <fieldset>
+                            <input type="radio" id="White" value="Hispanic or Latino" name="Race" />
+                            <label for="White">
+                                White
+                            </label><br>
+                            <input type="radio" id="Black" value="Black or African American" name="Race" />
+                            <label for="Black or African American">
+                                Black or African American
+                            </label><br>
+                            <input type="radio" id="Asian" value="Asian" name="Race" />
+                            <label for="Asian">
+                                Asian
+                            </label><br>
+                            <input type="radio" id="AmericanIndian" value="American Indian or Alaska Native" name="Race" />
+                            <label for="AmericanIndian">
+                                American Indian or Alaska Native
+                            </label><br>
+                            <input type="radio" id="Hawaiian" value="Native Hawaiian or Other Pacific Islander" name="Race" />
+                            <label for="Hawaiian">
+                                Native Hawaiian or Other Pacific Islander
+                            </label><br>
+                            <input type="radio" id="Other" value="Other" name="Race" />
+                            <label for="Other">
+                                Other
+                            </label><br>
+                        </fieldset>                        
+                    </div>
+                </div>               
+
+                <div class="grid__column grid__column--12 grid__column--12--sm">
+                    <h4>How does your skin feel? Mark your thoughts on the continuum below:</h4>
+                    <div class="slidecontainer">
+                        <input type="range" min="0" max="10" value="5" step="any" class="slider" id="myRange">
+                        <label class="sliderlabelleft">
+                            Extremely Dry
+                        </label>
+                        <label class="sliderlabelright">
+                            Extremely Hydrated
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="grid__column grid__column--12 grid__column--12--sm" style="text-align:center">
+                <button class="btn" id="btnSubmit" type="submit">Submit</button>
+            </div>            
+        </div>
+    </form>
 </div>

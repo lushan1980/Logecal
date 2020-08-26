@@ -206,6 +206,7 @@
     <Content Include="assets\scripts\ResetPwd.js" />
     <Content Include="assets\scripts\Signup.js" />
     <Content Include="assets\scripts\VASSurvey1.js" />
+    <Content Include="assets\scripts\VASSurvey2.js" />
     <Content Include="assets\scripts\VASValue.js" />
     <Content Include="assets\scripts\Vendor.js" />
     <Content Include="assets\scripts\VerifyEmail.js" />
