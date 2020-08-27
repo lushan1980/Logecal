@@ -2019,9 +2019,20 @@ dd {
 
 table {
     border-spacing: 0;
+    border: 1px solid black;
+    width: 100%;
+    margin: 30px 0px
 }
 
+    table th {
+        border-spacing: 0;
+        border: 1px solid black;
+        padding: 10px;
+    }
+
     table td {
+        border-spacing: 0;
+        border: 1px solid black;
         padding: .5rem;
     }
 

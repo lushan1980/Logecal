@@ -15,14 +15,19 @@
 <div class="section section--white">
     <form action="" id="SurveyForm" name="SurveyForm">
         <div class="container container--large">
-            <div class="grid" id="Formgird">
 
-                <div class="grid__column grid__column--12 grid__column--6--sm"> 
+            <h2>DEMOGRAPHICS</h2>
+            <h3>Visit 1: Baseline</h3>
+            <h4 id="subjID">Subject ID: </h4>
+
+            @*div Demog*@
+            <div class="grid" id="divDemog">
+                @*div Age Gender Ethnicity*@
+                <div class="grid__column grid__column--12 grid__column--6--sm">
                     <div class="control" style="width: 50%">
                         <label for="age" class="control__label control__label--is-required">Age</label>
                         <select class="control__input" id="age"></select>
-                    
-                
+
                         <label for="gender" class="control__label control__label--is-required">Gender</label>
                         <fieldset>
                             <label for="male">
@@ -32,8 +37,7 @@
                                 <input type="radio" id="female" value="Female" name="gender" /> Female
                             </label>
                         </fieldset>
-                
-                    
+
                         <label for="Ethnicity" class="control__label control__label--is-required">Ethnicity</label>
                         <fieldset>
                             <input type="radio" id="HoL" value="Hispanic or Latino" name="Ethnicity" />
@@ -44,9 +48,10 @@
                             <label for="NHoL">
                                 Not Hispanic nor Latino
                             </label><br>
-                        </fieldset>                        
+                        </fieldset>
                     </div>
                 </div>
+                @*div Race*@
                 <div class="grid__column grid__column--12 grid__column--6--sm">
                     <div class="control">
                         <label for="Race" class="control__label control__label--is-required">Race</label>
@@ -75,10 +80,13 @@
                             <label for="Other">
                                 Other
                             </label><br>
-                        </fieldset>                        
+                        </fieldset>
                     </div>
-                </div>               
+                </div>
+            </div>
 
+            @*div feeling*@
+            <div class="grid" id="divfeeling" style="display:none">
                 <div class="grid__column grid__column--12 grid__column--12--sm">
                     <h4>How does your skin feel? Mark your thoughts on the continuum below:</h4>
                     <div class="slidecontainer">
@@ -91,11 +99,100 @@
                         </label>
                     </div>
                 </div>
-
             </div>
-            <div class="grid__column grid__column--12 grid__column--12--sm" style="text-align:center">
+
+            @*div ADVERSE EVENTS*@
+            <div class="grid" id="divAE" style="display:none">
+                <div class="grid__column grid__column--12 grid__column--12--sm">
+                    <label for="AdverseEvent" class="control__label" style="display: inline-block">
+                        Have you encountered any adverse events since the previous assessment?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </label>
+
+                    <label for="No">
+                        <input type="radio" id="No" value="No" name="AdverseEvent" /> No
+                    </label>
+                    <label for="Yes">
+                        <input type="radio" id="Yes" value="Yes" name="AdverseEvent" /> Yes
+                    </label>
+                </div>
+
+                <div class="grid__column grid__column--12 grid__column--12--sm">
+                    <table>
+                        <tr>
+                            <th>#</th>
+                            <th>ADVERSE EVENT</th>
+                            <th>SEVERITY</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">1</td>
+                            <td width="70%"><input style="border: 0px; width: 100%" /></td>
+                            <td style="text-align:center">
+                                <label for="Mild">
+                                    <input type="radio" id="Mild" value="Mild" name="SEVERITY1" /> Mild
+                                </label>
+                                <label for="Moderate">
+                                    <input type="radio" id="Moderate" value="Moderate" name="SEVERITY1" /> Moderate
+                                </label>
+                                <label for="Severe">
+                                    <input type="radio" id="Severe" value="Severe" name="SEVERITY1" /> Severe
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">2</td>
+                            <td><input style="border: 0px; width: 100%" /></td>
+                            <td style="text-align:center">
+                                <label for="Mild">
+                                    <input type="radio" id="Mild" value="Mild" name="SEVERITY2" /> Mild
+                                </label>
+                                <label for="Moderate">
+                                    <input type="radio" id="Moderate" value="Moderate" name="SEVERITY2" /> Moderate
+                                </label>
+                                <label for="Severe">
+                                    <input type="radio" id="Severe" value="Severe" name="SEVERITY2" /> Severe
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">3</td>
+                            <td><input style="border: 0px; width: 100%" /></td>
+                            <td style="text-align:center">
+                                <label for="Mild">
+                                    <input type="radio" id="Mild" value="Mild" name="SEVERITY3" /> Mild
+                                </label>
+                                <label for="Moderate">
+                                    <input type="radio" id="Moderate" value="Moderate" name="SEVERITY3" /> Moderate
+                                </label>
+                                <label for="Severe">
+                                    <input type="radio" id="Severe" value="Severe" name="SEVERITY3" /> Severe
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">...</td>
+                            <td><input style="border: 0px; width: 100%" /></td>
+                            <td style="text-align:center">
+                                <label for="Mild">
+                                    <input type="radio" id="Mild" value="Mild" name="SEVERITY4" /> Mild
+                                </label>
+                                <label for="Moderate">
+                                    <input type="radio" id="Moderate" value="Moderate" name="SEVERITY4" /> Moderate
+                                </label>
+                                <label for="Severe">
+                                    <input type="radio" id="Severe" value="Severe" name="SEVERITY4" /> Severe
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid__column grid__column--12 grid__column--12--sm" style="text-align:right">
+                <label class="btn" id="lblNext">Next</label>
+            </div>
+            <div class="grid__column grid__column--12 grid__column--12--sm" style="text-align:right; display:none">
                 <button class="btn" id="btnSubmit" type="submit">Submit</button>
-            </div>            
+            </div>
         </div>
     </form>
 </div>

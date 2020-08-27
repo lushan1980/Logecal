@@ -2,8 +2,11 @@
     background-color: #fff;
 }
 
-h4 {
+h1,h2,h3 {
     text-align: center;
+}
+h4{
+    text-align: left;
 }
 .center {
     text-align: center;
