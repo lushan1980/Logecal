@@ -45,9 +45,9 @@
                 if (data.returnvalue !== "") {
                     //alert("Success");
                     //var user = JSON.parse(data);
-                    var UserID = data.returnvalue;
+                    var SubjID = data.returnvalue;
                     //var ID = user[0].ID;
-                    window.location.replace(url + "?UserID=" + UserID)
+                    window.location.replace(url + "?SubjID=" + SubjID)
                 } else {
                     alert("You already have an account, please sign in directly.");
                 }

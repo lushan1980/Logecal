@@ -208,17 +208,17 @@ namespace WebMVC.Controllers
 
                 SqlDataReader rdr = cmd.ExecuteReader();
 
-                string UserID = "";
+                string SubjID = "";
                 if (rdr.HasRows)
                 {
                     while (rdr.Read())
                     {
-                        UserID = rdr["UserID"].ToString();
+                        SubjID = rdr["SubjID"].ToString();
                     }
                 }
 
                 con.Close();
-                return Json(new { returnvalue = UserID });
+                return Json(new { returnvalue = SubjID });
 
             }
 
@@ -361,8 +361,8 @@ namespace WebMVC.Controllers
 
                 cmd.Parameters.Add(new SqlParameter()
                 {
-                    ParameterName = "UserID",
-                    Value = val.UserID
+                    ParameterName = "SubjID",
+                    Value = val.SubjID
                 });
                 cmd.Parameters.Add(new SqlParameter()
                 {
@@ -467,17 +467,17 @@ namespace WebMVC.Controllers
 
                 SqlDataReader rdr = cmd.ExecuteReader();
 
-                string UserID = "";
+                string SubjID = "";
                 if (rdr.HasRows)
                 {
                     while (rdr.Read())
                     {
-                        UserID = rdr["UserID"].ToString();
+                        SubjID = rdr["SubjID"].ToString();
                     }
                 }
 
                 con.Close();
-                return Json(new { returnvalue = UserID });
+                return Json(new { returnvalue = SubjID });
 
             }
         }

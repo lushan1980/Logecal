@@ -119,12 +119,12 @@ $(document).ready(function () {
             //const queryString = window.location.search;
             //const urlParams = new URLSearchParams(queryString);
             //const UserID = urlParams.get('UserID');
-            const UserID = getParameterByName('UserID');
+            const SubjID = getParameterByName('SubjID');
             
             //var now = new Date().toLocaleString();
             //console.log(UserID);
             var obj = {
-                UserID: UserID,
+                SubjID: SubjID,
                 Age : $('#age').val(),
                 //Gender: $('#gender').val(),
                 Gender: displayRadioValue(),

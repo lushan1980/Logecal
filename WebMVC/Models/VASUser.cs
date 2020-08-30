@@ -10,6 +10,7 @@ namespace WebMVC.Models
     {
         public int SurveyID { get; set; }
         public int UserID { get; set; }
+        public string SubjID { get; set; }
         public string Email { get; set; }
         public string InviteCode { get; set; }
         public string SecurityCode { get; set; }

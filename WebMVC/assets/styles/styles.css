@@ -4789,6 +4789,35 @@ p {
     }
 }
 
+.btn--previous {
+    padding: .875em 2em .935em 3.5em;
+}
+    .btn--previous:hover:before {
+        color: #fff;
+    }
+    .btn--previous:before {
+        position: absolute;
+        left: 35px;
+        top: 50%;
+        transform: translateY(-50%);
+        content: "\f104";
+        display: inline-block;
+        color: #2684ba;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: 1.5em;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transition: all .4s ease;
+    }
+    .btn--previous:after{
+        content: "";
+    }
+@media (min-width:768px) {
+    .btn:hover:before {
+        left: 28px;
+    }
+}
 .btn--light-blue, .btn--light-blue:hover {
     border-color: #0ac1e0;
     color: #fff;
@@ -4801,6 +4830,21 @@ p {
     .btn--light-blue:after {
         color: #fff;
     }
+
+.btn--noborder, .btn--noborder:hover {
+    border-color: #0ac1e0;
+    color: #fff;
+}
+
+    .btn--noborder:hover {
+        background-color: transparent;
+        font-size: 1.05em;
+    }
+
+    .btn--noborder:after {
+        color: #fff;
+    }
+
 
 .btn--full {
     width: 100%;

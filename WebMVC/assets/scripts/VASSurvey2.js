@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
-    const UserID = getParameterByName('UserID');
-    document.getElementById('subjID').innerHTML = "Subject ID: " + UserID;
+    const SubjID = getParameterByName('SubjID');
+    document.getElementById('subjID').innerHTML = "Subject ID: " + SubjID;
 
     for (var i = 18; i <= 100; i++) {
         var select = document.getElementById("age");
@@ -23,14 +23,38 @@
         Ethnicity = displayRadioValue('Ethnicity'),
         Race = displayRadioValue('Race');
 
-    const Next = document.getElementById("lblNext");
-    const Demog = document.getElementById("divDemog");
-    const feeling = document.getElementById("divfeeling");
-    const AE = document.getElementById("divAE");
-    Next.addEventListener('click', function () {
-        Demog.style.display = "none";
-        feeling.style.display = "block";
-    })
+    const Previous = document.getElementById("btnPrevious");
+    const Next = document.getElementById("btnNext");
+
+    var $curr = $("#section-Demog");
+    var $first = $("#section-Demog");
+    var $last = $("#section-AE");
+
+    Previous.addEventListener('click', function (e) {
+        e.preventDefault();
+        $curr.css("display", "none");
+        $curr = $curr.prev();
+        $("section").css("display", "none");
+        if ($curr.is($first)) {
+            $("#btnPrevious").css("display", "none");
+            $("#btnSubmit").css("display", "none");
+            $("#btnNext").css("display", "block");
+        }
+        $curr.css("display", "block");
+    })           
+    Next.addEventListener('click', function (e) {
+        e.preventDefault();    
+        $("#btnPrevious").css("display", "block");
+        $curr.css("display", "none");
+        $curr = $curr.next();
+        $("section").css("display", "none");
+        if ($curr.is($last)) {
+            $("#btnSubmit").css("display", "block");
+            $("#btnNext").css("display", "none");
+        }
+        $curr.css("display", "block");
+    })     
+
 
     function getParameterByName(name, url) {
         if (!url) url = window.location.href;

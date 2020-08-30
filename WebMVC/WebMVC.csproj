@@ -432,6 +432,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\VAS\ResetPwd.cshtml" />
     <Content Include="Views\VAS\Signup.cshtml" />
+    <Content Include="Views\VAS\teststep.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
