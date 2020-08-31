@@ -1,6 +1,32 @@
 ﻿$(document).ready(function () {
+
     const SubjID = getParameterByName('SubjID');
     document.getElementById('subjID').innerHTML = "Subject ID: " + SubjID;
+
+    var obj = {
+        SubjID: SubjID
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "/VASValue/CheckexistsSubj",
+        dataType: "json",
+        data: JSON.stringify(obj),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            if (data.returnvalue != "") {
+                alert("Not First Visit");
+            } else {
+                alert("First visit"); 
+                var i, Visits;
+                Visits = document.querySelectorAll('[id ^= "Visit"]');
+                for (i = 1; i < Visits.length; i++) {                    
+                    Visits[i].className = "isDisabled";
+                }
+                return true;
+            }
+        }
+    })
 
     for (var i = 18; i <= 100; i++) {
         var select = document.getElementById("age");
@@ -40,7 +66,7 @@
             $("#btnSubmit").css("display", "none");
             $("#btnNext").css("display", "block");
         }
-        $curr.css("display", "block");
+        $curr.css("display", "inline-flex");
     })           
     Next.addEventListener('click', function (e) {
         e.preventDefault();    
@@ -52,7 +78,7 @@
             $("#btnSubmit").css("display", "block");
             $("#btnNext").css("display", "none");
         }
-        $curr.css("display", "block");
+        $curr.css("display", "inline-flex");
     })     
 
 

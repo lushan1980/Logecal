@@ -668,6 +668,42 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = resetPwd });
             }
         }
+
+        public ActionResult CheckexistsSubj(VASUser user)
+        {
+
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("CheckexistsSubj", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@SubjID",
+                    Value = user.SubjID
+                });
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                string SubjID = "";
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        SubjID = rdr["SubjID"].ToString();
+                    }
+                }
+
+                con.Close();
+                return Json(new { returnvalue = SubjID });
+            }
+        }
+
         private static string CreateRandomPassword(int length = 8)
         {
             // Create a string of characters, numbers, special characters that allowed in the password  

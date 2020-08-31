@@ -14,25 +14,34 @@
 
 <div class="container two-column__container">
     <form action="" id="SurveyForm" name="SurveyForm">
-        <div class="grid two-column contact">
-            <div class="grid__column grid__column--12 grid__column--3--md two-column__section two-column__section--blue">
-                <div class="btn btn--noborder" style="border: 0px">Visit 1: Baseline</div>
-                <div class="btn btn--noborder" style="border: 0px">Visit 2: Week 1</div>
+        <div class="grid two-column">           
+
+            <div class="grid__column grid__column--12 grid__column--3--md two-column__section two-column__section--blue" id="div-menu">
+                <div class="vertical-menu">
+                    <a href="#" id="Visit0">Baseline</a>
+                    <a href="#" id="Visit1">Week 1</a>
+                    <a href="#" id="Visit2">Week 2</a>
+                    <a href="#" id="Visit3">Week 3</a>
+                    <a href="#" id="Visit4">Week 4</a>
+                </div>
             </div>
-            <div class="grid__column grid__column--12 grid__column--9--md two-column__section">
-                <h2>DEMOGRAPHICS</h2>
-                <h4 id="subjID">Subject ID: </h4>
-                <!--div Demog-->
-                <section class="grid" id="section-Demog" style="display:block">
+            <div class="grid__column grid__column--12 grid__column--9--md two-column__section" id="div-Form">
+                <h6 id="subjID"></h6>
+                <!--section Demog-->
+                <section class="grid" id="section-Demog">
+                    <div class="grid__column grid__column--12 grid__column--12--md">
+                        <h2>DEMOGRAPHICS</h2>
+                    </div>
+
                     @*div Age Gender Ethnicity*@
-                    <div class="grid__column grid__column--12 grid__column--6--md">                        
+                    <div class="grid__column grid__column--12 grid__column--6--md">
                         <label for="age" class="control__label control__label--is-required">Age</label>
-                        <select class="control__input" id="age"></select>
+                        <select class="control__select" id="age"></select>
 
                         <label for="gender" class="control__label control__label--is-required">Gender</label>
                         <fieldset>
                             <label for="male">
-                                <input type="radio" id="male" value="Male" name="gender" /> Male
+                                <input type="radio" id="male" value=" Male" name="gender" /> Male
                             </label>
                             <label for="female">
                                 <input type="radio" id="female" value="Female" name="gender" /> Female
@@ -50,10 +59,10 @@
                                 Not Hispanic nor Latino
                             </label><br>
                         </fieldset>
-                        
+
                     </div>
                     @*div Race*@
-                    <div class="grid__column grid__column--12 grid__column--6--md">                        
+                    <div class="grid__column grid__column--12 grid__column--6--md">
                         <label for="Race" class="control__label control__label--is-required">Race</label>
                         <fieldset>
                             <input type="radio" id="White" value="Hispanic or Latino" name="Race" />
@@ -81,12 +90,14 @@
                                 Other
                             </label><br>
                         </fieldset>
-                        
                     </div>
                 </section>
 
-                <!--div feeling-->
+                <!--section feeling-->
                 <section class="grid" id="section-feeling" style="display:none">
+                    <div class="grid__column grid__column--12 grid__column--12--md">
+                        <h2>FACIAL ASSESSMENT</h2>
+                    </div>
                     <div class="grid__column grid__column--12 grid__column--12--sm">
                         <h4>How does your skin feel? Mark your thoughts on the continuum below:</h4>
                         <div class="slidecontainer">
@@ -101,8 +112,11 @@
                     </div>
                 </section>
 
-                <!--div ADVERSE EVENTS-->
+                <!--section ADVERSE EVENTS-->
                 <section class="grid" id="section-AE" style="display:none">
+                    <div class="grid__column grid__column--12 grid__column--12--md">
+                        <h2>ADVERSE EVENTS</h2>
+                    </div>
                     <div class="grid__column grid__column--12 grid__column--12--sm">
                         <label for="AdverseEvent" class="control__label" style="display: inline-block">
                             Have you encountered any adverse events since the previous assessment?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -187,12 +201,13 @@
                     </div>
                 </section>
 
-                <div class="grid__column grid__column--12 grid__column--12--sm" >
-                    <button class="btn btn--previous" id="btnPrevious" style="float: left; display:none">Previous</button>
-                    <button class="btn" id="btnNext" style="float: right">Next</button>
-                    <button class="btn" id="btnSubmit" type="submit"  style="float: right; display: none">Submit</button>
+                <div class="grid" style="margin-top:30px">
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                        <button class="btn btn--previous" id="btnPrevious" style="float: left; display:none">Previous</button>
+                        <button class="btn" id="btnNext" style="float: right">Next</button>
+                        <button class="btn" id="btnSubmit" type="submit" style="float: right; display: none">Submit</button>
+                    </div>
                 </div>
-
             </div>
         </div>
     </form>
