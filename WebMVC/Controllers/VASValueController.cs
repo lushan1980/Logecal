@@ -668,7 +668,6 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = resetPwd });
             }
         }
-
         public ActionResult CheckexistsSubj(VASUser user)
         {
 
@@ -690,20 +689,118 @@ namespace WebMVC.Controllers
 
                 SqlDataReader rdr = cmd.ExecuteReader();
 
-                string SubjID = "";
+                string VisitNo = "";
                 if (rdr.HasRows)
                 {
                     while (rdr.Read())
                     {
-                        SubjID = rdr["SubjID"].ToString();
+                        VisitNo = rdr["VisitNo"].ToString();
                     }
                 }
 
                 con.Close();
-                return Json(new { returnvalue = SubjID });
+                return Json(new { returnvalue = VisitNo });
+            }
+        }
+        public ActionResult InsertStudy2(Survey val)
+        {
+
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("InsertStudy2", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "SubjID",
+                    Value = val.SubjID
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Age",
+                    Value = val.Age
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Gender",
+                    Value = val.Gender
+                });
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Ethnicity",
+                    Value = val.Ethnicity
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Race",
+                    Value = val.Race
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Assessment",
+                    Value = val.Assessment
+                });
+                int result = cmd.ExecuteNonQuery();
+
+                bool insertData;
+                if (result > 0)
+                {
+                    insertData = true;
+                }
+                else
+                {
+                    insertData = false;
+                }
+                con.Close();
+                return Json(new { returnvalue = insertData });
             }
         }
 
+        [HttpPost]
+        public JsonResult GetStudy2Demog(VASUser user)
+        {
+            List<Survey> Demoginfo = new List<Survey>();
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("getStudy2Demog", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@SubjID",
+                    Value = user.SubjID
+                });
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Survey Demog = new Survey
+                    {
+                        Age = (int)GetInt(rdr["Age"]),
+                        Gender = GetString(rdr["Gender"]),
+                        Ethnicity = GetString(rdr["Ethnicity"]),
+                        Race = GetString(rdr["Race"]),
+                        Assessment = (float)GetFloat(rdr["Assessment"])
+
+                    };
+                    Demoginfo.Add(Demog);
+                }
+                con.Close();
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            return Json(js.Serialize(Demoginfo), JsonRequestBehavior.AllowGet);
+        }
         private static string CreateRandomPassword(int length = 8)
         {
             // Create a string of characters, numbers, special characters that allowed in the password  
