@@ -17,10 +17,18 @@ namespace WebMVC.Models
         public float F2 { get; set; }
         public string Ethnicity { get; set; }
         public string Race { get; set; }
+        public int? VisitNo { get; set; }
         public float? Assessment { get; set; }
         public string AEDiscription { get; set; }
         public string Severity { get; set; }
-
+        public string AEDiscription1 { get; set; }
+        public string Severity1 { get; set; }
+        public string AEDiscription2 { get; set; }
+        public string Severity2 { get; set; }
+        public string AEDiscription3 { get; set; }
+        public string Severity3 { get; set; }
+        public string AEDiscription4 { get; set; }
+        public string Severity4 { get; set; }
 
 
     }

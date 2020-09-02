@@ -14,8 +14,8 @@
 
 <div class="container two-column__container">
     <form action="" id="Study2" name="SurveyForm">
-        <div class="grid two-column">           
-
+        <div class="grid two-column">
+            <!--left -->
             <div class="grid__column grid__column--12 grid__column--3--md two-column__section two-column__section--blue" id="div-menu">
                 <div class="vertical-menu">
                     <a href="#" id="Visit0">Baseline</a>
@@ -25,6 +25,7 @@
                     <a href="#" id="Visit4">Week 4</a>
                 </div>
             </div>
+            <!--right -->
             <div class="grid__column grid__column--12 grid__column--9--md two-column__section" id="div-Form">
                 <h6 id="subjID"></h6>
                 <!--section Demog-->
@@ -139,7 +140,7 @@
                             </tr>
                             <tr>
                                 <td style="text-align:center">1</td>
-                                <td width="60%"><input style="border: 0px; width: 100%" /></td>
+                                <td width="60%"><input style="border: 0px; width: 100%" id="AdventEvent1" /></td>
                                 <td style="text-align:center">
                                     <label for="Mild">
                                         <input type="radio" id="Mild" value="Mild" name="SEVERITY1" /> Mild
@@ -154,7 +155,7 @@
                             </tr>
                             <tr>
                                 <td style="text-align:center">2</td>
-                                <td><input style="border: 0px; width: 100%" /></td>
+                                <td><input style="border: 0px; width: 100%" id="AdventEvent2" /></td>
                                 <td style="text-align:center">
                                     <label for="Mild">
                                         <input type="radio" id="Mild" value="Mild" name="SEVERITY2" /> Mild
@@ -169,7 +170,7 @@
                             </tr>
                             <tr>
                                 <td style="text-align:center">3</td>
-                                <td><input style="border: 0px; width: 100%" /></td>
+                                <td><input style="border: 0px; width: 100%" id="AdventEvent3" /></td>
                                 <td style="text-align:center">
                                     <label for="Mild">
                                         <input type="radio" id="Mild" value="Mild" name="SEVERITY3" /> Mild
@@ -184,7 +185,7 @@
                             </tr>
                             <tr>
                                 <td style="text-align:center">...</td>
-                                <td><input style="border: 0px; width: 100%" /></td>
+                                <td><input style="border: 0px; width: 100%" id="AdventEvent4" /></td>
                                 <td style="text-align:center">
                                     <label for="Mild">
                                         <input type="radio" id="Mild" value="Mild" name="SEVERITY4" /> Mild
@@ -201,15 +202,20 @@
                     </div>
                 </section>
 
-                <div class="grid" style="margin-top:30px">
+                <!--div button-->
+                <div class="grid" style="margin-top:30px" id="divButton">
                     <div class="grid__column grid__column--12 grid__column--12--sm">
                         <button class="btn btn--previous" id="btnPrevious" style="float: left; display:none">Previous</button>
                         <button class="btn" id="btnNext" style="float: right">Next</button>
                         <button class="btn" id="btnSubmit" type="submit" style="float: right; display: none">Submit</button>
                     </div>
                 </div>
+
+                <!--div Message for success submit-->
+                <div class="grid" style="margin-top:30px" id="SuccessMessage">
+                    
+                </div>
             </div>
-        </div>
     </form>
 </div>
 

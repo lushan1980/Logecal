@@ -697,18 +697,22 @@ namespace WebMVC.Controllers
                         VisitNo = rdr["VisitNo"].ToString();
                     }
                 }
+                if (VisitNo == "")
+                {
+                    VisitNo = "0";
+                }
 
                 con.Close();
                 return Json(new { returnvalue = VisitNo });
             }
         }
-        public ActionResult InsertStudy2(Survey val)
+        public ActionResult InsertStudy2first(Survey val)
         {
 
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
             {
-                SqlCommand cmd = new SqlCommand("InsertStudy2", con)
+                SqlCommand cmd = new SqlCommand("InsertStudy2first", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -730,7 +734,6 @@ namespace WebMVC.Controllers
                     ParameterName = "@Gender",
                     Value = val.Gender
                 });
-
                 cmd.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "@Ethnicity",
@@ -762,6 +765,98 @@ namespace WebMVC.Controllers
             }
         }
 
+        public ActionResult InsertStudy2(Survey val)
+        {
+
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("InsertStudy2", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();                
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "SubjID",
+                    Value = val.SubjID
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "VisitNo",
+                    Value = val.VisitNo
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Assessment",
+                    Value = val.Assessment
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@AEDiscription1",
+                    Value = val.AEDiscription1
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Severity1",
+                    Value = val.Severity1
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@AEDiscription2",
+                    Value = GetString(val.AEDiscription2)
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Severity2",
+                    Value = GetString(val.Severity2)
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@AEDiscription3",
+                    Value = val.AEDiscription3
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Severity3",
+                    Value = val.Severity3
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@AEDiscription4",
+                    Value = val.AEDiscription4
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Severity4",
+                    Value = val.Severity4
+                });
+
+                foreach (SqlParameter parameter in cmd.Parameters)
+                {
+                    if (parameter.Value == null)
+                    {
+                        parameter.Value = DBNull.Value;
+                    }
+                };
+
+                int result = cmd.ExecuteNonQuery();
+
+                bool insertData;
+                if (result > 0)
+                {
+                    insertData = true;
+                }
+                else
+                {
+                    insertData = false;
+                }
+                con.Close();
+                return Json(new { returnvalue = insertData });
+            }
+        }
         [HttpPost]
         public JsonResult GetStudy2Demog(VASUser user)
         {
@@ -800,6 +895,47 @@ namespace WebMVC.Controllers
             }
             JavaScriptSerializer js = new JavaScriptSerializer();
             return Json(js.Serialize(Demoginfo), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetStudy2AllValue(VASUser user)
+        {
+            List<Survey> AllValueinfo = new List<Survey>();
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("getStudy2AllValue", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@SubjID",
+                    Value = user.SubjID
+                });
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Survey AllValue = new Survey
+                    {
+                        Age = (int)GetInt(rdr["Age"]),
+                        Gender = GetString(rdr["Gender"]),
+                        Ethnicity = GetString(rdr["Ethnicity"]),
+                        Race = GetString(rdr["Race"]),
+                        VisitNo = (int)GetInt(rdr["VisitNo"]),
+                        Assessment = (float)GetFloat(rdr["Assessment"]),
+                        AEDiscription = GetString(rdr["AEDiscription"]),
+                        Severity = GetString(rdr["Severity"])
+                    };
+                    AllValueinfo.Add(AllValue);
+                }
+                con.Close();
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
         }
         private static string CreateRandomPassword(int length = 8)
         {
