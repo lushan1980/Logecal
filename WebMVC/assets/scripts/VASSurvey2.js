@@ -16,11 +16,23 @@
         Visit2 = document.getElementById("Visit2"),
         Visit3 = document.getElementById("Visit3"),
         Visit4 = document.getElementById("Visit4");
+
     var VisitTime;
-    var i, Visits, AllValues, thisAge, thisGender, thisEthnicity, thisRace, BaselineAssessment,
-        Week1Assessment, Week2Assessment, Week3Assessment, Week4Assessment;
+    var WeekAssessments = [];
+
+    var i, Visits, AllValues, thisAge, thisGender, thisEthnicity, thisRace;
     Visits = document.querySelectorAll('[id ^= "Visit"]');
 
+    var aaaaa = Visits;
+
+    
+
+    document.getElementById("No").addEventListener('click', function () {
+        document.getElementById("divAEtable").classList.add("isDisabled");
+    })
+    document.getElementById("Yes").addEventListener('click', function () {
+        document.getElementById("divAEtable").classList.remove("isDisabled");
+    })
     function NotFirstVisit() {
         $last = $("#section-AE");
         $.ajax({
@@ -32,15 +44,14 @@
             success: function (data) {
 
                 AllValues = JSON.parse(data);
+                getAllAssessment();
 
                 thisAge = AllValues[0].Age,
                 thisGender = myTrim(AllValues[0].Gender),
                 thisEthnicity = myTrim(AllValues[0].Ethnicity),
-                thisRace = myTrim(AllValues[0].Race),
-                BaselineAssessment = parseFloat(AllValues[0].Assessment);
+                thisRace = myTrim(AllValues[0].Race);                
 
-                document.getElementById('age').value = thisAge;
-                //document.getElementById("myRange").value = BaselineAssessment
+                document.getElementById('age').value = thisAge;            
 
                 if (thisGender == "male") {
                     document.getElementById('male').checked = true;
@@ -87,7 +98,8 @@
         data: JSON.stringify(obj),
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            switch (data.returnvalue) {
+            VisitTime = parseInt(data.returnvalue) + 1; 
+            switch (data.returnvalue) {                
                 case "0":
                     //alert("Baseline");
                     $last = $("#section-feeling");
@@ -96,33 +108,29 @@
                     }
                     break;
                 case "1":
-                    //alert("Week 1")
                     for (i = 2; i < Visits.length; i++) {
                         Visits[i].className = "isDisabled";
                     }
                     NotFirstVisit();                    
                     break;
-                case "2":
-                    //alert("Week 2");                    
+                case "2":                 
                     for (i = 3; i < Visits.length; i++) {
                         Visits[i].className = "isDisabled";
                     }
-                    NotFirstVisit();   
-                    break;
+                    NotFirstVisit();  
+                     break;
                 case "3":
-                    //alert("Week 3")
                     $last = $("#section-AE");
                     for (i = 4; i < Visits.length; i++) {
                         Visits[i].className = "isDisabled";
                     }
-                    NotFirstVisit();   
+                    NotFirstVisit(); 
                     break;
                 case "4":
-                    //alert("Week 4")
-                    NotFirstVisit();   
+                    NotFirstVisit();  
                     break;
             }
-            VisitTime = parseInt(data.returnvalue) + 1; 
+            
         }
     })
 
@@ -149,34 +157,42 @@
             $("#btnNext").css("display", "none");
         }
         $curr.css("display", "inline-flex");
-    })     
+    }) 
+
+    //for (i = 0; i < Visits.length; i++) {
+    //    Visits[i].addEventListener('click', function (e) {
+    //        e.preventDefault(); 
+    //        document.getElementById("myRange").value = WeekAssessments[i];
+    //    })
+    //}
+
     Visit0.addEventListener('click', function (e) {
-        e.preventDefault(); 
-        
-        var thisAge = AllValues[0].Age,
-            thisGender = myTrim(AllValues[0].Gender),
-            thisEthnicity = myTrim(AllValues[0].Ethnicity),
-            thisRace = myTrim(AllValues[0].Race),
-            thisVisitNo = AllValues[0].VisitNo,
-            thisAssessment = parseFloat(AllValues[0].Assessment);        
-        document.getElementById("myRange").value = thisAssessment
+        e.preventDefault();         
+       
+        document.getElementById("myRange").value = WeekAssessments[0];
         $("#section-AE").css("display", "none");
-        document.getElementById("section-feeling").classList.add("isDisabled")
         $("#btnSubmit").css("display", "none");
     })
     Visit1.addEventListener('click', function (e) {
         e.preventDefault();
-        $("#section-AE").css("display", "inline-flex");
-        $("#btnSubmit").css("display", "block");
+        //$("#section-AE").css("display", "inline-flex");
+        //$("#btnSubmit").css("display", "block");
+        document.getElementById("myRange").value = WeekAssessments[1];        
+
+        getAEs("2");
     })
     Visit2.addEventListener('click', function (e) {
         e.preventDefault();
+        document.getElementById("myRange").value = WeekAssessments[2];
+        getAEs("3");
     })
     Visit3.addEventListener('click', function (e) {
         e.preventDefault();
+        document.getElementById("myRange").value = WeekAssessments[3];
     })
     Visit4.addEventListener('click', function (e) {
         e.preventDefault();
+        document.getElementById("myRange").value = WeekAssessments[4];
     })
 
     $('#Study2').on('submit',function (event) {
@@ -278,4 +294,73 @@
     function myTrim(x) {
         return x.replace(/^\s+|\s+$/gm, '').toLowerCase();
     }
+    //get all assessment for each Visit
+    function getAllAssessment() {
+        var AllAssessments = {};
+        AllValues.forEach(function (item) {
+            var VisitNo = AllAssessments[item.VisitNo] = AllAssessments[item.VisitNo] || {};
+            VisitNo[item.Assessment] = true;
+        });
+        var outputList = [];
+        for (var VisitNo in AllAssessments) {
+            for (var Assessment in AllAssessments[VisitNo]) {
+                outputList.push({ VisitNo: VisitNo, Assessment: Assessment });
+            }
+        }
+        
+        for (i = 0; i < outputList.length; i++) {
+            WeekAssessments[i] = parseFloat(outputList[i].Assessment);
+        }
+        var aaa = WeekAssessments;
+    }
+
+    function getAllAE() {        
+        var AllAEs = AllValues.map(function (AllAE) {
+            return {
+                "VisitNo": AllAE.VisitNo,
+                "AEDiscription": AllAE.AEDiscription,
+                "Severity": AllAE.Severity                    
+            }                   
+        });        
+        return AllAEs;   
+    }
+
+    function getAEs(VisitNo) {      
+        var AEs = getAllAE();
+        var j = 1;
+        var AE;
+        for (i = 0; i < AEs.length; i++) {
+            if (AEs[i].VisitNo == VisitNo) {
+                AE = AEs[i].AEDiscription;
+                document.getElementById("AdventEvent" + j).value = AE;
+                j = j + 1;
+            }
+
+        }
+    }
+
+    function WeekChoose() {
+        var aPressed;
+        $('a').click(function () {
+            aPressed = $(this).attr('id')
+        })
+        switch (aPressed) {
+            case "Visit0":
+                document.getElementById("myRange").value = WeekAssessments[0];
+                break;
+            case "Visit1":
+                document.getElementById("myRange").value = WeekAssessments[1];
+                break;
+            case "Visit2":
+                document.getElementById("myRange").value = WeekAssessments[2];
+                break;
+            case "Visit3":
+                document.getElementById("myRange").value = WeekAssessments[3];
+                break;
+            case "Visit4":
+                document.getElementById("myRange").value = WeekAssessments[4];
+                break;
+        }   
+    }
+
 })
