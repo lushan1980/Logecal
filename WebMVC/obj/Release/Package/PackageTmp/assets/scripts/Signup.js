@@ -45,9 +45,9 @@
                 if (data.returnvalue !== "") {
                     //alert("Success");
                     //var user = JSON.parse(data);
-                    var UserID = data.returnvalue;
+                    var SubjID = data.returnvalue;
                     //var ID = user[0].ID;
-                    window.location.replace(url + "?UserID=" + UserID)
+                    window.location.replace(url + "?SubjID=" + SubjID)
                 } else {
                     alert("You already have an account, please sign in directly.");
                 }
@@ -65,4 +65,14 @@
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
+
+    $(".toggle-password").click(function () {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
 })

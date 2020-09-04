@@ -120,8 +120,8 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     if (data.returnvalue != "") {
-                        var UserID = data.returnvalue;
-                        window.location.replace(url + "?UserID=" + UserID)
+                        var SubjID = data.returnvalue;
+                        window.location.replace(url + "?SubjID=" + SubjID)
                     } else {
                         alert("Your Email or Password are wrong");
                         Response.redirect(url)
@@ -175,7 +175,6 @@
             //    }
             //})
         }
-
 
         function getParameterByName(name, url) {
             if (!url) url = window.location.href;

@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Survey2";
 }
-
+<script src="~/assets/scripts/VASSurvey2.js?826"></script>
 <!-- BANNER
 ================================================== -->
 <div class="banner banner--small" role="banner">
@@ -12,11 +12,211 @@
     </div>
 </div><!--/banner -->
 
-<h2>Survey 2</h2>
-<div class="section section--white">
-    <p>    </p>
-    <p>    </p>
-    <p>    </p>
-    <p>    </p>
-    <p>    </p>
+<div class="container two-column__container">
+    <form action="" id="Study2" name="SurveyForm">
+        <div class="grid two-column">
+            <!--left -->
+            <div class="grid__column grid__column--12 grid__column--3--md two-column__section two-column__section--blue" id="div-menu">
+                <div class="vertical-menu">
+                    <a href="#" id="Visit0" targetLink="Visit0">Baseline</a>
+                    <a href="#" id="Visit1">Week 1</a>
+                    <a href="#" id="Visit2">Week 2</a>
+                    <a href="#" id="Visit3">Week 3</a>
+                    <a href="#" id="Visit4">Week 4</a>
+                </div>
+            </div>
+            <!--right -->
+            <div class="grid__column grid__column--12 grid__column--9--md two-column__section" id="div-Form">
+                <h6 id="subjID"></h6>
+                <!--section Demog-->
+                <section class="grid" id="section-Demog">
+                    <div class="grid__column grid__column--12 grid__column--12--md">
+                        <h2>DEMOGRAPHICS</h2>
+                    </div>
+
+                    @*div Age Gender Ethnicity*@
+                    <div class="grid__column grid__column--12 grid__column--6--md">
+                        <label for="age" class="control__label control__label--is-required">Age</label>
+                        <select class="control__select" id="age"></select>
+
+                        <label for="gender" class="control__label control__label--is-required">Gender</label>
+                        <fieldset>
+                            <label for="male">
+                                <input type="radio" id="male" value="Male" name="gender" /> Male
+                            </label>
+                            <label for="female">
+                                <input type="radio" id="female" value="Female" name="gender" /> Female
+                            </label>
+                        </fieldset>
+
+                        <label for="ethnicity" class="control__label control__label--is-required">Ethnicity</label>
+                        <fieldset>
+                            <input type="radio" id="HoL" value="Hispanic or Latino" name="ethnicity" />
+                            <label for="HoL">
+                                Hispanic or Latino
+                            </label><br>
+                            <input type="radio" id="NHoL" value="Not Hispanic nor Latino" name="ethnicity" />
+                            <label for="NHoL">
+                                Not Hispanic nor Latino
+                            </label><br>
+                        </fieldset>
+
+                    </div>
+                    @*div Race*@
+                    <div class="grid__column grid__column--12 grid__column--6--md">
+                        <label for="Race" class="control__label control__label--is-required">race</label>
+                        <fieldset>
+                            <input type="radio" id="White" value="White" name="race" />
+                            <label for="White">
+                                White
+                            </label><br>
+                            <input type="radio" id="Black" value="Black or African American" name="race" />
+                            <label for="Black or African American">
+                                Black or African American
+                            </label><br>
+                            <input type="radio" id="Asian" value="Asian" name="race" />
+                            <label for="Asian">
+                                Asian
+                            </label><br>
+                            <input type="radio" id="AmericanIndian" value="American Indian or Alaska Native" name="race" />
+                            <label for="AmericanIndian">
+                                American Indian or Alaska Native
+                            </label><br>
+                            <input type="radio" id="Hawaiian" value="Native Hawaiian or Other Pacific Islander" name="race" />
+                            <label for="Hawaiian">
+                                Native Hawaiian or Other Pacific Islander
+                            </label><br>
+                            <input type="radio" id="Other" value="Other" name="race" />
+                            <label for="Other">
+                                Other
+                            </label><br>
+                        </fieldset>
+                    </div>
+                </section>
+
+                <!--section feeling-->
+                <section class="grid" id="section-feeling" style="display:none">
+                    <div class="grid__column grid__column--12 grid__column--12--md">
+                        <h2>FACIAL ASSESSMENT</h2>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                        <h4>How does your skin feel? Mark your thoughts on the continuum below:</h4>
+                        <div class="slidecontainer">
+                            <input type="range" min="0" max="10" value="5" step="any" class="slider" id="myRange">
+                            <label class="sliderlabelleft">
+                                Extremely Dry
+                            </label>
+                            <label class="sliderlabelright">
+                                Extremely Hydrated
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!--section ADVERSE EVENTS-->
+                <section class="grid" id="section-AE" style="display:none">
+                    <div class="grid__column grid__column--12 grid__column--12--md">
+                        <h2>ADVERSE EVENTS</h2>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                        <label for="AdverseEvent" class="control__label" style="display: inline-block">
+                            Have you encountered any adverse events since the previous assessment?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </label>
+
+                        <label for="No">
+                            <input type="radio" id="No" value="No" name="AdverseEvent" /> No
+                        </label>
+                        <label for="Yes">
+                            <input type="radio" id="Yes" value="Yes" name="AdverseEvent" /> Yes
+                        </label>
+                    </div>
+
+                    <div class="grid__column grid__column--12 grid__column--12--sm isDisabled" id="divAEtable">
+                        <table>
+                            <tr>
+                                <th>#</th>
+                                <th>ADVERSE EVENT</th>
+                                <th>SEVERITY</th>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">1</td>
+                                <td width="60%"><input style="border: 0px; width: 100%" id="AdventEvent1" /></td>
+                                <td style="text-align:center">
+                                    <label for="Mild">
+                                        <input type="radio" id="Mild1" value="Mild" name="SEVERITY1" /> Mild
+                                    </label>
+                                    <label for="Moderate">
+                                        <input type="radio" id="Moderate1" value="Moderate" name="SEVERITY1" /> Moderate
+                                    </label>
+                                    <label for="Severe">
+                                        <input type="radio" id="Severe1" value="Severe" name="SEVERITY1" /> Severe
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">2</td>
+                                <td><input style="border: 0px; width: 100%" id="AdventEvent2" /></td>
+                                <td style="text-align:center">
+                                    <label for="Mild">
+                                        <input type="radio" id="Mild2" value="Mild" name="SEVERITY2" /> Mild
+                                    </label>
+                                    <label for="Moderate">
+                                        <input type="radio" id="Moderate2" value="Moderate" name="SEVERITY2" /> Moderate
+                                    </label>
+                                    <label for="Severe">
+                                        <input type="radio" id="Severe2" value="Severe" name="SEVERITY2" /> Severe
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">3</td>
+                                <td><input style="border: 0px; width: 100%" id="AdventEvent3" /></td>
+                                <td style="text-align:center">
+                                    <label for="Mild">
+                                        <input type="radio" id="Mild3" value="Mild" name="SEVERITY3" /> Mild
+                                    </label>
+                                    <label for="Moderate">
+                                        <input type="radio" id="Moderate3" value="Moderate" name="SEVERITY3" /> Moderate
+                                    </label>
+                                    <label for="Severe">
+                                        <input type="radio" id="Severe3" value="Severe" name="SEVERITY3" /> Severe
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">...</td>
+                                <td><input style="border: 0px; width: 100%" id="AdventEvent4" /></td>
+                                <td style="text-align:center">
+                                    <label for="Mild">
+                                        <input type="radio" id="Mild4" value="Mild" name="SEVERITY4" /> Mild
+                                    </label>
+                                    <label for="Moderate">
+                                        <input type="radio" id="Moderate4" value="Moderate" name="SEVERITY4" /> Moderate
+                                    </label>
+                                    <label for="Severe">
+                                        <input type="radio" id="Severe4" value="Severe" name="SEVERITY4" /> Severe
+                                    </label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+
+                <!--div button-->
+                <div class="grid" style="margin-top:30px" id="divButton">
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                        <button class="btn btn--previous" id="btnPrevious" style="float: left; display:none">Previous</button>
+                        <button class="btn" id="btnNext" style="float: right">Next</button>
+                        <button class="btn" id="btnSubmit" type="submit" style="float: right; display: none">Submit</button>
+                    </div>
+                </div>
+
+                <!--div Message for success submit-->
+                <div class="grid" style="margin-top:30px" id="SuccessMessage">
+                    
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
+

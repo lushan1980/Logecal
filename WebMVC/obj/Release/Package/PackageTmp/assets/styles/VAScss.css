@@ -2,8 +2,13 @@
     background-color: #fff;
 }
 
-h4 {
+h1, h2, h3 {
     text-align: center;
+    padding-bottom: 20px;
+}
+h4,h5,h6 {
+    text-align: left;
+    padding-bottom: 20px;
 }
 .center {
     text-align: center;
@@ -504,4 +509,10 @@ canvas {
         border: 10px solid transparent;
         border-top-color: yellow;
     }
-  
+.field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-top: -30px;
+    position: relative;
+    z-index: 2;
+}

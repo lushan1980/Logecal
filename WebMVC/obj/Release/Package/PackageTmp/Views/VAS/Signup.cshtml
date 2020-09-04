@@ -37,7 +37,8 @@
                     <div class="grid__column grid__column--12 grid__column--6--sm">
                         <div class="control" id="divPwd">
                             <label for="User-Pwd" class="control__label control__label--is-required">Password</label>
-                            <input type="password" class="control__input" id="User-Pwd">
+                            <input type="password" class="control__input" id="User-Pwd" @*minlength="8" required*@>
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                             <p id="msg-Pwd" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         </div>
                     </div>
@@ -45,6 +46,7 @@
                         <div class="control" id="divConfirmPwd">
                             <label for="User-ConfirmPwd" class="control__label control__label--is-required">Confirm Password</label>
                             <input type="password" class="control__input" id="User-ConfirmPwd">
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                             <p id="msg-ConfirmPwd" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         </div>
                     </div>
