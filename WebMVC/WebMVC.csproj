@@ -207,6 +207,7 @@
     <Content Include="assets\scripts\Signup.js" />
     <Content Include="assets\scripts\VASSurvey1.js" />
     <Content Include="assets\scripts\VASSurvey2.js" />
+    <Content Include="assets\scripts\VASSurvey3.js" />
     <Content Include="assets\scripts\VASValue.js" />
     <Content Include="assets\scripts\Vendor.js" />
     <Content Include="assets\scripts\VerifyEmail.js" />
@@ -433,6 +434,8 @@
     <Content Include="Views\VAS\ResetPwd.cshtml" />
     <Content Include="Views\VAS\Signup.cshtml" />
     <Content Include="Views\VAS\teststep.cshtml" />
+    <Content Include="Views\VAS\navpagesample.cshtml" />
+    <Content Include="Views\VAS\Survey3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

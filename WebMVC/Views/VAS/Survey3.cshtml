@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "Lumendi";
+}
+<script src="~/assets/scripts/VASSurvey3.js?916"></script>
+<!-- BANNER
+================================================== -->
+<div class="banner banner--small" role="banner">
+    <div class="banner__background" style="background-image:url(/assets/images/banner-contact.jpg);" data-type="background"></div>
+    <div class="banner__content">
+        <h2 class="banner__headline alpha">Lumendi</h2>
+    </div>
+</div><!--/banner -->
+
+<div class="container">
+    <form action="" id="Study3" name="LumendiForm">
+        <div class="grid">
+            <div class="grid__column grid__column--12 grid__column--12--md" id="div-Form">
+                <section class="grid" id="section-Demog">
+                    <div class="grid__column grid__column--12 grid__column--12--md">
+                        <h3>DEMOGRAPHICS</h3>
+                    </div>
+                    @*div Initials, Age, Gender*@
+                    <div class="grid__column grid__column--12 grid__column--6--md">
+                        <label for="initials" class="control__label control__label--is-required">initials</label>
+                        <input type="text" class="control__input" style="width: 30%" id="initials" />
+
+                        <label for="age" class="control__label control__label--is-required">Age</label>
+                        <select class="control__select" id="age"></select>
+
+                        <label for="gender" class="control__label control__label--is-required">Gender</label>
+                        <fieldset>
+                            <label for="male">
+                                <input type="radio" id="male" value="Male" name="gender" /> Male
+                            </label>
+                            <label for="female">
+                                <input type="radio" id="female" value="Female" name="gender" /> Female
+                            </label>
+                        </fieldset>
+                    </div>
+                    @*div Race*@
+                    <div class="grid__column grid__column--12 grid__column--6--md">
+                        <label for="RaceEthni" class="control__label control__label--is-required">Race/Ethnicity</label>
+                        <fieldset>
+                            <input type="radio" id="Black" value="African American/Black/Not of Hispanic Origin" name="RaceEthni" />
+                            <label for="Black">
+                                African American/Black/Not of Hispanic Origin
+                            </label><br>
+
+                            <input type="radio" id="AmericanIndian" value="African American/Black/Not of Hispanic Origin" name="RaceEthni" />
+                            <label for="American Indian or Alaska Native">
+                                American Indian or Alaska Native
+                            </label><br>
+
+                            <input type="radio" id="Asian" value="Asian" name="RaceEthni" />
+                            <label for="Asian">
+                                Asian
+                            </label><br>
+
+                            <input type="radio" id="White" value="Caucasian/White/Not of Hispanic Origin" name="RaceEthni" />
+                            <label for="AmericanIndian">
+                                Caucasian/White/Not of Hispanic Origin
+                            </label><br>
+
+                            <input type="radio" id="Hispanic" value="Hispanic or Latino" name="RaceEthni" />
+                            <label for="Hawaiian">
+                                Hispanic or Latino
+                            </label><br>
+
+                            <input type="radio" id="Hawaiian" value="Native Hawaiian or Other Pacific Islander" name="RaceEthni" />
+                            <label for="Other">
+                                Native Hawaiian or Other Pacific Islander
+                            </label><br>
+
+                            <input type="radio" id="Other" value="Other" name="RaceEthni" />
+                            <label for="Other">
+                                Other
+                            </label><br>
+                        </fieldset>
+                    </div>
+                </section>
+                <section id="section-proc" class="grid">
+                    <div class="grid__column grid__column--12 grid__column--12--md">
+                        <h3>Procedure</h3>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--6--md">
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="Randomization" class="control__label control__label__inline control__label--is-required">Randomization Group: </label>
+                            <fieldset>
+                                <label for="Device">
+                                    <input type="radio" id="Device" value="Device" name="Randomization" /> Device
+                                </label>
+                                <label for="Control">
+                                    <input type="radio" id="Control" value="Control" name="Randomization" /> Control
+                                </label>
+                            </fieldset>
+                        </div>
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="Length" class="control__label control__label__inline control__label--is-required">Length of Lesion:</label>
+                            <input type="number" step="0.1" min="0" max="10" class="control__number__inline" id="Length" />cm
+                        </div>
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="Width" class="control__label control__label__inline control__label--is-required">Width of Lesion:</label>
+                            <input type="number" step="0.01" min="0" max="10" class="control__number__inline" id="Width" />cm
+                        </div>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--6--md">
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label class="control__label control__label__inline control__label--is-required">Time Case Begin: </label>
+                            <input type="time" class="control__time__inline" step="2" id="Begin" />
+                        </div>
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label class="control__label control__label__inline control__label--is-required">Time Case Ended: </label>
+                            <input type="time" class="control__time__inline" step="2" id="End" />
+                        </div>
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label class="control__label control__label__inline control__label--is-required">Time when Ceum Reached: </label>
+                            <input type="time" class="control__time__inline" step="2" id="CecummReached" />
+                        </div>
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label class="control__label control__label__inline control__label--is-required">Time when Lesion Reached: </label>
+                            <input type="time" class="control__time__inline" step="2" id="LesionReached" />
+                        </div>
+                    </div>
+                </section>
+
+                <!--div button-->
+                <div class="grid" style="margin-top:30px" id="divButton">
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                        <button class="btn" id="btnSubmit" type="submit" style="float: right">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+</div>

@@ -111,23 +111,45 @@
                 Email: $('#User-Email').val(),
                 Password: $('#User-Password').val()
             }
-            
-            $.ajax({
-                type: "POST",
-                url: "/VASValue/CheckVASUser",
-                dataType: "json",
-                data: JSON.stringify(obj),
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    if (data.returnvalue != "") {
-                        var SubjID = data.returnvalue;
-                        window.location.replace(url + "?SubjID=" + SubjID)
-                    } else {
-                        alert("Your Email or Password are wrong");
-                        Response.redirect(url)
+
+            if (SurveyID === "3") {
+                $.ajax({
+                    type: "POST",
+                    url: "/VASValue/CheckLumendiUser",
+                    dataType: "json",
+                    data: JSON.stringify(obj),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data.returnvalue != "") {
+                            var UserID = data.returnvalue;
+                            window.location.replace(url + "?UserID=" + UserID)
+                        } else {
+                            alert("Your Email or Password are wrong");
+                            Response.redirect(url)
+                        }
                     }
-                }
-            })
+                })
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "/VASValue/CheckVASUser",
+                    dataType: "json",
+                    data: JSON.stringify(obj),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data.returnvalue != "") {
+                            var SubjID = data.returnvalue;
+                            window.location.replace(url + "?SubjID=" + SubjID)
+                        } else {
+                            alert("Your Email or Password are wrong");
+                            Response.redirect(url)
+                        }
+                    }
+                })
+            }
+            
+
         }
 
         function Signup() {   

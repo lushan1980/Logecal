@@ -223,6 +223,48 @@ namespace WebMVC.Controllers
             }
 
         }
+
+        public ActionResult CheckLumendiUser(VASUser user)
+        {
+
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("CheckLumendiUser", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Email",
+                    Value = user.Email
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Password",
+                    Value = user.Password
+                });
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                string UserID = "";
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        UserID = rdr["UserID"].ToString();
+                    }
+                }
+
+                con.Close();
+                return Json(new { returnvalue = UserID });
+
+            }
+
+        }
         public ActionResult CheckVASUserEmail(VASUser user)
         {
 
@@ -478,6 +520,52 @@ namespace WebMVC.Controllers
 
                 con.Close();
                 return Json(new { returnvalue = SubjID });
+
+            }
+        }
+        public JsonResult InsertLumendiUser(VASUser user)
+        {
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("InsertLumendiUser", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@SurveyID",
+                    Value = user.SurveyID
+                });
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Email",
+                    Value = user.Email
+                });
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Password",
+                    Value = user.Password
+                });
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                string UserID = "";
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        UserID = rdr["UserID"].ToString();
+                    }
+                }
+
+                con.Close();
+                return Json(new { returnvalue = UserID });
 
             }
         }

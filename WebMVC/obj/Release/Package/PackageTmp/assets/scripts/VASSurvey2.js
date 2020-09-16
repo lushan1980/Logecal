@@ -166,7 +166,7 @@
         else {
             object = {
                 SubjID: SubjID,
-                VisitNo: VisitTime,
+                VisitNo: VisitTime+1,
                 Assessment: sliderValue,
                 AEDiscription1: AEDiscription1,
                 Severity1: severity1,

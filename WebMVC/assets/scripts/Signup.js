@@ -35,24 +35,45 @@
             Password: $('#User-Pwd').val()
         }
         var url = "/VAS/Survey" + SurveyID;
-        $.ajax({
-            type: "POST",
-            url: "/VASValue/InsertVASUser",
-            dataType: "json",
-            data: JSON.stringify(obj),
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                if (data.returnvalue !== "") {
-                    //alert("Success");
-                    //var user = JSON.parse(data);
-                    var SubjID = data.returnvalue;
-                    //var ID = user[0].ID;
-                    window.location.replace(url + "?SubjID=" + SubjID)
-                } else {
-                    alert("You already have an account, please sign in directly.");
+
+        if (SurveyID === "3") {
+            $.ajax({
+                type: "POST",
+                url: "/VASValue/InsertLumendiUser",
+                dataType: "json",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data.returnvalue !== "") {
+                        var UserID = data.returnvalue;
+                        window.location.replace(url + "?UserID=" + UserID)
+                    } else {
+                        alert("You already have an account, please sign in directly.");
+                    }
                 }
-            }
-        })
+            })
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                url: "/VASValue/InsertVASUser",
+                dataType: "json",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data.returnvalue !== "") {
+                        //alert("Success");
+                        //var user = JSON.parse(data);
+                        var SubjID = data.returnvalue;
+                        //var ID = user[0].ID;
+                        window.location.replace(url + "?SubjID=" + SubjID)
+                    } else {
+                        alert("You already have an account, please sign in directly.");
+                    }
+                }
+            })
+        }
+
     })
     
 

@@ -2902,6 +2902,10 @@ table {
     margin: 0;
     font-weight: 600;
 }
+.control__label__inline {
+    display: inline-block;
+
+}
 
 .control--checkbox .control__label, .control--radio .control__label {
     font-weight: 400;
@@ -5001,6 +5005,30 @@ input[type=email].control__input, input[type=file].control__input, input[type=nu
     border: 1px solid #b3b3b3;
 }
 
+
+input[type=number].control__number__inline {
+    display: inline-block;
+    margin-bottom: 0;
+    width: 30%;
+    padding: 12px 15px;
+    background-color: #fff;
+    color: #333;
+    font-size: 1.125em;
+    border-bottom: 1px solid #b3b3b3;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+input[type=time].control__time__inline {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 12px 15px;
+    background-color: #fff;
+    color: #333;
+    font-size: 1.125em;
+    border: none;
+
+}
     input[type=email].control__input:focus, input[type=file].control__input:focus, input[type=number].control__input:focus, input[type=password].control__input:focus, input[type=search].control__input:focus, input[type=tel].control__input:focus, input[type=text].control__input:focus, input[type=url].control__input:focus, select.control__input:focus, textarea.control__input:focus {
         outline: 2px solid #2684ba;
     }

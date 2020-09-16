@@ -38,6 +38,11 @@ namespace WebMVC.Controllers
         {
             return View();
         }
+        public ActionResult Survey3()
+        {
+            return View();
+        }
+
         public ActionResult Dragball()
         {
             return View();
@@ -62,5 +67,13 @@ namespace WebMVC.Controllers
         {
             return View();
         }
+
+        public ActionResult navpagesample()
+        {
+            return View();
+        }
+
+
+
     }
 }
