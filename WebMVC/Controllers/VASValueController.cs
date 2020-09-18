@@ -794,6 +794,45 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = VisitNo });
             }
         }
+
+        public ActionResult CheckLumendiSubjExists(VASUser user)
+        {
+
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("CheckLumendiSubjExists", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@SubjID",
+                    Value = user.SubjID
+                });
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                string VisitNo = "";
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        VisitNo = rdr["VisitNo"].ToString();
+                    }
+                }
+                else 
+                {
+                    VisitNo = "0";
+                }
+
+                con.Close();
+                return Json(new { returnvalue = VisitNo });
+            }
+        }
         public ActionResult InsertStudy2first(Survey val)
         {
 
@@ -945,6 +984,103 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = insertData });
             }
         }
+
+        public ActionResult InsertLumendi(Survey val)
+        {
+
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("InsertLumendi", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "UserID",
+                    Value = val.UserID
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "SubjID",
+                    Value = val.SubjID
+                });                
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Age",
+                    Value = val.Age
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Gender",
+                    Value = val.Gender
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@RaceEthni",
+                    Value = val.RaceEthni
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Randomization",
+                    Value = val.Randomization
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Length",
+                    Value = val.Length
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Width",
+                    Value = val.Width
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@TBegan",
+                    Value = val.TBegan
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@TEnded",
+                    Value = val.TEnded
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@TCeReached",
+                    Value = val.TCeReached
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@TLeReached",
+                    Value = val.TLeReached
+                });
+
+                foreach (SqlParameter parameter in cmd.Parameters)
+                {
+                    if (parameter.Value == null)
+                    {
+                        parameter.Value = DBNull.Value;
+                    }
+                };
+
+                int result = cmd.ExecuteNonQuery();
+
+                bool insertData;
+                if (result > 0)
+                {
+                    insertData = true;
+                }
+                else
+                {
+                    insertData = false;
+                }
+                con.Close();
+                return Json(new { returnvalue = insertData });
+            }
+        }
         [HttpPost]
         public JsonResult GetStudy2Demog(VASUser user)
         {
@@ -1015,6 +1151,51 @@ namespace WebMVC.Controllers
                         Race = GetString(rdr["Race"]),
                         VisitNo = (int)GetInt(rdr["VisitNo"]),
                         Assessment = (float)GetFloat(rdr["Assessment"]),
+                        AEDiscription = GetString(rdr["AEDiscription"]),
+                        Severity = GetString(rdr["Severity"])
+                    };
+                    AllValueinfo.Add(AllValue);
+                }
+                con.Close();
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetLumendiAllValue(VASUser user)
+        {
+            List<Survey> AllValueinfo = new List<Survey>();
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("GetLumendiAllValue", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@SubjID",
+                    Value = user.SubjID
+                });
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Survey AllValue = new Survey
+                    {
+                        Age = (int)GetInt(rdr["Age"]),
+                        Gender = GetString(rdr["Gender"]),
+                        RaceEthni = GetString(rdr["RaceEthni"]),
+                        Randomization = GetString(rdr["Randomization"]),
+                        Length = (float)GetFloat(rdr["Length"]),
+                        Width = (float)GetFloat(rdr["Width"]),
+                        TBegan = GetString(rdr["TBegan"]),
+                        TEnded = GetString(rdr["TEnded"]),
+                        TCeReached = GetString(rdr["TCeReached"]),
+                        TLeReached = GetString(rdr["TLeReached"]),
                         AEDiscription = GetString(rdr["AEDiscription"]),
                         Severity = GetString(rdr["Severity"])
                     };

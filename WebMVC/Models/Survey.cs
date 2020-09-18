@@ -17,8 +17,16 @@ namespace WebMVC.Models
         public float F2 { get; set; }
         public string Ethnicity { get; set; }
         public string Race { get; set; }
+        public string RaceEthni { get; set; }
         public int? VisitNo { get; set; }
         public float? Assessment { get; set; }
+        public string Randomization { get; set; }
+        public float? Length { get; set; }
+        public float? Width { get; set; }
+        public string TBegan { get; set; }
+        public string TEnded { get; set; }
+        public string TCeReached { get; set; }
+        public string TLeReached { get; set; }
         public string AEDiscription { get; set; }
         public string Severity { get; set; }
         public string AEDiscription1 { get; set; }

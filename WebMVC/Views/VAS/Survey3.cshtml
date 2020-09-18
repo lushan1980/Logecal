@@ -12,18 +12,33 @@
     </div>
 </div><!--/banner -->
 
-<div class="container">
+<div class="container two-column__container">
     <form action="" id="Study3" name="LumendiForm">
-        <div class="grid">
-            <div class="grid__column grid__column--12 grid__column--12--md" id="div-Form">
+        <div class="grid two-column">
+            <!--left -->
+            <div class="grid__column grid__column--12 grid__column--2--md two-column__section two-column__section--blue" id="div-menu">
+                <div class="vertical-menu">
+                    <a href="#" id="Visit0" targetLink="Visit0">Visit 1</a>
+                    <a href="#" id="Visit1">Visit 2</a>
+                    <a href="#" id="Visit2">Visit 3</a>
+                    <a href="#" id="Visit3">Visit 4</a>
+                </div>
+            </div>
+            <!--right -->
+            <div class="grid__column grid__column--12 grid__column--10--md two-column__section" id="div-Form">
+                <div class="grid__column grid__column--12 grid__column--12--md" style="padding-bottom:50px">
+                    <label for="SubjID" class="control__label control__label__inline control__label--is-required">Subject ID: </label>
+                    <input type="text" pattern="[0-9]{2}-[0-9]{3}" class="control__input__inline" style="width: 30%" id="SubjID" />
+                </div>
+
+                <!--section Demog-->
                 <section class="grid" id="section-Demog">
                     <div class="grid__column grid__column--12 grid__column--12--md">
                         <h3>DEMOGRAPHICS</h3>
                     </div>
-                    @*div Initials, Age, Gender*@
+                    @*div Age, Gender*@
                     <div class="grid__column grid__column--12 grid__column--6--md">
-                        <label for="initials" class="control__label control__label--is-required">initials</label>
-                        <input type="text" class="control__input" style="width: 30%" id="initials" />
+
 
                         <label for="age" class="control__label control__label--is-required">Age</label>
                         <select class="control__select" id="age"></select>
@@ -38,7 +53,7 @@
                             </label>
                         </fieldset>
                     </div>
-                    @*div Race*@
+                    @*div RaceEthni*@
                     <div class="grid__column grid__column--12 grid__column--6--md">
                         <label for="RaceEthni" class="control__label control__label--is-required">Race/Ethnicity</label>
                         <fieldset>
@@ -47,7 +62,7 @@
                                 African American/Black/Not of Hispanic Origin
                             </label><br>
 
-                            <input type="radio" id="AmericanIndian" value="African American/Black/Not of Hispanic Origin" name="RaceEthni" />
+                            <input type="radio" id="AmericanIndian" value="American Indian or Alaska Native" name="RaceEthni" />
                             <label for="American Indian or Alaska Native">
                                 American Indian or Alaska Native
                             </label><br>
@@ -79,9 +94,10 @@
                         </fieldset>
                     </div>
                 </section>
-                <section id="section-proc" class="grid">
+                <!--section Procedure-->
+                <section id="section-proc" class="grid" style="display: none">
                     <div class="grid__column grid__column--12 grid__column--12--md">
-                        <h3>Procedure</h3>
+                        <h3>PROCEDURE</h3>
                     </div>
                     <div class="grid__column grid__column--12 grid__column--6--md">
                         <div class="grid__column grid__column--12 grid__column--12--md">
@@ -97,37 +113,126 @@
                         </div>
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label for="Length" class="control__label control__label__inline control__label--is-required">Length of Lesion:</label>
-                            <input type="number" step="0.1" min="0" max="10" class="control__number__inline" id="Length" />cm
+                            <input type="number" step="0.1" min="0" max="10" class="control__input__inline" id="Length" />cm
                         </div>
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label for="Width" class="control__label control__label__inline control__label--is-required">Width of Lesion:</label>
-                            <input type="number" step="0.01" min="0" max="10" class="control__number__inline" id="Width" />cm
+                            <input type="number" step="0.1" min="0" max="10" class="control__input__inline" id="Width" />cm
                         </div>
                     </div>
                     <div class="grid__column grid__column--12 grid__column--6--md">
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label class="control__label control__label__inline control__label--is-required">Time Case Begin: </label>
-                            <input type="time" class="control__time__inline" step="2" id="Begin" />
+                            <input type="time" class="control__input__inline" step="1" id="TBegan" />
                         </div>
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label class="control__label control__label__inline control__label--is-required">Time Case Ended: </label>
-                            <input type="time" class="control__time__inline" step="2" id="End" />
+                            <input type="time" class="control__input__inline" step="1" id="TEnded" />
                         </div>
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label class="control__label control__label__inline control__label--is-required">Time when Ceum Reached: </label>
-                            <input type="time" class="control__time__inline" step="2" id="CecummReached" />
+                            <input type="time" class="control__input__inline" step="1" id="TCeReached" />
                         </div>
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label class="control__label control__label__inline control__label--is-required">Time when Lesion Reached: </label>
-                            <input type="time" class="control__time__inline" step="2" id="LesionReached" />
+                            <input type="time" class="control__input__inline" step="1" id="TLeReached" />
                         </div>
                     </div>
                 </section>
+                <!--section ADVERSE EVENTS-->
+                <section class="grid" id="section-AE" style="display: none">
+                    <div class="grid__column grid__column--12 grid__column--12--md">
+                        <h3>ADVERSE EVENTS</h3>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                        <label for="AdverseEvent" class="control__label" style="display: inline-block">
+                            Have you encountered any adverse events since the previous assessment?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </label>
 
+                        <label for="No">
+                            <input type="radio" id="No" value="No" name="AdverseEvent" /> No
+                        </label>
+                        <label for="Yes">
+                            <input type="radio" id="Yes" value="Yes" name="AdverseEvent" /> Yes
+                        </label>
+                    </div>
+
+                    <div class="grid__column grid__column--12 grid__column--12--sm isDisabled" id="divAEtable">
+                        <table>
+                            <tr>
+                                <th>#</th>
+                                <th>ADVERSE EVENT</th>
+                                <th>SEVERITY</th>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">1</td>
+                                <td width="60%"><input style="border: 0px; width: 100%" id="AdventEvent1" /></td>
+                                <td style="text-align:center">
+                                    <label for="Mild">
+                                        <input type="radio" id="Mild1" value="Mild" name="SEVERITY1" /> Mild
+                                    </label>
+                                    <label for="Moderate">
+                                        <input type="radio" id="Moderate1" value="Moderate" name="SEVERITY1" /> Moderate
+                                    </label>
+                                    <label for="Severe">
+                                        <input type="radio" id="Severe1" value="Severe" name="SEVERITY1" /> Severe
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">2</td>
+                                <td><input style="border: 0px; width: 100%" id="AdventEvent2" /></td>
+                                <td style="text-align:center">
+                                    <label for="Mild">
+                                        <input type="radio" id="Mild2" value="Mild" name="SEVERITY2" /> Mild
+                                    </label>
+                                    <label for="Moderate">
+                                        <input type="radio" id="Moderate2" value="Moderate" name="SEVERITY2" /> Moderate
+                                    </label>
+                                    <label for="Severe">
+                                        <input type="radio" id="Severe2" value="Severe" name="SEVERITY2" /> Severe
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">3</td>
+                                <td><input style="border: 0px; width: 100%" id="AdventEvent3" /></td>
+                                <td style="text-align:center">
+                                    <label for="Mild">
+                                        <input type="radio" id="Mild3" value="Mild" name="SEVERITY3" /> Mild
+                                    </label>
+                                    <label for="Moderate">
+                                        <input type="radio" id="Moderate3" value="Moderate" name="SEVERITY3" /> Moderate
+                                    </label>
+                                    <label for="Severe">
+                                        <input type="radio" id="Severe3" value="Severe" name="SEVERITY3" /> Severe
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">...</td>
+                                <td><input style="border: 0px; width: 100%" id="AdventEvent4" /></td>
+                                <td style="text-align:center">
+                                    <label for="Mild">
+                                        <input type="radio" id="Mild4" value="Mild" name="SEVERITY4" /> Mild
+                                    </label>
+                                    <label for="Moderate">
+                                        <input type="radio" id="Moderate4" value="Moderate" name="SEVERITY4" /> Moderate
+                                    </label>
+                                    <label for="Severe">
+                                        <input type="radio" id="Severe4" value="Severe" name="SEVERITY4" /> Severe
+                                    </label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
                 <!--div button-->
                 <div class="grid" style="margin-top:30px" id="divButton">
                     <div class="grid__column grid__column--12 grid__column--12--sm">
-                        <button class="btn" id="btnSubmit" type="submit" style="float: right">Submit</button>
+                        <button class="btn btn--previous" id="btnPrevious" style="float: left; display:none">Previous</button>
+                        <button class="btn" id="btnNext" style="float: right">Next</button>
+                        <button class="btn" id="btnSubmit" type="submit" style="float: right; display: none">Submit</button>
                     </div>
                 </div>
             </div>

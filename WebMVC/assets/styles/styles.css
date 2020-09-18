@@ -5004,12 +5004,9 @@ input[type=email].control__input, input[type=file].control__input, input[type=nu
     font-size: 1.125em;
     border: 1px solid #b3b3b3;
 }
-
-
-input[type=number].control__number__inline {
+input[type=email].control__input__inline, input[type=time].control__input__inline, input[type=file].control__input__inline, input[type=number].control__input__inline, input[type=password].control__input__inline, input[type=search].control__input__inline, input[type=tel].control__input__inline, input[type=text].control__input__inline, input[type=url].control__input__inline, select.control__input__inline, textarea.control__input__inline {
     display: inline-block;
     margin-bottom: 0;
-    width: 30%;
     padding: 12px 15px;
     background-color: #fff;
     color: #333;
@@ -5019,16 +5016,8 @@ input[type=number].control__number__inline {
     border-left: none;
     border-right: none;
 }
-input[type=time].control__time__inline {
-    display: inline-block;
-    margin-bottom: 0;
-    padding: 12px 15px;
-    background-color: #fff;
-    color: #333;
-    font-size: 1.125em;
-    border: none;
 
-}
+
     input[type=email].control__input:focus, input[type=file].control__input:focus, input[type=number].control__input:focus, input[type=password].control__input:focus, input[type=search].control__input:focus, input[type=tel].control__input:focus, input[type=text].control__input:focus, input[type=url].control__input:focus, select.control__input:focus, textarea.control__input:focus {
         outline: 2px solid #2684ba;
     }
