@@ -824,10 +824,6 @@ namespace WebMVC.Controllers
                         VisitNo = rdr["VisitNo"].ToString();
                     }
                 }
-                else 
-                {
-                    VisitNo = "0";
-                }
 
                 con.Close();
                 return Json(new { returnvalue = VisitNo });
@@ -1056,6 +1052,94 @@ namespace WebMVC.Controllers
                 {
                     ParameterName = "@TLeReached",
                     Value = val.TLeReached
+                });
+
+                foreach (SqlParameter parameter in cmd.Parameters)
+                {
+                    if (parameter.Value == null)
+                    {
+                        parameter.Value = DBNull.Value;
+                    }
+                };
+
+                int result = cmd.ExecuteNonQuery();
+
+                bool insertData;
+                if (result > 0)
+                {
+                    insertData = true;
+                }
+                else
+                {
+                    insertData = false;
+                }
+                con.Close();
+                return Json(new { returnvalue = insertData });
+            }
+        }
+
+        public ActionResult InsertLumendiAE(Survey val)
+        {
+
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("InsertLumendiAE", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "SubjID",
+                    Value = val.SubjID
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "VisitNo",
+                    Value = val.VisitNo
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@AEDiscription1",
+                    Value = val.AEDiscription1
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Severity1",
+                    Value = val.Severity1
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@AEDiscription2",
+                    Value = GetString(val.AEDiscription2)
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Severity2",
+                    Value = GetString(val.Severity2)
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@AEDiscription3",
+                    Value = val.AEDiscription3
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Severity3",
+                    Value = val.Severity3
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@AEDiscription4",
+                    Value = val.AEDiscription4
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Severity4",
+                    Value = val.Severity4
                 });
 
                 foreach (SqlParameter parameter in cmd.Parameters)

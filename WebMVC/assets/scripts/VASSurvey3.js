@@ -58,18 +58,21 @@ $(document).ready(function () {
                             NotFirstVisit();
                             break;
                         case "2":
+                            VisitTime = 3;
                             for (i = 3; i < Visits.length; i++) {
                                 Visits[i].className = "isDisabled";
                             }
                             NotFirstVisit();
                             break;
                         case "3":
+                            VisitTime = 4;
                             for (i = 4; i < Visits.length; i++) {
                                 Visits[i].className = "isDisabled";
                             }
                             NotFirstVisit();
                             break;
                         case "4":
+                            VisitTime = 3;
                             NotFirstVisit();
                             break;
                     }              
@@ -132,7 +135,6 @@ $(document).ready(function () {
     Visits.forEach(function (Visit, index) {
         Visit.addEventListener('click', function (e) {
             e.preventDefault();
-
             getAEs(index + 1);
             $("#section-proc").removeClass("isDisabled")
             $("#section-AE").removeClass("isDisabled")
@@ -193,7 +195,8 @@ $(document).ready(function () {
         }
         else {
             object = {
-                SubjID: SubjID,
+                SubjID: $('#SubjID').val(),
+                VisitNo: VisitTime,
                 AEDiscription1: AEDiscription1,
                 Severity1: severity1,
                 AEDiscription2: AEDiscription2,
@@ -361,19 +364,15 @@ $(document).ready(function () {
         //var aaa = WeekAssessments;
     }
 
-    function getAllAE() {
-        var AllAEs = AllValues.map(function (AllAE) {
+    //get all Adverse Events for each Visit
+    function getAEs(VisitNo) {
+        var AEs = AllValues.map(function (AllAE) {
             return {
                 "VisitNo": AllAE.VisitNo,
                 "AEDiscription": AllAE.AEDiscription,
                 "Severity": AllAE.Severity
             }
         });
-        return AllAEs;
-    }
-
-    function getAEs(VisitNo) {
-        var AEs = getAllAE();
         var i, j = 1;
         var AE, Severity;
 
