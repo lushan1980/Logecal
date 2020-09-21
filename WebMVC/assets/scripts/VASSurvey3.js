@@ -29,9 +29,14 @@ $(document).ready(function () {
         Moderates = document.querySelectorAll('[id ^= "Moderate"]'),
         Severes = document.querySelectorAll('[id ^= "Severe"]');
 
-    SubjID.addEventListener('input', function () {
+    SubjID.addEventListener('input', function () {        
+        empty()
         obj = { SubjID: SubjID.value };
+        
         if (SubjID.value.length >= 6) {
+            for (var i = 1; i < Visits.length; i++) {
+                Visits[i].classList.remove("isDisabled");
+            }
             //Check how many visits this is
             $.ajax({
                 type: "POST",
@@ -80,11 +85,9 @@ $(document).ready(function () {
                 error: function () {
                     alert("Something got wrong!")
                 }
-
             })
         }
     })
-
 
     document.getElementById("No").addEventListener('click', function () {
         for (var i = 0; i < AdventEvents.length; i++) {
@@ -123,7 +126,7 @@ $(document).ready(function () {
             $("#btnNext").css("display", "none");
         }
         $curr.css("display", "inline-flex");
-        if (temp < VisitTime) {
+        if (temp+1 < VisitTime) {
             $("#btnSubmit").css("display", "none");
             if (temp == 0) {
                 $("#section-AE").css("display", "none");
@@ -145,7 +148,7 @@ $(document).ready(function () {
             $("#btnNext").css("display", "block");
             $("#btnSubmit").css("display", "none");
             $curr = $("#section-Demog");
-            if (index < VisitTime) {
+            if (index+1 < VisitTime) {
                 $("#section-proc").addClass("isDisabled")
                 $("#section-AE").addClass("isDisabled")
             }
@@ -295,7 +298,6 @@ $(document).ready(function () {
                         document.getElementById('Other').checked = true;
                         break;
                 }
-
                 if (thisRandomization == "Control") {
                     document.getElementById('Control').checked = true;
                 }
@@ -311,6 +313,7 @@ $(document).ready(function () {
             }
         });
         document.getElementById("section-Demog").classList.add("isDisabled")
+        document.getElementById("section-proc").classList.add("isDisabled")
     }
     //get url parameter
     function getParameterByName(name, url) {
@@ -344,25 +347,6 @@ $(document).ready(function () {
     function myTrim(x) {
         return x.replace(/^\s+|\s+$/gm, '').toLowerCase();
     }
-    //get all assessment for each Visit
-    function getAllAssessment() {
-        var AllAssessments = {};
-        AllValues.forEach(function (item) {
-            var VisitNo = AllAssessments[item.VisitNo] = AllAssessments[item.VisitNo] || {};
-            VisitNo[item.Assessment] = true;
-        });
-        var outputList = [];
-        for (var VisitNo in AllAssessments) {
-            for (var Assessment in AllAssessments[VisitNo]) {
-                outputList.push({ VisitNo: VisitNo, Assessment: Assessment });
-            }
-        }
-
-        for (i = 0; i < outputList.length; i++) {
-            WeekAssessments[i] = parseFloat(outputList[i].Assessment);
-        }
-        //var aaa = WeekAssessments;
-    }
 
     //get all Adverse Events for each Visit
     function getAEs(VisitNo) {
@@ -373,10 +357,10 @@ $(document).ready(function () {
                 "Severity": AllAE.Severity
             }
         });
-        var i, j = 1;
+        var j = 1;
         var AE, Severity;
 
-        for (i = 0; i < AdventEvents.length; i++) {
+        for (var i = 0; i < AdventEvents.length; i++) {
             AdventEvents[i].value = "";
             Milds[i].checked = false;
             Moderates[i].checked = false;
@@ -385,7 +369,7 @@ $(document).ready(function () {
             document.getElementById('No').checked = false;
         }
 
-        for (i = 0; i < AEs.length; i++) {
+        for (var i = 0; i < AEs.length; i++) {
             if (AEs[i].VisitNo == VisitNo) {
                 AE = AEs[i].AEDiscription;
                 Severity = AEs[i].Severity;
@@ -412,4 +396,53 @@ $(document).ready(function () {
         }
     }
 
+    //empty the form except Subject ID
+    function empty() {
+        document.getElementById('age').value = "";
+
+        document.getElementById('male').checked = false;
+        document.getElementById('female').checked = false;
+
+        document.getElementById('Black').checked = false;
+        document.getElementById('AmericanIndian').checked = false;
+        document.getElementById('Asian').checked = false;
+        document.getElementById('White').checked = false;
+        document.getElementById('Hispanic').checked = false;
+        document.getElementById('Hawaiian').checked = false;
+        document.getElementById('Other').checked = false;
+
+        document.getElementById('Control').checked = false;
+        document.getElementById('Device').checked = false;
+
+        document.getElementById('Length').value = "";
+        document.getElementById('Width').value = "";
+        document.getElementById('TBegan').value = "";
+        document.getElementById('TEnded').value = "";
+        document.getElementById('TCeReached').value = "";
+        document.getElementById('TLeReached').value = "";
+
+        document.getElementById('Yes').checked = false;
+        document.getElementById('No').checked = false;
+
+        document.getElementById('AdventEvent1').value = "";
+        document.getElementById('AdventEvent2').value = "";
+        document.getElementById('AdventEvent3').value = "";
+        document.getElementById('AdventEvent4').value = "";
+
+        document.getElementById('Mild1').checked = false;
+        document.getElementById('Mild2').checked = false;
+        document.getElementById('Mild3').checked = false;
+        document.getElementById('Mild4').checked = false;
+
+        document.getElementById('Moderate1').checked = false;
+        document.getElementById('Moderate2').checked = false;
+        document.getElementById('Moderate3').checked = false;
+        document.getElementById('Moderate4').checked = false;
+
+        document.getElementById('Severe1').checked = false;
+        document.getElementById('Severe2').checked = false;
+        document.getElementById('Severe3').checked = false;
+        document.getElementById('Severe4').checked = false;
+
+    }
 })

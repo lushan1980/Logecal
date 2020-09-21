@@ -19,19 +19,15 @@ namespace WebMVC.Controllers
 
         public static string GetString(object o)
         {
-            if (o == DBNull.Value) return null;
-            return (string)o;
+            return o == DBNull.Value ? null : (string)o;
         }
         public static int? GetInt(object o)
         {
-
-            if (o == DBNull.Value) return null;
-            return Convert.ToInt32(o);
+            return o == DBNull.Value ? default(int) : (int?)Convert.ToInt32(o);
         }
         public static float? GetFloat(object o)
         {
-            if (o == DBNull.Value) return null;
-            return Convert.ToSingle(o);
+            return o == DBNull.Value ? default(float) : (float?)Convert.ToSingle(o);
         }
         // GET: VASValue
         public ActionResult GetVASValue(VASValue val)
@@ -1270,6 +1266,8 @@ namespace WebMVC.Controllers
                 {
                     Survey AllValue = new Survey
                     {
+                        UserID = (int)GetInt(rdr["UserID"]),
+                        SubjID = GetString(rdr["SubjID"]),
                         Age = (int)GetInt(rdr["Age"]),
                         Gender = GetString(rdr["Gender"]),
                         RaceEthni = GetString(rdr["RaceEthni"]),
@@ -1280,6 +1278,7 @@ namespace WebMVC.Controllers
                         TEnded = GetString(rdr["TEnded"]),
                         TCeReached = GetString(rdr["TCeReached"]),
                         TLeReached = GetString(rdr["TLeReached"]),
+                        VisitNo = (int)GetInt(rdr["VisitNo"]),
                         AEDiscription = GetString(rdr["AEDiscription"]),
                         Severity = GetString(rdr["Severity"])
                     };
