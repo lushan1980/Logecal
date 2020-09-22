@@ -9,9 +9,10 @@ $(document).ready(function () {
 
     const UserID = getParameterByName('UserID');
 
-    var $curr, $first, $last = $("#section-AE"), VisitTime, obj,
-        AllValues, thisAge, thisGender, thisRaceEthni, thisRandomization, thisLength, thisWidth, thisTBegan, thisTEnded, thisTCeReached, thisTLeReached;
+    var $curr, $first, VisitTime, obj;
+    var AllValues, thisAge, thisGender, thisRaceEthni, thisRandomization, thisLength, thisWidth, thisTBegan, thisTEnded, thisTCeReached, thisTLeReached;
 
+    var $last = $("#section-AE");
     const Previous = document.getElementById("btnPrevious");
     const Next = document.getElementById("btnNext");
     const SubjID = document.getElementById("SubjID");

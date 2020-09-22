@@ -1983,9 +1983,9 @@ input[type=email], input[type=number], input[type=password], input[type=search],
     color: #a4a4a4;
     font-size: 1rem;
     font-family: inherit;
-    -webkit-appearance: none;
+/*    -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;
+    appearance: none;*/
 }
 
     input[type=email]:focus, input[type=number]:focus, input[type=password]:focus, input[type=search]:focus, input[type=tel]:focus, input[type=text]:focus, input[type=url]:focus, select:focus, textarea:focus {
@@ -2901,6 +2901,10 @@ table {
     display: block;
     margin: 0;
     font-weight: 600;
+}
+.control__label__inline {
+    display: inline-block;
+
 }
 
 .control--checkbox .control__label, .control--radio .control__label {
@@ -5000,6 +5004,19 @@ input[type=email].control__input, input[type=file].control__input, input[type=nu
     font-size: 1.125em;
     border: 1px solid #b3b3b3;
 }
+input[type=email].control__input__inline, input[type=time].control__input__inline, input[type=file].control__input__inline, input[type=number].control__input__inline, input[type=password].control__input__inline, input[type=search].control__input__inline, input[type=tel].control__input__inline, input[type=text].control__input__inline, input[type=url].control__input__inline, select.control__input__inline, textarea.control__input__inline {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 12px 15px;
+    background-color: #fff;
+    color: #333;
+    font-size: 1.125em;
+    border-bottom: 1px solid #b3b3b3;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
 
     input[type=email].control__input:focus, input[type=file].control__input:focus, input[type=number].control__input:focus, input[type=password].control__input:focus, input[type=search].control__input:focus, input[type=tel].control__input:focus, input[type=text].control__input:focus, input[type=url].control__input:focus, select.control__input:focus, textarea.control__input:focus {
         outline: 2px solid #2684ba;

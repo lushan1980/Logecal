@@ -1,4 +1,11 @@
-﻿$(document).ready(function () {
+﻿
+var arr = document.referrer.split("/");
+var url = arr.slice(-1)[0];
+if (url !== "VerifyEmail?SurveyID=2" && url !== "Signup?SurveyID=2") {
+    window.location.replace("/VAS/VerifyEmail?SurveyID=2");
+}    
+
+$(document).ready(function () {
 
     const SubjID = getParameterByName('SubjID');
     document.getElementById('subjID').innerHTML = "Subject ID: " + SubjID;
