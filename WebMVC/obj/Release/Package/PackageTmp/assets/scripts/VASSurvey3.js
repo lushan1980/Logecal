@@ -1,23 +1,42 @@
 ﻿
-var arr = document.referrer.split("/");
-var url = arr.slice(-1)[0];
-if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3") {
-    window.location.replace("/VAS/VerifyEmail?SurveyID=3");
-}
+//var arr = document.referrer.split("/");
+//var url = arr.slice(-1)[0];
+//if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3") {
+//    window.location.replace("/VAS/VerifyEmail?SurveyID=3");
+//}
 
 $(document).ready(function () {
+    //fill age dropdown menu
+    for (var i = 18; i <= 100; i++) {
+        var select = document.getElementById("age");
+        var option = document.createElement("OPTION");
+        select.options.add(option);
+        option.text = i;
+        option.value = i;
 
+        ////get reference to select element
+        //var sel = document.getElementById('age');
+        ////create new option element
+        //var opt = document.createElement('option');
+        ////create text node to add to option element (opt)
+        //opt.appendChild(document.createTextNode(i));
+        ////set value property of opt
+        //opt.value = i;
+        //opt.text = i;
+        ////add opt to end of select box (sel)
+        //sel.appendChild(opt);
+    }
     const UserID = getParameterByName('UserID');
 
-    var $curr, $first, VisitTime, obj;
-    var AllValues, thisAge, thisGender, thisRaceEthni, thisRandomization, thisLength, thisWidth, thisTBegan, thisTEnded, thisTCeReached, thisTLeReached;
+    var $curr, $first, $last = $("#section-AE"), VisitTime, obj,
+        AllValues, thisAge, thisGender, thisRaceEthni, thisRandomization, thisLength, thisWidth, thisTBegan, thisTEnded, thisTCeReached, thisTLeReached;
 
-    var $last = $("#section-AE");
     const Previous = document.getElementById("btnPrevious");
     const Next = document.getElementById("btnNext");
     const SubjID = document.getElementById("SubjID");
     
     var Visits = document.querySelectorAll('[id ^= "Visit"]');
+    var VisitsArray = Array.prototype.slice.call(Visits);
     var AdventEvents = document.querySelectorAll('[id ^= "AdventEvent"]'),
         Milds = document.querySelectorAll('[id ^= "Mild"]'),
         Moderates = document.querySelectorAll('[id ^= "Moderate"]'),
@@ -140,7 +159,7 @@ $(document).ready(function () {
     })
 
     var temp;
-    Visits.forEach(function (Visit, index) {
+    VisitsArray.forEach(function (Visit, index) {
         Visit.addEventListener('click', function (e) {
             e.preventDefault();
             getAEs(index + 1);
@@ -332,14 +351,7 @@ $(document).ready(function () {
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
-    //fill age dropdown menu
-    for (var i = 18; i <= 100; i++) {
-        var select = document.getElementById("age");
-        var option = document.createElement("OPTION");
-        select.options.add(option);
-        option.text = i;
-        option.value = i;
-    }
+
     //get radio value
     function displayRadioValue(name) {
         var ele = document.getElementsByName(name);
