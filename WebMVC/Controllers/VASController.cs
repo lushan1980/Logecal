@@ -72,8 +72,11 @@ namespace WebMVC.Controllers
         {
             return View();
         }
-
-
+        public ActionResult LumendiSummary()
+        {
+            return View();
+        }
+        
 
     }
 }

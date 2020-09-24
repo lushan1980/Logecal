@@ -1289,6 +1289,78 @@ namespace WebMVC.Controllers
             JavaScriptSerializer js = new JavaScriptSerializer();
             return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetLumendiDemog(VASUser user)
+        {
+            List<Survey> AllValueinfo = new List<Survey>();
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("GetLumendiDemog", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@UserID",
+                    Value = user.UserID
+                });
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Survey AllValue = new Survey
+                    {
+                        SubjID = GetString(rdr["SubjID"]),
+                        Age = (int)GetInt(rdr["Age"]),
+                        Gender = GetString(rdr["Gender"]),
+                        RaceEthni = GetString(rdr["RaceEthni"]),
+
+                    };
+                    AllValueinfo.Add(AllValue);
+                }
+                con.Close();
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult CountSubj(VASUser user)
+        {
+
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("CountSubj", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@UserID",
+                    Value = user.UserID
+                });
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                string SubjNum = "";
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        SubjNum = rdr["SubjNum"].ToString();
+                    }
+                }
+
+                con.Close();
+                return Json(new { returnvalue = SubjNum });
+            }
+        }
         private static string CreateRandomPassword(int length = 8)
         {
             // Create a string of characters, numbers, special characters that allowed in the password  

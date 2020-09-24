@@ -203,6 +203,7 @@
     <Content Include="assets\images\testimonial-quote.png" />
     <Content Include="assets\scripts\App.js" />
     <Content Include="assets\scripts\ContactForm.js" />
+    <Content Include="assets\scripts\LumendiSummary.js" />
     <Content Include="assets\scripts\ResetPwd.js" />
     <Content Include="assets\scripts\Signup.js" />
     <Content Include="assets\scripts\VASSurvey1.js" />
@@ -436,6 +437,7 @@
     <Content Include="Views\VAS\teststep.cshtml" />
     <Content Include="Views\VAS\navpagesample.cshtml" />
     <Content Include="Views\VAS\Survey3.cshtml" />
+    <Content Include="Views\VAS\LumendiSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,9 +1,9 @@
 ﻿
-//var arr = document.referrer.split("/");
-//var url = arr.slice(-1)[0];
-//if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3") {
-//    window.location.replace("/VAS/VerifyEmail?SurveyID=3");
-//}
+var arr = document.referrer.split("/");
+var url = arr.slice(-1)[0];
+if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3") {
+    window.location.replace("/VAS/VerifyEmail?SurveyID=3");
+}
 
 $(document).ready(function () {
 
@@ -16,12 +16,18 @@ $(document).ready(function () {
     const Next = document.getElementById("btnNext");
     const SubjID = document.getElementById("SubjID");
     
-    var Visits = document.querySelectorAll('[id ^= "Visit"]');
-    var VisitsArray = Array.prototype.slice.call(Visits);
+    var Visits = document.querySelectorAll('[id ^= "Visit"]'),
+        VisitsArray = Array.prototype.slice.call(Visits)
+        Summary = document.getElementById("Summary");
     var AdventEvents = document.querySelectorAll('[id ^= "AdventEvent"]'),
         Milds = document.querySelectorAll('[id ^= "Mild"]'),
         Moderates = document.querySelectorAll('[id ^= "Moderate"]'),
         Severes = document.querySelectorAll('[id ^= "Severe"]');
+
+    Summary.addEventListener('click', function (e) {
+        e.preventDefault;
+        window.location.replace("/VAS/LumendiSummary" + "?UserID=" + UserID)
+    })
 
     SubjID.addEventListener('input', function () {         
              
@@ -92,6 +98,10 @@ $(document).ready(function () {
                 }
             })
         }
+    })
+
+    Summary.addEventListener('click', function () {
+    
     })
 
     document.getElementById("No").addEventListener('click', function () {
