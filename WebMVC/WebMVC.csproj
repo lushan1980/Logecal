@@ -150,6 +150,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomHtmlHelepers.cs" />
+    <Compile Include="Models\LumendiSummary.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Survey.cs" />

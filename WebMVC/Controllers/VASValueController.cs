@@ -1327,6 +1327,45 @@ namespace WebMVC.Controllers
             JavaScriptSerializer js = new JavaScriptSerializer();
             return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult SummaryDemog(VASUser user)
+        {
+            List<LumendiSummary> AllValueinfo = new List<LumendiSummary>();
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("SummaryDemog", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@UserID",
+                    Value = user.UserID
+                });
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    LumendiSummary AllValue = new LumendiSummary
+                    {
+                        Parameter1 = GetString(rdr["Parameter1"]),
+                        Parameter2 = GetString(rdr["Parameter2"]),
+                        Control = (float)GetFloat(rdr["Control"]),
+                        Device = (float)GetFloat(rdr["Device"]),
+                        Overall = (float)GetFloat(rdr["Overall"])
+
+                    };
+                    AllValueinfo.Add(AllValue);
+                }
+                con.Close();
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult CountSubj(VASUser user)
         {
 

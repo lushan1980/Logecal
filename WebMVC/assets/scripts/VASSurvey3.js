@@ -1,7 +1,16 @@
-﻿
+﻿const UserID = getParameterByName('UserID');;
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
 var arr = document.referrer.split("/");
 var url = arr.slice(-1)[0];
-if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3") {
+if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3" && url !== "LumendiSummary?UserID="+UserID ) {
     window.location.replace("/VAS/VerifyEmail?SurveyID=3");
 }
 
