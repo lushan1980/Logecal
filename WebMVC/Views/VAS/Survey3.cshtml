@@ -26,26 +26,26 @@
                     <a href="#" id="Visit3">Visit 4</a>
                     <a href="#" id="Visit4">Visit 5</a>*@
 
-                    <button class="dropdown-btn" id="Visit0">Visit 1<i class="fa fa-caret-down"></i></button>
+                    <button class="dropdown-btn" id="Visit0">Visit 1<i class="fa fa-caret-right"></i></button>
                     <div class="dropdown-container">
-                        <a href="#" id="Visit0Demog">DEMOGRAPHICS</a>
-                        <a href="#" id="Visit0Proc">PROCEDURE</a>
+                        <a href="#" id="DemogVisit0">Demographics</a>
+                        <a href="#" id="ProcVisit0">Procedure</a>
                     </div>
-                    <button class="dropdown-btn" id="Visit1">Visit 2<i class="fa fa-caret-down"></i></button>
+                    <button class="dropdown-btn" id="Visit1">Visit 2<i class="fa fa-caret-right"></i></button>
                     <div class="dropdown-container">
-                        <a href="#" id="Visit1AE">Adverse Events</a>
+                        <a href="#" id="AEVisit1">Adverse Events</a>
                     </div>
-                    <button class="dropdown-btn" id="Visit2">Visit 3<i class="fa fa-caret-down"></i></button>
+                    <button class="dropdown-btn" id="Visit2">Visit 3<i class="fa fa-caret-right"></i></button>
                     <div class="dropdown-container">
-                        <a href="#" id="Visit2AE">Adverse Events</a>
+                        <a href="#" id="AEVisit2">Adverse Events</a>
                     </div>
-                    <button class="dropdown-btn" id="Visit3">Visit 4<i class="fa fa-caret-down"></i></button>
+                    <button class="dropdown-btn" id="Visit3">Visit 4<i class="fa fa-caret-right"></i></button>
                     <div class="dropdown-container">
-                        <a href="#" id="Visit3AE">Adverse Events</a>
+                        <a href="#" id="AEVisit3">Adverse Events</a>
                     </div>
-                    <button class="dropdown-btn" id="Visit4">Visit 5<i class="fa fa-caret-down"></i></button>
+                    <button class="dropdown-btn" id="Visit4">Visit 5<i class="fa fa-caret-right"></i></button>
                     <div class="dropdown-container">
-                        <a href="#" id="Visit4AE">Adverse Events</a>
+                        <a href="#" id="AEVisit4">Adverse Events</a>
                     </div>
 
                     <a href="#" id="Summary">Summary</a>
@@ -67,7 +67,7 @@
                     <div class="grid__column grid__column--12 grid__column--6--md">
 
                         <label for="age" class="control__label control__label--is-required">Age</label>
-                        <select class="control__select" id="age">
+                        <select class="control__select" id="age" required>
                             <option value="none" selected disabled hidden>
                                 --Select an Option--
                             </option>
@@ -76,7 +76,7 @@
                         <label for="gender" class="control__label control__label--is-required">Gender</label>
                         <fieldset>
                             <label for="male">
-                                <input type="radio" id="male" value="Male" name="gender" /> Male
+                                <input type="radio" id="male" value="Male" name="gender" required/> Male
                             </label>
                             <label for="female">
                                 <input type="radio" id="female" value="Female" name="gender" /> Female
@@ -87,7 +87,7 @@
                     <div class="grid__column grid__column--12 grid__column--6--md">
                         <label for="RaceEthni" class="control__label control__label--is-required">Race/Ethnicity</label>
                         <fieldset>
-                            <input type="radio" id="Black" value="African American/Black/Not of Hispanic Origin" name="RaceEthni" />
+                            <input type="radio" id="Black" value="African American/Black/Not of Hispanic Origin" name="RaceEthni" required/>
                             <label for="Black">
                                 African American/Black/Not of Hispanic Origin
                             </label><br>
@@ -97,7 +97,7 @@
                                 American Indian or Alaska Native
                             </label><br>
 
-                            <input type="radio" id="Asian" value="Asian" name="RaceEthni" />
+                            <input type="radio" id="Asian" value="Asian" name="RaceEthni" required/>
                             <label for="Asian">
                                 Asian
                             </label><br>
@@ -107,7 +107,7 @@
                                 Caucasian/White/Not of Hispanic Origin
                             </label><br>
 
-                            <input type="radio" id="Hispanic" value="Hispanic or Latino" name="RaceEthni" />
+                            <input type="radio" id="Hispanic" value="Hispanic or Latino" name="RaceEthni" required/>
                             <label for="Hawaiian">
                                 Hispanic or Latino
                             </label><br>
@@ -134,7 +134,7 @@
                             <label for="Randomization" class="control__label control__label__inline control__label--is-required">Randomization Group: </label>
                             <fieldset>
                                 <label for="Device">
-                                    <input type="radio" id="Device" value="Device" name="Randomization" /> Device
+                                    <input type="radio" id="Device" value="Device" name="Randomization" required/> Device
                                 </label>
                                 <label for="Control">
                                     <input type="radio" id="Control" value="Control" name="Randomization" /> Control
@@ -143,29 +143,29 @@
                         </div>
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label for="Length" class="control__label control__label__inline control__label--is-required">Length of Lesion:</label>
-                            <input type="number" step="0.1" min="0" max="100" class="control__input__inline" id="Length" />cm
+                            <input type="number" step="0.1" min="0" max="100" class="control__input__inline" id="Length" required/>cm
                         </div>
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label for="Width" class="control__label control__label__inline control__label--is-required">Width of Lesion:</label>
-                            <input type="number" step="0.1" min="0" max="100" class="control__input__inline" id="Width" />cm
+                            <input type="number" step="0.1" min="0" max="100" class="control__input__inline" id="Width" required/>cm
                         </div>
                     </div>
                     <div class="grid__column grid__column--12 grid__column--6--md">
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label class="control__label control__label__inline control__label--is-required">Time Case Begin: </label>
-                            <input type="time" class="control__input__inline" step="1" id="TBegan" />
+                            <input type="time" class="control__input__inline" step="1" id="TBegan" required/>
                         </div>
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label class="control__label control__label__inline control__label--is-required">Time Case Ended: </label>
-                            <input type="time" class="control__input__inline" step="1" id="TEnded" />
+                            <input type="time" class="control__input__inline" step="1" id="TEnded" required/>
                         </div>
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label class="control__label control__label__inline control__label--is-required">Time when Ceum Reached: </label>
-                            <input type="time" class="control__input__inline" step="1" id="TCeReached" />
+                            <input type="time" class="control__input__inline" step="1" id="TCeReached" required/>
                         </div>
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label class="control__label control__label__inline control__label--is-required">Time when Lesion Reached: </label>
-                            <input type="time" class="control__input__inline" step="1" id="TLeReached" />
+                            <input type="time" class="control__input__inline" step="1" id="TLeReached" required/>
                         </div>
                     </div>
                 </section>
@@ -261,7 +261,7 @@
                 <div class="grid" style="margin-top:30px" id="divButton">
                     <div class="grid__column grid__column--12 grid__column--12--sm">
                         <button class="btn btn--previous" id="btnPrevious" style="float: left; display:none">Previous</button>
-                        <button class="btn" id="btnNext" style="float: right">Next</button>
+                        <button class="btn" id="btnNext" style="float: right" type="submit">Next</button>
                         <button class="btn" id="btnSubmit" type="submit" style="float: right; display: none">Submit</button>
                     </div>
                 </div>

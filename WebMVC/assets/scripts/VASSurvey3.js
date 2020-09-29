@@ -1,24 +1,27 @@
-﻿//const UserID = getParameterByName('UserID');;
-//function getParameterByName(name, url) {
-//    if (!url) url = window.location.href;
-//    name = name.replace(/[\[\]]/g, '\\$&');
-//    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-//        results = regex.exec(url);
-//    if (!results) return null;
-//    if (!results[2]) return '';
-//    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-//}
-//var arr = document.referrer.split("/");
-//var url = arr.slice(-1)[0];
-//if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3" && url !== "LumendiSummary?UserID="+UserID ) {
-//    window.location.replace("/VAS/VerifyEmail?SurveyID=3");
-//}
+﻿const UserID = getParameterByName('UserID');;
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+var arr = document.referrer.split("/");
+var url = arr.slice(-1)[0];
+if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3" && url !== "LumendiSummary?UserID="+UserID ) {
+    window.location.replace("/VAS/VerifyEmail?SurveyID=3");
+}
 
 $(document).ready(function () {
+    $('button').click(function () {
+        $(this).toggleClass('down');
+    });
+
     /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
     var dropdown = document.getElementsByClassName("dropdown-btn");
     var i;
-
     for (i = 0; i < dropdown.length; i++) {
         dropdown[i].addEventListener("click", function () {
             this.classList.toggle("active");
@@ -41,8 +44,15 @@ $(document).ready(function () {
     const SubjID = document.getElementById("SubjID");
     
     var Visits = document.querySelectorAll('[id ^= "Visit"]'),
-        VisitsArray = Array.prototype.slice.call(Visits)
+        VisitsArray = Array.prototype.slice.call(Visits),
         Summary = document.getElementById("Summary");
+    var AEVisits = document.querySelectorAll('[id ^= "AEVisit"]'),   
+        AEVisitsArray = Array.prototype.slice.call(AEVisits);
+
+    var DemogVisit0 = document.getElementById('DemogVisit0'),
+        ProcVisit0 = document.getElementById('ProcVisit0');
+        
+    
     var AdventEvents = document.querySelectorAll('[id ^= "AdventEvent"]'),
         Milds = document.querySelectorAll('[id ^= "Mild"]'),
         Moderates = document.querySelectorAll('[id ^= "Moderate"]'),
@@ -54,16 +64,23 @@ $(document).ready(function () {
     })
 
     SubjID.addEventListener('input', function () {         
-             
+        for (var i = 0; i < Visits.length; i++) {
+            Visits[i].classList.remove("isDisabled");
+        }
+        for (var i = 0; i < AEVisits.length; i++) {
+            AEVisits[i].classList.remove("isDisabled");
+        }
+        $("#section-Demog").css("display", "inline-flex");
+        $("#section-proc").css("display", "none");
+        $("#section-AE").css("display", "none");
+        $("#btnSubmit").css("display", "none");
+        $("#btnPrevious").css("display", "none");
+        $("#btnNext").css("display", "block");
+
         if (SubjID.value.length >= 6) {
-            $("#section-Demog").css("display", "inline-flex");
-            $("#section-proc").css("display", "none");
-            $("#section-AE").css("display", "none");
-            $("#btnSubmit").css("display", "none");
-            $("#btnPrevious").css("display", "none");
-            $("#btnNext").css("display", "block");
-            $curr = $("#section-Demog");
-            $first = $("#section-Demog");
+            
+            //$curr = $("#section-Demog");
+            //$first = $("#section-Demog");
             empty();
             obj = { SubjID: SubjID.value };   
             for (var i = 1; i < Visits.length; i++) {
@@ -78,13 +95,16 @@ $(document).ready(function () {
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     //VisitTime = parseInt(data.returnvalue);
-                    var i;
+                    
                     switch (data.returnvalue) {
                         case "0":
                             VisitTime = 1;
                             $last = $("#section-proc");
-                            for (i = 1; i < Visits.length; i++) {
-                                Visits[i].className = "isDisabled";
+                            for (var i = 1; i < Visits.length; i++) {
+                                Visits[i].classList.add("isDisabled");
+                            }
+                            for (var i = 0; i < AEVisits.length; i++) {
+                                AEVisits[i].className = "isDisabled";
                             }
                             document.getElementById("section-Demog").classList.remove("isDisabled");
                             document.getElementById("section-proc").classList.remove("isDisabled");
@@ -92,22 +112,31 @@ $(document).ready(function () {
                             break;
                         case "1":                            
                             VisitTime = 2;
-                            for (i = 2; i < Visits.length; i++) {
-                                Visits[i].className = "isDisabled";                                
-                            }                            
+                            for (var i = 2; i < Visits.length; i++) {
+                                Visits[i].classList.add("isDisabled");
+                            }
+                            for (var i = 1; i < AEVisits.length; i++) {
+                                AEVisits[i].className = "isDisabled";
+                            }
                             NotFirstVisit();
                             break;
                         case "2":
                             VisitTime = 3;
-                            for (i = 3; i < Visits.length; i++) {
-                                Visits[i].className = "isDisabled";
+                            for (var i = 3; i < Visits.length; i++) {
+                                Visits[i].classList.add("isDisabled");
+                            }
+                            for (var i = 2; i < AEVisits.length; i++) {
+                                AEVisits[i].className = "isDisabled";
                             }
                             NotFirstVisit();
                             break;
                         case "3":
                             VisitTime = 4;
-                            for (i = 4; i < Visits.length; i++) {
-                                Visits[i].className = "isDisabled";
+                            for (var i = 4; i < Visits.length; i++) {
+                                Visits[i].classList.add("isDisabled");
+                            }
+                            for (var i = 3; i < AEVisits.length; i++) {
+                                AEVisits[i].className = "isDisabled";
                             }
                             NotFirstVisit();
                             break;
@@ -122,10 +151,6 @@ $(document).ready(function () {
                 }
             })
         }
-    })
-
-    Summary.addEventListener('click', function () {
-    
     })
 
     document.getElementById("No").addEventListener('click', function () {
@@ -144,32 +169,46 @@ $(document).ready(function () {
 
     Previous.addEventListener('click', function (e) {
         e.preventDefault();
-        $curr.css("display", "none");
-        $curr = $curr.prev();
-        $("section").css("display", "none");
-        $("#btnSubmit").css("display", "none");
+        //$curr.css("display", "none");
+        //$curr = $curr.prev();
+        //$("section").css("display", "none");
+        //$("#btnSubmit").css("display", "none");
+        //$("#btnNext").css("display", "block");
+        //if ($curr.is($first)) {
+        //    $("#btnPrevious").css("display", "none");
+        //}
+        //$curr.css("display", "inline-flex");
+        $("#section-proc").css("display", "none");
+        $("#section-Demog").css("display", "inline-flex");
+        $("#btnPrevious").css("display", "none");
         $("#btnNext").css("display", "block");
-        if ($curr.is($first)) {
-            $("#btnPrevious").css("display", "none");
-        }
-        $curr.css("display", "inline-flex");
+        $("#btnSubmit").css("display", "none");
     })
     Next.addEventListener('click', function (e) {
         e.preventDefault();
+        //$("#btnPrevious").css("display", "block");
+        //$curr.css("display", "none");
+        //$curr = $curr.next();
+        //$("section").css("display", "none");
+        //if ($curr.is($last)) {
+        //    $("#btnSubmit").css("display", "block");
+        //    $("#btnNext").css("display", "none");
+        //}
+        //$curr.css("display", "inline-flex");
+        //if (temp+1 < VisitTime) {
+        //    $("#btnSubmit").css("display", "none");
+        //    if (temp == 0) {
+        //        $("#section-AE").css("display", "none");
+        //    }
+        //}
+
+        $("#section-proc").css("display", "inline-flex");
+        $("#section-Demog").css("display", "none");
         $("#btnPrevious").css("display", "block");
-        $curr.css("display", "none");
-        $curr = $curr.next();
-        $("section").css("display", "none");
-        if ($curr.is($last)) {
+        $("#btnNext").css("display", "none");
+        $("#btnSubmit").css("display", "none");
+        if (VisitTime == 1) {
             $("#btnSubmit").css("display", "block");
-            $("#btnNext").css("display", "none");
-        }
-        $curr.css("display", "inline-flex");
-        if (temp+1 < VisitTime) {
-            $("#btnSubmit").css("display", "none");
-            if (temp == 0) {
-                $("#section-AE").css("display", "none");
-            }
         }
     })
 
@@ -177,25 +216,63 @@ $(document).ready(function () {
     VisitsArray.forEach(function (Visit, index) {
         Visit.addEventListener('click', function (e) {
             e.preventDefault();
-            getAEs(index + 1);
-            $("#section-proc").removeClass("isDisabled")
-            $("#section-AE").removeClass("isDisabled")
-            $("#section-Demog").css("display", "inline-flex");
-            $("#section-proc").css("display", "none");
-            $("#section-AE").css("display", "none");
-            $("#btnPrevious").css("display", "none");
-            $("#btnNext").css("display", "block");
-            $("#btnSubmit").css("display", "none");
-            $curr = $("#section-Demog");
-            if (index + 1 <= VisitTime) {
-                $("#section-proc").addClass("isDisabled");
-            }
-            if (index + 1 < VisitTime) {
-                $("#section-AE").addClass("isDisabled");
-            }
-            temp = index;
+            //getAEs(index);
+            //$("#section-proc").removeClass("isDisabled")
+            //$("#section-AE").removeClass("isDisabled")
+            //$("#section-Demog").css("display", "inline-flex");
+            //$("#section-proc").css("display", "none");
+            //$("#section-AE").css("display", "none");
+            //$("#btnPrevious").css("display", "none");
+            //$("#btnNext").css("display", "block");
+            //$("#btnSubmit").css("display", "none");
+            //$curr = $("#section-Demog");
+            //if (index + 1 <= VisitTime) {
+            //    $("#section-proc").addClass("isDisabled");
+            //}
+            //if (index + 1 < VisitTime) {
+            //    $("#section-AE").addClass("isDisabled");
+            //}
+            //temp = index;
         })
+    })
 
+    AEVisitsArray.forEach(function (AEVisit, index) {
+        AEVisit.addEventListener('click', function (e) {
+            e.preventDefault();
+            $("#btnPrevious").css("display", "none");
+            $("#btnNext").css("display", "none");
+            $("#btnSubmit").css("display", "none");
+            document.getElementById("section-AE").classList.remove("isDisabled");
+            $("#btnSubmit").css("display", "none");
+            getAEs(index + 2);
+            $("#section-Demog").css("display", "none");
+            $("#section-proc").css("display", "none");
+            $("#section-AE").css("display", "inline-flex");
+            if (index + 2 < VisitTime) {
+                document.getElementById("section-AE").classList.add("isDisabled");
+            } 
+            if (index + 2 == VisitTime) {
+                $("#btnSubmit").css("display", "block");
+            }
+        })
+    })
+
+    DemogVisit0.addEventListener('click', function (e) {
+        e.preventDefault();
+        $("#section-Demog").css("display", "inline-flex");
+        $("#section-proc").css("display", "none");
+        $("#section-AE").css("display", "none");
+        $("#btnSubmit").css("display", "none");
+
+    })
+    ProcVisit0.addEventListener('click', function (e) {
+        e.preventDefault();
+        $("#section-Demog").css("display", "none");
+        $("#section-proc").css("display", "inline-flex");
+        $("#section-AE").css("display", "none");
+        if (VisitTime == 1) {
+            $("#btnSubmit").css("display", "block");
+        }        
     })
 
     $('#Study3').on('submit', function (event) {
@@ -261,7 +338,7 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 if (data.returnvalue) {
-                    alert("Subject already input in Database!");
+                    alert("Success!");
                     $('#Study3')[0].reset();
                     $("#section-Demog").css("display", "inline-flex");
                     $("#section-proc").css("display", "none");
