@@ -1,20 +1,35 @@
-﻿const UserID = getParameterByName('UserID');;
-function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
-var arr = document.referrer.split("/");
-var url = arr.slice(-1)[0];
-if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3" && url !== "LumendiSummary?UserID="+UserID ) {
-    window.location.replace("/VAS/VerifyEmail?SurveyID=3");
-}
+﻿//const UserID = getParameterByName('UserID');;
+//function getParameterByName(name, url) {
+//    if (!url) url = window.location.href;
+//    name = name.replace(/[\[\]]/g, '\\$&');
+//    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+//        results = regex.exec(url);
+//    if (!results) return null;
+//    if (!results[2]) return '';
+//    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+//}
+//var arr = document.referrer.split("/");
+//var url = arr.slice(-1)[0];
+//if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3" && url !== "LumendiSummary?UserID="+UserID ) {
+//    window.location.replace("/VAS/VerifyEmail?SurveyID=3");
+//}
 
 $(document).ready(function () {
+    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        });
+    }
 
     const UserID = getParameterByName('UserID');
 
