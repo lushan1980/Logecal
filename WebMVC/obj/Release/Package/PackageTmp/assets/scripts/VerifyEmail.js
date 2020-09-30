@@ -60,7 +60,7 @@
 
                     if (data.returnvalue) {
                         //alert("success");
-                        document.getElementById("head1").innerHTML = "Welcome to take part in our Survey";
+                        document.getElementById("head1").innerHTML = "Lumendi Study";
                         document.getElementById("head2").innerHTML = "If you do not have an account, please sign up first. If you are an existing user, please enter your Email and password then Login. ";
                         $("#divVerifyCode").remove();
                         divEmailLabel = '<label for="User-Email" class="control__label control__label--is-required">Email Address</label>';

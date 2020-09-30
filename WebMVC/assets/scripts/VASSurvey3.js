@@ -63,7 +63,11 @@ $(document).ready(function () {
         window.location.replace("/VAS/LumendiSummary" + "?UserID=" + UserID)
     })
 
-    SubjID.addEventListener('input', function () {         
+    SubjID.addEventListener('input', function () { 
+        var messages = document.querySelectorAll('[id ^= "msg-"]');
+        for (i = 0; i < messages.length; i++) {
+            messages[i].innerHTML = "";
+        }
         for (var i = 0; i < Visits.length; i++) {
             Visits[i].classList.remove("isDisabled");
         }
@@ -167,40 +171,72 @@ $(document).ready(function () {
     })
 
 
-    Previous.addEventListener('click', function (e) {
+    //Previous.addEventListener('click', function (e) {
+    //    e.preventDefault();
+    //    $curr.css("display", "none");
+    //    $curr = $curr.prev();
+    //    $("section").css("display", "none");
+    //    $("#btnSubmit").css("display", "none");
+    //    $("#btnNext").css("display", "block");
+    //    if ($curr.is($first)) {
+    //        $("#btnPrevious").css("display", "none");
+    //    }
+    //    $curr.css("display", "inline-flex");
+    //})
+    //Next.addEventListener('click', function (e) {
+    //    e.preventDefault();
+    //    $("#btnPrevious").css("display", "block");
+    //    $curr.css("display", "none");
+    //    $curr = $curr.next();
+    //    $("section").css("display", "none");
+    //    if ($curr.is($last)) {
+    //        $("#btnSubmit").css("display", "block");
+    //        $("#btnNext").css("display", "none");
+    //    }
+    //    $curr.css("display", "inline-flex");
+    //    if (temp+1 < VisitTime) {
+    //        $("#btnSubmit").css("display", "none");
+    //        if (temp == 0) {
+    //            $("#section-AE").css("display", "none");
+    //        }
+    //    }  
+    //})
+
+    $("#btnPrevious").on('click', function (e) {
         e.preventDefault();
-        //$curr.css("display", "none");
-        //$curr = $curr.prev();
-        //$("section").css("display", "none");
-        //$("#btnSubmit").css("display", "none");
-        //$("#btnNext").css("display", "block");
-        //if ($curr.is($first)) {
-        //    $("#btnPrevious").css("display", "none");
-        //}
-        //$curr.css("display", "inline-flex");
         $("#section-proc").css("display", "none");
         $("#section-Demog").css("display", "inline-flex");
         $("#btnPrevious").css("display", "none");
         $("#btnNext").css("display", "block");
         $("#btnSubmit").css("display", "none");
     })
-    Next.addEventListener('click', function (e) {
+
+    var check_age, checked_gender, checked_RaceEthni;
+    $("#btnNext").on('click', function (e) {
         e.preventDefault();
-        //$("#btnPrevious").css("display", "block");
-        //$curr.css("display", "none");
-        //$curr = $curr.next();
-        //$("section").css("display", "none");
-        //if ($curr.is($last)) {
-        //    $("#btnSubmit").css("display", "block");
-        //    $("#btnNext").css("display", "none");
-        //}
-        //$curr.css("display", "inline-flex");
-        //if (temp+1 < VisitTime) {
-        //    $("#btnSubmit").css("display", "none");
-        //    if (temp == 0) {
-        //        $("#section-AE").css("display", "none");
-        //    }
-        //}
+        var messages = document.querySelectorAll('[id ^= "msg-Demog-"]');
+        for (i = 0; i < messages.length; i++) {
+            messages[i].innerHTML = "";
+        }
+        var isAgeValid = true, isGenderValid = true, isRaceValid = true;
+        check_age = document.getElementById("Demog-age").value;
+        if (check_age == null || check_age === "") {
+            document.getElementById("msg-Demog-age").innerHTML = "Please select one of these options";
+            isAgeValid = false;
+        }
+
+        checked_gender = document.querySelector('input[name="Demog-gender"]:checked');
+        if (checked_gender == null) {
+            document.getElementById("msg-Demog-gender").innerHTML = "Please select one of these options";
+            isGenderValid = false;
+        }
+        checked_RaceEthni = document.querySelector('input[name="Demog-RaceEthni"]:checked');
+        if (checked_RaceEthni == null) {
+            document.getElementById("msg-Demog-RaceEthni").innerHTML = "Please select one of these options";
+            isRaceValid = false;
+        }
+
+        if (!isAgeValid || !isGenderValid || !isRaceValid) { return };
 
         $("#section-proc").css("display", "inline-flex");
         $("#section-Demog").css("display", "none");
@@ -262,8 +298,9 @@ $(document).ready(function () {
         $("#section-Demog").css("display", "inline-flex");
         $("#section-proc").css("display", "none");
         $("#section-AE").css("display", "none");
-        $("#btnSubmit").css("display", "none");
-
+        $("#btnSubmit").css("display", "none");        
+        $("#btnPrevious").css("display", "none");
+        $("#btnNext").css("display", "block");
     })
     ProcVisit0.addEventListener('click', function (e) {
         e.preventDefault();
@@ -272,20 +309,31 @@ $(document).ready(function () {
         $("#section-AE").css("display", "none");
         if (VisitTime == 1) {
             $("#btnSubmit").css("display", "block");
-        }        
+        } 
+        $("#btnPrevious").css("display", "block");
+        $("#btnNext").css("display", "none");
     })
+
+
 
     $('#Study3').on('submit', function (event) {
         event.preventDefault();
-        var gender = displayRadioValue('gender'),
-            RaceEthni = displayRadioValue('RaceEthni');
-        var Randomization = displayRadioValue('Randomization'),
-            Length = document.getElementById("Length").value,
-            Width = document.getElementById("Width").value,
-            TBegan = document.getElementById("TBegan").value,
-            TEnded = document.getElementById("TEnded").value,
-            TCeReached = document.getElementById("TCeReached").value,
-            TLeReached = document.getElementById("TLeReached").value;
+        var isValid = true;
+        if (check_age == null || checked_gender == null || checked_RaceEthni == null) {
+            alert("Please fill in the Demographics page!");
+            isValid = false;
+        }
+        if (!isValid) { return };
+
+        var gender = displayRadioValue('Demog-gender'),
+            RaceEthni = displayRadioValue('Demog-RaceEthni');
+        var Randomization = displayRadioValue('proc-Randomization'),
+            Length = document.getElementById("proc-Length").value,
+            Width = document.getElementById("proc-Width").value,
+            TBegan = document.getElementById("proc-TBegan").value,
+            TEnded = document.getElementById("proc-TEnded").value,
+            TCeReached = document.getElementById("proc-TCeReached").value,
+            TLeReached = document.getElementById("proc-TLeReached").value;
         var AEDiscription1 = document.getElementById("AdventEvent1").value,
             AEDiscription2 = document.getElementById("AdventEvent2").value,
             AEDiscription3 = document.getElementById("AdventEvent3").value,
@@ -301,7 +349,7 @@ $(document).ready(function () {
             object = {
                 UserID: UserID,
                 SubjID: $('#SubjID').val(),
-                Age: $('#age').val(),
+                Age: $('#Demog-age').val(),
                 Gender: gender,
                 RaceEthni: RaceEthni,
                 Randomization: Randomization,
@@ -360,9 +408,11 @@ $(document).ready(function () {
         })
     })
 
+
+
     //fill age dropdown menu
     for (var i = 18; i <= 100; i++) {
-        var select = document.getElementById("age");
+        var select = document.getElementById("Demog-age");
         var option = document.createElement("OPTION");
         select.options.add(option);
         option.text = i;
@@ -404,7 +454,7 @@ $(document).ready(function () {
                 thisTCeReached = AllValues[0].TCeReached;
                 thisTLeReached = AllValues[0].TLeReached;
 
-                document.getElementById('age').value = thisAge;
+                document.getElementById('Demog-age').value = thisAge;
 
                 if (thisGender == "male") {
                     document.getElementById('male').checked = true;
@@ -442,12 +492,12 @@ $(document).ready(function () {
                 else {
                     document.getElementById('Device').checked = true;
                 }
-                document.getElementById('Length').value = thisLength;
-                document.getElementById('Width').value = thisWidth;
-                document.getElementById('TBegan').value = thisTBegan;
-                document.getElementById('TEnded').value = thisTEnded;
-                document.getElementById('TCeReached').value = thisTCeReached;
-                document.getElementById('TLeReached').value = thisTLeReached;
+                document.getElementById('proc-Length').value = thisLength;
+                document.getElementById('proc-Width').value = thisWidth;
+                document.getElementById('proc-TBegan').value = thisTBegan;
+                document.getElementById('proc-TEnded').value = thisTEnded;
+                document.getElementById('proc-TCeReached').value = thisTCeReached;
+                document.getElementById('proc-TLeReached').value = thisTLeReached;
             }
         });
         document.getElementById("section-Demog").classList.add("isDisabled")
@@ -474,6 +524,7 @@ $(document).ready(function () {
         }
         return val;
     }
+
     //remove before and after space and lower case character
     function myTrim(x) {
         return x.replace(/^\s+|\s+$/gm, '').toLowerCase();
@@ -527,21 +578,23 @@ $(document).ready(function () {
         }
     }
 
-    //empty the form except Subject ID
+    //empty the proc except Subject ID
     function empty() {
         $('input[type=radio]').each(function () { $(this).prop('checked', false); });
 
-        document.getElementById('age').value = "";
+        document.getElementById('Demog-age').value = "";
 
-        document.getElementById('Length').value = "";
-        document.getElementById('Width').value = "";
-        document.getElementById('TBegan').value = "";
-        document.getElementById('TEnded').value = "";
-        document.getElementById('TCeReached').value = "";
-        document.getElementById('TLeReached').value = "";
+        document.getElementById('proc-Length').value = "";
+        document.getElementById('proc-Width').value = "";
+        document.getElementById('proc-TBegan').value = "";
+        document.getElementById('proc-TEnded').value = "";
+        document.getElementById('proc-TCeReached').value = "";
+        document.getElementById('proc-TLeReached').value = "";
 
         for (var i = 0; i < AdventEvents.length; i++) {
             AdventEvents[i].value = "";
         }        
     }
+
+
 })

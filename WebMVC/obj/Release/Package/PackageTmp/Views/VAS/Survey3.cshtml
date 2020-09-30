@@ -12,138 +12,174 @@
     </div>
 </div><!--/banner -->
 
-<div class="container two-column__container">
+
+
+<div class="container--fluid two-column__container">
     <form action="" id="Study3" name="LumendiForm">
         <div class="grid two-column">
-            <!--left -->
+            @*left*@    
             <div class="grid__column grid__column--12 grid__column--2--md two-column__section two-column__section--blue" id="div-menu">
                 <div class="vertical-menu">
-                    <a href="#" id="Visit0" targetLink="Visit0">Visit 1</a>
+                    @*<a href="#" id="Visit0" targetLink="Visit0">Visit 1</a>
                     <a href="#" id="Visit1">Visit 2</a>
                     <a href="#" id="Visit2">Visit 3</a>
                     <a href="#" id="Visit3">Visit 4</a>
-                    <a href="#" id="Visit4">Visit 5</a>
+                    <a href="#" id="Visit4">Visit 5</a>*@
+
+                    <button class="dropdown-btn" id="Visit0">Visit 1<i class="fa fa-caret-right"></i></button>
+                    <div class="dropdown-container">
+                        <a href="#" id="DemogVisit0">Demographics</a>
+                        <a href="#" id="ProcVisit0">Procedure</a>
+                    </div>
+                    <button class="dropdown-btn" id="Visit1">Visit 2<i class="fa fa-caret-right"></i></button>
+                    <div class="dropdown-container">
+                        <a href="#" id="AEVisit1">Adverse Events</a>
+                    </div>
+                    <button class="dropdown-btn" id="Visit2">Visit 3<i class="fa fa-caret-right"></i></button>
+                    <div class="dropdown-container">
+                        <a href="#" id="AEVisit2">Adverse Events</a>
+                    </div>
+                    <button class="dropdown-btn" id="Visit3">Visit 4<i class="fa fa-caret-right"></i></button>
+                    <div class="dropdown-container">
+                        <a href="#" id="AEVisit3">Adverse Events</a>
+                    </div>
+                    <button class="dropdown-btn" id="Visit4">Visit 5<i class="fa fa-caret-right"></i></button>
+                    <div class="dropdown-container">
+                        <a href="#" id="AEVisit4">Adverse Events</a>
+                    </div>
+
+                    <a href="#" id="Summary">Summary</a>
                 </div>
             </div>
-            <!--right -->
+            @*right*@ 
             <div class="grid__column grid__column--12 grid__column--10--md two-column__section" id="div-Form">
                 <div class="grid__column grid__column--12 grid__column--12--md" style="padding-bottom:50px">
-                    <label for="SubjID" class="control__label control__label__inline control__label--is-required">Subject ID: </label>
+                    <label for="SubjID" class="control__label control__label__inline control__label--is-required" id="lblSubjID">Subject ID: </label>
                     <input type="text" pattern="[0-9]{2}-[0-9]{3}" class="control__input__inline" style="width: 30%" id="SubjID" />
                 </div>
 
-                <!--section Demog-->
+                @*section Demog*@
                 <section class="grid" id="section-Demog">
                     <div class="grid__column grid__column--12 grid__column--12--md">
                         <h3>DEMOGRAPHICS</h3>
                     </div>
-                    @*div Age, Gender*@
-                    <div class="grid__column grid__column--12 grid__column--6--md">
+                    @*div Age, gender*@
+                <div class="grid__column grid__column--12 grid__column--6--md">
 
-                        <label for="age" class="control__label control__label--is-required">Age</label>
-                        <select class="control__select" id="age">
-                            <option value="none" selected disabled hidden>
-                                --Select an Option--
-                            </option>
-                        </select>
+                    <label for="Demog-age" class="control__label control__label--is-required">Age</label>
+                    <select class="control__select" id="Demog-age">
+                        <option value="none" selected disabled hidden>
+                            --Select an Option--
+                        </option>
+                    </select>
+                    <p id="msg-Demog-age" style="color:#ff0000; margin:0px; font-style:italic"></p>
 
-                        <label for="gender" class="control__label control__label--is-required">Gender</label>
-                        <fieldset>
-                            <label for="male">
-                                <input type="radio" id="male" value="Male" name="gender" /> Male
-                            </label>
-                            <label for="female">
-                                <input type="radio" id="female" value="Female" name="gender" /> Female
-                            </label>
-                        </fieldset>
-                    </div>
+                    <label for="Demog-gender" class="control__label control__label--is-required">Gender</label>
+                    <fieldset>
+                        <label for="male">
+                            <input type="radio" id="male" value="Male" name="Demog-gender" /> Male
+                        </label>
+                        <label for="female">
+                            <input type="radio" id="female" value="Female" name="Demog-gender" /> Female
+                        </label>
+                    </fieldset>
+                    <p id="msg-Demog-gender" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                </div>
                     @*div RaceEthni*@
-                    <div class="grid__column grid__column--12 grid__column--6--md">
-                        <label for="RaceEthni" class="control__label control__label--is-required">Race/Ethnicity</label>
-                        <fieldset>
-                            <input type="radio" id="Black" value="African American/Black/Not of Hispanic Origin" name="RaceEthni" />
-                            <label for="Black">
-                                African American/Black/Not of Hispanic Origin
-                            </label><br>
+                <div class="grid__column grid__column--12 grid__column--6--md">
+                    <label for="Demog-RaceEthni" class="control__label control__label--is-required">Race/Ethnicity</label>
+                    <fieldset>
+                        <input type="radio" id="Black" value="African American/Black/Not of Hispanic Origin" name="Demog-RaceEthni"  />
+                        <label for="Black">
+                            African American/Black/Not of Hispanic Origin
+                        </label><br>
 
-                            <input type="radio" id="AmericanIndian" value="American Indian or Alaska Native" name="RaceEthni" />
-                            <label for="American Indian or Alaska Native">
-                                American Indian or Alaska Native
-                            </label><br>
+                        <input type="radio" id="AmericanIndian" value="American Indian or Alaska Native" name="Demog-RaceEthni" />
+                        <label for="American Indian or Alaska Native">
+                            American Indian or Alaska Native
+                        </label><br>
 
-                            <input type="radio" id="Asian" value="Asian" name="RaceEthni" />
-                            <label for="Asian">
-                                Asian
-                            </label><br>
+                        <input type="radio" id="Asian" value="Asian" name="Demog-RaceEthni"  />
+                        <label for="Asian">
+                            Asian
+                        </label><br>
 
-                            <input type="radio" id="White" value="Caucasian/White/Not of Hispanic Origin" name="RaceEthni" />
-                            <label for="AmericanIndian">
-                                Caucasian/White/Not of Hispanic Origin
-                            </label><br>
+                        <input type="radio" id="White" value="Caucasian/White/Not of Hispanic Origin" name="Demog-RaceEthni" />
+                        <label for="AmericanIndian">
+                            Caucasian/White/Not of Hispanic Origin
+                        </label><br>
 
-                            <input type="radio" id="Hispanic" value="Hispanic or Latino" name="RaceEthni" />
-                            <label for="Hawaiian">
-                                Hispanic or Latino
-                            </label><br>
+                        <input type="radio" id="Hispanic" value="Hispanic or Latino" name="Demog-RaceEthni"  />
+                        <label for="Hawaiian">
+                            Hispanic or Latino
+                        </label><br>
 
-                            <input type="radio" id="Hawaiian" value="Native Hawaiian or Other Pacific Islander" name="RaceEthni" />
-                            <label for="Other">
-                                Native Hawaiian or Other Pacific Islander
-                            </label><br>
+                        <input type="radio" id="Hawaiian" value="Native Hawaiian or Other Pacific Islander" name="Demog-RaceEthni" />
+                        <label for="Other">
+                            Native Hawaiian or Other Pacific Islander
+                        </label><br>
 
-                            <input type="radio" id="Other" value="Other" name="RaceEthni" />
-                            <label for="Other">
-                                Other
-                            </label><br>
-                        </fieldset>
-                    </div>
+                        <input type="radio" id="Other" value="Other" name="Demog-RaceEthni" />
+                        <label for="Other">
+                            Other
+                        </label><br>
+                    </fieldset>
+                    <p id="msg-Demog-RaceEthni" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                </div>
                 </section>
-                <!--section Procedure-->
+                @*section Procedure*@
                 <section id="section-proc" class="grid" style="display: none">
                     <div class="grid__column grid__column--12 grid__column--12--md">
                         <h3>PROCEDURE</h3>
                     </div>
                     <div class="grid__column grid__column--12 grid__column--6--md">
                         <div class="grid__column grid__column--12 grid__column--12--md">
-                            <label for="Randomization" class="control__label control__label__inline control__label--is-required">Randomization Group: </label>
+                            <label for="proc-Randomization" class="control__label control__label__inline control__label--is-required">Randomization Group: </label>
                             <fieldset>
                                 <label for="Device">
-                                    <input type="radio" id="Device" value="Device" name="Randomization" /> Device
+                                    <input type="radio" id="Device" value="Device" name="proc-Randomization" required /> Device
                                 </label>
                                 <label for="Control">
-                                    <input type="radio" id="Control" value="Control" name="Randomization" /> Control
+                                    <input type="radio" id="Control" value="Control" name="proc-Randomization" /> Control
                                 </label>
                             </fieldset>
                         </div>
+                        <p id="msg-proc-Randomization" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         <div class="grid__column grid__column--12 grid__column--12--md">
-                            <label for="Length" class="control__label control__label__inline control__label--is-required">Length of Lesion:</label>
-                            <input type="number" step="0.1" min="0" max="10" class="control__input__inline" id="Length" />cm
+                            <label for="proc-Length" class="control__label control__label__inline control__label--is-required">Length of Lesion:</label>
+                            <input type="number" step="0.1" min="0" max="100" class="control__input__inline" id="proc-Length" required />cm
                         </div>
+                        <p id="msg-proc-Length" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         <div class="grid__column grid__column--12 grid__column--12--md">
-                            <label for="Width" class="control__label control__label__inline control__label--is-required">Width of Lesion:</label>
-                            <input type="number" step="0.1" min="0" max="10" class="control__input__inline" id="Width" />cm
+                            <label for="proc-Width" class="control__label control__label__inline control__label--is-required">Width of Lesion:</label>
+                            <input type="number" step="0.1" min="0" max="100" class="control__input__inline" id="proc-Width" required />cm
                         </div>
+                        <p id="msg-proc-Width" style="color:#ff0000; margin:0px; font-style:italic"></p>
                     </div>
                     <div class="grid__column grid__column--12 grid__column--6--md">
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label class="control__label control__label__inline control__label--is-required">Time Case Begin: </label>
-                            <input type="time" class="control__input__inline" step="1" id="TBegan" />
+                            <input type="time" class="control__input__inline" step="1" id="proc-TBegan" required />
                         </div>
+                        <p id="msg-proc-TBegan" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label class="control__label control__label__inline control__label--is-required">Time Case Ended: </label>
-                            <input type="time" class="control__input__inline" step="1" id="TEnded" />
+                            <input type="time" class="control__input__inline" step="1" id="proc-TEnded" required />
                         </div>
+                        <p id="msg-proc-TEnded" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label class="control__label control__label__inline control__label--is-required">Time when Ceum Reached: </label>
-                            <input type="time" class="control__input__inline" step="1" id="TCeReached" />
+                            <input type="time" class="control__input__inline" step="1" id="proc-TCeReached" required />
                         </div>
+                        <p id="msg-proc-TCeReached" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label class="control__label control__label__inline control__label--is-required">Time when Lesion Reached: </label>
-                            <input type="time" class="control__input__inline" step="1" id="TLeReached" />
+                            <input type="time" class="control__input__inline" step="1" id="proc-TLeReached" required />
                         </div>
+                        <p id="msg-proc-TLeReached" style="color:#ff0000; margin:0px; font-style:italic"></p>
                     </div>
                 </section>
-                <!--section ADVERSE EVENTS-->
+                @*section ADVERSE EVENTS*@
                 <section class="grid" id="section-AE" style="display: none">
                     <div class="grid__column grid__column--12 grid__column--12--md">
                         <h3>ADVERSE EVENTS</h3>
@@ -154,13 +190,13 @@
                         </label>
 
                         <label for="No">
-                            <input type="radio" id="No" value="No" name="AdverseEvent" /> No
+                            <input type="radio" id="No" value="No" name="AE-AdverseEvent" /> No
                         </label>
                         <label for="Yes">
-                            <input type="radio" id="Yes" value="Yes" name="AdverseEvent" /> Yes
+                            <input type="radio" id="Yes" value="Yes" name="AE-AdverseEvent" /> Yes
                         </label>
                     </div>
-
+                    <p id="msg-AE-AdverseEvent" style="color:#ff0000; margin:0px; font-style:italic"></p>
                     <div class="grid__column grid__column--12 grid__column--12--sm isDisabled" id="divAEtable">
                         <table>
                             <tr>
@@ -229,13 +265,14 @@
                                 </td>
                             </tr>
                         </table>
+                        <p id="msg-AE-AdverseEventtable" style="color:#ff0000; margin:0px; font-style:italic"></p>
                     </div>
                 </section>
-                <!--div button-->
+                @*div button*@
                 <div class="grid" style="margin-top:30px" id="divButton">
                     <div class="grid__column grid__column--12 grid__column--12--sm">
                         <button class="btn btn--previous" id="btnPrevious" style="float: left; display:none">Previous</button>
-                        <button class="btn" id="btnNext" style="float: right">Next</button>
+                        <button class="btn" id="btnNext" style="float: right" type="submit">Next</button>
                         <button class="btn" id="btnSubmit" type="submit" style="float: right; display: none">Submit</button>
                     </div>
                 </div>

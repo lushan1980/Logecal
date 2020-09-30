@@ -1368,7 +1368,7 @@ namespace WebMVC.Controllers
         }
         public ActionResult CountSubj(VASUser user)
         {
-
+            List<LumendiSummary> AllValueinfo = new List<LumendiSummary>();
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
             {
@@ -1386,19 +1386,21 @@ namespace WebMVC.Controllers
                 });
 
                 SqlDataReader rdr = cmd.ExecuteReader();
-
-                string SubjNum = "";
-                if (rdr.HasRows)
+                while (rdr.Read())
                 {
-                    while (rdr.Read())
+                    LumendiSummary AllValue = new LumendiSummary
                     {
-                        SubjNum = rdr["SubjNum"].ToString();
-                    }
-                }
+                        Device = (int)GetInt(rdr["Device"]),
+                        Control = (int)GetInt(rdr["Control"]),
+                        Overall = (int)GetInt(rdr["Overall"])
 
+                    };
+                    AllValueinfo.Add(AllValue);
+                }
                 con.Close();
-                return Json(new { returnvalue = SubjNum });
             }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
         }
         private static string CreateRandomPassword(int length = 8)
         {

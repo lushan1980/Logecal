@@ -4747,23 +4747,64 @@ p {
     border-style: none;
 }
 
-    .vertical-menu a {
+    .vertical-menu a, .dropdown-btn {
         border-style: none;
         background-color: transparent;
+        width: 100%;
         color: white;
         display: block;
         padding: 12px;
         text-decoration: none;
     }
 
-        .vertical-menu a:hover {
+        .vertical-menu a:hover, .dropdown-btn:hover {
             font-size: 1.1em;
+            color: #f1f1f1;
         }
 
-        .vertical-menu a:active {            
-            color: pink;
+        .vertical-menu a:active, .dropdown-btn:active {
+            color: #efeeee;
         }
 
+        .dropdown-btn:focus {
+            color: #fff;
+        }
+
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+    display: none;
+    background-color: transparent;
+    padding-left: 8px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-right {
+    float: right;
+    padding-right: 8px;
+    padding-top: 3px;
+}
+
+.down i {
+    transform: rotate(90deg);
+    padding-right: 0;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+    background-color: transparent;
+    color: white;
+}
+/* Some media queries for responsiveness */
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+        .sidenav a {
+            font-size: 18px;
+        }
+}
 
 .isDisabled {
     color: currentColor;
