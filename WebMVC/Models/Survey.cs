@@ -23,6 +23,7 @@ namespace WebMVC.Models
         public string Randomization { get; set; }
         public float? Length { get; set; }
         public float? Width { get; set; }
+        public string DProc { get; set; }
         public string TBegan { get; set; }
         public string TEnded { get; set; }
         public string TCeReached { get; set; }

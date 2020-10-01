@@ -5045,7 +5045,7 @@ input[type=email].control__input, input[type=file].control__input, input[type=nu
     font-size: 1.125em;
     border: 1px solid #b3b3b3;
 }
-input[type=email].control__input__inline, input[type=time].control__input__inline, input[type=file].control__input__inline, input[type=number].control__input__inline, input[type=password].control__input__inline, input[type=search].control__input__inline, input[type=tel].control__input__inline, input[type=text].control__input__inline, input[type=url].control__input__inline, select.control__input__inline, textarea.control__input__inline {
+input[type=email].control__input__inline, input[type=time].control__input__inline, input[type=date].control__input__inline, input[type=file].control__input__inline, input[type=number].control__input__inline, input[type=password].control__input__inline, input[type=search].control__input__inline, input[type=tel].control__input__inline, input[type=text].control__input__inline, input[type=url].control__input__inline, select.control__input__inline, textarea.control__input__inline {
     display: inline-block;
     margin-bottom: 0;
     padding: 12px 15px;

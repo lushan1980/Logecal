@@ -39,8 +39,8 @@ $(document).ready(function () {
     var $curr, $first, $last = $("#section-AE"), VisitTime, obj,
         AllValues, thisAge, thisGender, thisRaceEthni, thisRandomization, thisLength, thisWidth, thisTBegan, thisTEnded, thisTCeReached, thisTLeReached;
 
-    const Previous = document.getElementById("btnPrevious");
-    const Next = document.getElementById("btnNext");
+    //const Previous = document.getElementById("btnPrevious");
+    //const Next = document.getElementById("btnNext");
     const SubjID = document.getElementById("SubjID");
     
     var Visits = document.querySelectorAll('[id ^= "Visit"]'),
@@ -86,7 +86,7 @@ $(document).ready(function () {
             //$curr = $("#section-Demog");
             //$first = $("#section-Demog");
             empty();
-            obj = { SubjID: SubjID.value };   
+            obj = { UserID: UserID, SubjID: SubjID.value };   
             for (var i = 1; i < Visits.length; i++) {
                 Visits[i].classList.remove("isDisabled");
             }
@@ -101,6 +101,19 @@ $(document).ready(function () {
                     //VisitTime = parseInt(data.returnvalue);
                     
                     switch (data.returnvalue) {
+                        case "-1":
+                            for (var i = 0; i < Visits.length; i++) {
+                                Visits[i].classList.add("isDisabled");
+                            }
+                            for (var i = 0; i < AEVisits.length; i++) {
+                                AEVisits[i].className = "isDisabled";
+                            }
+                            document.getElementById("section-Demog").classList.add("isDisabled");
+                            document.getElementById("section-proc").classList.add("isDisabled");
+                            document.getElementById("section-AE").classList.add("isDisabled");
+                            $("#btnNext").css("display", "none");
+                            alert("This Subject belong to other User!");
+                            break;
                         case "0":
                             VisitTime = 1;
                             $last = $("#section-proc");
@@ -146,6 +159,10 @@ $(document).ready(function () {
                             break;
                         case "4":
                             VisitTime = 5;
+                            NotFirstVisit();
+                            break;
+                        case "5":
+                            VisitTime = 6;
                             NotFirstVisit();
                             break;
                     }              
@@ -248,7 +265,7 @@ $(document).ready(function () {
         }
     })
 
-    var temp;
+    //var temp;
     VisitsArray.forEach(function (Visit, index) {
         Visit.addEventListener('click', function (e) {
             e.preventDefault();
@@ -314,10 +331,8 @@ $(document).ready(function () {
         $("#btnNext").css("display", "none");
     })
 
-
-
-    $('#Study3').on('submit', function (event) {
-        event.preventDefault();
+    $('#Study3').on('submit', function (e) {
+        e.preventDefault();
         var isValid = true;
         if (check_age == null || checked_gender == null || checked_RaceEthni == null) {
             alert("Please fill in the Demographics page!");
@@ -329,15 +344,16 @@ $(document).ready(function () {
             RaceEthni = displayRadioValue('Demog-RaceEthni');
         var Randomization = displayRadioValue('proc-Randomization'),
             Length = document.getElementById("proc-Length").value,
-            Width = document.getElementById("proc-Width").value,
-            TBegan = document.getElementById("proc-TBegan").value,
-            TEnded = document.getElementById("proc-TEnded").value,
-            TCeReached = document.getElementById("proc-TCeReached").value,
-            TLeReached = document.getElementById("proc-TLeReached").value;
-        var AEDiscription1 = document.getElementById("AdventEvent1").value,
-            AEDiscription2 = document.getElementById("AdventEvent2").value,
-            AEDiscription3 = document.getElementById("AdventEvent3").value,
-            AEDiscription4 = document.getElementById("AdventEvent4").value;
+            Width = document.getElementById('proc-Width').value,
+            DProc = document.getElementById('proc-DProc').value,
+            TBegan = document.getElementById('proc-TBegan').value,
+            TEnded = document.getElementById('proc-TEnded').value,
+            TCeReached = document.getElementById('proc-TCeReached').value,
+            TLeReached = document.getElementById('proc-TLeReached').value;
+        var AEDiscription1 = document.getElementById('AdventEvent1').value,
+            AEDiscription2 = document.getElementById('AdventEvent2').value,
+            AEDiscription3 = document.getElementById('AdventEvent3').value,
+            AEDiscription4 = document.getElementById('AdventEvent4').value;
         var severity1 = displayRadioValue('SEVERITY1'),
             severity2 = displayRadioValue('SEVERITY2'),
             severity3 = displayRadioValue('SEVERITY3'),
@@ -355,6 +371,7 @@ $(document).ready(function () {
                 Randomization: Randomization,
                 Length: Length,
                 Width: Width,
+                DProc: DProc,
                 TBegan: TBegan,
                 TEnded: TEnded,
                 TCeReached: TCeReached,
@@ -408,8 +425,6 @@ $(document).ready(function () {
         })
     })
 
-
-
     //fill age dropdown menu
     for (var i = 18; i <= 100; i++) {
         var select = document.getElementById("Demog-age");
@@ -418,18 +433,8 @@ $(document).ready(function () {
         option.text = i;
         option.value = i;
 
-        ////get reference to select element
-        //var sel = document.getElementById('age');
-        ////create new option element
-        //var opt = document.createElement('option');
-        ////create text node to add to option element (opt)
-        //opt.appendChild(document.createTextNode(i));
-        ////set value property of opt
-        //opt.value = i;
-        //opt.text = i;
-        ////add opt to end of select box (sel)
-        //sel.appendChild(opt);
     }
+
     //Not First Visit function
     function NotFirstVisit() {
         $last = $("#section-AE");
@@ -449,6 +454,7 @@ $(document).ready(function () {
                 thisRandomization = myTrim(AllValues[0].Randomization);
                 thisLength = AllValues[0].Length;
                 thisWidth = AllValues[0].Width;
+                thisDProc = AllValues[0].DProc;
                 thisTBegan = AllValues[0].TBegan;
                 thisTEnded = AllValues[0].TEnded;
                 thisTCeReached = AllValues[0].TCeReached;
@@ -494,6 +500,7 @@ $(document).ready(function () {
                 }
                 document.getElementById('proc-Length').value = thisLength;
                 document.getElementById('proc-Width').value = thisWidth;
+                document.getElementById('proc-DProc').value = thisDProc;
                 document.getElementById('proc-TBegan').value = thisTBegan;
                 document.getElementById('proc-TEnded').value = thisTEnded;
                 document.getElementById('proc-TCeReached').value = thisTCeReached;
@@ -503,6 +510,7 @@ $(document).ready(function () {
         document.getElementById("section-Demog").classList.add("isDisabled")
         document.getElementById("section-proc").classList.add("isDisabled")
     }
+
     //get url parameter
     function getParameterByName(name, url) {
         if (!url) url = window.location.href;

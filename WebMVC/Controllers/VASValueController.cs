@@ -806,6 +806,11 @@ namespace WebMVC.Controllers
 
                 cmd.Parameters.Add(new SqlParameter()
                 {
+                    ParameterName = "@UserID",
+                    Value = user.UserID
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
                     ParameterName = "@SubjID",
                     Value = user.SubjID
                 });
@@ -1033,6 +1038,11 @@ namespace WebMVC.Controllers
                 {
                     ParameterName = "@TBegan",
                     Value = val.TBegan
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@DProc",
+                    Value = val.DProc
                 });
                 cmd.Parameters.Add(new SqlParameter()
                 {
@@ -1274,6 +1284,7 @@ namespace WebMVC.Controllers
                         Randomization = GetString(rdr["Randomization"]),
                         Length = (float)GetFloat(rdr["Length"]),
                         Width = (float)GetFloat(rdr["Width"]),
+                        DProc = GetString(rdr["DProc"]),
                         TBegan = GetString(rdr["TBegan"]),
                         TEnded = GetString(rdr["TEnded"]),
                         TCeReached = GetString(rdr["TCeReached"]),

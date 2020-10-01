@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Lumendi";
 }
-<script src="~/assets/scripts/VASSurvey3.js?916"></script>
+<script src="~/assets/scripts/VASSurvey3.js?1001"></script>
 <!-- BANNER
 ================================================== -->
 <div class="banner banner--small" role="banner">
@@ -157,6 +157,11 @@
                         <p id="msg-proc-Width" style="color:#ff0000; margin:0px; font-style:italic"></p>
                     </div>
                     <div class="grid__column grid__column--12 grid__column--6--md">
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label class="control__label control__label__inline control__label--is-required">Date of Procedure: </label>
+                            <input type="date" class="control__input__inline" id="proc-DProc" required />
+                        </div>
+                        <p id="msg-proc-TBegan" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <label class="control__label control__label__inline control__label--is-required">Time Case Begin: </label>
                             <input type="time" class="control__input__inline" step="1" id="proc-TBegan" required />
