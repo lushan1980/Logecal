@@ -1338,7 +1338,35 @@ namespace WebMVC.Controllers
             JavaScriptSerializer js = new JavaScriptSerializer();
             return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetLumendiAllDemog(VASUser user)
+        {
+            List<Survey> AllValueinfo = new List<Survey>();
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("GetLumendiAllDemog", con);
 
+                con.Open();
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Survey AllValue = new Survey
+                    {
+                        UserID = (int)GetInt(rdr["UserID"]),
+                        SubjID = GetString(rdr["SubjID"]),
+                        Age = (int)GetInt(rdr["Age"]),
+                        Gender = GetString(rdr["Gender"]),
+                        RaceEthni = GetString(rdr["RaceEthni"]),
+
+                    };
+                    AllValueinfo.Add(AllValue);
+                }
+                con.Close();
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
+        }
         public JsonResult SummaryDemog(VASUser user)
         {
             List<LumendiSummary> AllValueinfo = new List<LumendiSummary>();

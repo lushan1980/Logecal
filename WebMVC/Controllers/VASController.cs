@@ -76,7 +76,10 @@ namespace WebMVC.Controllers
         {
             return View();
         }
-        
 
+        public ActionResult Admin()
+        {
+            return View();
+        }
     }
 }

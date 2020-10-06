@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+<script src="~/assets/scripts/Admin.js"></script>
+<!-- BANNER
+================================================== -->
+<div class="banner banner--small" role="banner">
+    <div class="banner__background" style="background-image:url(/assets/images/banner-contact.jpg);" data-type="background"></div>
+    <div class="banner__content">
+        <h2 class="banner__headline alpha">Administrator</h2>
+    </div>
+</div><!--/banner -->
+
+
+<main role="main" id="main">
+    <div class="section section--gray" style="padding: 40px 0">
+        <div class="container">
+            <p style="display: inline">Hi User <span id="UserID"></span>: Welcome to our study! Now, you can input your Subject.</p>
+            <button class="btn" id="btnSignOut" style="float: right; transform: translateY(-20px)">Sign Out</button>
+        </div>
+    </div>
+    <div class="container--fluid two-column__container">
+        <form action="" id="Study3" name="LumendiForm">
+            <div class="grid two-column">
+                <!--left -->
+                <div class="grid__column grid__column--12 grid__column--2--md two-column__section two-column__section--blue" id="div-menu">
+                    <div class="vertical-menu">
+                        <a href="#" id="Summary0" targetLink="Visit0">Demographics</a>
+                        <a href="#" id="Summary1">Procedure</a>
+                        <a href="#" id="Summary2">Adverse Events</a>
+
+                    </div>
+                </div>
+                <!--right -->
+                <div class="grid__column grid__column--12 grid__column--10--md two-column__section" id="div-Form">
+                    <!--section Demog-->
+                    <section class="grid" id="section-Demog">
+                        <div class="grid__column grid__column--12 grid__column--12--md" style="padding: 0 100px">
+                            <h3>DEMOGRAPHICS</h3>
+                            <table id="table">
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Subject ID</th>
+                                    <th>Age</th>
+                                    <th>Gender</th>
+                                    <th>Race/Ethnicity</th>
+                                    <th>Options</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
