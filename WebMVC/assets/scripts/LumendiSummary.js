@@ -1,7 +1,8 @@
 ﻿$(document).ready(function () {
 
-    const UserID = getParameterByName('UserID');;
-    obj = { UserID: UserID };  
+    const UserID = getParameterByName('UserID'),
+          SignOut = document.getElementById("btnSignOut"),
+          obj = { UserID: UserID };  
 
     //get total number of Subject
     $.ajax({
@@ -80,6 +81,11 @@
         }
     });
 
+    //button Sign Out: change to VerifyEmail
+    SignOut.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.location.replace("/VAS/VerifyEmail?SurveyID=3")
+    })
     const Return = document.getElementById('return');
     Return.addEventListener('click', function (e) {
         e.preventDefault;

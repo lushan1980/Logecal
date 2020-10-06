@@ -1,4 +1,4 @@
-﻿const UserID = getParameterByName('UserID');;
+﻿const UserID = getParameterByName('UserID');
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -8,13 +8,15 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
-var arr = document.referrer.split("/");
-var url = arr.slice(-1)[0];
-if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3" && url !== "LumendiSummary?UserID="+UserID ) {
-    window.location.replace("/VAS/VerifyEmail?SurveyID=3");
-}
+//var arr = document.referrer.split("/");
+//var url = arr.slice(-1)[0];
+//if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3" && url !== "LumendiSummary?UserID="+UserID ) {
+//    window.location.replace("/VAS/VerifyEmail?SurveyID=3");
+//}
 
 $(document).ready(function () {
+    document.getElementById("UserID").innerHTML = UserID;
+
     $('button').click(function () {
         $(this).toggleClass('down');
     });
@@ -34,14 +36,15 @@ $(document).ready(function () {
         });
     }
 
-    const UserID = getParameterByName('UserID');
+    //const UserID = getParameterByName('UserID');
 
     var $curr, $first, $last = $("#section-AE"), VisitTime, obj,
         AllValues, thisAge, thisGender, thisRaceEthni, thisRandomization, thisLength, thisWidth, thisTBegan, thisTEnded, thisTCeReached, thisTLeReached;
 
     //const Previous = document.getElementById("btnPrevious");
     //const Next = document.getElementById("btnNext");
-    const SubjID = document.getElementById("SubjID");
+    const SubjID = document.getElementById("SubjID"),
+          SignOut = document.getElementById("btnSignOut");
     
     var Visits = document.querySelectorAll('[id ^= "Visit"]'),
         VisitsArray = Array.prototype.slice.call(Visits),
@@ -425,6 +428,11 @@ $(document).ready(function () {
         })
     })
 
+    //button Sign Out: change to VerifyEmail
+    SignOut.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.location.replace("/VAS/VerifyEmail?SurveyID=3")
+    })
     //fill age dropdown menu
     for (var i = 18; i <= 100; i++) {
         var select = document.getElementById("Demog-age");
