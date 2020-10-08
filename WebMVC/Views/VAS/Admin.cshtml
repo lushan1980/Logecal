@@ -8,7 +8,7 @@
 <div class="banner banner--small" role="banner">
     <div class="banner__background" style="background-image:url(/assets/images/banner-contact.jpg);" data-type="background"></div>
     <div class="banner__content">
-        <h2 class="banner__headline alpha">Administrator</h2>
+        <h2 class="banner__headline alpha">Data Administrator</h2>
     </div>
 </div><!--/banner -->
 
@@ -16,7 +16,7 @@
 <main role="main" id="main">
     <div class="section section--gray" style="padding: 40px 0">
         <div class="container">
-            <p style="display: inline">Hi User <span id="UserID"></span>: Welcome to our study! Now, you can input your Subject.</p>
+            <p style="display: inline">Hi Data Administrator: Welcome to our study! Now, you can modify the record.</p>
             <button class="btn" id="btnSignOut" style="float: right; transform: translateY(-20px)">Sign Out</button>
         </div>
     </div>
@@ -35,10 +35,10 @@
                 <!--right -->
                 <div class="grid__column grid__column--12 grid__column--10--md two-column__section" id="div-Form">
                     <!--section Demog-->
-                    <section class="grid" id="section-Demog">
+                    <section class="grid" id="section-Demog"  style="display: inline-block">
                         <div class="grid__column grid__column--12 grid__column--12--md" style="padding: 0 100px">
                             <h3>DEMOGRAPHICS</h3>
-                            <table id="table">
+                            <table id="table-Demog">
                                 <tr>
                                     <th>User ID</th>
                                     <th>Subject ID</th>
@@ -50,7 +50,41 @@
                             </table>
                         </div>
                     </section>
-
+                    <!--section Proc-->
+                    <section class="grid" id="section-Proc" style="display: none">
+                        <div class="grid__column grid__column--12 grid__column--12--md" style="padding: 0 100px">
+                            <h3>PROCEDURE</h3>
+                            <table id="table-Proc">
+                                <tr>
+                                    <th>Subject ID</th>
+                                    <th>Randomization Group</th>
+                                    <th>Length of Lesion</th>
+                                    <th>Width of Lesion</th>
+                                    <th>Date of Procedure</th>
+                                    <th>Time Case Begin</th>
+                                    <th>Time Case Ended</th>
+                                    <th>Time when Ceum Reached</th>
+                                    <th>Time when Lesion Reached</th>
+                                    <th>Options</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </section>
+                    <!--section AE-->
+                    <section class="grid" id="section-AE" style="display: none">
+                        <div class="grid__column grid__column--12 grid__column--12--md" style="padding: 0 100px">
+                            <h3>PROCEDURE</h3>
+                            <table id="table-AE">
+                                <tr>
+                                    <th>Subject ID</th>
+                                    <th>Visit No.</th>
+                                    <th>Adverse Event</th>
+                                    <th>Severity</th>
+                                    <th>Options</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </section>
                 </div>
             </div>
         </form>

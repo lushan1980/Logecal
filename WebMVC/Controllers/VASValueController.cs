@@ -343,7 +343,6 @@ namespace WebMVC.Controllers
         //end
 
         //using session
-        [HttpPost]
         public ActionResult CheckVASUser2(VASUser user)
         {
 
@@ -382,8 +381,6 @@ namespace WebMVC.Controllers
             return View(user);
         }
         //end 
-
-        [HttpPost]
         public ActionResult InsertASurvey(Survey val)
         {
 
@@ -790,7 +787,6 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = VisitNo });
             }
         }
-
         public ActionResult CheckLumendiSubjExists(VASUser user)
         {
 
@@ -888,7 +884,6 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = insertData });
             }
         }
-
         public ActionResult InsertStudy2(Survey val)
         {
 
@@ -981,7 +976,6 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = insertData });
             }
         }
-
         public ActionResult InsertLumendi(Survey val)
         {
 
@@ -1083,7 +1077,105 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = insertData });
             }
         }
+        public ActionResult EditDemog(Survey val)
+        {
 
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("EditDemog", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "UserID",
+                    Value = val.UserID
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "SubjID",
+                    Value = val.SubjID
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Age",
+                    Value = val.Age
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Gender",
+                    Value = val.Gender
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@RaceEthni",
+                    Value = val.RaceEthni
+                });
+  
+                foreach (SqlParameter parameter in cmd.Parameters)
+                {
+                    if (parameter.Value == null)
+                    {
+                        parameter.Value = DBNull.Value;
+                    }
+                };
+
+                int result = cmd.ExecuteNonQuery();
+
+                bool insertData;
+                if (result > 0)
+                {
+                    insertData = true;
+                }
+                else
+                {
+                    insertData = false;
+                }
+                con.Close();
+                return Json(new { returnvalue = insertData });
+            }
+        }
+        public ActionResult DeleteDemog(Survey val)
+        {
+
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("DeleteDemog", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "UserID",
+                    Value = val.UserID
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "SubjID",
+                    Value = val.SubjID
+                });
+
+
+                foreach (SqlParameter parameter in cmd.Parameters)
+                {
+                    if (parameter.Value == null)
+                    {
+                        parameter.Value = DBNull.Value;
+                    }
+                };
+
+                int result = cmd.ExecuteNonQuery();
+
+                con.Close();
+                return Json(new { returnvalue = result });
+            }
+        }
         public ActionResult InsertLumendiAE(Survey val)
         {
 
@@ -1171,7 +1263,6 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = insertData });
             }
         }
-        [HttpPost]
         public JsonResult GetStudy2Demog(VASUser user)
         {
             List<Survey> Demoginfo = new List<Survey>();
@@ -1210,7 +1301,6 @@ namespace WebMVC.Controllers
             JavaScriptSerializer js = new JavaScriptSerializer();
             return Json(js.Serialize(Demoginfo), JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult GetStudy2AllValue(VASUser user)
         {
             List<Survey> AllValueinfo = new List<Survey>();
@@ -1251,7 +1341,6 @@ namespace WebMVC.Controllers
             JavaScriptSerializer js = new JavaScriptSerializer();
             return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult GetLumendiAllValue(VASUser user)
         {
             List<Survey> AllValueinfo = new List<Survey>();
@@ -1300,7 +1389,6 @@ namespace WebMVC.Controllers
             JavaScriptSerializer js = new JavaScriptSerializer();
             return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult GetLumendiDemog(VASUser user)
         {
             List<Survey> AllValueinfo = new List<Survey>();
@@ -1338,7 +1426,7 @@ namespace WebMVC.Controllers
             JavaScriptSerializer js = new JavaScriptSerializer();
             return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
         }
-        public JsonResult GetLumendiAllDemog(VASUser user)
+        public JsonResult GetLumendiAllDemog()
         {
             List<Survey> AllValueinfo = new List<Survey>();
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
@@ -1359,6 +1447,65 @@ namespace WebMVC.Controllers
                         Gender = GetString(rdr["Gender"]),
                         RaceEthni = GetString(rdr["RaceEthni"]),
 
+                    };
+                    AllValueinfo.Add(AllValue);
+                }
+                con.Close();
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetLumendiAllProc()
+        {
+            List<Survey> AllValueinfo = new List<Survey>();
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("GetLumendiAllProc", con);
+
+                con.Open();
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Survey AllValue = new Survey
+                    {                        
+                        SubjID = GetString(rdr["SubjID"]),
+                        Randomization = GetString(rdr["SubjID"]),
+                        Length = GetFloat(rdr["Length"]),
+                        Width = GetFloat(rdr["Width"]),
+                        DProc = GetString(rdr["DProc"]),
+                        TBegan = GetString(rdr["TBegan"]),
+                        TEnded = GetString(rdr["TEnded"]),
+                        TCeReached = GetString(rdr["TCeReached"]),
+                        TLeReached = GetString(rdr["TLeReached"])
+                    };
+                    AllValueinfo.Add(AllValue);
+                }
+                con.Close();
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetLumendiAllAE()
+        {
+            List<Survey> AllValueinfo = new List<Survey>();
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("GetLumendiAllAE", con);
+
+                con.Open();
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Survey AllValue = new Survey
+                    {                        
+                        SubjID = GetString(rdr["SubjID"]),
+                        VisitNo = (int)GetInt(rdr["VisitNo"]),
+                        AEDiscription = GetString(rdr["AEDiscription"]),
+                        Severity = GetString(rdr["Severity"])
                     };
                     AllValueinfo.Add(AllValue);
                 }
