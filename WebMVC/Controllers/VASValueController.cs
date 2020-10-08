@@ -83,7 +83,6 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = insertData });
             }
         }
-
         public ActionResult InsertVASUser111(VASUser user)
         {
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
@@ -177,7 +176,6 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = insertData });
             }
         }
-
         public ActionResult CheckVASUser(VASUser user)
         {
 
@@ -219,7 +217,6 @@ namespace WebMVC.Controllers
             }
 
         }
-
         public ActionResult CheckLumendiUser(VASUser user)
         {
 
@@ -1138,6 +1135,137 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = insertData });
             }
         }
+        public ActionResult EditProc(Survey val)
+        {
+
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("EditProc", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "SubjID",
+                    Value = val.SubjID
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Randomization",
+                    Value = val.Randomization
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Length",
+                    Value = val.Length
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Width",
+                    Value = val.Width
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@DProc",
+                    Value = val.DProc
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@TBegan",
+                    Value = val.TBegan
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@TEnded",
+                    Value = val.TEnded
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@TCeReached",
+                    Value = val.TCeReached
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@TLeReached",
+                    Value = val.TLeReached
+                });
+
+                foreach (SqlParameter parameter in cmd.Parameters)
+                {
+                    if (parameter.Value == null)
+                    {
+                        parameter.Value = DBNull.Value;
+                    }
+                };
+
+                int result = cmd.ExecuteNonQuery();
+
+                bool insertData;
+                if (result > 0)
+                {
+                    insertData = true;
+                }
+                else
+                {
+                    insertData = false;
+                }
+                con.Close();
+                return Json(new { returnvalue = insertData });
+            }
+        }
+
+        public ActionResult EditAE(Survey val)
+        {
+
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("EditAE", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "SubjID",
+                    Value = val.SubjID
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@VisitNo",
+                    Value = val.VisitNo
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@AEDiscription",
+                    Value = val.AEDiscription
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Severity",
+                    Value = val.Severity
+                });
+
+                foreach (SqlParameter parameter in cmd.Parameters)
+                {
+                    if (parameter.Value == null)
+                    {
+                        parameter.Value = DBNull.Value;
+                    }
+                };
+
+                int result = cmd.ExecuteNonQuery();
+
+                con.Close();
+                return Json(new { returnvalue = result });
+            }
+        }
         public ActionResult DeleteDemog(Survey val)
         {
 
@@ -1161,6 +1289,78 @@ namespace WebMVC.Controllers
                     Value = val.SubjID
                 });
 
+
+                foreach (SqlParameter parameter in cmd.Parameters)
+                {
+                    if (parameter.Value == null)
+                    {
+                        parameter.Value = DBNull.Value;
+                    }
+                };
+
+                int result = cmd.ExecuteNonQuery();
+
+                con.Close();
+                return Json(new { returnvalue = result });
+            }
+        }
+        public ActionResult DeleteProc(Survey val)
+        {
+
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("DeleteProc", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "SubjID",
+                    Value = val.SubjID
+                });
+
+
+                foreach (SqlParameter parameter in cmd.Parameters)
+                {
+                    if (parameter.Value == null)
+                    {
+                        parameter.Value = DBNull.Value;
+                    }
+                };
+
+                int result = cmd.ExecuteNonQuery();
+
+                con.Close();
+                return Json(new { returnvalue = result });
+            }
+        }
+        public ActionResult DeleteAE(Survey val)
+        {
+
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("DeleteAE", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "SubjID",
+                    Value = val.SubjID
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "VisitNo",
+                    Value = val.VisitNo
+                });
 
                 foreach (SqlParameter parameter in cmd.Parameters)
                 {
@@ -1471,7 +1671,7 @@ namespace WebMVC.Controllers
                     Survey AllValue = new Survey
                     {                        
                         SubjID = GetString(rdr["SubjID"]),
-                        Randomization = GetString(rdr["SubjID"]),
+                        Randomization = GetString(rdr["Randomization"]),
                         Length = GetFloat(rdr["Length"]),
                         Width = GetFloat(rdr["Width"]),
                         DProc = GetString(rdr["DProc"]),
