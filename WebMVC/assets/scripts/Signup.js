@@ -75,6 +75,9 @@
         }
     })
     
+    $('#btnCancel').on('click', function (e) {
+        window.location.replace("/VAS/Signin")
+    })
 
     function getParameterByName(name, url) {
         if (!url) url = window.location.href;

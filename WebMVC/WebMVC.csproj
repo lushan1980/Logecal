@@ -208,6 +208,7 @@
     <Content Include="assets\scripts\ContactForm.js" />
     <Content Include="assets\scripts\LumendiSummary.js" />
     <Content Include="assets\scripts\ResetPwd.js" />
+    <Content Include="assets\scripts\Signin.js" />
     <Content Include="assets\scripts\Signup.js" />
     <Content Include="assets\scripts\VASSurvey1.js" />
     <Content Include="assets\scripts\VASSurvey2.js" />
@@ -442,6 +443,7 @@
     <Content Include="Views\VAS\Survey3.cshtml" />
     <Content Include="Views\VAS\LumendiSummary.cshtml" />
     <Content Include="Views\VAS\Admin.cshtml" />
+    <Content Include="Views\VAS\DataAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

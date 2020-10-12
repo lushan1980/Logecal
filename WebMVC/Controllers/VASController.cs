@@ -59,6 +59,10 @@ namespace WebMVC.Controllers
         {
             return View();
         }
+        public ActionResult Signin()
+        {
+            return View();
+        }
         public ActionResult Signup()
         {
             return View();

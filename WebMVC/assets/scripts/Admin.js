@@ -1,132 +1,174 @@
 ﻿
 $(document).ready(function () {
-    var Demog = document.getElementById('Summary0'),
+
+    const SurveyID = getParameterByName('SurveyID');
+
+    var Invitation = document.getElementById('Invitation'),
+        Demog = document.getElementById('Summary0'),
         Proc = document.getElementById('Summary1'),
         AE = document.getElementById('Summary2');
 
-    //get Demographics all values table
-    $.ajax({
-        type: 'POST',
-        url: "/VASValue/GetLumendiAllDemog",
+    //Invitation click event
+    Invitation.addEventListener('click', function (e) {
+        e.preventDefault();
+        $("#section-Invitation").css("display", "inline-flex");
+        $("#section-Demog").css("display", "none");
+        $("#section-AE").css("display", "none");
+        $("#section-Proc").css("display", "none");
+    })
 
-        contentType: "application/json; charset=utf-8",
-        success: function (data) {
+    $('#InvitationForm').on('submit', function (e) {
+        e.preventDefault();
 
-            AllValues = JSON.parse(data);
+        var object = {
+            SurveyID: SurveyID,
+            Email: $('#User-Email').val(),
+            Administrator: "User"
+        };
+        url = "/VASValue/InviteUser";
 
-            $.each(AllValues, function (index, value) {
-                var row = $("<tr id='Demogtr" + index + "'><td  id='DemogtdUserID" + index + "' style='text-align: center'>" + value.UserID +
-                    "</td><td id='DemogtdSubjID" + index + "' style='text-align: center'>" + value.SubjID +
-                    "</td><td id='DemogtdAge" + index + "' style='text-align: center'>" + value.Age +
-                    "</td><td id='DemogtdGender" + index + "'>" + value.Gender +
-                    "</td><td id='DemogtdRaceEthni" + index + "'>" + value.RaceEthni +
-                    "</td><td id='DemogtdOptions" + index + "' style='text-align: center'>" +
-                    "<button id='Demogedit" + index + "' type='button' class='button_icon'>" + "<i class='fa fa-pencil'></i>" + "</button>" +
-                    "<button id='Demogsave" + index + "' type='button' class='button_icon'>" + "<i class='fa fa-floppy-o'></i>" + "</button>" +
-                    "<button id='Demogdelete" + index + "' type='button' class='button_icon'>" + "<i class='fa fa-trash'></i>" + "</button>" +                    
-                    "</td><tr>");
-                $("#table-Demog").append(row);
-            });
-
-        },
-        error: function () {
-            alert("Something got wrong");
-        }
-    }).done(function () {
-        //edit[i] code
-        var Edits = document.querySelectorAll('[id ^= "Demogedit"]'),
-            EditsArray = Array.prototype.slice.call(Edits);
-        var trs = document.querySelectorAll('[id ^= "Demogtr"]'),
-            tdUserIDs = document.querySelectorAll('[id ^= "DemogtdUserID"]'),
-            tdSubjIDs = document.querySelectorAll('[id ^= "DemogtdSubjID"]'),
-            tdAges = document.querySelectorAll('[id ^= "DemogtdAge"]'),
-            tdGenders = document.querySelectorAll('[id ^= "DemogtdGender"]'),
-            tdRaceEthnis = document.querySelectorAll('[id ^= "DemogtdRaceEthni"]');
-        
-        EditsArray.forEach(function (Edit, index) {
-            Edit.addEventListener('click', function (e) {
-                e.preventDefault();
-                tdAges[index].contentEditable = true;
-                tdGenders[index].contentEditable = true;
-                tdRaceEthnis[index].contentEditable = true;  
-            })
-        })
-
-        //delete[i] code
-        var Deletes = document.querySelectorAll('[id ^= "Demogdelete"]'),
-            DeletesArray = Array.prototype.slice.call(Deletes);
-
-        DeletesArray.forEach(function (Save, index) {
-            Save.addEventListener('click', function (e) {
-                e.preventDefault();
-                obj = {
-                    UserID: tdUserIDs[index].innerHTML,
-                    SubjID: tdSubjIDs[index].innerHTML
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "/VASValue/DeleteDemog",
-                    dataType: "json",
-                    data: JSON.stringify(obj),
-                    contentType: "application/json; charset=utf-8",
-                    success: function (data) {
-                        if (data.returnvalue == "1") {
-                            trs[index].remove(); 
-                        }
-                        else if (data.returnvalue == "0") {
-                            alert("You cannot delete this Subject, since you have that in Procedure table!")
-                        }
-                    },
-                    error: function () {
-                        alert("Something got wrong!")
-                    }
-                })
-            })
-        })
-        //save[i] code
-        var Saves = document.querySelectorAll('[id ^= "Demogsave"]'),
-            SavesArray = Array.prototype.slice.call(Saves);
-
-        SavesArray.forEach(function (Save, index) {
-            Save.addEventListener('click', function (e) {
-                e.preventDefault();
-                obj = {
-                    UserID: tdUserIDs[index].innerHTML,
-                    SubjID: tdSubjIDs[index].innerHTML,
-                    Age: tdAges[index].innerHTML,
-                    Gender: tdGenders[index].innerHTML,
-                    RaceEthni: tdRaceEthnis[index].innerHTML
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "/VASValue/EditDemog",
-                    dataType: "json",
-                    data: JSON.stringify(obj),
-                    contentType: "application/json; charset=utf-8",
-                    success: function (data) {
-                        if (data.returnvalue) {
-                            alert("Success!")
-                        }
-                    },                    
-                    error: function () {
-                        alert("Something got wrong!")
-                    }
-                })
-            })
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: JSON.stringify(object),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.returnvalue) {
+                    alert("Success!");
+                }
+                else {
+                    alert("Oops! Something got wrong");
+                }
+            }
         })
     })
 
     //get Demographics all values table
     Demog.addEventListener('click', function (e) {
         e.preventDefault();
+        $("#section-Invitation").css("display", "none");
         $("#section-Demog").css("display", "inline-flex");
         $("#section-AE").css("display", "none");
         $("#section-Proc").css("display", "none");
+
+        //get Demographics all values table
+        $.ajax({
+            type: 'POST',
+            url: "/VASValue/GetLumendiAllDemog",
+
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                AllValues = JSON.parse(data);
+
+                $.each(AllValues, function (index, value) {
+                    var row = $("<tr id='Demogtr" + index + "'><td  id='DemogtdUserID" + index + "' style='text-align: center'>" + value.UserID +
+                        "</td><td id='DemogtdSubjID" + index + "' style='text-align: center'>" + value.SubjID +
+                        "</td><td id='DemogtdAge" + index + "' style='text-align: center'>" + value.Age +
+                        "</td><td id='DemogtdGender" + index + "'>" + value.Gender +
+                        "</td><td id='DemogtdRaceEthni" + index + "'>" + value.RaceEthni +
+                        "</td><td id='DemogtdOptions" + index + "' style='text-align: center'>" +
+                        "<button id='Demogedit" + index + "' type='button' class='button_icon'>" + "<i class='fa fa-pencil'></i>" + "</button>" +
+                        "<button id='Demogsave" + index + "' type='button' class='button_icon'>" + "<i class='fa fa-floppy-o'></i>" + "</button>" +
+                        "<button id='Demogdelete" + index + "' type='button' class='button_icon'>" + "<i class='fa fa-trash'></i>" + "</button>" +
+                        "</td><tr>");
+                    $("#table-Demog").append(row);
+                });
+
+            },
+            error: function () {
+                alert("Something got wrong");
+            }
+        }).done(function () {
+            //edit[i] code
+            var Edits = document.querySelectorAll('[id ^= "Demogedit"]'),
+                EditsArray = Array.prototype.slice.call(Edits);
+            var trs = document.querySelectorAll('[id ^= "Demogtr"]'),
+                tdUserIDs = document.querySelectorAll('[id ^= "DemogtdUserID"]'),
+                tdSubjIDs = document.querySelectorAll('[id ^= "DemogtdSubjID"]'),
+                tdAges = document.querySelectorAll('[id ^= "DemogtdAge"]'),
+                tdGenders = document.querySelectorAll('[id ^= "DemogtdGender"]'),
+                tdRaceEthnis = document.querySelectorAll('[id ^= "DemogtdRaceEthni"]');
+
+            EditsArray.forEach(function (Edit, index) {
+                Edit.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    tdAges[index].contentEditable = true;
+                    tdGenders[index].contentEditable = true;
+                    tdRaceEthnis[index].contentEditable = true;
+                })
+            })
+
+            //delete[i] code
+            var Deletes = document.querySelectorAll('[id ^= "Demogdelete"]'),
+                DeletesArray = Array.prototype.slice.call(Deletes);
+
+            DeletesArray.forEach(function (Save, index) {
+                Save.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    obj = {
+                        UserID: tdUserIDs[index].innerHTML,
+                        SubjID: tdSubjIDs[index].innerHTML
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: "/VASValue/DeleteDemog",
+                        dataType: "json",
+                        data: JSON.stringify(obj),
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            if (data.returnvalue == "1") {
+                                trs[index].remove();
+                            }
+                            else if (data.returnvalue == "0") {
+                                alert("You cannot delete this Subject, since you have that in Procedure table!")
+                            }
+                        },
+                        error: function () {
+                            alert("Something got wrong!")
+                        }
+                    })
+                })
+            })
+            //save[i] code
+            var Saves = document.querySelectorAll('[id ^= "Demogsave"]'),
+                SavesArray = Array.prototype.slice.call(Saves);
+
+            SavesArray.forEach(function (Save, index) {
+                Save.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    obj = {
+                        UserID: tdUserIDs[index].innerHTML,
+                        SubjID: tdSubjIDs[index].innerHTML,
+                        Age: tdAges[index].innerHTML,
+                        Gender: tdGenders[index].innerHTML,
+                        RaceEthni: tdRaceEthnis[index].innerHTML
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: "/VASValue/EditDemog",
+                        dataType: "json",
+                        data: JSON.stringify(obj),
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            if (data.returnvalue) {
+                                alert("Success!")
+                            }
+                        },
+                        error: function () {
+                            alert("Something got wrong!")
+                        }
+                    })
+                })
+            })
+        })
     })
 
     //Procedure Link event
     Proc.addEventListener('click', function (e) {
         e.preventDefault();
+        $("#section-Invitation").css("display", "none");
         $("#section-Demog").css("display", "none");
         $("#section-AE").css("display", "none");
         $("#section-Proc").css("display", "inline-flex");
@@ -263,6 +305,7 @@ $(document).ready(function () {
     //get Adverse Events all values table
     AE.addEventListener('click', function (e) {
         e.preventDefault();
+        $("#section-Invitation").css("display", "none");
         $("#section-Demog").css("display", "none");
         $("#section-Proc").css("display", "none");
         $("#section-AE").css("display", "inline-flex");
@@ -379,4 +422,14 @@ $(document).ready(function () {
         })
     })
 
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
 })

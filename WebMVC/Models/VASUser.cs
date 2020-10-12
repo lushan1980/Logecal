@@ -15,6 +15,7 @@ namespace WebMVC.Models
         public string InviteCode { get; set; }
         public string SecurityCode { get; set; }
         public string Password { get; set; }
+        public string Administrator { get; set; }
 
-    }
+}
 }

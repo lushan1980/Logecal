@@ -1,6 +1,67 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Signin";
 }
+<script src="~/assets/scripts/Signin.js?1012"></script>
+<!-- BANNER
+================================================== -->
+<div class="banner banner--small" role="banner">
+    <div class="banner__background" style="background-image:url(/assets/images/banner-contact.jpg);" data-type="background"></div>
+    <div class="banner__content">
+        <h2 class="banner__headline alpha">Verfication</h2>
+    </div>
+</div><!--/banner -->
 
-<h2>Signin</h2>
+<main role="main" id="main">
+    <!--Verify Email
+    ================================================== -->
+    <article class="section section--small">
+        <div class="container container--small">
+            <div class="section__header section__header--centered">
+                <img src="~/assets/images/email-logo.jpg" width="200" />
+                <h2 class="section__heading" id="head1">Sign in</h2>
+            </div>
 
+            <form action="" id="Signin">
+                <div class="grid" id="Formgird">
+                    @*Email Address*@
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                        <div class="control" id="divEmail">
+                            <label for="User-Email" class="control__label control__label--is-required">Email Address</label>
+                            <input type="email" class="control__input" id="User-Email">
+                            <p id="msg-email" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                        <div class="control" id="divEmail">
+                            <label for="Administrator">
+                                <input type="checkbox" id="User-Administrator" value="User" name="Administrator" /> Are You Administrator?
+                            </label>
+                            <p id="msg-Administrator" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                        <div class="control" id="divPwd">
+                            <label for="User-Password" class="control__label control__label--is-required">Password</label>
+                            <input type="password" class="control__input" id="User-Password">
+                            <p id="msg-password" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                    </div>
+
+
+                    <div class="grid__column grid__column--12 grid__column--6--sm">
+                        <button class="btn" id="btnSignin" type="submit" value="btnSignin">Sign in</button>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--6--sm">
+                        <button class="btn" id="btnSignup" style="float: right; color: #b74d4d" value="btnSignin">Sign Up</button>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--12--sm" style="padding-top:30px">
+                        <a href="ResetPwd" id="forgetlink" class="text-link">Forgot user name and / or password?   &#8250;</a>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </article><!--/Verify Email-->
+</main>

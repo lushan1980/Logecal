@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -219,7 +220,7 @@ namespace WebMVC.Controllers
         }
         public ActionResult CheckLumendiUser(VASUser user)
         {
-
+            List<VASUser> AllUser = new List<VASUser>();
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
             {
@@ -237,23 +238,32 @@ namespace WebMVC.Controllers
                 });
                 cmd.Parameters.Add(new SqlParameter()
                 {
+                    ParameterName = "@Administrator",
+                    Value = user.Administrator
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
                     ParameterName = "@Password",
                     Value = user.Password
                 });
 
-                SqlDataReader rdr = cmd.ExecuteReader();
-
-                string UserID = "";
+                SqlDataReader rdr = cmd.ExecuteReader();                
+                
                 if (rdr.HasRows)
                 {
                     while (rdr.Read())
                     {
-                        UserID = rdr["UserID"].ToString();
+                        VASUser User = new VASUser()
+                        {
+                            UserID = (int)rdr["UserID"],
+                            Administrator = rdr["Administrator"].ToString()
+                        };
+                        AllUser.Add(User);
                     }
                 }
 
                 con.Close();
-                return Json(new { returnvalue = UserID });
+                return Json(new { returnvalue = AllUser });
 
             }
 
@@ -338,7 +348,6 @@ namespace WebMVC.Controllers
             return Json(js.Serialize(userinfo), JsonRequestBehavior.AllowGet);
         }
         //end
-
         //using session
         public ActionResult CheckVASUser2(VASUser user)
         {
@@ -650,7 +659,7 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = insertData });
             }
         }
-        public ActionResult SendEmailSecurityCode(VASUser user)   
+        public ActionResult SendEmailSecurityCode(VASUser user)
         {
             string SecurityCode = CreateRandomPassword();
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
@@ -684,6 +693,69 @@ namespace WebMVC.Controllers
             {
                 Subject = "Security Code",
                 Body = $"This is your Security Code: {SecurityCode}"
+            };
+
+            SmtpClient client = new SmtpClient("smtp.office365.com", 587)
+            {
+                Credentials = new NetworkCredential("s.lu@logecal.com", "TaGha_6W"),
+                EnableSsl = true
+            };
+            string result = "";
+            try
+            {
+                client.Send(mail);
+                result = "1";
+            }
+            catch (SmtpException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return Json(new { returnvalue = result });
+        }
+
+        public ActionResult InviteUser(VASUser user)   //insert a record to LumendiUser and give it a tempory password and send a link and password to Email
+        {
+            string TemporyPassword = CreateRandomPassword();
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("InviteUser", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@SurveyID",
+                    Value = user.SurveyID
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Email",
+                    Value = user.Email
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Password",
+                    Value = TemporyPassword
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Administrator",
+                    Value = user.Administrator
+                });
+
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+
+            string to = user.Email;
+            string from = "s.lu@logecal.com";
+            MailMessage mail = new MailMessage(from, to)
+            {
+                Subject = "Tempory Password",
+                Body = $"This is your Tempory Password: {TemporyPassword}, Please reset your Password: https://localhost:44343/VAS/ResetPwd"
             };
 
             SmtpClient client = new SmtpClient("smtp.office365.com", 587)
@@ -1217,7 +1289,6 @@ namespace WebMVC.Controllers
                 return Json(new { returnvalue = insertData });
             }
         }
-
         public ActionResult EditAE(Survey val)
         {
 
