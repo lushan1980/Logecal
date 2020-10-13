@@ -2,13 +2,13 @@
 @{
     ViewBag.Title = "Signin";
 }
-<script src="~/assets/scripts/Signin.js?1012"></script>
+<script src="~/assets/scripts/Signin.js?1013"></script>
 <!-- BANNER
 ================================================== -->
 <div class="banner banner--small" role="banner">
     <div class="banner__background" style="background-image:url(/assets/images/banner-contact.jpg);" data-type="background"></div>
     <div class="banner__content">
-        <h2 class="banner__headline alpha">Verfication</h2>
+        <h2 class="banner__headline alpha" id="BannerContent"></h2>
     </div>
 </div><!--/banner -->
 
@@ -32,14 +32,14 @@
                             <p id="msg-email" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         </div>
                     </div>
-                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                    @*<div class="grid__column grid__column--12 grid__column--12--sm">
                         <div class="control" id="divEmail">
                             <label for="Administrator">
                                 <input type="checkbox" id="User-Administrator" value="User" name="Administrator" /> Are You Administrator?
                             </label>
                             <p id="msg-Administrator" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         </div>
-                    </div>
+                    </div>*@
                     <div class="grid__column grid__column--12 grid__column--12--sm">
                         <div class="control" id="divPwd">
                             <label for="User-Password" class="control__label control__label--is-required">Password</label>
@@ -53,10 +53,10 @@
                         <button class="btn" id="btnSignin" type="submit" value="btnSignin">Sign in</button>
                     </div>
                     <div class="grid__column grid__column--12 grid__column--6--sm">
-                        <button class="btn" id="btnSignup" style="float: right; color: #b74d4d" value="btnSignin">Sign Up</button>
+                        <button class="btn" id="btnSignup" type="submit" style="float: right; color: #b74d4d" value="btnSignin">Sign Up</button>
                     </div>
                     <div class="grid__column grid__column--12 grid__column--12--sm" style="padding-top:30px">
-                        <a href="ResetPwd" id="forgetlink" class="text-link">Forgot user name and / or password?   &#8250;</a>
+                        <button class="text-link" id="forgetlink" type="submit">Forgot user name and / or password?   &#8250;</button>
                     </div>
 
                 </div>

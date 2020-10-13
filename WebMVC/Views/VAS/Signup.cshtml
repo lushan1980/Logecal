@@ -3,13 +3,13 @@
     ViewBag.Title = "Signup";
 }
 
-<script src="~/assets/scripts/Signup.js"></script>
+<script src="~/assets/scripts/Signup.js?1013"></script>
 <!-- BANNER
 ================================================== -->
 <div class="banner banner--small" role="banner">
     <div class="banner__background" style="background-image:url(/assets/images/banner-contact.jpg);" data-type="background"></div>
     <div class="banner__content">
-        <h2 class="banner__headline alpha">Visual Analog Scale (VAS)</h2>
+        <h2 class="banner__headline alpha" id="BannerContent"></h2>
     </div>
 </div><!--/banner -->
 
@@ -21,7 +21,7 @@
             <div class="section__header section__header--centered">
                 <img src="~/assets/images/email-logo.jpg" width="200" />
                 <h2 class="section__heading" id="head1">Sign Up</h2>
-                <p class="lead" id="head2">Please enter your Email and Password.</p>
+                @*<p class="lead" id="head2">Please enter your Email and Password.</p>*@
             </div>
 
             <form action="" id="Signup">
@@ -32,6 +32,34 @@
                             <label for="User-Email" class="control__label control__label--is-required">Email Address</label>
                             <input type="email" class="control__input" id="User-Email">
                             <p id="msg-email" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--6--sm">
+                        <div class="control" id="divPwd">
+                            <label for="User-FName" class="control__label control__label--is-required">First Name</label>
+                            <input type="text" class="control__input" id="User-FName">
+                            <p id="msg-Fname" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--6--sm">
+                        <div class="control" id="divPwd">
+                            <label for="User-LName" class="control__label control__label--is-required">Last Name</label>
+                            <input type="text" class="control__input" id="User-LName">
+                            <p id="msg-LName" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                        <div class="control" id="divPwd">
+                            <label for="User-Pwd" class="control__label control__label--is-required">Phone</label>
+                            <input type="text" class="control__input" id="User-Phone">
+                            <p id="msg-Pwd" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                        <div class="control" id="divPwd">
+                            <label for="User-TempPwd" class="control__label control__label--is-required">Temporary Password</label>
+                            <input type="password" class="control__input" id="User-TempPwd">
+                            <p id="msg-Pwd" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         </div>
                     </div>
                     <div class="grid__column grid__column--12 grid__column--6--sm">

@@ -1,9 +1,11 @@
 ﻿$(document).ready(function () {
+    const StudyName = getParameterByName('StudyName'),
+          SurveyID = getParameterByName('SurveyID');
+    document.getElementById('BannerContent').innerHTML = StudyName;
 
     $('#Signup').submit(function (event) {
         event.preventDefault();
-        const SurveyID = getParameterByName('SurveyID');
-        
+              
         var i, inputs, messages;
         inputs = document.querySelectorAll('[id ^= "User-"]');
         messages = document.querySelectorAll('[id ^= "msg-"]');
@@ -76,7 +78,7 @@
     })
     
     $('#btnCancel').on('click', function (e) {
-        window.location.replace("/VAS/Signin")
+        window.location.replace("/VAS/Signin" + '?SurveyID=' + SurveyID + '&StudyName=' + StudyName)
     })
 
     function getParameterByName(name, url) {

@@ -17,7 +17,6 @@ namespace WebMVC.Controllers
 {
     public class VASValueController : Controller
     {
-
         public static string GetString(object o)
         {
             return o == DBNull.Value ? null : (string)o;
@@ -236,34 +235,26 @@ namespace WebMVC.Controllers
                     ParameterName = "@Email",
                     Value = user.Email
                 });
-                cmd.Parameters.Add(new SqlParameter()
-                {
-                    ParameterName = "@Administrator",
-                    Value = user.Administrator
-                });
+
                 cmd.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "@Password",
                     Value = user.Password
                 });
 
-                SqlDataReader rdr = cmd.ExecuteReader();                
-                
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                string UserID = "";
                 if (rdr.HasRows)
                 {
                     while (rdr.Read())
                     {
-                        VASUser User = new VASUser()
-                        {
-                            UserID = (int)rdr["UserID"],
-                            Administrator = rdr["Administrator"].ToString()
-                        };
-                        AllUser.Add(User);
+                        UserID = rdr["UserID"].ToString();
                     }
                 }
 
                 con.Close();
-                return Json(new { returnvalue = AllUser });
+                return Json(new { returnvalue = UserID });
 
             }
 
@@ -275,6 +266,43 @@ namespace WebMVC.Controllers
             using (SqlConnection con = new SqlConnection(CS))
             {
                 SqlCommand cmd = new SqlCommand("CheckVASUserEmail", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Email",
+                    Value = user.Email
+                });
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                string UserID = "";
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        UserID = rdr["UserID"].ToString();
+                    }
+                }
+
+                con.Close();
+                return Json(new { returnvalue = UserID });
+
+            }
+
+        }
+
+        public ActionResult CheckLumendiUserEmail(VASUser user)
+        {
+
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("CheckLumendiUserEmail", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -728,7 +756,7 @@ namespace WebMVC.Controllers
                 cmd.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "@SurveyID",
-                    Value = user.SurveyID
+                    Value = 3
                 });
                 cmd.Parameters.Add(new SqlParameter()
                 {

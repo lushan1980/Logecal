@@ -2,12 +2,12 @@
 $(document).ready(function () {
 
     const SurveyID = getParameterByName('SurveyID');
-
+    
     var Invitation = document.getElementById('Invitation'),
         Demog = document.getElementById('Summary0'),
         Proc = document.getElementById('Summary1'),
-        AE = document.getElementById('Summary2');
-
+        AE = document.getElementById('Summary2'),
+        SignOut = document.getElementById("btnSignOut");
     //Invitation click event
     Invitation.addEventListener('click', function (e) {
         e.preventDefault();
@@ -422,6 +422,11 @@ $(document).ready(function () {
         })
     })
 
+    //button Sign Out: change to VerifyEmail
+    SignOut.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.location.replace("/VAS/Signin" + "?SurveyID=3" + "&StudyName=" + StudyName)
+    })
 
     function getParameterByName(name, url) {
         if (!url) url = window.location.href;

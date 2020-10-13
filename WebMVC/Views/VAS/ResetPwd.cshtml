@@ -2,13 +2,13 @@
 @{
     ViewBag.Title = "ChangePwd";
 }
-<script src="~/assets/scripts/ResetPwd.js?824"></script>
+<script src="~/assets/scripts/ResetPwd.js?1013"></script>
 <!-- BANNER
 ================================================== -->
 <div class="banner banner--small" role="banner">
     <div class="banner__background" style="background-image:url(/assets/images/banner-contact.jpg);" data-type="background"></div>
     <div class="banner__content">
-        <h2 class="banner__headline alpha">Visual Analog Scale (VAS)</h2>
+        <h2 class="banner__headline alpha" id="BannerContent"></h2>
     </div>
 </div><!--/banner -->
 
@@ -24,7 +24,7 @@
                 <p class="lead" id="head2">Let's make a brand new password!</p>
             </div>
 
-            <form action="" id="VerifyEmail">
+            <form action="" id="ResetForm">
                 <div class="grid" id="Formgird">
 
                     <div class="grid__column grid__column--12 grid__column--12--sm">
@@ -53,10 +53,10 @@
                     </div>
 
                     <div class="grid__column grid__column--12 grid__column--6--sm" id="divbtnCancel">
-                        <button class="btn" type="submit" value="btnCancel" id="btnCancel">Cancel</button>
+                        <button class="btn" value="btnCancel" id="btnCancel">Cancel</button>
                     </div>
                     <div class="grid__column grid__column--12 grid__column--6--sm" id="divbtnContinue">
-                        <button class="btn" type="submit" style="float: right" value="btnContinue" id="btnContinue">Continue</button>
+                        <button class="btn" style="float: right" value="btnContinue" id="btnContinue">Continue</button>
                     </div>
                     <div class="grid__column grid__column--12 grid__column--6--sm" style="display:none;" id="divbtnSubmit">
                         <button class="btn" type="submit" style="float: right" value="btnSubmit" id="btnSubmit">Submit</button>

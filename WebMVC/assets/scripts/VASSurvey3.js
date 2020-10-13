@@ -1,4 +1,7 @@
-﻿const UserID = getParameterByName('UserID');
+﻿const UserID = getParameterByName('UserID'),
+      SurveyID = getParameterByName('SurveyID'),
+      StudyName = getParameterByName('StudyName');
+
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -322,6 +325,7 @@ $(document).ready(function () {
         $("#btnPrevious").css("display", "none");
         $("#btnNext").css("display", "block");
     })
+
     ProcVisit0.addEventListener('click', function (e) {
         e.preventDefault();
         $("#section-Demog").css("display", "none");
@@ -431,8 +435,9 @@ $(document).ready(function () {
     //button Sign Out: change to VerifyEmail
     SignOut.addEventListener('click', function (e) {
         e.preventDefault();
-        window.location.replace("/VAS/VerifyEmail?SurveyID=3")
+        window.location.replace("/VAS/Signin" + "?SurveyID=" + SurveyID+ "&StudyName=" + StudyName)
     })
+
     //fill age dropdown menu
     for (var i = 18; i <= 100; i++) {
         var select = document.getElementById("Demog-age");
