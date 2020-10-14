@@ -2914,10 +2914,11 @@ table {
 }
 .control__label__inline {
     display: inline-block;
-
+    margin: 0;
+    font-weight: 600;
 }
 
-.control--checkbox .control__label, .control--radio .control__label {
+.control--checkbox .control__label, .control--checkbox .control__label__inline, .control--radio .control__label, .control--radio .control__label__inline {
     font-weight: 400;
 }
 
@@ -2926,7 +2927,7 @@ table {
     flex-direction: column;
 }
 
-    .control--inline .control__label:not(:first-child) {
+    .control--inline .control__label:not(:first-child), .control--inline .control__label__inline:not(:first-child) {
         margin-left: 0;
     }
 
@@ -2936,7 +2937,7 @@ table {
         flex-direction: row;
     }
 
-        .control--inline .control__label:not(:first-child) {
+        .control--inline .control__label:not(:first-child), .control--inline .control__label__inline:not(:first-child) {
             margin-left: .5rem;
         }
 }
@@ -5078,7 +5079,7 @@ input[type=checkbox].control__checkbox {
     position: absolute;
 }
 
-    input[type=checkbox].control__checkbox:focus ~ .control__label {
+    input[type=checkbox].control__checkbox:focus ~ .control__label, input[type=checkbox].control__checkbox:focus ~ .control__label__inline {
         outline: 2px solid #0ac1e0;
     }
 
@@ -5086,7 +5087,7 @@ textarea.control__input {
     height: 120px;
 }
 
-.control__label {
+.control__label, .control__label__inline {
     padding: 5px 0;
     font-size: 1.125em;
     font-weight: 400;
