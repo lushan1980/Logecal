@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Lumendi";
 }
-<script src="~/assets/scripts/VASSurvey3.js?1013"></script>
+<script src="~/assets/scripts/VASSurvey3.js?1015"></script>
 <!-- BANNER
 ================================================== -->
 <div class="banner banner--small" role="banner">
@@ -308,7 +308,7 @@
                         <div class="grid__column grid__column--12 grid__column--6--md">
                             @*Randomization*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-Randomization" class="control__label control__label control__label--is-required">Randomization Group: </label>
+                                <label for="proc-Randomization" class="control__label control__label__inline control__label--is-required">Randomization Group: </label>
                                 <fieldset>
                                     <label for="Device">
                                         <input type="radio" id="Device" value="Device" name="proc-Randomization" required /> Device
@@ -354,8 +354,6 @@
                                 <input type="number" step="0.1" min="0" max="100" class="control__input__inline" id="proc-Width" required />cm
                                 <p id="msg-proc-Width" style="color:#ff0000; margin:0px; font-style:italic"></p>
                             </div>
-
-
                         </div>
 
                         @*Form Right*@
@@ -365,34 +363,34 @@
                                 <label for="Demog-LesionLocation: " class="control__label control__label--is-required">Lesion Location: </label>
                                 <fieldset>
                                     <label for="LesionLocation1">
-                                        <input type="radio" id="LesionLocation1" value="Appendix" name="Demog-LesionLocation" /> Appendix
+                                        <input type="radio" id="LesionLocation1" value="Appendix" name="proc-LesionLocation" /> Appendix
                                     </label>
                                     <label for="LesionLocation2">
-                                        <input type="radio" id="LesionLocation2" value="Ascending Colon" name="Demog-LesionLocation" /> Ascending Colon
+                                        <input type="radio" id="LesionLocation2" value="Ascending Colon" name="proc-LesionLocation" /> Ascending Colon
                                     </label>
                                     <label for="LesionLocation3">
-                                        <input type="radio" id="LesionLocation3" value="Cecum" name="Demog-LesionLocation" /> Cecum
+                                        <input type="radio" id="LesionLocation3" value="Cecum" name="proc-LesionLocation" /> Cecum
                                     </label>
                                     <label for="LesionLocation4">
-                                        <input type="radio" id="LesionLocation4" value="Descending Colon" name="Demog-LesionLocation" /> Descending Colon
+                                        <input type="radio" id="LesionLocation4" value="Descending Colon" name="proc-LesionLocation" /> Descending Colon
                                     </label><br>
                                     <label for="LesionLocation5">
-                                        <input type="radio" id="LesionLocation5" value="Hepatic Flexure" name="Demog-LesionLocation" /> Hepatic Flexure
+                                        <input type="radio" id="LesionLocation5" value="Hepatic Flexure" name="proc-LesionLocation" /> Hepatic Flexure
                                     </label>
                                     <label for="LesionLocation6">
-                                        <input type="radio" id="LesionLocation6" value="ICV" name="Demog-LesionLocation" /> ICV
+                                        <input type="radio" id="LesionLocation6" value="ICV" name="proc-LesionLocation" /> ICV
                                     </label>
                                     <label for="LesionLocation7">
-                                        <input type="radio" id="LesionLocation7" value="Rectum" name="Demog-LesionLocation" /> Rectum
+                                        <input type="radio" id="LesionLocation7" value="Rectum" name="proc-LesionLocation" /> Rectum
                                     </label>
                                     <label for="LesionLocation8">
-                                        <input type="radio" id="LesionLocation8" value="Sigmoid" name="Demog-LesionLocation" /> Sigmoid
+                                        <input type="radio" id="LesionLocation8" value="Sigmoid" name="proc-LesionLocation" /> Sigmoid
                                     </label><br>
                                     <label for="LesionLocation9">
-                                        <input type="radio" id="LesionLocation9" value="Splenic Flexure" name="Demog-LesionLocation" /> Splenic Flexure
+                                        <input type="radio" id="LesionLocation9" value="Splenic Flexure" name="proc-LesionLocation" /> Splenic Flexure
                                     </label>
                                     <label for="LesionLocation10">
-                                        <input type="radio" id="LesionLocation10" value="Transverse Colon" name="Demog-LesionLocation" /> Transverse Colon
+                                        <input type="radio" id="LesionLocation10" value="Transverse Colon" name="proc-LesionLocation" /> Transverse Colon
                                     </label>
                                 </fieldset>
                                 <p id="msg-proc-Width" style="color:#ff0000; margin:0px; font-style:italic"></p>
@@ -422,10 +420,10 @@
                                 <label for="Demog-CleanMarginsYes" class="control__label__inline control__label--is-required">Clean Margins?</label>
                                 <fieldset>
                                     <label for="CleanMarginsYes">
-                                        <input type="radio" id="CleanMarginsYes" value="Yes" name="Demog-CleanMargins" /> Yes
+                                        <input type="radio" id="CleanMarginsYes" value="Yes" name="proc-CleanMargins" /> Yes
                                     </label>
                                     <label for="CleanMarginsNo">
-                                        <input type="radio" id="CleanMarginsNo" value="No" name="Demog-CleanMargins" /> No
+                                        <input type="radio" id="CleanMarginsNo" value="No" name="proc-CleanMargins" /> No
                                     </label>
                                 </fieldset>
                                 <p id="msg-Demog-CleanMargins" style="color:#ff0000; margin:0px; font-style:italic"></p>

@@ -16,13 +16,33 @@ namespace WebMVC.Models
         public float F1 { get; set; }
         public float F2 { get; set; }
         public string Ethnicity { get; set; }
+        public string ColonPolyp { get; set; }
+        public string BiopsyDone { get; set; }
+        public string Hemorrhoids { get; set; }
+        public string Diverticulitis { get; set; }
+        public string Diabetes { get; set; }
+        public string Anemia { get; set; }
+        public string Hysterectomy { get; set; }
+        public string ASA { get; set; }
+        public string Kudo { get; set; }
+        public string Paris { get; set; }
+
+
         public string Race { get; set; }
         public string RaceEthni { get; set; }
         public int? VisitNo { get; set; }
         public float? Assessment { get; set; }
         public string Randomization { get; set; }
+        public string Successful { get; set; }
+        public string Comment { get; set; }
+
         public float? Length { get; set; }
         public float? Width { get; set; }
+
+        public string Location { get; set; }
+        public string Navigating { get; set; }
+        public string CleanMargins { get; set; }
+
         public string DProc { get; set; }
         public string TBegan { get; set; }
         public string TEnded { get; set; }

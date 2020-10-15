@@ -1747,7 +1747,7 @@ button, select {
 
 fieldset {
     padding: .35em .75em .625em;
-    display: inline-block;
+    display: -webkit-inline-box;
     border: 0px;
 }
 
@@ -2926,8 +2926,7 @@ table {
     -ms-flex-direction: column;
     flex-direction: column;
 }
-
-    .control--inline .control__label:not(:first-child), .control--inline .control__label__inline:not(:first-child) {
+    .control--inline .control__label:not(:first-child) {
         margin-left: 0;
     }
 
@@ -2937,7 +2936,7 @@ table {
         flex-direction: row;
     }
 
-        .control--inline .control__label:not(:first-child), .control--inline .control__label__inline:not(:first-child) {
+        .control--inline .control__label:not(:first-child) {
             margin-left: .5rem;
         }
 }
@@ -5079,7 +5078,7 @@ input[type=checkbox].control__checkbox {
     position: absolute;
 }
 
-    input[type=checkbox].control__checkbox:focus ~ .control__label, input[type=checkbox].control__checkbox:focus ~ .control__label__inline {
+    input[type=checkbox].control__checkbox:focus ~ .control__label {
         outline: 2px solid #0ac1e0;
     }
 

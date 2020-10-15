@@ -1112,8 +1112,68 @@ namespace WebMVC.Controllers
                 });
                 cmd.Parameters.Add(new SqlParameter()
                 {
+                    ParameterName = "@ColonPolyp",
+                    Value = val.ColonPolyp
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@BiopsyDone",
+                    Value = val.BiopsyDone
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Hemorrhoids",
+                    Value = val.Hemorrhoids
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Diverticulitis",
+                    Value = val.Diverticulitis
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Diabetes",
+                    Value = val.Diabetes
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Anemia",
+                    Value = val.Anemia
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Hysterectomy",
+                    Value = val.Hysterectomy
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@ASA",
+                    Value = val.ASA
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Kudo",
+                    Value = val.Kudo
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Paris",
+                    Value = val.Paris
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
                     ParameterName = "@Randomization",
                     Value = val.Randomization
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Successful",
+                    Value = val.Successful
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Comment",
+                    Value = val.Comment
                 });
                 cmd.Parameters.Add(new SqlParameter()
                 {
@@ -1124,6 +1184,21 @@ namespace WebMVC.Controllers
                 {
                     ParameterName = "@Width",
                     Value = val.Width
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Location",
+                    Value = val.Location
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@Navigating",
+                    Value = val.Navigating
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@CleanMargins",
+                    Value = val.CleanMargins
                 });
                 cmd.Parameters.Add(new SqlParameter()
                 {

@@ -1,4 +1,6 @@
-﻿const UserID = getParameterByName('UserID'),
+﻿
+
+const UserID = getParameterByName('UserID'),
       SurveyID = getParameterByName('SurveyID'),
       StudyName = getParameterByName('StudyName');
 
@@ -38,8 +40,6 @@ $(document).ready(function () {
             }
         });
     }
-
-    //const UserID = getParameterByName('UserID');
 
     var $curr, $first, $last = $("#section-AE"), VisitTime, obj,
         AllValues, thisAge, thisGender, thisRaceEthni, thisRandomization, thisLength, thisWidth, thisTBegan, thisTEnded, thisTCeReached, thisTLeReached;
@@ -347,12 +347,29 @@ $(document).ready(function () {
         }
         if (!isValid) { return };
 
-        var gender = displayRadioValue('Demog-gender'),
-            RaceEthni = displayRadioValue('Demog-RaceEthni');
+        var Age = $('#Demog-age').val(),
+            gender = displayRadioValue('Demog-gender'),
+            RaceEthni = displayRadioValue('Demog-RaceEthni'),
+            ColonPolyp = displayRadioValue('Demog-ColonPolyp'),
+            BiopsyDone = displayRadioValue('Demog-BiopsyDone'),
+            Hemorrhoids = displayRadioValue('Demog-Hemorrhoids'),
+            Diverticulitis = displayRadioValue('Demog-Diverticulitis'),
+            Diabetes = displayRadioValue('Demog-Diabete'),
+            Anemia = displayRadioValue('Demog-Anemia'),
+            Hysterectomy = displayRadioValue('Demog-Hysterectomy'),
+            ASA = displayRadioValue('Demog-ASA'),
+            Kudo = displayRadioValue('Demog-Kudo'),
+            Paris = displayRadioValue('Demog-Paris')
+            ;
         var Randomization = displayRadioValue('proc-Randomization'),
+            Successful = displayRadioValue('proc-Randomization'),
+            Comment = document.getElementById('proc-DescribeNotSuccess').value,
             Length = document.getElementById("proc-Length").value,
             Width = document.getElementById('proc-Width').value,
             DProc = document.getElementById('proc-DProc').value,
+            Location = displayRadioValue('proc-LesionLocation'),
+            Navigating = displayRadioValue('proc-Navigating'),
+            CleanMargins = displayRadioValue('proc-CleanMargins'),
             TBegan = document.getElementById('proc-TBegan').value,
             TEnded = document.getElementById('proc-TEnded').value,
             TCeReached = document.getElementById('proc-TCeReached').value,
@@ -372,12 +389,27 @@ $(document).ready(function () {
             object = {
                 UserID: UserID,
                 SubjID: $('#SubjID').val(),
-                Age: $('#Demog-age').val(),
+                Age: Age,
                 Gender: gender,
                 RaceEthni: RaceEthni,
+                ColonPolyp: ColonPolyp,
+                BiopsyDone: BiopsyDone,
+                Hemorrhoids: Hemorrhoids,
+                Diverticulitis: Diverticulitis,
+                Diabetes: Diabetes,
+                Anemia: Anemia,
+                Hysterectomy: Hysterectomy,
+                ASA: ASA,
+                Kudo: Kudo,
+                Paris: Paris,
                 Randomization: Randomization,
+                Successful: Successful,
+                Comment: Comment,
                 Length: Length,
                 Width: Width,
+                Location: Location,
+                Navigating: Navigating,
+                CleanMargins: CleanMargins,
                 DProc: DProc,
                 TBegan: TBegan,
                 TEnded: TEnded,
