@@ -1,11 +1,33 @@
 ﻿$(document).ready(function () {
-    const StudyName = getParameterByName('StudyName'),
-          SurveyID = getParameterByName('SurveyID');
-    document.getElementById('BannerContent').innerHTML = StudyName;
 
-    $('#Signup').submit(function (event) {
-        event.preventDefault();
-              
+    const SurveyID = getParameterByName('SurveyID'),
+          StudyName = getParameterByName('StudyName');
+    var url = "/VAS/Survey" + SurveyID;
+
+    document.getElementById('BannerContent').innerHTML = StudyName;
+    var buttonpressed;
+    $('.btn').click(function () {
+        buttonpressed = $(this).attr('id')
+    })
+    $('#Signin').submit(function (e) {
+        e.preventDefault();
+        if (buttonpressed === "btnSignin") {
+            Signin();
+        }
+        else {
+            Signup();
+        }
+    })
+
+    //document.getElementById('User-Administrator').addEventListener('change', function(event) {
+    //    if (event.target.checked) {
+    //        document.getElementById('User-Administrator').value = "Admin";
+    //    } else {
+    //        document.getElementById('User-Administrator').value = "User";
+    //    }
+    //})
+
+    function Signin() {
         var i, inputs, messages;
         inputs = document.querySelectorAll('[id ^= "User-"]');
         messages = document.querySelectorAll('[id ^= "msg-"]');
@@ -22,35 +44,26 @@
         }
         if (!isValid) { return };
 
-        var password = document.getElementById("User-Pwd")
-            , confirm_password = document.getElementById("User-ConfirmPwd");
-
-        if (password.value != confirm_password.value) {
-            document.getElementById("msg-ConfirmPwd").innerHTML = "Password don't match"
-            return false;
-        }  
-
-
         var obj = {
             SurveyID: SurveyID,
             Email: $('#User-Email').val(),
-            Password: $('#User-Pwd').val()
+            Administrator: $('#User-Administrator').val(),
+            Password: $('#User-Password').val()
         }
-        var url = "/VAS/Survey" + SurveyID;
 
         if (SurveyID === "3") {
             $.ajax({
                 type: "POST",
-                url: "/VASValue/InsertLumendiUser",
+                url: "/VASValue/CheckLumendiUser",
                 dataType: "json",
                 data: JSON.stringify(obj),
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    if (data.returnvalue !== "") {
+                    if (data.returnvalue != "") {
                         var UserID = data.returnvalue;
-                        window.location.replace(url + "?UserID=" + UserID)
+                        window.location.replace("/VAS/Survey" + SurveyID + "?SurveyID=" + SurveyID + "&UserID=" + UserID + "&StudyName=" + StudyName)
                     } else {
-                        alert("You already have an account, please sign in directly.");
+                        alert("Your Email or Password are wrong! ");
                     }
                 }
             })
@@ -58,27 +71,31 @@
         else {
             $.ajax({
                 type: "POST",
-                url: "/VASValue/InsertVASUser",
+                url: "/VASValue/CheckVASUser",
                 dataType: "json",
                 data: JSON.stringify(obj),
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    if (data.returnvalue !== "") {
-                        //alert("Success");
-                        //var user = JSON.parse(data);
+                    if (data.returnvalue != "") {
                         var SubjID = data.returnvalue;
-                        //var ID = user[0].ID;
                         window.location.replace(url + "?SubjID=" + SubjID)
                     } else {
-                        alert("You already have an account, please sign in directly.");
+                        alert("Your Email or Password are wrong");
+                        Response.redirect(url)
                     }
                 }
             })
         }
-    })
-    
-    $('#btnCancel').on('click', function (e) {
-        window.location.replace("/VAS/Signin" + '?SurveyID=' + SurveyID + '&StudyName=' + StudyName)
+    }
+
+    function Signup() {
+        var urlSignup = "/VAS/Signup?SurveyID=" + SurveyID + '&StudyName=' + StudyName;
+        window.location.replace(urlSignup)
+    }
+
+    $('#forgetlink').on('click', function (e) {
+        e.preventDefault();
+        window.location.replace('/VAS/ResetPwd' + '?SurveyID=' + SurveyID + '&StudyName=' + StudyName)
     })
 
     function getParameterByName(name, url) {
@@ -91,15 +108,7 @@
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
-    $(".toggle-password").click(function () {
-        $(this).toggleClass("fa-eye fa-eye-slash");
-        var input = $($(this).attr("toggle"));
-    
-        if (input.attr("type") == "password") {
-            input.attr("type", "text");
-        } else {
-            input.attr("type", "password");
-        }
-
-    });
 })
+
+
+

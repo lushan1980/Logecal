@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+<script src="~/assets/scripts/Admin.js"></script>
+<!-- BANNER
+================================================== -->
+<div class="banner banner--small" role="banner">
+    <div class="banner__background" style="background-image:url(/assets/images/banner-contact.jpg);" data-type="background"></div>
+    <div class="banner__content">
+        <h2 class="banner__headline alpha">Data Administrator</h2>
+    </div>
+</div><!--/banner -->
+
+
+<main role="main" id="main">
+    <div class="section section--gray" style="padding: 40px 0">
+        <div class="container">
+            <p style="display: inline">Hi Data Administrator: Welcome to our study! Now, you can modify the record.</p>
+            <button class="btn" id="btnSignOut" style="float: right; transform: translateY(-20px)">Sign Out</button>
+        </div>
+    </div>
+    <div class="container--fluid two-column__container">
+        <div class="grid two-column">
+            <!--left -->
+            <div class="grid__column grid__column--12 grid__column--2--md two-column__section two-column__section--blue" id="div-menu">
+                <div class="vertical-menu">
+                    <a href="#" id="Invitation" targetLink="Invitation">Invitation</a>
+                    <a href="#" id="Summary0">Demographics</a>
+                    <a href="#" id="Summary1">Procedure</a>
+                    <a href="#" id="Summary2">Adverse Events</a>
+
+                </div>
+            </div>
+            <!--right -->
+            <div class="grid__column grid__column--12 grid__column--10--md two-column__section" id="div-Form">
+                <!--section Invitation-->
+                <section class="grid" id="section-Invitation" style="display: inline-block">
+                    <div class="grid__column grid__column--12 grid__column--12--md" style="padding: 0 100px">
+                        <h3>Invitation</h3>
+                        <form action="" id="InvitationForm">
+                            <div class="grid" id="Formgird">
+                                <div class="grid__column grid__column--12 grid__column--12--sm">
+                                    <div class="control" id="divEmail">
+                                        <label for="User-Email" class="control__label control__label--is-required">Email Address</label>
+                                        <input type="email" class="control__input" id="User-Email">
+                                        <p id="msg-email" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                                    </div>
+                                </div>
+
+                                <div class="grid__column grid__column--12 grid__column--6--sm">
+                                    <button class="btn" id="btnInvit" type="submit" value="btnSubmit">Invite</button>
+                                </div>
+                                <div class="grid__column grid__column--12 grid__column--6--sm">
+                                    <button class="btn" id="btnCancel" style="float: right; color: #b74d4d" value="btnSignin">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+                <!--section Demog-->
+                <section class="grid" id="section-Demog" style="display: none">
+                    <div class="grid__column grid__column--12 grid__column--12--md" style="padding: 0 100px">
+                        <h3>DEMOGRAPHICS</h3>
+                        <table id="table-Demog">
+                            <tr>
+                                <th>User ID</th>
+                                <th>Subject ID</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Race/Ethnicity</th>
+                                <th>Options</th>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+                <!--section Proc-->
+                <section class="grid" id="section-Proc" style="display: none">
+                    <div class="grid__column grid__column--12 grid__column--12--md" style="padding: 0 100px">
+                        <h3>PROCEDURE</h3>
+                        <table id="table-Proc">
+                            <tr>
+                                <th>Subject ID</th>
+                                <th>Randomization Group</th>
+                                <th>Length of Lesion</th>
+                                <th>Width of Lesion</th>
+                                <th>Date of Procedure</th>
+                                <th>Time Case Begin</th>
+                                <th>Time Case Ended</th>
+                                <th>Time when Ceum Reached</th>
+                                <th>Time when Lesion Reached</th>
+                                <th style="width:20%">Options</th>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+                <!--section AE-->
+                <section class="grid" id="section-AE" style="display: none">
+                    <div class="grid__column grid__column--12 grid__column--12--md" style="padding: 0 100px">
+                        <h3>ADVERSE EVENTS</h3>
+                        <table id="table-AE">
+                            <tr>
+                                <th>Subject ID</th>
+                                <th>Visit No.</th>
+                                <th>Adverse Event</th>
+                                <th>Severity</th>
+                                <th>Options</th>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+    </div>
+</main>

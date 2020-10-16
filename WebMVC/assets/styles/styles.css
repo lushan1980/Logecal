@@ -2917,6 +2917,9 @@ table {
     margin: 0;
     font-weight: 600;
 }
+.fieldset_label{
+    padding: 0 10px;
+}
 
 .control--checkbox .control__label, .control--checkbox .control__label__inline, .control--radio .control__label, .control--radio .control__label__inline {
     font-weight: 400;

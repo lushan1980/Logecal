@@ -1,4 +1,9 @@
-﻿const UserID = getParameterByName('UserID');;
+﻿
+
+const UserID = getParameterByName('UserID'),
+      SurveyID = getParameterByName('SurveyID'),
+      StudyName = getParameterByName('StudyName');
+
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -8,13 +13,15 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
-var arr = document.referrer.split("/");
-var url = arr.slice(-1)[0];
-if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3" && url !== "LumendiSummary?UserID="+UserID ) {
-    window.location.replace("/VAS/VerifyEmail?SurveyID=3");
-}
+//var arr = document.referrer.split("/");
+//var url = arr.slice(-1)[0];
+//if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3" && url !== "LumendiSummary?UserID="+UserID ) {
+//    window.location.replace("/VAS/VerifyEmail?SurveyID=3");
+//}
 
 $(document).ready(function () {
+    document.getElementById("UserID").innerHTML = UserID;
+
     $('button').click(function () {
         $(this).toggleClass('down');
     });
@@ -34,14 +41,13 @@ $(document).ready(function () {
         });
     }
 
-    const UserID = getParameterByName('UserID');
-
     var $curr, $first, $last = $("#section-AE"), VisitTime, obj,
         AllValues, thisAge, thisGender, thisRaceEthni, thisRandomization, thisLength, thisWidth, thisTBegan, thisTEnded, thisTCeReached, thisTLeReached;
 
     //const Previous = document.getElementById("btnPrevious");
     //const Next = document.getElementById("btnNext");
-    const SubjID = document.getElementById("SubjID");
+    const SubjID = document.getElementById("SubjID"),
+          SignOut = document.getElementById("btnSignOut");
     
     var Visits = document.querySelectorAll('[id ^= "Visit"]'),
         VisitsArray = Array.prototype.slice.call(Visits),
@@ -187,38 +193,6 @@ $(document).ready(function () {
         document.getElementById("divAEtable").classList.remove("isDisabled");
     })
 
-
-    //Previous.addEventListener('click', function (e) {
-    //    e.preventDefault();
-    //    $curr.css("display", "none");
-    //    $curr = $curr.prev();
-    //    $("section").css("display", "none");
-    //    $("#btnSubmit").css("display", "none");
-    //    $("#btnNext").css("display", "block");
-    //    if ($curr.is($first)) {
-    //        $("#btnPrevious").css("display", "none");
-    //    }
-    //    $curr.css("display", "inline-flex");
-    //})
-    //Next.addEventListener('click', function (e) {
-    //    e.preventDefault();
-    //    $("#btnPrevious").css("display", "block");
-    //    $curr.css("display", "none");
-    //    $curr = $curr.next();
-    //    $("section").css("display", "none");
-    //    if ($curr.is($last)) {
-    //        $("#btnSubmit").css("display", "block");
-    //        $("#btnNext").css("display", "none");
-    //    }
-    //    $curr.css("display", "inline-flex");
-    //    if (temp+1 < VisitTime) {
-    //        $("#btnSubmit").css("display", "none");
-    //        if (temp == 0) {
-    //            $("#section-AE").css("display", "none");
-    //        }
-    //    }  
-    //})
-
     $("#btnPrevious").on('click', function (e) {
         e.preventDefault();
         $("#section-proc").css("display", "none");
@@ -319,6 +293,7 @@ $(document).ready(function () {
         $("#btnPrevious").css("display", "none");
         $("#btnNext").css("display", "block");
     })
+
     ProcVisit0.addEventListener('click', function (e) {
         e.preventDefault();
         $("#section-Demog").css("display", "none");
@@ -340,12 +315,29 @@ $(document).ready(function () {
         }
         if (!isValid) { return };
 
-        var gender = displayRadioValue('Demog-gender'),
-            RaceEthni = displayRadioValue('Demog-RaceEthni');
+        var Age = $('#Demog-age').val(),
+            gender = displayRadioValue('Demog-gender'),
+            RaceEthni = displayRadioValue('Demog-RaceEthni'),
+            ColonPolyp = displayRadioValue('Demog-ColonPolyp'),
+            BiopsyDone = displayRadioValue('Demog-BiopsyDone'),
+            Hemorrhoids = displayRadioValue('Demog-Hemorrhoids'),
+            Diverticulitis = displayRadioValue('Demog-Diverticulitis'),
+            Diabetes = displayRadioValue('Demog-Diabete'),
+            Anemia = displayRadioValue('Demog-Anemia'),
+            Hysterectomy = displayRadioValue('Demog-Hysterectomy'),
+            ASA = displayRadioValue('Demog-ASA'),
+            Kudo = displayRadioValue('Demog-Kudo'),
+            Paris = displayRadioValue('Demog-Paris')
+            ;
         var Randomization = displayRadioValue('proc-Randomization'),
+            Successful = displayRadioValue('proc-Randomization'),
+            Comment = document.getElementById('proc-DescribeNotSuccess').value,
             Length = document.getElementById("proc-Length").value,
             Width = document.getElementById('proc-Width').value,
             DProc = document.getElementById('proc-DProc').value,
+            Location = displayRadioValue('proc-LesionLocation'),
+            Navigating = displayRadioValue('proc-Navigating'),
+            CleanMargins = displayRadioValue('proc-CleanMargins'),
             TBegan = document.getElementById('proc-TBegan').value,
             TEnded = document.getElementById('proc-TEnded').value,
             TCeReached = document.getElementById('proc-TCeReached').value,
@@ -365,12 +357,27 @@ $(document).ready(function () {
             object = {
                 UserID: UserID,
                 SubjID: $('#SubjID').val(),
-                Age: $('#Demog-age').val(),
+                Age: Age,
                 Gender: gender,
                 RaceEthni: RaceEthni,
+                ColonPolyp: ColonPolyp,
+                BiopsyDone: BiopsyDone,
+                Hemorrhoids: Hemorrhoids,
+                Diverticulitis: Diverticulitis,
+                Diabetes: Diabetes,
+                Anemia: Anemia,
+                Hysterectomy: Hysterectomy,
+                ASA: ASA,
+                Kudo: Kudo,
+                Paris: Paris,
                 Randomization: Randomization,
+                Successful: Successful,
+                Comment: Comment,
                 Length: Length,
                 Width: Width,
+                Location: Location,
+                Navigating: Navigating,
+                CleanMargins: CleanMargins,
                 DProc: DProc,
                 TBegan: TBegan,
                 TEnded: TEnded,
@@ -425,6 +432,12 @@ $(document).ready(function () {
         })
     })
 
+    //button Sign Out: change to VerifyEmail
+    SignOut.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.location.replace("/VAS/Signin" + "?SurveyID=" + SurveyID+ "&StudyName=" + StudyName)
+    })
+
     //fill age dropdown menu
     for (var i = 18; i <= 100; i++) {
         var select = document.getElementById("Demog-age");
@@ -451,9 +464,30 @@ $(document).ready(function () {
                 thisAge = AllValues[0].Age;
                 thisGender = myTrim(AllValues[0].Gender);
                 thisRaceEthni = myTrim(AllValues[0].RaceEthni);
+
+                thisColonPolyp = myTrim(AllValues[0].ColonPolyp);
+                thisBiopsyDone = myTrim(AllValues[0].BiopsyDone);
+                thisHemorrhoids = myTrim(AllValues[0].Hemorrhoids);
+                thisDiverticulitis = myTrim(AllValues[0].Diverticulitis);
+                thisDiabetes = myTrim(AllValues[0].Diabetes);
+                thisAnemia = myTrim(AllValues[0].Anemia);
+                thisHysterectomy = myTrim(AllValues[0].Hysterectomy);
+                thisASA = myTrim(AllValues[0].ASA);
+                thisKudo = myTrim(AllValues[0].Kudo);
+                thisParis = myTrim(AllValues[0].Paris);
+
                 thisRandomization = myTrim(AllValues[0].Randomization);
+
+                thisSuccessful = myTrim(AllValues[0].Successful);
+                thisComment = myTrim(AllValues[0].Comment);
+
                 thisLength = AllValues[0].Length;
                 thisWidth = AllValues[0].Width;
+
+                thisLocation = myTrim(AllValues[0].Location);
+                thisNavigating = myTrim(AllValues[0].Navigating);
+                thisCleanMargins = myTrim(AllValues[0].CleanMargins);
+
                 thisDProc = AllValues[0].DProc;
                 thisTBegan = AllValues[0].TBegan;
                 thisTEnded = AllValues[0].TEnded;
@@ -462,42 +496,166 @@ $(document).ready(function () {
 
                 document.getElementById('Demog-age').value = thisAge;
 
-                if (thisGender == "male") {
+                if (thisGender == "Male") {
                     document.getElementById('male').checked = true;
                 }
-                else {
+                else if (thisGender == "Female") {
                     document.getElementById('female').checked = true;
                 }
-
+                
                 switch (thisRaceEthni) {
-                    case "african american/black/not of hispanic origin":
+                    case "African American/Black/Not of Hispanic Origin":
                         document.getElementById('Black').checked = true;
                         break;
-                    case "american indian or alaska native":
+                    case "American Indian or Alaska Native":
                         document.getElementById('AmericanIndian').checked = true;
                         break;
-                    case "asian":
+                    case "Asian":
                         document.getElementById('Asian').checked = true;
                         break;
-                    case "caucasian/white/not of hispanic origin":
+                    case "Caucasian/White/Not of Hispanic Origin":
                         document.getElementById('White').checked = true;
                         break;
-                    case "hispanic or latino":
+                    case "Hispanic or Latino":
                         document.getElementById('Hispanic').checked = true;
                         break;
-                    case "native hawaiian or other pacific islander":
+                    case "Native Hawaiian or Other Pacific Islander":
                         document.getElementById('Hawaiian').checked = true;
                         break;
-                    case "other":
+                    case "Other":
                         document.getElementById('Other').checked = true;
                         break;
                 }
+
+
+                Radiochecked(thisColonPolyp, 'ColonPolyp');
+                Radiochecked(thisBiopsyDone, 'BiopsyDone');
+                Radiochecked(thisHemorrhoids, 'Hemorrhoids');
+                Radiochecked(thisDiverticulitis, 'Diverticulitis');
+                Radiochecked(thisDiabetes, 'Diabetes');
+                Radiochecked(thisAnemia, 'Anemia');
+                Radiochecked(thisHysterectomy, 'Hysterectomy');
+
+
+                switch (thisASA ) {
+                    case "1":
+                        document.getElementById('ASA1').checked = true;
+                        break;
+                    case "2":
+                        document.getElementById('ASA2').checked = true;
+                        break;
+                    case "3":
+                        document.getElementById('ASA3').checked = true;
+                        break;
+                }
+
+
+                switch (thisKudo) {
+                    case "II":
+                        document.getElementById('Kudo1').checked = true;
+                        break;
+                    case "IIA":
+                        document.getElementById('Kudo2').checked = true;
+                        break;
+                    case "IIIL":
+                        document.getElementById('Kudo3').checked = true;
+                        break;
+                    case "IIIS":
+                        document.getElementById('Kudo4').checked = true;
+                        break;
+                    case "IV":
+                        document.getElementById('Kudo5').checked = true;
+                        break;
+                }
+
+                switch (thisParis) {
+                    case "IIa":
+                        document.getElementById('Paris1').checked = true;
+                        break;
+                    case "IIb":
+                        document.getElementById('Paris2').checked = true;
+                        break;
+                    case "IIa+IIb":
+                        document.getElementById('Paris3').checked = true;
+                        break;
+                    case "Ip":
+                        document.getElementById('Paris4').checked = true;
+                        break;
+                    case "Is":
+                        document.getElementById('Paris5').checked = true;
+                        break;
+                    case "Is+IIa":
+                        document.getElementById('Paris6').checked = true;
+                        break;
+                    case "Is+Ip":
+                        document.getElementById('Paris7').checked = true;
+                        break;
+                }
+
                 if (thisRandomization == "Control") {
                     document.getElementById('Control').checked = true;
                 }
-                else {
+                else if (thisRandomization == "Device") {
                     document.getElementById('Device').checked = true;
                 }
+
+                Radiochecked(thisSuccessful, 'DiviceSuccessful');
+
+                switch (thisLocation ) {
+                    case "Appendix":
+                        document.getElementById('LesionLocation1').checked = true;
+                        break;
+                    case "Ascending Colon":
+                        document.getElementById('LesionLocation2').checked = true;
+                        break;
+                    case "Cecum":
+                        document.getElementById('LesionLocation3').checked = true;
+                        break;
+                    case "Descending Colon":
+                        document.getElementById('LesionLocation4').checked = true;
+                        break;
+                    case "Hepatic Flexure":
+                        document.getElementById('LesionLocation5').checked = true;
+                        break;
+                    case "ICV":
+                        document.getElementById('LesionLocation6').checked = true;
+                        break;
+                    case "Rectum":
+                        document.getElementById('LesionLocation7').checked = true;
+                        break;
+                    case "Sigmoid":
+                        document.getElementById('LesionLocation8').checked = true;
+                        break;
+                    case "Splenic Flexure":
+                        document.getElementById('LesionLocation9').checked = true;
+                        break;
+                    case "Transverse Colon":
+                        document.getElementById('LesionLocation10').checked = true;
+                        break;
+                }
+                switch (thisNavigating ) {
+                    case "Difficult":
+                        document.getElementById('Navigating1').checked = true;
+                        break;
+                    case "Somewhat Difficult":
+                        document.getElementById('Navigating2').checked = true;
+                        break;
+                    case "Somewhat Easy":
+                        document.getElementById('Navigating3').checked = true;
+                        break;
+                    case "Easy":
+                        document.getElementById('Navigating4').checked = true;
+                        break;                    
+                }
+
+                if (thisCleanMargins  == "Yes") {
+                    document.getElementById('CleanMarginsYes').checked = true;
+                }
+                else if (thisCleanMargins == "No") {
+                    document.getElementById('CleanMarginsNo').checked = true;
+                }
+
+                document.getElementById('proc-DescribeNotSuccess').value = thisComment;
                 document.getElementById('proc-Length').value = thisLength;
                 document.getElementById('proc-Width').value = thisWidth;
                 document.getElementById('proc-DProc').value = thisDProc;
@@ -509,17 +667,6 @@ $(document).ready(function () {
         });
         document.getElementById("section-Demog").classList.add("isDisabled")
         document.getElementById("section-proc").classList.add("isDisabled")
-    }
-
-    //get url parameter
-    function getParameterByName(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, '\\$&');
-        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
     //get radio value
@@ -535,7 +682,9 @@ $(document).ready(function () {
 
     //remove before and after space and lower case character
     function myTrim(x) {
-        return x.replace(/^\s+|\s+$/gm, '').toLowerCase();
+        if (x !== null) {
+            return x.replace(/^\s+|\s+$/gm, '')/*.toLowerCase()*/;
+        }
     }
 
     //get all Adverse Events for each Visit
@@ -604,5 +753,49 @@ $(document).ready(function () {
         }        
     }
 
+    //Yes or No checked function
+    function Radiochecked(x, element) {
+        if (x == "Yes") {
+            document.getElementById(element + 'Yes').checked = true;
+        }
+        else if (x == "No") {
+            document.getElementById(element + 'No').checked = true;
+        }
+    }
 
 })
+
+
+
+
+
+    //Previous.addEventListener('click', function (e) {
+    //    e.preventDefault();
+    //    $curr.css("display", "none");
+    //    $curr = $curr.prev();
+    //    $("section").css("display", "none");
+    //    $("#btnSubmit").css("display", "none");
+    //    $("#btnNext").css("display", "block");
+    //    if ($curr.is($first)) {
+    //        $("#btnPrevious").css("display", "none");
+    //    }
+    //    $curr.css("display", "inline-flex");
+    //})
+    //Next.addEventListener('click', function (e) {
+    //    e.preventDefault();
+    //    $("#btnPrevious").css("display", "block");
+    //    $curr.css("display", "none");
+    //    $curr = $curr.next();
+    //    $("section").css("display", "none");
+    //    if ($curr.is($last)) {
+    //        $("#btnSubmit").css("display", "block");
+    //        $("#btnNext").css("display", "none");
+    //    }
+    //    $curr.css("display", "inline-flex");
+    //    if (temp+1 < VisitTime) {
+    //        $("#btnSubmit").css("display", "none");
+    //        if (temp == 0) {
+    //            $("#section-AE").css("display", "none");
+    //        }
+    //    }  
+    //})
