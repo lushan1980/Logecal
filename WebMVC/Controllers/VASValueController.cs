@@ -1087,6 +1087,11 @@ namespace WebMVC.Controllers
                 con.Open();
                 cmd.Parameters.Add(new SqlParameter()
                 {
+                    ParameterName = "VisitTime",
+                    Value = val.VisitTime
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
                     ParameterName = "UserID",
                     Value = val.UserID
                 });

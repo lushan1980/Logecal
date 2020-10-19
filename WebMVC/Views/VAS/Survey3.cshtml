@@ -303,7 +303,7 @@
                         <div class="grid__column grid__column--12 grid__column--12--md">
                             <h3>PROCEDURE</h3>
                         </div>
-                        @*Form Left*@
+                        @*Proc Left*@
                         <div class="grid__column grid__column--12 grid__column--6--md">
                             @*Randomization*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
@@ -355,7 +355,7 @@
                             </div>
                         </div>
 
-                        @*Form Right*@
+                        @*Proc Right*@
                         <div class="grid__column grid__column--12 grid__column--6--md">
                             @*Lesion Location:*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
@@ -399,13 +399,13 @@
                                 <label for="proc-Randomization" class="control__label control__label control__label--is-required">Navigating: </label>
                                 <fieldset>
                                     <label for="Navigating1" class="fieldset_label">
-                                        <input type="radio" id="Navigating1" value="Difficult" name="proc-Navigating" required /> Difficult
+                                        <input type="radio" id="Navigating1" value="Difficult" name="proc-Navigating" /> Difficult
                                     </label>
                                     <label for="Navigating2" class="fieldset_label">
                                         <input type="radio" id="Navigating2" value="Somewhat Difficult" name="proc-Navigating" /> Somewhat Difficult
                                     </label>
                                     <label for="Navigating3" class="fieldset_label">
-                                        <input type="radio" id="Navigating3" value="Somewhat Easy" name="proc-Navigating" required /> Somewhat Easy
+                                        <input type="radio" id="Navigating3" value="Somewhat Easy" name="proc-Navigating" /> Somewhat Easy
                                     </label>
                                     <label for="Navigating4" class="fieldset_label">
                                         <input type="radio" id="Navigating4" value="Easy" name="proc-Navigating" /> Easy
@@ -431,31 +431,31 @@
                             @*Date of Procedure:*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
                                 <label class="control__label control__label__inline control__label--is-required">Date of Procedure: </label>
-                                <input type="date" class="control__input__inline" id="proc-DProc" required />
+                                <input type="date" class="control__input__inline" id="proc-DProc" />
                             </div>
                             <p id="msg-proc-TBegan" style="color:#ff0000; margin:0px; font-style:italic"></p>
                             @*Time Case Begin:*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
                                 <label class="control__label control__label__inline control__label--is-required">Time Case Begin: </label>
-                                <input type="time" class="control__input__inline" step="1" id="proc-TBegan" required />
+                                <input type="time" class="control__input__inline" step="1" id="proc-TBegan" />
                             </div>
                             <p id="msg-proc-TBegan" style="color:#ff0000; margin:0px; font-style:italic"></p>
                             @*Time Case Ended:*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
                                 <label class="control__label control__label__inline control__label--is-required">Time Case Ended: </label>
-                                <input type="time" class="control__input__inline" step="1" id="proc-TEnded" required />
+                                <input type="time" class="control__input__inline" step="1" id="proc-TEnded" />
                             </div>
                             <p id="msg-proc-TEnded" style="color:#ff0000; margin:0px; font-style:italic"></p>
                             @*Time when Ceum Reached:*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
                                 <label class="control__label control__label__inline control__label--is-required">Time when Ceum Reached: </label>
-                                <input type="time" class="control__input__inline" step="1" id="proc-TCeReached" required />
+                                <input type="time" class="control__input__inline" step="1" id="proc-TCeReached" />
                             </div>
                             <p id="msg-proc-TCeReached" style="color:#ff0000; margin:0px; font-style:italic"></p>
                             @*Time when Lesion Reached:*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
                                 <label class="control__label control__label__inline control__label--is-required">Time when Lesion Reached: </label>
-                                <input type="time" class="control__input__inline" step="1" id="proc-TLeReached" required />
+                                <input type="time" class="control__input__inline" step="1" id="proc-TLeReached" />
                             </div>
                             <p id="msg-proc-TLeReached" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         </div>
@@ -553,9 +553,10 @@
                     @*div button*@
                     <div class="grid" style="margin-top:30px" id="divButton">
                         <div class="grid__column grid__column--12 grid__column--12--sm">
-                            <button class="btn btn--previous" id="btnPrevious" style="float: left; display:none">Previous</button>
+                            <button class="btn btn--previous" id="btnPrevious" style="float: left; display:none">Previous</button>                            
                             <button class="btn" id="btnNext" style="float: right" type="submit">Next</button>
                             <button class="btn" id="btnSubmit" type="submit" style="float: right; display: none">Submit</button>
+                            <button class="btn" id="btnAESubmit" type="submit" style="float: right; display: none">Submit</button>
                         </div>
                     </div>
                 </div>

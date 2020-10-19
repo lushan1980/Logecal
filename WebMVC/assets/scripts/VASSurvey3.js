@@ -56,8 +56,7 @@ $(document).ready(function () {
         AEVisitsArray = Array.prototype.slice.call(AEVisits);
 
     var DemogVisit0 = document.getElementById('DemogVisit0'),
-        ProcVisit0 = document.getElementById('ProcVisit0');
-        
+        ProcVisit0 = document.getElementById('ProcVisit0');        
     
     var AdventEvents = document.querySelectorAll('[id ^= "AdventEvent"]'),
         Milds = document.querySelectorAll('[id ^= "Mild"]'),
@@ -229,14 +228,35 @@ $(document).ready(function () {
 
         if (!isAgeValid || !isGenderValid || !isRaceValid) { return };
 
+        //var inputs, fieldSets, arr;
+        //inputs = document.querySelectorAll('[id ^= "Demog-"]');
+        //fieldSets = document.querySelectorAll('[name ^= "Demog-"]');
+
+        
+        //for (i = 0; i < inputs.length; i++) {
+        //    var isValid = true;
+        //    var currentInputValue = inputs[i].value;
+        //    if (currentInputValue == null || currentInputValue === "") {
+        //        arr[i] = "";
+        //        isValid = false;
+        //    }
+        //    else arr[i] = inputs[i].value;
+        //    isValid = true;
+        //}
+            
+        //confirm("There are still some options not selected. Are you sure to go to next page?");
+
+
+        //if (!isValid) { return };
+
         $("#section-proc").css("display", "inline-flex");
         $("#section-Demog").css("display", "none");
         $("#btnPrevious").css("display", "block");
         $("#btnNext").css("display", "none");
         $("#btnSubmit").css("display", "none");
-        if (VisitTime == 1) {
+        //if (VisitTime == 1) {
             $("#btnSubmit").css("display", "block");
-        }
+        //}
     })
 
     //var temp;
@@ -269,6 +289,7 @@ $(document).ready(function () {
             $("#btnPrevious").css("display", "none");
             $("#btnNext").css("display", "none");
             $("#btnSubmit").css("display", "none");
+            $("#btnAESubmit").css("display", "none");
             document.getElementById("section-AE").classList.remove("isDisabled");
             $("#btnSubmit").css("display", "none");
             getAEs(index + 2);
@@ -279,7 +300,7 @@ $(document).ready(function () {
                 document.getElementById("section-AE").classList.add("isDisabled");
             } 
             if (index + 2 == VisitTime) {
-                $("#btnSubmit").css("display", "block");
+                $("#btnAESubmit").css("display", "block");
             }
         })
     })
@@ -299,15 +320,31 @@ $(document).ready(function () {
         $("#section-Demog").css("display", "none");
         $("#section-proc").css("display", "inline-flex");
         $("#section-AE").css("display", "none");
-        if (VisitTime == 1) {
+        //if (VisitTime == 1) {
             $("#btnSubmit").css("display", "block");
-        } 
+        //} 
         $("#btnPrevious").css("display", "block");
         $("#btnNext").css("display", "none");
     })
 
+
+    var buttonpressed;
+    $('.btn').click(function () {
+        buttonpressed = $(this).attr('id')
+    })
+
     $('#Study3').on('submit', function (e) {
         e.preventDefault();
+
+        if (buttonpressed === "btnSubmit") {
+            Submit();
+        }
+        else if (buttonpressed === "btnAESubmit") {
+            AESubmit();
+        }
+    })
+
+    function Submit() {
         var isValid = true;
         if (check_age == null || checked_gender == null || checked_RaceEthni == null) {
             alert("Please fill in the Demographics page!");
@@ -330,7 +367,7 @@ $(document).ready(function () {
             Paris = displayRadioValue('Demog-Paris')
             ;
         var Randomization = displayRadioValue('proc-Randomization'),
-            Successful = displayRadioValue('proc-Randomization'),
+            Successful = displayRadioValue('proc-DiviceSuccessful'),
             Comment = document.getElementById('proc-DescribeNotSuccess').value,
             Length = document.getElementById("proc-Length").value,
             Width = document.getElementById('proc-Width').value,
@@ -342,19 +379,11 @@ $(document).ready(function () {
             TEnded = document.getElementById('proc-TEnded').value,
             TCeReached = document.getElementById('proc-TCeReached').value,
             TLeReached = document.getElementById('proc-TLeReached').value;
-        var AEDiscription1 = document.getElementById('AdventEvent1').value,
-            AEDiscription2 = document.getElementById('AdventEvent2').value,
-            AEDiscription3 = document.getElementById('AdventEvent3').value,
-            AEDiscription4 = document.getElementById('AdventEvent4').value;
-        var severity1 = displayRadioValue('SEVERITY1'),
-            severity2 = displayRadioValue('SEVERITY2'),
-            severity3 = displayRadioValue('SEVERITY3'),
-            severity4 = displayRadioValue('SEVERITY4');
 
         var object, url;
 
-        if (VisitTime == 1) {
             object = {
+                VisitTime: VisitTime,
                 UserID: UserID,
                 SubjID: $('#SubjID').val(),
                 Age: Age,
@@ -385,22 +414,6 @@ $(document).ready(function () {
                 TLeReached: TLeReached
             };
             url = "/VASValue/InsertLumendi";
-        }
-        else {
-            object = {
-                SubjID: $('#SubjID').val(),
-                VisitNo: VisitTime,
-                AEDiscription1: AEDiscription1,
-                Severity1: severity1,
-                AEDiscription2: AEDiscription2,
-                Severity2: severity2,
-                AEDiscription3: AEDiscription3,
-                Severity3: severity3,
-                AEDiscription4: AEDiscription4,
-                Severity4: severity4
-            };
-            url = "/VASValue/InsertLumendiAE";
-        }
 
         $.ajax({
             type: "POST",
@@ -418,19 +431,65 @@ $(document).ready(function () {
                     $("#btnPrevious").css("display", "none");
                     $("#btnNext").css("display", "block");
                     $("#btnSubmit").css("display", "none");
-                    //$divButton.remove();
-                    //$("#section-Demog").remove();
-                    //$("#section-feeling").remove();
-                    //$("#section-AE").remove();
-                    //divSuccessMessage = '<p>Thank you for take part in our study</p>';
-                    //$("#SuccessMessage").append(divSuccessMessage);
                 }
                 else {
                     alert("Oops! Something got wrong");
                 }
             }
         })
-    })
+    }
+
+    function AESubmit() {
+        var AEDiscription1 = document.getElementById('AdventEvent1').value,
+            AEDiscription2 = document.getElementById('AdventEvent2').value,
+            AEDiscription3 = document.getElementById('AdventEvent3').value,
+            AEDiscription4 = document.getElementById('AdventEvent4').value;
+        var severity1 = displayRadioValue('SEVERITY1'),
+            severity2 = displayRadioValue('SEVERITY2'),
+            severity3 = displayRadioValue('SEVERITY3'),
+            severity4 = displayRadioValue('SEVERITY4');
+
+        var object, url;
+        
+            object = {
+                SubjID: $('#SubjID').val(),
+                VisitNo: VisitTime,
+                AEDiscription1: AEDiscription1,
+                Severity1: severity1,
+                AEDiscription2: AEDiscription2,
+                Severity2: severity2,
+                AEDiscription3: AEDiscription3,
+                Severity3: severity3,
+                AEDiscription4: AEDiscription4,
+                Severity4: severity4
+            };
+            url = "/VASValue/InsertLumendiAE";
+        
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: JSON.stringify(object),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.returnvalue) {
+                    alert("Success!");
+                    $('#Study3')[0].reset();
+                    $("#section-Demog").css("display", "inline-flex");
+                    $("#section-proc").css("display", "none");
+                    $("#section-AE").css("display", "none");
+                    $("#btnPrevious").css("display", "none");
+                    $("#btnNext").css("display", "block");
+                    $("#btnSubmit").css("display", "none");
+                    $("#btnAESubmit").css("display", "none");
+                }
+                else {
+                    alert("Oops! Something got wrong");
+                }
+            }
+        })
+    }
 
     //button Sign Out: change to VerifyEmail
     SignOut.addEventListener('click', function (e) {
@@ -655,7 +714,13 @@ $(document).ready(function () {
                     document.getElementById('CleanMarginsNo').checked = true;
                 }
 
-                document.getElementById('proc-DescribeNotSuccess').value = thisComment;
+                if (thisComment == null || thisComment == "undefined") {
+                    document.getElementById('proc-DescribeNotSuccess').value = "";
+                }
+                else {
+                    document.getElementById('proc-DescribeNotSuccess').value = thisComment;
+                }
+
                 document.getElementById('proc-Length').value = thisLength;
                 document.getElementById('proc-Width').value = thisWidth;
                 document.getElementById('proc-DProc').value = thisDProc;
@@ -665,8 +730,8 @@ $(document).ready(function () {
                 document.getElementById('proc-TLeReached').value = thisTLeReached;
             }
         });
-        document.getElementById("section-Demog").classList.add("isDisabled")
-        document.getElementById("section-proc").classList.add("isDisabled")
+        //document.getElementById("section-Demog").classList.add("isDisabled")
+        //document.getElementById("section-proc").classList.add("isDisabled")
     }
 
     //get radio value
