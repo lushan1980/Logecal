@@ -70,7 +70,7 @@ $(document).ready(function () {
 
     SubjID.addEventListener('input', function () { 
         var messages = document.querySelectorAll('[id ^= "msg-"]');
-        for (i = 0; i < messages.length; i++) {
+        for (var i = 0; i < messages.length; i++) {
             messages[i].innerHTML = "";
         }
         for (var i = 0; i < Visits.length; i++) {
@@ -201,70 +201,23 @@ $(document).ready(function () {
         $("#btnSubmit").css("display", "none");
     })
 
-    var check_age, checked_gender, checked_RaceEthni;
     $("#btnNext").on('click', function (e) {
         e.preventDefault();
-        //var messages = document.querySelectorAll('[id ^= "msg-Demog-"]');
-        //for (i = 0; i < messages.length; i++) {
-        //    messages[i].innerHTML = "";
-        //}
-        //var isAgeValid = true, isGenderValid = true, isRaceValid = true;
-        //check_age = document.getElementById("Demog-age").value;
-        //if (check_age == null || check_age === "") {
-        //    document.getElementById("msg-Demog-age").innerHTML = "Please select one of these options";
-        //    isAgeValid = false;
-        //}
+        Validator("Demog-")       
 
-        //checked_gender = document.querySelector('input[name="Demog-gender"]:checked');
-        //if (checked_gender == null) {
-        //    document.getElementById("msg-Demog-gender").innerHTML = "Please select one of these options";
-        //    isGenderValid = false;
-        //}
-        //checked_RaceEthni = document.querySelector('input[name="Demog-RaceEthni"]:checked');
-        //if (checked_RaceEthni == null) {
-        //    document.getElementById("msg-Demog-RaceEthni").innerHTML = "Please select one of these options";
-        //    isRaceValid = false;
-        //}
-
-        //if (!isAgeValid || !isGenderValid || !isRaceValid) { return };
-
-        //var inputs, fieldSets, inputarrs = [], FieldSetarrs = [];
-        //inputs = document.querySelectorAll('[id ^= "Demog-"]');
-        //fieldSets = document.querySelectorAll('[name ^= "Demog-"]');
-
-        
-        //for (i = 0; i < inputs.length; i++) {            
-        //    var currentInputValue = inputs[i].value;
-        //    if (currentInputValue == null || currentInputValue === "" || currentInputValue == "none" ) {
-        //        inputarrs[i] = "";                
-        //    }
-        //    else inputarrs[i] = inputs[i].value;            
-        //}
-        //for (i = 0; i < fieldSets.length; i++) {
-        //    var currentFieldSetsValue = fieldSets[i].value;
-        //    if (currentFieldSetsValue == null || currentFieldSetsValue === "" || currentFieldSetsValue == "none") {
-        //        FieldSetarrs[i] = "";
-        //    }
-        //    else FieldSetarrs[i] = fieldSets[i].value;
-        //}
-
-
-        //var a = inputarrs, b = FieldSetarrs;    
-
-        //var result = confirm("There are still some options not selected. Are you sure to go to next page?");
-        //if (result == false) {
-        //    return;
-        //}
-        
+        if (!isValid) {
+            var result = confirm('There are still some options not selected. Are you sure you want to go to next page?');
+            if (result == false) {
+                return
+            }
+        };
 
         $("#section-proc").css("display", "inline-flex");
         $("#section-Demog").css("display", "none");
         $("#btnPrevious").css("display", "block");
         $("#btnNext").css("display", "none");
         $("#btnSubmit").css("display", "none");
-        //if (VisitTime == 1) {
-            $("#btnSubmit").css("display", "block");
-        //}
+        $("#btnSubmit").css("display", "block");
     })
 
     //var temp;
@@ -353,18 +306,14 @@ $(document).ready(function () {
     })
 
     function Submit() {
-        //var isValid = true;
-        //if (check_age == null || checked_gender == null || checked_RaceEthni == null) {
-        //    alert("Please fill in the Demographics page!");
-        //    isValid = false;
-        //}
-        //if (!isValid) { return };
-        Vailidator();
-        //SelectValidator();
-        //RadioValidator();
-        if (result == false) {
-            return;
-        }
+        Validator("proc-");
+
+        if (!isValid) {
+            var result = confirm('There are still some options not selected. Are you sure you want to submit your subject?')
+            if (result == false) {
+                return
+            }
+        };
 
         var Age = $('#Demog-age').val(),
             gender = displayRadioValue('Demog-gender'),
@@ -373,7 +322,7 @@ $(document).ready(function () {
             BiopsyDone = displayRadioValue('Demog-BiopsyDone'),
             Hemorrhoids = displayRadioValue('Demog-Hemorrhoids'),
             Diverticulitis = displayRadioValue('Demog-Diverticulitis'),
-            Diabetes = displayRadioValue('Demog-Diabete'),
+            Diabetes = displayRadioValue('Demog-Diabetes'),
             Anemia = displayRadioValue('Demog-Anemia'),
             Hysterectomy = displayRadioValue('Demog-Hysterectomy'),
             ASA = displayRadioValue('Demog-ASA'),
@@ -396,39 +345,38 @@ $(document).ready(function () {
 
         var object, url;
 
-            object = {
-                VisitTime: VisitTime,
-                UserID: UserID,
-                SubjID: $('#SubjID').val(),
-                Age: Age,
-                Gender: gender,
-                RaceEthni: RaceEthni,
-                ColonPolyp: ColonPolyp,
-                BiopsyDone: BiopsyDone,
-                Hemorrhoids: Hemorrhoids,
-                Diverticulitis: Diverticulitis,
-                Diabetes: Diabetes,
-                Anemia: Anemia,
-                Hysterectomy: Hysterectomy,
-                ASA: ASA,
-                Kudo: Kudo,
-                Paris: Paris,
-                Randomization: Randomization,
-                Successful: Successful,
-                Comment: Comment,
-                Length: Length,
-                Width: Width,
-                Location: Location,
-                Navigating: Navigating,
-                CleanMargins: CleanMargins,
-                DProc: DProc,
-                TBegan: TBegan,
-                TEnded: TEnded,
-                TCeReached: TCeReached,
-                TLeReached: TLeReached
-            };
-            url = "/VASValue/InsertLumendi";
-
+        object = {
+            VisitTime: VisitTime,
+            UserID: UserID,
+            SubjID: $('#SubjID').val(),
+            Age: Age,
+            Gender: gender,
+            RaceEthni: RaceEthni,
+            ColonPolyp: ColonPolyp,
+            BiopsyDone: BiopsyDone,
+            Hemorrhoids: Hemorrhoids,
+            Diverticulitis: Diverticulitis,
+            Diabetes: Diabetes,
+            Anemia: Anemia,
+            Hysterectomy: Hysterectomy,
+            ASA: ASA,
+            Kudo: Kudo,
+            Paris: Paris,
+            Randomization: Randomization,
+            Successful: Successful,
+            Comment: Comment,
+            Length: Length,
+            Width: Width,
+            Location: Location,
+            Navigating: Navigating,
+            CleanMargins: CleanMargins,
+            DProc: DProc,
+            TBegan: TBegan,
+            TEnded: TEnded,
+            TCeReached: TCeReached,
+            TLeReached: TLeReached
+        };
+        url = "/VASValue/InsertLumendi";
         $.ajax({
             type: "POST",
             url: url,
@@ -569,164 +517,30 @@ $(document).ready(function () {
 
                 document.getElementById('Demog-age').value = thisAge;
 
-                if (thisGender == "Male") {
-                    document.getElementById('male').checked = true;
-                }
-                else if (thisGender == "Female") {
-                    document.getElementById('female').checked = true;
-                }
-                
-                switch (thisRaceEthni) {
-                    case "African American/Black/Not of Hispanic Origin":
-                        document.getElementById('Black').checked = true;
-                        break;
-                    case "American Indian or Alaska Native":
-                        document.getElementById('AmericanIndian').checked = true;
-                        break;
-                    case "Asian":
-                        document.getElementById('Asian').checked = true;
-                        break;
-                    case "Caucasian/White/Not of Hispanic Origin":
-                        document.getElementById('White').checked = true;
-                        break;
-                    case "Hispanic or Latino":
-                        document.getElementById('Hispanic').checked = true;
-                        break;
-                    case "Native Hawaiian or Other Pacific Islander":
-                        document.getElementById('Hawaiian').checked = true;
-                        break;
-                    case "Other":
-                        document.getElementById('Other').checked = true;
-                        break;
-                }
+                MultiRadioChecked(thisGender, 'Demog-gender');
+                MultiRadioChecked(thisRaceEthni, 'Demog-RaceEthni');
+
+                Radiochecked(thisColonPolyp, 'Demog-ColonPolyp');
+                Radiochecked(thisBiopsyDone, 'Demog-BiopsyDone');
+                Radiochecked(thisHemorrhoids, 'Demog-Hemorrhoids');
+                Radiochecked(thisDiverticulitis, 'Demog-Diverticulitis');
+                Radiochecked(thisDiabetes, 'Demog-Diabetes');
+                Radiochecked(thisAnemia, 'Demog-Anemia');
+                Radiochecked(thisHysterectomy, 'Demog-Hysterectomy');
 
 
-                Radiochecked(thisColonPolyp, 'ColonPolyp');
-                Radiochecked(thisBiopsyDone, 'BiopsyDone');
-                Radiochecked(thisHemorrhoids, 'Hemorrhoids');
-                Radiochecked(thisDiverticulitis, 'Diverticulitis');
-                Radiochecked(thisDiabetes, 'Diabetes');
-                Radiochecked(thisAnemia, 'Anemia');
-                Radiochecked(thisHysterectomy, 'Hysterectomy');
+                MultiRadioChecked(thisASA, 'Demog-ASA');
+                MultiRadioChecked(thisKudo, 'Demog-Kudo');
+                MultiRadioChecked(thisParis, 'Demog-Paris');
 
 
-                switch (thisASA ) {
-                    case "1":
-                        document.getElementById('ASA1').checked = true;
-                        break;
-                    case "2":
-                        document.getElementById('ASA2').checked = true;
-                        break;
-                    case "3":
-                        document.getElementById('ASA3').checked = true;
-                        break;
-                }
+                MultiRadioChecked(thisRandomization, 'proc-Randomization');
+                MultiRadioChecked(thisLocation, 'proc-LesionLocation');
+                MultiRadioChecked(thisNavigating, 'proc-Navigating');
+                MultiRadioChecked(thisCleanMargins, 'proc-CleanMargins');
 
+                Radiochecked(thisSuccessful, 'proc-DiviceSuccessful');
 
-                switch (thisKudo) {
-                    case "II":
-                        document.getElementById('Kudo1').checked = true;
-                        break;
-                    case "IIA":
-                        document.getElementById('Kudo2').checked = true;
-                        break;
-                    case "IIIL":
-                        document.getElementById('Kudo3').checked = true;
-                        break;
-                    case "IIIS":
-                        document.getElementById('Kudo4').checked = true;
-                        break;
-                    case "IV":
-                        document.getElementById('Kudo5').checked = true;
-                        break;
-                }
-
-                switch (thisParis) {
-                    case "IIa":
-                        document.getElementById('Paris1').checked = true;
-                        break;
-                    case "IIb":
-                        document.getElementById('Paris2').checked = true;
-                        break;
-                    case "IIa+IIb":
-                        document.getElementById('Paris3').checked = true;
-                        break;
-                    case "Ip":
-                        document.getElementById('Paris4').checked = true;
-                        break;
-                    case "Is":
-                        document.getElementById('Paris5').checked = true;
-                        break;
-                    case "Is+IIa":
-                        document.getElementById('Paris6').checked = true;
-                        break;
-                    case "Is+Ip":
-                        document.getElementById('Paris7').checked = true;
-                        break;
-                }
-
-                if (thisRandomization == "Control") {
-                    document.getElementById('Control').checked = true;
-                }
-                else if (thisRandomization == "Device") {
-                    document.getElementById('Device').checked = true;
-                }
-
-                Radiochecked(thisSuccessful, 'DiviceSuccessful');
-
-                switch (thisLocation ) {
-                    case "Appendix":
-                        document.getElementById('LesionLocation1').checked = true;
-                        break;
-                    case "Ascending Colon":
-                        document.getElementById('LesionLocation2').checked = true;
-                        break;
-                    case "Cecum":
-                        document.getElementById('LesionLocation3').checked = true;
-                        break;
-                    case "Descending Colon":
-                        document.getElementById('LesionLocation4').checked = true;
-                        break;
-                    case "Hepatic Flexure":
-                        document.getElementById('LesionLocation5').checked = true;
-                        break;
-                    case "ICV":
-                        document.getElementById('LesionLocation6').checked = true;
-                        break;
-                    case "Rectum":
-                        document.getElementById('LesionLocation7').checked = true;
-                        break;
-                    case "Sigmoid":
-                        document.getElementById('LesionLocation8').checked = true;
-                        break;
-                    case "Splenic Flexure":
-                        document.getElementById('LesionLocation9').checked = true;
-                        break;
-                    case "Transverse Colon":
-                        document.getElementById('LesionLocation10').checked = true;
-                        break;
-                }
-                switch (thisNavigating ) {
-                    case "Difficult":
-                        document.getElementById('Navigating1').checked = true;
-                        break;
-                    case "Somewhat Difficult":
-                        document.getElementById('Navigating2').checked = true;
-                        break;
-                    case "Somewhat Easy":
-                        document.getElementById('Navigating3').checked = true;
-                        break;
-                    case "Easy":
-                        document.getElementById('Navigating4').checked = true;
-                        break;                    
-                }
-
-                if (thisCleanMargins  == "Yes") {
-                    document.getElementById('CleanMarginsYes').checked = true;
-                }
-                else if (thisCleanMargins == "No") {
-                    document.getElementById('CleanMarginsNo').checked = true;
-                }
 
                 if (thisComment == null || thisComment == "undefined") {
                     document.getElementById('proc-DescribeNotSuccess').value = "";
@@ -833,24 +647,44 @@ $(document).ready(function () {
     }
 
     //Yes or No checked function
+
+    //function Radiochecked(x, element) {
+    //    if (x == "Yes") {
+    //        document.getElementById(element + 'Yes').checked = true;
+    //    }
+    //    else if (x == "No") {
+    //        document.getElementById(element + 'No').checked = true;
+    //    }
+    //}
+
     function Radiochecked(x, element) {
         if (x == "Yes") {
-            document.getElementById(element + 'Yes').checked = true;
+            document.getElementsByName(element)[0].checked = true;
         }
         else if (x == "No") {
-            document.getElementById(element + 'No').checked = true;
+            document.getElementsByName(element)[1].checked = true;
         }
     }
 
-    var result;
-    function RadioValidator() {
-        var ShowAlert = '';
-        //var AllFormElements = document.getElementById("Study3").elements;
-        var AllFormElements = document.querySelectorAll('[name ^= "Demog-"], [name ^= "proc-"]');
-        for (i = 0; i < AllFormElements.length; i++) {
-            if (AllFormElements[i].type == 'radio') {
-                var ThisRadio = AllFormElements[i].name;
-                var labelContent = $("label[for='" + ThisRadio + "']").text();
+    var isValid;
+    function Validator(elementsid) {
+        var inputs = document.querySelectorAll('[id ^= ' + elementsid + ']');
+        var a = '[id ^= "msg-' + elementsid + '"]';
+        var messages = document.querySelectorAll('[id ^= "msg-' + elementsid + '"]');
+        for (var i = 0; i < inputs.length; i++) {
+            messages[i].innerHTML = "";
+        }
+        for (var i = 0; i < inputs.length; i++) {
+            if (inputs[i].type == 'number' || inputs[i].type == 'date' || inputs[i].type == 'time' || inputs[i].localName == "textarea" || inputs[i].localName == "select") {
+                isValid = true;
+                var currentInputValue = inputs[i].value;
+                if (currentInputValue == null || currentInputValue === "") {
+                    messages[i].innerHTML = "This field are not been entered a value!";
+                    isValid = false;
+                }
+            }
+            else if (inputs[i].type == 'radio') {
+                var ThisRadio = inputs[i].name;
                 var ThisChecked = 'No';
                 var AllRadioOptions = document.getElementsByName(ThisRadio);
                 for (x = 0; x < AllRadioOptions.length; x++) {
@@ -859,30 +693,26 @@ $(document).ready(function () {
                         break;
                     }
                 }
-                var AlreadySearched = ShowAlert.indexOf(ThisRadio);
-                if (ThisChecked == 'No' && AlreadySearched == -1) {
-                    ShowAlert = ShowAlert + labelContent + ' are not been selected\n';
+                if (ThisChecked == 'No') {
+                    messages[i].innerHTML = "This field are not been selected!";
+                    isValid = false;
                 }
             }
         }
-        if (ShowAlert != '') {
-            result = confirm('There are still some options not selected. Are you sure you want to submit your subject?');
-        }        
+        return isValid;
     }
 
-    function SelectValidator() {
-        var ShowAlert = '';
-        var AllSelectElements = document.getElementsByTagName('select');
-        for (i = 0; i < AllSelectElements.length; i++) {
-            if (AllSelectElements[i].nodeValue == null ) {
-                var ThisSelect = AllSelectElements[i].id;
-                var labelContent = $("label[for='" + ThisSelect + "']").text();
-                ShowAlert = ShowAlert + labelContent + ' are not been selected\n';
+    function MultiRadioChecked(thisElement, ElementName) {
+        var element = document.getElementsByName(ElementName)
+        for (var i = 0; i < element.length; i++) {
+            var a = element[i].value;
+            if (thisElement == element[i].value) {
+                element[i].checked = true;
             }
         }
     }
 
-    function Vailidator() {
+    function Validator11() {
         var ShowAlert = '';
         var AllFormElements = document.querySelectorAll('[id ^= "Demog-"], [id ^= "proc-"], [name ^= "Demog-"], [name ^= "proc-"]');
         for (i = 0; i < AllFormElements.length; i++) {
@@ -903,14 +733,8 @@ $(document).ready(function () {
                 }
                 var CurrentRaido = ThisRadio;
             }
-            else if (AllFormElements[i].type == 'number' || AllFormElements[i].type == 'date' || AllFormElements[i].type == 'time' || AllFormElements[i].localName == "textarea") {
-                if (AllFormElements[i].nodeValue == null) {
-                    var ThisSelect = AllFormElements[i].id;
-                    var labelContent = $("label[for='" + ThisSelect + "']").text();
-                    ShowAlert = ShowAlert + labelContent + ' are not been selected\n';
-                }
-            }
-            else if (AllFormElements[i].localName == "select") {
+
+            else if (AllFormElements[i].type == 'number' || AllFormElements[i].type == 'date' || AllFormElements[i].type == 'time' || AllFormElements[i].localName == "textarea" || AllFormElements[i].localName == "select") {
                 var ThisSelect = AllFormElements[i].id;
                 var a = document.getElementById(ThisSelect).value;
                 if (document.getElementById(ThisSelect).value == null || document.getElementById(ThisSelect).value == "none" || document.getElementById(ThisSelect).value == "") {
