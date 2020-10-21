@@ -196,7 +196,7 @@
                                 <label for="Demog-Diabetes" class="control__label__inline control__label--is-required">Diabetes?  </label>
                                 <fieldset>
                                     <label for="DiabetesYes" class="fieldset_label">
-                                        <input type="radio" id="DiabetesYes" value="Yes" name="Demog-Diabete" /> Yes
+                                        <input type="radio" id="DiabetesYes" value="Yes" name="Demog-Diabetes" /> Yes
                                     </label>
                                     <label for="DiabetesNo" class="fieldset_label">
                                         <input type="radio" id="DiabetesNo" value="No" name="Demog-Diabetes" /> No
@@ -248,7 +248,7 @@
                             </div>
                             @*Kudo Classification:  *@
                             <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-ASA" class="control__label__inline control__label--is-required">Kudo Classification:    </label>
+                                <label for="Demog-Kudo" class="control__label__inline control__label--is-required">Kudo Classification:    </label>
                                 <fieldset>
                                     <label for="Kudo1" class="fieldset_label">
                                         <input type="radio" id="Kudo1" value="II" name="Demog-Kudo" /> II
@@ -270,7 +270,7 @@
                             </div>
                             @*Paris Classification:  *@
                             <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-ASA" class="control__label__inline control__label--is-required">Paris Classification:     </label>
+                                <label for="Demog-Paris" class="control__label__inline control__label--is-required">Paris Classification:     </label>
                                 <fieldset>
                                     <label for="Paris1" class="fieldset_label">
                                         <input type="radio" id="Paris1" value="IIa" name="Demog-Paris" /> IIa
@@ -310,7 +310,7 @@
                                 <label for="proc-Randomization" class="control__label control__label__inline control__label--is-required">Randomization Group: </label>
                                 <fieldset>
                                     <label for="Device" class="fieldset_label">
-                                        <input type="radio" id="Device" value="Device" name="proc-Randomization" required /> Device
+                                        <input type="radio" id="Device" value="Device" name="proc-Randomization" /> Device
                                     </label>
                                     <label for="Control" class="fieldset_label">
                                         <input type="radio" id="Control" value="Control" name="proc-Randomization" /> Control
@@ -321,10 +321,10 @@
 
                             @*Was Intervention with Device Successful? *@
                             <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-Randomization" class="control__label control__label__inline control__label--is-required">If device used, was intervention with device successful?  </label>
+                                <label for="proc-DiviceSuccessful" class="control__label control__label__inline control__label--is-required">If device used, was intervention with device successful?  </label>
                                 <fieldset>
                                     <label for="DiviceSuccessfulYes" class="fieldset_label">
-                                        <input type="radio" id="DiviceSuccessfulYes" value="Yes" name="proc-DiviceSuccessful" required /> Yes
+                                        <input type="radio" id="DiviceSuccessfulYes" value="Yes" name="proc-DiviceSuccessful" /> Yes
                                     </label>
                                     <label for="DiviceSuccessfulNo" class="fieldset_label">
                                         <input type="radio" id="DiviceSuccessfulNo" value="No" name="proc-DiviceSuccessful" /> No
@@ -343,14 +343,14 @@
                             @*Length of Lesion:*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
                                 <label for="proc-Length" class="control__label control__label__inline control__label--is-required">Length of Lesion:</label>
-                                <input type="number" step="0.1" min="0" max="100" class="control__input__inline" id="proc-Length" required />cm
+                                <input type="number" step="0.1" min="0" max="100" class="control__input__inline" id="proc-Length" />cm
                                 <p id="msg-proc-Length" style="color:#ff0000; margin:0px; font-style:italic"></p>
                             </div>
 
                             @*Width of Lesion:*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
                                 <label for="proc-Width" class="control__label control__label__inline control__label--is-required">Width of Lesion:</label>
-                                <input type="number" step="0.1" min="0" max="100" class="control__input__inline" id="proc-Width" required />cm
+                                <input type="number" step="0.1" min="0" max="100" class="control__input__inline" id="proc-Width" />cm
                                 <p id="msg-proc-Width" style="color:#ff0000; margin:0px; font-style:italic"></p>
                             </div>
                         </div>
@@ -359,7 +359,7 @@
                         <div class="grid__column grid__column--12 grid__column--6--md">
                             @*Lesion Location:*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-LesionLocation: " class="control__label control__label--is-required">Lesion Location: </label>
+                                <label for="proc-LesionLocation" class="control__label control__label--is-required">Lesion Location: </label>
                                 <fieldset>
                                     <label for="LesionLocation1" class="fieldset_label">
                                         <input type="radio" id="LesionLocation1" value="Appendix" name="proc-LesionLocation" /> Appendix
@@ -396,7 +396,7 @@
                             </div>
                             @*Navigating: *@
                             <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-Randomization" class="control__label control__label control__label--is-required">Navigating: </label>
+                                <label for="proc-Navigating" class="control__label control__label control__label--is-required">Navigating: </label>
                                 <fieldset>
                                     <label for="Navigating1" class="fieldset_label">
                                         <input type="radio" id="Navigating1" value="Difficult" name="proc-Navigating" /> Difficult
@@ -416,7 +416,7 @@
 
                             @*Clean Margins?*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-CleanMarginsYes" class="control__label__inline control__label--is-required">Clean Margins?</label>
+                                <label for="proc-CleanMargins" class="control__label__inline control__label--is-required">Clean Margins?</label>
                                 <fieldset>
                                     <label for="CleanMarginsYes" class="fieldset_label">
                                         <input type="radio" id="CleanMarginsYes" value="Yes" name="proc-CleanMargins" /> Yes
@@ -430,31 +430,31 @@
 
                             @*Date of Procedure:*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label class="control__label control__label__inline control__label--is-required">Date of Procedure: </label>
+                                <label for="proc-DProc" class="control__label control__label__inline control__label--is-required">Date of Procedure: </label>
                                 <input type="date" class="control__input__inline" id="proc-DProc" />
                             </div>
                             <p id="msg-proc-TBegan" style="color:#ff0000; margin:0px; font-style:italic"></p>
                             @*Time Case Begin:*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label class="control__label control__label__inline control__label--is-required">Time Case Begin: </label>
+                                <label for="proc-TBegan" class="control__label control__label__inline control__label--is-required">Time Case Begin: </label>
                                 <input type="time" class="control__input__inline" step="1" id="proc-TBegan" />
                             </div>
                             <p id="msg-proc-TBegan" style="color:#ff0000; margin:0px; font-style:italic"></p>
                             @*Time Case Ended:*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label class="control__label control__label__inline control__label--is-required">Time Case Ended: </label>
+                                <label for="proc-TEnded" class="control__label control__label__inline control__label--is-required">Time Case Ended: </label>
                                 <input type="time" class="control__input__inline" step="1" id="proc-TEnded" />
                             </div>
                             <p id="msg-proc-TEnded" style="color:#ff0000; margin:0px; font-style:italic"></p>
                             @*Time when Ceum Reached:*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label class="control__label control__label__inline control__label--is-required">Time when Ceum Reached: </label>
+                                <label for="proc-TCeReached" class="control__label control__label__inline control__label--is-required">Time when Ceum Reached: </label>
                                 <input type="time" class="control__input__inline" step="1" id="proc-TCeReached" />
                             </div>
                             <p id="msg-proc-TCeReached" style="color:#ff0000; margin:0px; font-style:italic"></p>
                             @*Time when Lesion Reached:*@
                             <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label class="control__label control__label__inline control__label--is-required">Time when Lesion Reached: </label>
+                                <label for="proc-TLeReached" class="control__label control__label__inline control__label--is-required">Time when Lesion Reached: </label>
                                 <input type="time" class="control__input__inline" step="1" id="proc-TLeReached" />
                             </div>
                             <p id="msg-proc-TLeReached" style="color:#ff0000; margin:0px; font-style:italic"></p>

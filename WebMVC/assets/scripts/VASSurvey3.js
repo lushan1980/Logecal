@@ -204,50 +204,58 @@ $(document).ready(function () {
     var check_age, checked_gender, checked_RaceEthni;
     $("#btnNext").on('click', function (e) {
         e.preventDefault();
-        var messages = document.querySelectorAll('[id ^= "msg-Demog-"]');
-        for (i = 0; i < messages.length; i++) {
-            messages[i].innerHTML = "";
-        }
-        var isAgeValid = true, isGenderValid = true, isRaceValid = true;
-        check_age = document.getElementById("Demog-age").value;
-        if (check_age == null || check_age === "") {
-            document.getElementById("msg-Demog-age").innerHTML = "Please select one of these options";
-            isAgeValid = false;
-        }
+        //var messages = document.querySelectorAll('[id ^= "msg-Demog-"]');
+        //for (i = 0; i < messages.length; i++) {
+        //    messages[i].innerHTML = "";
+        //}
+        //var isAgeValid = true, isGenderValid = true, isRaceValid = true;
+        //check_age = document.getElementById("Demog-age").value;
+        //if (check_age == null || check_age === "") {
+        //    document.getElementById("msg-Demog-age").innerHTML = "Please select one of these options";
+        //    isAgeValid = false;
+        //}
 
-        checked_gender = document.querySelector('input[name="Demog-gender"]:checked');
-        if (checked_gender == null) {
-            document.getElementById("msg-Demog-gender").innerHTML = "Please select one of these options";
-            isGenderValid = false;
-        }
-        checked_RaceEthni = document.querySelector('input[name="Demog-RaceEthni"]:checked');
-        if (checked_RaceEthni == null) {
-            document.getElementById("msg-Demog-RaceEthni").innerHTML = "Please select one of these options";
-            isRaceValid = false;
-        }
+        //checked_gender = document.querySelector('input[name="Demog-gender"]:checked');
+        //if (checked_gender == null) {
+        //    document.getElementById("msg-Demog-gender").innerHTML = "Please select one of these options";
+        //    isGenderValid = false;
+        //}
+        //checked_RaceEthni = document.querySelector('input[name="Demog-RaceEthni"]:checked');
+        //if (checked_RaceEthni == null) {
+        //    document.getElementById("msg-Demog-RaceEthni").innerHTML = "Please select one of these options";
+        //    isRaceValid = false;
+        //}
 
-        if (!isAgeValid || !isGenderValid || !isRaceValid) { return };
+        //if (!isAgeValid || !isGenderValid || !isRaceValid) { return };
 
-        //var inputs, fieldSets, arr;
+        //var inputs, fieldSets, inputarrs = [], FieldSetarrs = [];
         //inputs = document.querySelectorAll('[id ^= "Demog-"]');
         //fieldSets = document.querySelectorAll('[name ^= "Demog-"]');
 
         
-        //for (i = 0; i < inputs.length; i++) {
-        //    var isValid = true;
+        //for (i = 0; i < inputs.length; i++) {            
         //    var currentInputValue = inputs[i].value;
-        //    if (currentInputValue == null || currentInputValue === "") {
-        //        arr[i] = "";
-        //        isValid = false;
+        //    if (currentInputValue == null || currentInputValue === "" || currentInputValue == "none" ) {
+        //        inputarrs[i] = "";                
         //    }
-        //    else arr[i] = inputs[i].value;
-        //    isValid = true;
+        //    else inputarrs[i] = inputs[i].value;            
         //}
-            
-        //confirm("There are still some options not selected. Are you sure to go to next page?");
+        //for (i = 0; i < fieldSets.length; i++) {
+        //    var currentFieldSetsValue = fieldSets[i].value;
+        //    if (currentFieldSetsValue == null || currentFieldSetsValue === "" || currentFieldSetsValue == "none") {
+        //        FieldSetarrs[i] = "";
+        //    }
+        //    else FieldSetarrs[i] = fieldSets[i].value;
+        //}
 
 
-        //if (!isValid) { return };
+        //var a = inputarrs, b = FieldSetarrs;    
+
+        //var result = confirm("There are still some options not selected. Are you sure to go to next page?");
+        //if (result == false) {
+        //    return;
+        //}
+        
 
         $("#section-proc").css("display", "inline-flex");
         $("#section-Demog").css("display", "none");
@@ -345,12 +353,18 @@ $(document).ready(function () {
     })
 
     function Submit() {
-        var isValid = true;
-        if (check_age == null || checked_gender == null || checked_RaceEthni == null) {
-            alert("Please fill in the Demographics page!");
-            isValid = false;
+        //var isValid = true;
+        //if (check_age == null || checked_gender == null || checked_RaceEthni == null) {
+        //    alert("Please fill in the Demographics page!");
+        //    isValid = false;
+        //}
+        //if (!isValid) { return };
+        Vailidator();
+        //SelectValidator();
+        //RadioValidator();
+        if (result == false) {
+            return;
         }
-        if (!isValid) { return };
 
         var Age = $('#Demog-age').val(),
             gender = displayRadioValue('Demog-gender'),
@@ -828,10 +842,92 @@ $(document).ready(function () {
         }
     }
 
+    var result;
+    function RadioValidator() {
+        var ShowAlert = '';
+        //var AllFormElements = document.getElementById("Study3").elements;
+        var AllFormElements = document.querySelectorAll('[name ^= "Demog-"], [name ^= "proc-"]');
+        for (i = 0; i < AllFormElements.length; i++) {
+            if (AllFormElements[i].type == 'radio') {
+                var ThisRadio = AllFormElements[i].name;
+                var labelContent = $("label[for='" + ThisRadio + "']").text();
+                var ThisChecked = 'No';
+                var AllRadioOptions = document.getElementsByName(ThisRadio);
+                for (x = 0; x < AllRadioOptions.length; x++) {
+                    if (AllRadioOptions[x].checked && ThisChecked == 'No') {
+                        ThisChecked = 'Yes';
+                        break;
+                    }
+                }
+                var AlreadySearched = ShowAlert.indexOf(ThisRadio);
+                if (ThisChecked == 'No' && AlreadySearched == -1) {
+                    ShowAlert = ShowAlert + labelContent + ' are not been selected\n';
+                }
+            }
+        }
+        if (ShowAlert != '') {
+            result = confirm('There are still some options not selected. Are you sure you want to submit your subject?');
+        }        
+    }
+
+    function SelectValidator() {
+        var ShowAlert = '';
+        var AllSelectElements = document.getElementsByTagName('select');
+        for (i = 0; i < AllSelectElements.length; i++) {
+            if (AllSelectElements[i].nodeValue == null ) {
+                var ThisSelect = AllSelectElements[i].id;
+                var labelContent = $("label[for='" + ThisSelect + "']").text();
+                ShowAlert = ShowAlert + labelContent + ' are not been selected\n';
+            }
+        }
+    }
+
+    function Vailidator() {
+        var ShowAlert = '';
+        var AllFormElements = document.querySelectorAll('[id ^= "Demog-"], [id ^= "proc-"], [name ^= "Demog-"], [name ^= "proc-"]');
+        for (i = 0; i < AllFormElements.length; i++) {
+            if (AllFormElements[i].type == 'radio') {
+                var ThisRadio = AllFormElements[i].name;
+                var labelContent = $("label[for='" + ThisRadio + "']").text();
+                var ThisChecked = 'No';
+                var AllRadioOptions = document.getElementsByName(ThisRadio);
+                for (x = 0; x < AllRadioOptions.length; x++) {
+                    if (AllRadioOptions[x].checked && ThisChecked == 'No') {
+                        ThisChecked = 'Yes';
+                        break;
+                    }
+                }
+                var AlreadySearched = ShowAlert.indexOf(ThisRadio);
+                if (ThisChecked == 'No' && AlreadySearched == -1 && ThisRadio != CurrentRaido) {
+                    ShowAlert = ShowAlert + labelContent + ' are not been selected\n';
+                }
+                var CurrentRaido = ThisRadio;
+            }
+            else if (AllFormElements[i].type == 'number' || AllFormElements[i].type == 'date' || AllFormElements[i].type == 'time' || AllFormElements[i].localName == "textarea") {
+                if (AllFormElements[i].nodeValue == null) {
+                    var ThisSelect = AllFormElements[i].id;
+                    var labelContent = $("label[for='" + ThisSelect + "']").text();
+                    ShowAlert = ShowAlert + labelContent + ' are not been selected\n';
+                }
+            }
+            else if (AllFormElements[i].localName == "select") {
+                var ThisSelect = AllFormElements[i].id;
+                var a = document.getElementById(ThisSelect).value;
+                if (document.getElementById(ThisSelect).value == null || document.getElementById(ThisSelect).value == "none" || document.getElementById(ThisSelect).value == "") {
+                    var labelContent = $("label[for='" + ThisSelect + "']").text();
+                    ShowAlert = ShowAlert + labelContent + ' are not been selected\n';
+                }
+            }
+        }
+        if (ShowAlert != '') {
+            //result = confirm('There are still some options not selected. Are you sure you want to submit your subject?');
+            result = confirm(ShowAlert);
+        }        
+    }
 })
 
 
-
+//There are still some options not selected.Are you sure to go to next page
 
 
     //Previous.addEventListener('click', function (e) {
