@@ -13,11 +13,11 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
-//var arr = document.referrer.split("/");
-//var url = arr.slice(-1)[0];
-//if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3" && url !== "LumendiSummary?UserID="+UserID ) {
-//    window.location.replace("/VAS/VerifyEmail?SurveyID=3");
-//}
+var arr = document.referrer.split("/");
+var url = arr.slice(-1)[0];
+if (url !== "Signin?SurveyID=3&StudyName=Lumendi" && url !== "Signup?SurveyID=3&StudyName=Lumendi" && url !== "LumendiSummary?UserID="+UserID ) {
+    window.location.replace("/VAS/Signin?SurveyID=3&StudyName=Lumendi");
+}
 
 $(document).ready(function () {
     document.getElementById("UserID").innerHTML = UserID;
@@ -204,14 +204,12 @@ $(document).ready(function () {
     $("#btnNext").on('click', function (e) {
         e.preventDefault();
         Validator("Demog-")       
-
         if (!isValid) {
             var result = confirm('There are still some options not selected. Are you sure you want to go to next page?');
             if (result == false) {
                 return
             }
         };
-
         $("#section-proc").css("display", "inline-flex");
         $("#section-Demog").css("display", "none");
         $("#btnPrevious").css("display", "block");
@@ -224,23 +222,6 @@ $(document).ready(function () {
     VisitsArray.forEach(function (Visit, index) {
         Visit.addEventListener('click', function (e) {
             e.preventDefault();
-            //getAEs(index);
-            //$("#section-proc").removeClass("isDisabled")
-            //$("#section-AE").removeClass("isDisabled")
-            //$("#section-Demog").css("display", "inline-flex");
-            //$("#section-proc").css("display", "none");
-            //$("#section-AE").css("display", "none");
-            //$("#btnPrevious").css("display", "none");
-            //$("#btnNext").css("display", "block");
-            //$("#btnSubmit").css("display", "none");
-            //$curr = $("#section-Demog");
-            //if (index + 1 <= VisitTime) {
-            //    $("#section-proc").addClass("isDisabled");
-            //}
-            //if (index + 1 < VisitTime) {
-            //    $("#section-AE").addClass("isDisabled");
-            //}
-            //temp = index;
         })
     })
 
@@ -287,7 +268,6 @@ $(document).ready(function () {
         $("#btnPrevious").css("display", "block");
         $("#btnNext").css("display", "none");
     })
-
 
     var buttonpressed;
     $('.btn').click(function () {
@@ -481,7 +461,14 @@ $(document).ready(function () {
             success: function (data) {
 
                 AllValues = JSON.parse(data);
-                
+
+                var picked = (({ Age, Gender, RaceEthni,  ColonPolyp, BiopsyDone, Hemorrhoids, Diverticulitis, Diabetes, Anemia, Hysterectomy, ASA, Kudo, Paris,
+                    Randomization, Successful, Comment, Length, Width, Location, Navigating, CleanMargins, DProc, TBegan, TEnded, TCeReached, TLeReached }) => ({
+                        Age, Gender, RaceEthni, ColonPolyp, BiopsyDone, Hemorrhoids, Diverticulitis, Diabetes, Anemia, Hysterectomy, ASA, Kudo, Paris,
+                        Randomization, Successful, Comment, Length, Width, Location, Navigating, CleanMargins, DProc, TBegan, TEnded, TCeReached,
+                        TLeReached}))(AllValues[0]);
+                var a = picked;
+
                 thisAge = AllValues[0].Age;
                 thisGender = myTrim(AllValues[0].Gender);
                 thisRaceEthni = myTrim(AllValues[0].RaceEthni);
@@ -520,27 +507,25 @@ $(document).ready(function () {
                 MultiRadioChecked(thisGender, 'Demog-gender');
                 MultiRadioChecked(thisRaceEthni, 'Demog-RaceEthni');
 
-                Radiochecked(thisColonPolyp, 'Demog-ColonPolyp');
-                Radiochecked(thisBiopsyDone, 'Demog-BiopsyDone');
-                Radiochecked(thisHemorrhoids, 'Demog-Hemorrhoids');
-                Radiochecked(thisDiverticulitis, 'Demog-Diverticulitis');
-                Radiochecked(thisDiabetes, 'Demog-Diabetes');
-                Radiochecked(thisAnemia, 'Demog-Anemia');
-                Radiochecked(thisHysterectomy, 'Demog-Hysterectomy');
+                MultiRadioChecked(thisColonPolyp, 'Demog-ColonPolyp');
 
+                MultiRadioChecked(thisBiopsyDone, 'Demog-BiopsyDone');
+                MultiRadioChecked(thisHemorrhoids, 'Demog-Hemorrhoids');
+                MultiRadioChecked(thisDiverticulitis, 'Demog-Diverticulitis');
+                MultiRadioChecked(thisDiabetes, 'Demog-Diabetes');
+                MultiRadioChecked(thisAnemia, 'Demog-Anemia');
+                MultiRadioChecked(thisHysterectomy, 'Demog-Hysterectomy');
 
                 MultiRadioChecked(thisASA, 'Demog-ASA');
                 MultiRadioChecked(thisKudo, 'Demog-Kudo');
                 MultiRadioChecked(thisParis, 'Demog-Paris');
-
 
                 MultiRadioChecked(thisRandomization, 'proc-Randomization');
                 MultiRadioChecked(thisLocation, 'proc-LesionLocation');
                 MultiRadioChecked(thisNavigating, 'proc-Navigating');
                 MultiRadioChecked(thisCleanMargins, 'proc-CleanMargins');
 
-                Radiochecked(thisSuccessful, 'proc-DiviceSuccessful');
-
+                MultiRadioChecked(thisSuccessful, 'proc-DiviceSuccessful');
 
                 if (thisComment == null || thisComment == "undefined") {
                     document.getElementById('proc-DescribeNotSuccess').value = "";
@@ -646,26 +631,18 @@ $(document).ready(function () {
         }        
     }
 
-    //Yes or No checked function
-
-    //function Radiochecked(x, element) {
-    //    if (x == "Yes") {
-    //        document.getElementById(element + 'Yes').checked = true;
-    //    }
-    //    else if (x == "No") {
-    //        document.getElementById(element + 'No').checked = true;
-    //    }
-    //}
-
-    function Radiochecked(x, element) {
-        if (x == "Yes") {
-            document.getElementsByName(element)[0].checked = true;
-        }
-        else if (x == "No") {
-            document.getElementsByName(element)[1].checked = true;
+    //Set Radio buttton checked
+    function MultiRadioChecked(thisElement, ElementName) {
+        var element = document.getElementsByName(ElementName)
+        for (var i = 0; i < element.length; i++) {
+            var a = element[i].value;
+            if (thisElement == element[i].value) {
+                element[i].checked = true;
+            }
         }
     }
 
+    //Validator
     var isValid;
     function Validator(elementsid) {
         var inputs = document.querySelectorAll('[id ^= ' + elementsid + ']');
@@ -700,16 +677,6 @@ $(document).ready(function () {
             }
         }
         return isValid;
-    }
-
-    function MultiRadioChecked(thisElement, ElementName) {
-        var element = document.getElementsByName(ElementName)
-        for (var i = 0; i < element.length; i++) {
-            var a = element[i].value;
-            if (thisElement == element[i].value) {
-                element[i].checked = true;
-            }
-        }
     }
 
     function Validator11() {
@@ -784,3 +751,12 @@ $(document).ready(function () {
     //        }
     //    }  
     //})
+
+    //function Radiochecked(x, element) {
+    //    if (x == "Yes") {
+    //        document.getElementsByName(element)[0].checked = true;
+    //    }
+    //    else if (x == "No") {
+    //        document.getElementsByName(element)[1].checked = true;
+    //    }
+    //}

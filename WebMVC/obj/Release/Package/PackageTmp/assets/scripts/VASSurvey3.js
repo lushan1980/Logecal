@@ -13,11 +13,11 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
-//var arr = document.referrer.split("/");
-//var url = arr.slice(-1)[0];
-//if (url !== "VerifyEmail?SurveyID=3" && url !== "Signup?SurveyID=3" && url !== "LumendiSummary?UserID="+UserID ) {
-//    window.location.replace("/VAS/VerifyEmail?SurveyID=3");
-//}
+var arr = document.referrer.split("/");
+var url = arr.slice(-1)[0];
+if (url !== "Signin?SurveyID=3&StudyName=Lumendi" && url !== "Signup?SurveyID=3" && url !== "LumendiSummary?UserID="+UserID ) {
+    window.location.replace("/VAS/Signin?SurveyID=3&StudyName=Lumendi");
+}
 
 $(document).ready(function () {
     document.getElementById("UserID").innerHTML = UserID;
@@ -56,8 +56,7 @@ $(document).ready(function () {
         AEVisitsArray = Array.prototype.slice.call(AEVisits);
 
     var DemogVisit0 = document.getElementById('DemogVisit0'),
-        ProcVisit0 = document.getElementById('ProcVisit0');
-        
+        ProcVisit0 = document.getElementById('ProcVisit0');        
     
     var AdventEvents = document.querySelectorAll('[id ^= "AdventEvent"]'),
         Milds = document.querySelectorAll('[id ^= "Mild"]'),
@@ -71,7 +70,7 @@ $(document).ready(function () {
 
     SubjID.addEventListener('input', function () { 
         var messages = document.querySelectorAll('[id ^= "msg-"]');
-        for (i = 0; i < messages.length; i++) {
+        for (var i = 0; i < messages.length; i++) {
             messages[i].innerHTML = "";
         }
         for (var i = 0; i < Visits.length; i++) {
@@ -202,64 +201,27 @@ $(document).ready(function () {
         $("#btnSubmit").css("display", "none");
     })
 
-    var check_age, checked_gender, checked_RaceEthni;
     $("#btnNext").on('click', function (e) {
         e.preventDefault();
-        var messages = document.querySelectorAll('[id ^= "msg-Demog-"]');
-        for (i = 0; i < messages.length; i++) {
-            messages[i].innerHTML = "";
-        }
-        var isAgeValid = true, isGenderValid = true, isRaceValid = true;
-        check_age = document.getElementById("Demog-age").value;
-        if (check_age == null || check_age === "") {
-            document.getElementById("msg-Demog-age").innerHTML = "Please select one of these options";
-            isAgeValid = false;
-        }
-
-        checked_gender = document.querySelector('input[name="Demog-gender"]:checked');
-        if (checked_gender == null) {
-            document.getElementById("msg-Demog-gender").innerHTML = "Please select one of these options";
-            isGenderValid = false;
-        }
-        checked_RaceEthni = document.querySelector('input[name="Demog-RaceEthni"]:checked');
-        if (checked_RaceEthni == null) {
-            document.getElementById("msg-Demog-RaceEthni").innerHTML = "Please select one of these options";
-            isRaceValid = false;
-        }
-
-        if (!isAgeValid || !isGenderValid || !isRaceValid) { return };
-
+        Validator("Demog-")       
+        if (!isValid) {
+            var result = confirm('There are still some options not selected. Are you sure you want to go to next page?');
+            if (result == false) {
+                return
+            }
+        };
         $("#section-proc").css("display", "inline-flex");
         $("#section-Demog").css("display", "none");
         $("#btnPrevious").css("display", "block");
         $("#btnNext").css("display", "none");
         $("#btnSubmit").css("display", "none");
-        if (VisitTime == 1) {
-            $("#btnSubmit").css("display", "block");
-        }
+        $("#btnSubmit").css("display", "block");
     })
 
     //var temp;
     VisitsArray.forEach(function (Visit, index) {
         Visit.addEventListener('click', function (e) {
             e.preventDefault();
-            //getAEs(index);
-            //$("#section-proc").removeClass("isDisabled")
-            //$("#section-AE").removeClass("isDisabled")
-            //$("#section-Demog").css("display", "inline-flex");
-            //$("#section-proc").css("display", "none");
-            //$("#section-AE").css("display", "none");
-            //$("#btnPrevious").css("display", "none");
-            //$("#btnNext").css("display", "block");
-            //$("#btnSubmit").css("display", "none");
-            //$curr = $("#section-Demog");
-            //if (index + 1 <= VisitTime) {
-            //    $("#section-proc").addClass("isDisabled");
-            //}
-            //if (index + 1 < VisitTime) {
-            //    $("#section-AE").addClass("isDisabled");
-            //}
-            //temp = index;
         })
     })
 
@@ -269,6 +231,7 @@ $(document).ready(function () {
             $("#btnPrevious").css("display", "none");
             $("#btnNext").css("display", "none");
             $("#btnSubmit").css("display", "none");
+            $("#btnAESubmit").css("display", "none");
             document.getElementById("section-AE").classList.remove("isDisabled");
             $("#btnSubmit").css("display", "none");
             getAEs(index + 2);
@@ -279,7 +242,7 @@ $(document).ready(function () {
                 document.getElementById("section-AE").classList.add("isDisabled");
             } 
             if (index + 2 == VisitTime) {
-                $("#btnSubmit").css("display", "block");
+                $("#btnAESubmit").css("display", "block");
             }
         })
     })
@@ -299,21 +262,38 @@ $(document).ready(function () {
         $("#section-Demog").css("display", "none");
         $("#section-proc").css("display", "inline-flex");
         $("#section-AE").css("display", "none");
-        if (VisitTime == 1) {
+        //if (VisitTime == 1) {
             $("#btnSubmit").css("display", "block");
-        } 
+        //} 
         $("#btnPrevious").css("display", "block");
         $("#btnNext").css("display", "none");
     })
 
+    var buttonpressed;
+    $('.btn').click(function () {
+        buttonpressed = $(this).attr('id')
+    })
+
     $('#Study3').on('submit', function (e) {
         e.preventDefault();
-        var isValid = true;
-        if (check_age == null || checked_gender == null || checked_RaceEthni == null) {
-            alert("Please fill in the Demographics page!");
-            isValid = false;
+
+        if (buttonpressed === "btnSubmit") {
+            Submit();
         }
-        if (!isValid) { return };
+        else if (buttonpressed === "btnAESubmit") {
+            AESubmit();
+        }
+    })
+
+    function Submit() {
+        Validator("proc-");
+
+        if (!isValid) {
+            var result = confirm('There are still some options not selected. Are you sure you want to submit your subject?')
+            if (result == false) {
+                return
+            }
+        };
 
         var Age = $('#Demog-age').val(),
             gender = displayRadioValue('Demog-gender'),
@@ -322,7 +302,7 @@ $(document).ready(function () {
             BiopsyDone = displayRadioValue('Demog-BiopsyDone'),
             Hemorrhoids = displayRadioValue('Demog-Hemorrhoids'),
             Diverticulitis = displayRadioValue('Demog-Diverticulitis'),
-            Diabetes = displayRadioValue('Demog-Diabete'),
+            Diabetes = displayRadioValue('Demog-Diabetes'),
             Anemia = displayRadioValue('Demog-Anemia'),
             Hysterectomy = displayRadioValue('Demog-Hysterectomy'),
             ASA = displayRadioValue('Demog-ASA'),
@@ -330,7 +310,7 @@ $(document).ready(function () {
             Paris = displayRadioValue('Demog-Paris')
             ;
         var Randomization = displayRadioValue('proc-Randomization'),
-            Successful = displayRadioValue('proc-Randomization'),
+            Successful = displayRadioValue('proc-DiviceSuccessful'),
             Comment = document.getElementById('proc-DescribeNotSuccess').value,
             Length = document.getElementById("proc-Length").value,
             Width = document.getElementById('proc-Width').value,
@@ -342,6 +322,66 @@ $(document).ready(function () {
             TEnded = document.getElementById('proc-TEnded').value,
             TCeReached = document.getElementById('proc-TCeReached').value,
             TLeReached = document.getElementById('proc-TLeReached').value;
+
+        var object, url;
+
+        object = {
+            VisitTime: VisitTime,
+            UserID: UserID,
+            SubjID: $('#SubjID').val(),
+            Age: Age,
+            Gender: gender,
+            RaceEthni: RaceEthni,
+            ColonPolyp: ColonPolyp,
+            BiopsyDone: BiopsyDone,
+            Hemorrhoids: Hemorrhoids,
+            Diverticulitis: Diverticulitis,
+            Diabetes: Diabetes,
+            Anemia: Anemia,
+            Hysterectomy: Hysterectomy,
+            ASA: ASA,
+            Kudo: Kudo,
+            Paris: Paris,
+            Randomization: Randomization,
+            Successful: Successful,
+            Comment: Comment,
+            Length: Length,
+            Width: Width,
+            Location: Location,
+            Navigating: Navigating,
+            CleanMargins: CleanMargins,
+            DProc: DProc,
+            TBegan: TBegan,
+            TEnded: TEnded,
+            TCeReached: TCeReached,
+            TLeReached: TLeReached
+        };
+        url = "/VASValue/InsertLumendi";
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: JSON.stringify(object),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.returnvalue) {
+                    alert("Success!");
+                    $('#Study3')[0].reset();
+                    $("#section-Demog").css("display", "inline-flex");
+                    $("#section-proc").css("display", "none");
+                    $("#section-AE").css("display", "none");
+                    $("#btnPrevious").css("display", "none");
+                    $("#btnNext").css("display", "block");
+                    $("#btnSubmit").css("display", "none");
+                }
+                else {
+                    alert("Oops! Something got wrong");
+                }
+            }
+        })
+    }
+
+    function AESubmit() {
         var AEDiscription1 = document.getElementById('AdventEvent1').value,
             AEDiscription2 = document.getElementById('AdventEvent2').value,
             AEDiscription3 = document.getElementById('AdventEvent3').value,
@@ -352,41 +392,7 @@ $(document).ready(function () {
             severity4 = displayRadioValue('SEVERITY4');
 
         var object, url;
-
-        if (VisitTime == 1) {
-            object = {
-                UserID: UserID,
-                SubjID: $('#SubjID').val(),
-                Age: Age,
-                Gender: gender,
-                RaceEthni: RaceEthni,
-                ColonPolyp: ColonPolyp,
-                BiopsyDone: BiopsyDone,
-                Hemorrhoids: Hemorrhoids,
-                Diverticulitis: Diverticulitis,
-                Diabetes: Diabetes,
-                Anemia: Anemia,
-                Hysterectomy: Hysterectomy,
-                ASA: ASA,
-                Kudo: Kudo,
-                Paris: Paris,
-                Randomization: Randomization,
-                Successful: Successful,
-                Comment: Comment,
-                Length: Length,
-                Width: Width,
-                Location: Location,
-                Navigating: Navigating,
-                CleanMargins: CleanMargins,
-                DProc: DProc,
-                TBegan: TBegan,
-                TEnded: TEnded,
-                TCeReached: TCeReached,
-                TLeReached: TLeReached
-            };
-            url = "/VASValue/InsertLumendi";
-        }
-        else {
+        
             object = {
                 SubjID: $('#SubjID').val(),
                 VisitNo: VisitTime,
@@ -400,7 +406,7 @@ $(document).ready(function () {
                 Severity4: severity4
             };
             url = "/VASValue/InsertLumendiAE";
-        }
+        
 
         $.ajax({
             type: "POST",
@@ -418,19 +424,14 @@ $(document).ready(function () {
                     $("#btnPrevious").css("display", "none");
                     $("#btnNext").css("display", "block");
                     $("#btnSubmit").css("display", "none");
-                    //$divButton.remove();
-                    //$("#section-Demog").remove();
-                    //$("#section-feeling").remove();
-                    //$("#section-AE").remove();
-                    //divSuccessMessage = '<p>Thank you for take part in our study</p>';
-                    //$("#SuccessMessage").append(divSuccessMessage);
+                    $("#btnAESubmit").css("display", "none");
                 }
                 else {
                     alert("Oops! Something got wrong");
                 }
             }
         })
-    })
+    }
 
     //button Sign Out: change to VerifyEmail
     SignOut.addEventListener('click', function (e) {
@@ -460,7 +461,9 @@ $(document).ready(function () {
             success: function (data) {
 
                 AllValues = JSON.parse(data);
-                
+
+
+
                 thisAge = AllValues[0].Age;
                 thisGender = myTrim(AllValues[0].Gender);
                 thisRaceEthni = myTrim(AllValues[0].RaceEthni);
@@ -496,166 +499,36 @@ $(document).ready(function () {
 
                 document.getElementById('Demog-age').value = thisAge;
 
-                if (thisGender == "Male") {
-                    document.getElementById('male').checked = true;
+                MultiRadioChecked(thisGender, 'Demog-gender');
+                MultiRadioChecked(thisRaceEthni, 'Demog-RaceEthni');
+
+                MultiRadioChecked(thisColonPolyp, 'Demog-ColonPolyp');
+
+                MultiRadioChecked(thisBiopsyDone, 'Demog-BiopsyDone');
+                MultiRadioChecked(thisHemorrhoids, 'Demog-Hemorrhoids');
+                MultiRadioChecked(thisDiverticulitis, 'Demog-Diverticulitis');
+                MultiRadioChecked(thisDiabetes, 'Demog-Diabetes');
+                MultiRadioChecked(thisAnemia, 'Demog-Anemia');
+                MultiRadioChecked(thisHysterectomy, 'Demog-Hysterectomy');
+
+                MultiRadioChecked(thisASA, 'Demog-ASA');
+                MultiRadioChecked(thisKudo, 'Demog-Kudo');
+                MultiRadioChecked(thisParis, 'Demog-Paris');
+
+                MultiRadioChecked(thisRandomization, 'proc-Randomization');
+                MultiRadioChecked(thisLocation, 'proc-LesionLocation');
+                MultiRadioChecked(thisNavigating, 'proc-Navigating');
+                MultiRadioChecked(thisCleanMargins, 'proc-CleanMargins');
+
+                MultiRadioChecked(thisSuccessful, 'proc-DiviceSuccessful');
+
+                if (thisComment == null || thisComment == "undefined") {
+                    document.getElementById('proc-DescribeNotSuccess').value = "";
                 }
-                else if (thisGender == "Female") {
-                    document.getElementById('female').checked = true;
-                }
-                
-                switch (thisRaceEthni) {
-                    case "African American/Black/Not of Hispanic Origin":
-                        document.getElementById('Black').checked = true;
-                        break;
-                    case "American Indian or Alaska Native":
-                        document.getElementById('AmericanIndian').checked = true;
-                        break;
-                    case "Asian":
-                        document.getElementById('Asian').checked = true;
-                        break;
-                    case "Caucasian/White/Not of Hispanic Origin":
-                        document.getElementById('White').checked = true;
-                        break;
-                    case "Hispanic or Latino":
-                        document.getElementById('Hispanic').checked = true;
-                        break;
-                    case "Native Hawaiian or Other Pacific Islander":
-                        document.getElementById('Hawaiian').checked = true;
-                        break;
-                    case "Other":
-                        document.getElementById('Other').checked = true;
-                        break;
-                }
-
-
-                Radiochecked(thisColonPolyp, 'ColonPolyp');
-                Radiochecked(thisBiopsyDone, 'BiopsyDone');
-                Radiochecked(thisHemorrhoids, 'Hemorrhoids');
-                Radiochecked(thisDiverticulitis, 'Diverticulitis');
-                Radiochecked(thisDiabetes, 'Diabetes');
-                Radiochecked(thisAnemia, 'Anemia');
-                Radiochecked(thisHysterectomy, 'Hysterectomy');
-
-
-                switch (thisASA ) {
-                    case "1":
-                        document.getElementById('ASA1').checked = true;
-                        break;
-                    case "2":
-                        document.getElementById('ASA2').checked = true;
-                        break;
-                    case "3":
-                        document.getElementById('ASA3').checked = true;
-                        break;
+                else {
+                    document.getElementById('proc-DescribeNotSuccess').value = thisComment;
                 }
 
-
-                switch (thisKudo) {
-                    case "II":
-                        document.getElementById('Kudo1').checked = true;
-                        break;
-                    case "IIA":
-                        document.getElementById('Kudo2').checked = true;
-                        break;
-                    case "IIIL":
-                        document.getElementById('Kudo3').checked = true;
-                        break;
-                    case "IIIS":
-                        document.getElementById('Kudo4').checked = true;
-                        break;
-                    case "IV":
-                        document.getElementById('Kudo5').checked = true;
-                        break;
-                }
-
-                switch (thisParis) {
-                    case "IIa":
-                        document.getElementById('Paris1').checked = true;
-                        break;
-                    case "IIb":
-                        document.getElementById('Paris2').checked = true;
-                        break;
-                    case "IIa+IIb":
-                        document.getElementById('Paris3').checked = true;
-                        break;
-                    case "Ip":
-                        document.getElementById('Paris4').checked = true;
-                        break;
-                    case "Is":
-                        document.getElementById('Paris5').checked = true;
-                        break;
-                    case "Is+IIa":
-                        document.getElementById('Paris6').checked = true;
-                        break;
-                    case "Is+Ip":
-                        document.getElementById('Paris7').checked = true;
-                        break;
-                }
-
-                if (thisRandomization == "Control") {
-                    document.getElementById('Control').checked = true;
-                }
-                else if (thisRandomization == "Device") {
-                    document.getElementById('Device').checked = true;
-                }
-
-                Radiochecked(thisSuccessful, 'DiviceSuccessful');
-
-                switch (thisLocation ) {
-                    case "Appendix":
-                        document.getElementById('LesionLocation1').checked = true;
-                        break;
-                    case "Ascending Colon":
-                        document.getElementById('LesionLocation2').checked = true;
-                        break;
-                    case "Cecum":
-                        document.getElementById('LesionLocation3').checked = true;
-                        break;
-                    case "Descending Colon":
-                        document.getElementById('LesionLocation4').checked = true;
-                        break;
-                    case "Hepatic Flexure":
-                        document.getElementById('LesionLocation5').checked = true;
-                        break;
-                    case "ICV":
-                        document.getElementById('LesionLocation6').checked = true;
-                        break;
-                    case "Rectum":
-                        document.getElementById('LesionLocation7').checked = true;
-                        break;
-                    case "Sigmoid":
-                        document.getElementById('LesionLocation8').checked = true;
-                        break;
-                    case "Splenic Flexure":
-                        document.getElementById('LesionLocation9').checked = true;
-                        break;
-                    case "Transverse Colon":
-                        document.getElementById('LesionLocation10').checked = true;
-                        break;
-                }
-                switch (thisNavigating ) {
-                    case "Difficult":
-                        document.getElementById('Navigating1').checked = true;
-                        break;
-                    case "Somewhat Difficult":
-                        document.getElementById('Navigating2').checked = true;
-                        break;
-                    case "Somewhat Easy":
-                        document.getElementById('Navigating3').checked = true;
-                        break;
-                    case "Easy":
-                        document.getElementById('Navigating4').checked = true;
-                        break;                    
-                }
-
-                if (thisCleanMargins  == "Yes") {
-                    document.getElementById('CleanMarginsYes').checked = true;
-                }
-                else if (thisCleanMargins == "No") {
-                    document.getElementById('CleanMarginsNo').checked = true;
-                }
-
-                document.getElementById('proc-DescribeNotSuccess').value = thisComment;
                 document.getElementById('proc-Length').value = thisLength;
                 document.getElementById('proc-Width').value = thisWidth;
                 document.getElementById('proc-DProc').value = thisDProc;
@@ -665,8 +538,8 @@ $(document).ready(function () {
                 document.getElementById('proc-TLeReached').value = thisTLeReached;
             }
         });
-        document.getElementById("section-Demog").classList.add("isDisabled")
-        document.getElementById("section-proc").classList.add("isDisabled")
+        //document.getElementById("section-Demog").classList.add("isDisabled")
+        //document.getElementById("section-proc").classList.add("isDisabled")
     }
 
     //get radio value
@@ -753,20 +626,94 @@ $(document).ready(function () {
         }        
     }
 
-    //Yes or No checked function
-    function Radiochecked(x, element) {
-        if (x == "Yes") {
-            document.getElementById(element + 'Yes').checked = true;
-        }
-        else if (x == "No") {
-            document.getElementById(element + 'No').checked = true;
+    //Set Radio buttton checked
+    function MultiRadioChecked(thisElement, ElementName) {
+        var element = document.getElementsByName(ElementName)
+        for (var i = 0; i < element.length; i++) {
+            var a = element[i].value;
+            if (thisElement == element[i].value) {
+                element[i].checked = true;
+            }
         }
     }
 
+    //Validator
+    var isValid;
+    function Validator(elementsid) {
+        var inputs = document.querySelectorAll('[id ^= ' + elementsid + ']');
+        var a = '[id ^= "msg-' + elementsid + '"]';
+        var messages = document.querySelectorAll('[id ^= "msg-' + elementsid + '"]');
+        for (var i = 0; i < inputs.length; i++) {
+            messages[i].innerHTML = "";
+        }
+        for (var i = 0; i < inputs.length; i++) {
+            if (inputs[i].type == 'number' || inputs[i].type == 'date' || inputs[i].type == 'time' || inputs[i].localName == "textarea" || inputs[i].localName == "select") {
+                isValid = true;
+                var currentInputValue = inputs[i].value;
+                if (currentInputValue == null || currentInputValue === "") {
+                    messages[i].innerHTML = "This field are not been entered a value!";
+                    isValid = false;
+                }
+            }
+            else if (inputs[i].type == 'radio') {
+                var ThisRadio = inputs[i].name;
+                var ThisChecked = 'No';
+                var AllRadioOptions = document.getElementsByName(ThisRadio);
+                for (x = 0; x < AllRadioOptions.length; x++) {
+                    if (AllRadioOptions[x].checked && ThisChecked == 'No') {
+                        ThisChecked = 'Yes';
+                        break;
+                    }
+                }
+                if (ThisChecked == 'No') {
+                    messages[i].innerHTML = "This field are not been selected!";
+                    isValid = false;
+                }
+            }
+        }
+        return isValid;
+    }
+
+    function Validator11() {
+        var ShowAlert = '';
+        var AllFormElements = document.querySelectorAll('[id ^= "Demog-"], [id ^= "proc-"], [name ^= "Demog-"], [name ^= "proc-"]');
+        for (i = 0; i < AllFormElements.length; i++) {
+            if (AllFormElements[i].type == 'radio') {
+                var ThisRadio = AllFormElements[i].name;
+                var labelContent = $("label[for='" + ThisRadio + "']").text();
+                var ThisChecked = 'No';
+                var AllRadioOptions = document.getElementsByName(ThisRadio);
+                for (x = 0; x < AllRadioOptions.length; x++) {
+                    if (AllRadioOptions[x].checked && ThisChecked == 'No') {
+                        ThisChecked = 'Yes';
+                        break;
+                    }
+                }
+                var AlreadySearched = ShowAlert.indexOf(ThisRadio);
+                if (ThisChecked == 'No' && AlreadySearched == -1 && ThisRadio != CurrentRaido) {
+                    ShowAlert = ShowAlert + labelContent + ' are not been selected\n';
+                }
+                var CurrentRaido = ThisRadio;
+            }
+
+            else if (AllFormElements[i].type == 'number' || AllFormElements[i].type == 'date' || AllFormElements[i].type == 'time' || AllFormElements[i].localName == "textarea" || AllFormElements[i].localName == "select") {
+                var ThisSelect = AllFormElements[i].id;
+                var a = document.getElementById(ThisSelect).value;
+                if (document.getElementById(ThisSelect).value == null || document.getElementById(ThisSelect).value == "none" || document.getElementById(ThisSelect).value == "") {
+                    var labelContent = $("label[for='" + ThisSelect + "']").text();
+                    ShowAlert = ShowAlert + labelContent + ' are not been selected\n';
+                }
+            }
+        }
+        if (ShowAlert != '') {
+            //result = confirm('There are still some options not selected. Are you sure you want to submit your subject?');
+            result = confirm(ShowAlert);
+        }        
+    }
 })
 
 
-
+//There are still some options not selected.Are you sure to go to next page
 
 
     //Previous.addEventListener('click', function (e) {
@@ -799,3 +746,12 @@ $(document).ready(function () {
     //        }
     //    }  
     //})
+
+    //function Radiochecked(x, element) {
+    //    if (x == "Yes") {
+    //        document.getElementsByName(element)[0].checked = true;
+    //    }
+    //    else if (x == "No") {
+    //        document.getElementsByName(element)[1].checked = true;
+    //    }
+    //}
