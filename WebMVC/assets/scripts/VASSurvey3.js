@@ -1,6 +1,4 @@
-﻿
-
-const UserID = getParameterByName('UserID'),
+﻿const UserID = getParameterByName('UserID'),
       SurveyID = getParameterByName('SurveyID'),
       StudyName = getParameterByName('StudyName');
 
@@ -13,8 +11,8 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
-var arr = document.referrer.split("/");
-var url = arr.slice(-1)[0];
+var item = document.referrer.split("/");
+var url = item.slice(-1)[0];
 if (url !== "Signin?SurveyID=3&StudyName=Lumendi" && url !== "Signup?SurveyID=3&StudyName=Lumendi" && url !== "LumendiSummary?UserID="+UserID ) {
     window.location.replace("/VAS/Signin?SurveyID=3&StudyName=Lumendi");
 }
@@ -41,11 +39,8 @@ $(document).ready(function () {
         });
     }
 
-    var $curr, $first, $last = $("#section-AE"), VisitTime, obj,
-        AllValues, thisAge, thisGender, thisRaceEthni, thisRandomization, thisLength, thisWidth, thisTBegan, thisTEnded, thisTCeReached, thisTLeReached;
+    var VisitTime, obj, AllValues;
 
-    //const Previous = document.getElementById("btnPrevious");
-    //const Next = document.getElementById("btnNext");
     const SubjID = document.getElementById("SubjID"),
           SignOut = document.getElementById("btnSignOut");
     
@@ -295,8 +290,8 @@ $(document).ready(function () {
             }
         };
 
-        var Age = $('#Demog-age').val(),
-            gender = displayRadioValue('Demog-gender'),
+        var Age = $('#Demog-Age').val(),
+            gender = displayRadioValue('Demog-Gender'),
             RaceEthni = displayRadioValue('Demog-RaceEthni'),
             ColonPolyp = displayRadioValue('Demog-ColonPolyp'),
             BiopsyDone = displayRadioValue('Demog-BiopsyDone'),
@@ -310,12 +305,12 @@ $(document).ready(function () {
             Paris = displayRadioValue('Demog-Paris')
             ;
         var Randomization = displayRadioValue('proc-Randomization'),
-            Successful = displayRadioValue('proc-DiviceSuccessful'),
-            Comment = document.getElementById('proc-DescribeNotSuccess').value,
+            Successful = displayRadioValue('proc-Successful'),
+            Comment = document.getElementById('proc-Comment').value,
             Length = document.getElementById("proc-Length").value,
             Width = document.getElementById('proc-Width').value,
             DProc = document.getElementById('proc-DProc').value,
-            Location = displayRadioValue('proc-LesionLocation'),
+            Location = displayRadioValue('proc-Location'),
             Navigating = displayRadioValue('proc-Navigating'),
             CleanMargins = displayRadioValue('proc-CleanMargins'),
             TBegan = document.getElementById('proc-TBegan').value,
@@ -441,7 +436,7 @@ $(document).ready(function () {
 
     //fill age dropdown menu
     for (var i = 18; i <= 100; i++) {
-        var select = document.getElementById("Demog-age");
+        var select = document.getElementById("Demog-Age");
         var option = document.createElement("OPTION");
         select.options.add(option);
         option.text = i;
@@ -462,85 +457,21 @@ $(document).ready(function () {
 
                 AllValues = JSON.parse(data);
 
-                var picked = (({ Age, Gender, RaceEthni,  ColonPolyp, BiopsyDone, Hemorrhoids, Diverticulitis, Diabetes, Anemia, Hysterectomy, ASA, Kudo, Paris,
-                    Randomization, Successful, Comment, Length, Width, Location, Navigating, CleanMargins, DProc, TBegan, TEnded, TCeReached, TLeReached }) => ({
-                        Age, Gender, RaceEthni, ColonPolyp, BiopsyDone, Hemorrhoids, Diverticulitis, Diabetes, Anemia, Hysterectomy, ASA, Kudo, Paris,
-                        Randomization, Successful, Comment, Length, Width, Location, Navigating, CleanMargins, DProc, TBegan, TEnded, TCeReached,
-                        TLeReached}))(AllValues[0]);
-                var a = picked;
+                var pickedDemog = (({ Age, Gender, RaceEthni,  ColonPolyp, BiopsyDone, Hemorrhoids, Diverticulitis, Diabetes, Anemia, Hysterectomy, ASA, Kudo, Paris }) => ({
+                        Age, Gender, RaceEthni, ColonPolyp, BiopsyDone, Hemorrhoids, Diverticulitis, Diabetes, Anemia, Hysterectomy, ASA, Kudo, Paris
+                    }))(AllValues[0]);
 
-                thisAge = AllValues[0].Age;
-                thisGender = myTrim(AllValues[0].Gender);
-                thisRaceEthni = myTrim(AllValues[0].RaceEthni);
+                var pickedproc = (({Randomization, Successful, Comment, Length, Width, Location, Navigating, CleanMargins, DProc, TBegan, TEnded, TCeReached, TLeReached }) => ({
+                        Randomization, Successful, Comment, Length, Width, Location, Navigating, CleanMargins, DProc, TBegan, TEnded, TCeReached, TLeReached
+                    }))(AllValues[0]);
 
-                thisColonPolyp = myTrim(AllValues[0].ColonPolyp);
-                thisBiopsyDone = myTrim(AllValues[0].BiopsyDone);
-                thisHemorrhoids = myTrim(AllValues[0].Hemorrhoids);
-                thisDiverticulitis = myTrim(AllValues[0].Diverticulitis);
-                thisDiabetes = myTrim(AllValues[0].Diabetes);
-                thisAnemia = myTrim(AllValues[0].Anemia);
-                thisHysterectomy = myTrim(AllValues[0].Hysterectomy);
-                thisASA = myTrim(AllValues[0].ASA);
-                thisKudo = myTrim(AllValues[0].Kudo);
-                thisParis = myTrim(AllValues[0].Paris);
+                var a = pickedDemog;
+                var count = Object.keys(pickedDemog).length;
+                var keys = Object.keys(pickedDemog);
+                var b = keys[0], c = keys[1];
 
-                thisRandomization = myTrim(AllValues[0].Randomization);
-
-                thisSuccessful = myTrim(AllValues[0].Successful);
-                thisComment = myTrim(AllValues[0].Comment);
-
-                thisLength = AllValues[0].Length;
-                thisWidth = AllValues[0].Width;
-
-                thisLocation = myTrim(AllValues[0].Location);
-                thisNavigating = myTrim(AllValues[0].Navigating);
-                thisCleanMargins = myTrim(AllValues[0].CleanMargins);
-
-                thisDProc = AllValues[0].DProc;
-                thisTBegan = AllValues[0].TBegan;
-                thisTEnded = AllValues[0].TEnded;
-                thisTCeReached = AllValues[0].TCeReached;
-                thisTLeReached = AllValues[0].TLeReached;
-
-                document.getElementById('Demog-age').value = thisAge;
-
-                MultiRadioChecked(thisGender, 'Demog-gender');
-                MultiRadioChecked(thisRaceEthni, 'Demog-RaceEthni');
-
-                MultiRadioChecked(thisColonPolyp, 'Demog-ColonPolyp');
-
-                MultiRadioChecked(thisBiopsyDone, 'Demog-BiopsyDone');
-                MultiRadioChecked(thisHemorrhoids, 'Demog-Hemorrhoids');
-                MultiRadioChecked(thisDiverticulitis, 'Demog-Diverticulitis');
-                MultiRadioChecked(thisDiabetes, 'Demog-Diabetes');
-                MultiRadioChecked(thisAnemia, 'Demog-Anemia');
-                MultiRadioChecked(thisHysterectomy, 'Demog-Hysterectomy');
-
-                MultiRadioChecked(thisASA, 'Demog-ASA');
-                MultiRadioChecked(thisKudo, 'Demog-Kudo');
-                MultiRadioChecked(thisParis, 'Demog-Paris');
-
-                MultiRadioChecked(thisRandomization, 'proc-Randomization');
-                MultiRadioChecked(thisLocation, 'proc-LesionLocation');
-                MultiRadioChecked(thisNavigating, 'proc-Navigating');
-                MultiRadioChecked(thisCleanMargins, 'proc-CleanMargins');
-
-                MultiRadioChecked(thisSuccessful, 'proc-DiviceSuccessful');
-
-                if (thisComment == null || thisComment == "undefined") {
-                    document.getElementById('proc-DescribeNotSuccess').value = "";
-                }
-                else {
-                    document.getElementById('proc-DescribeNotSuccess').value = thisComment;
-                }
-
-                document.getElementById('proc-Length').value = thisLength;
-                document.getElementById('proc-Width').value = thisWidth;
-                document.getElementById('proc-DProc').value = thisDProc;
-                document.getElementById('proc-TBegan').value = thisTBegan;
-                document.getElementById('proc-TEnded').value = thisTEnded;
-                document.getElementById('proc-TCeReached').value = thisTCeReached;
-                document.getElementById('proc-TLeReached').value = thisTLeReached;
+                getValue(pickedDemog, "Demog-");
+                getValue(pickedproc, "proc-");
             }
         });
         //document.getElementById("section-Demog").classList.add("isDisabled")
@@ -617,14 +548,10 @@ $(document).ready(function () {
     function empty() {
         $('input[type=radio]').each(function () { $(this).prop('checked', false); });
 
-        document.getElementById('Demog-age').value = "";
-
-        document.getElementById('proc-Length').value = "";
-        document.getElementById('proc-Width').value = "";
-        document.getElementById('proc-TBegan').value = "";
-        document.getElementById('proc-TEnded').value = "";
-        document.getElementById('proc-TCeReached').value = "";
-        document.getElementById('proc-TLeReached').value = "";
+        var elements = document.querySelectorAll('[id ^= "Demog-"], [id ^= "proc-"]')
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].value = "";
+        }
 
         for (var i = 0; i < AdventEvents.length; i++) {
             AdventEvents[i].value = "";
@@ -646,7 +573,17 @@ $(document).ready(function () {
     var isValid;
     function Validator(elementsid) {
         var inputs = document.querySelectorAll('[id ^= ' + elementsid + ']');
-        var a = '[id ^= "msg-' + elementsid + '"]';
+
+        var aa = document.querySelectorAll('[name ^= ' + elementsid + ']');
+        var array = Array.prototype.slice.call(aa);
+        var newarray = array.filter(function (items) {
+            var count = items.length;
+            for (var i = 1; i < items.length; i++) {
+                var a = items[0].name, b = items[1].name;
+                return items[i].name != items[i - 1].name;
+            }
+        });
+        
         var messages = document.querySelectorAll('[id ^= "msg-' + elementsid + '"]');
         for (var i = 0; i < inputs.length; i++) {
             messages[i].innerHTML = "";
@@ -679,84 +616,30 @@ $(document).ready(function () {
         return isValid;
     }
 
-    function Validator11() {
-        var ShowAlert = '';
-        var AllFormElements = document.querySelectorAll('[id ^= "Demog-"], [id ^= "proc-"], [name ^= "Demog-"], [name ^= "proc-"]');
-        for (i = 0; i < AllFormElements.length; i++) {
-            if (AllFormElements[i].type == 'radio') {
-                var ThisRadio = AllFormElements[i].name;
-                var labelContent = $("label[for='" + ThisRadio + "']").text();
-                var ThisChecked = 'No';
-                var AllRadioOptions = document.getElementsByName(ThisRadio);
-                for (x = 0; x < AllRadioOptions.length; x++) {
-                    if (AllRadioOptions[x].checked && ThisChecked == 'No') {
-                        ThisChecked = 'Yes';
-                        break;
-                    }
+    //fill the input elements
+    function getValue(picked, name) {
+        var d = document.querySelectorAll('[name ^= "Demog-Gender"]')
+        var f = d[0].value, g = d[1].value;
+        for (key in picked) {
+            var element = document.getElementsByName(name + key); 
+            if (element[0].localName == "select" || element[0].type == 'number' || element[0].type == 'date' || element[0].type == 'time' || element[0].localName == "textarea") {
+                var ccc = picked[key];
+                if (picked[key] == null || picked[key] == "undefined" || picked[key] == "") {
+                    element[0].value = "";
+                } else {
+                    element[0].value = picked[key];
                 }
-                var AlreadySearched = ShowAlert.indexOf(ThisRadio);
-                if (ThisChecked == 'No' && AlreadySearched == -1 && ThisRadio != CurrentRaido) {
-                    ShowAlert = ShowAlert + labelContent + ' are not been selected\n';
-                }
-                var CurrentRaido = ThisRadio;
             }
-
-            else if (AllFormElements[i].type == 'number' || AllFormElements[i].type == 'date' || AllFormElements[i].type == 'time' || AllFormElements[i].localName == "textarea" || AllFormElements[i].localName == "select") {
-                var ThisSelect = AllFormElements[i].id;
-                var a = document.getElementById(ThisSelect).value;
-                if (document.getElementById(ThisSelect).value == null || document.getElementById(ThisSelect).value == "none" || document.getElementById(ThisSelect).value == "") {
-                    var labelContent = $("label[for='" + ThisSelect + "']").text();
-                    ShowAlert = ShowAlert + labelContent + ' are not been selected\n';
+            else if (element[0].type == 'radio') {
+                for (var i = 0; i < element.length; i++) {
+                    var a = element[i].value;
+                    var ddd = myTrim(picked[key]);
+                    if (myTrim(picked[key]) == element[i].value) {
+                        element[i].checked = true;
+                    }
                 }
             }
         }
-        if (ShowAlert != '') {
-            //result = confirm('There are still some options not selected. Are you sure you want to submit your subject?');
-            result = confirm(ShowAlert);
-        }        
     }
+
 })
-
-
-//There are still some options not selected.Are you sure to go to next page
-
-
-    //Previous.addEventListener('click', function (e) {
-    //    e.preventDefault();
-    //    $curr.css("display", "none");
-    //    $curr = $curr.prev();
-    //    $("section").css("display", "none");
-    //    $("#btnSubmit").css("display", "none");
-    //    $("#btnNext").css("display", "block");
-    //    if ($curr.is($first)) {
-    //        $("#btnPrevious").css("display", "none");
-    //    }
-    //    $curr.css("display", "inline-flex");
-    //})
-    //Next.addEventListener('click', function (e) {
-    //    e.preventDefault();
-    //    $("#btnPrevious").css("display", "block");
-    //    $curr.css("display", "none");
-    //    $curr = $curr.next();
-    //    $("section").css("display", "none");
-    //    if ($curr.is($last)) {
-    //        $("#btnSubmit").css("display", "block");
-    //        $("#btnNext").css("display", "none");
-    //    }
-    //    $curr.css("display", "inline-flex");
-    //    if (temp+1 < VisitTime) {
-    //        $("#btnSubmit").css("display", "none");
-    //        if (temp == 0) {
-    //            $("#section-AE").css("display", "none");
-    //        }
-    //    }  
-    //})
-
-    //function Radiochecked(x, element) {
-    //    if (x == "Yes") {
-    //        document.getElementsByName(element)[0].checked = true;
-    //    }
-    //    else if (x == "No") {
-    //        document.getElementsByName(element)[1].checked = true;
-    //    }
-    //}
