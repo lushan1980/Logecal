@@ -11,11 +11,11 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
-var item = document.referrer.split("/");
-var url = item.slice(-1)[0];
-if (url !== "Signin?SurveyID=3&StudyName=Lumendi" && url !== "Signup?SurveyID=3&StudyName=Lumendi" && url !== "LumendiSummary?UserID="+UserID ) {
-    window.location.replace("/VAS/Signin?SurveyID=3&StudyName=Lumendi");
-}
+//var item = document.referrer.split("/");
+//var url = item.slice(-1)[0];
+//if (url !== "Signin?SurveyID=3&StudyName=Lumendi" && url !== "Signup?SurveyID=3&StudyName=Lumendi" && url !== "LumendiSummary?UserID="+UserID ) {
+//    window.location.replace("/VAS/Signin?SurveyID=3&StudyName=Lumendi");
+//}
 
 $(document).ready(function () {
     document.getElementById("UserID").innerHTML = UserID;
@@ -49,6 +49,7 @@ $(document).ready(function () {
         Summary = document.getElementById("Summary");
     var AEVisits = document.querySelectorAll('[id ^= "AEVisit"]'),   
         AEVisitsArray = Array.prototype.slice.call(AEVisits);
+    var Satisfaction = document.getElementById('Satisfaction');
 
     var DemogVisit0 = document.getElementById('DemogVisit0'),
         ProcVisit0 = document.getElementById('ProcVisit0');        
@@ -76,10 +77,14 @@ $(document).ready(function () {
         }
         $("#section-Demog").css("display", "inline-flex");
         $("#section-proc").css("display", "none");
+        $("#section-feeling").css("display", "none");
         $("#section-AE").css("display", "none");
         $("#btnSubmit").css("display", "none");
         $("#btnPrevious").css("display", "none");
         $("#btnNext").css("display", "block");
+        $("#btnAESubmit").css("display", "none");
+        $("#btnVisit2Previous").css("display", "none");
+        $("#btnVisit2Next").css("display", "none");
 
         if (SubjID.value.length >= 6) {
             
@@ -110,6 +115,7 @@ $(document).ready(function () {
                             }
                             document.getElementById("section-Demog").classList.add("isDisabled");
                             document.getElementById("section-proc").classList.add("isDisabled");
+                            document.getElementById("section-feeling").classList.add("isDisabled");
                             document.getElementById("section-AE").classList.add("isDisabled");
                             $("#btnNext").css("display", "none");
                             alert("This Subject belong to other User!");
@@ -125,6 +131,7 @@ $(document).ready(function () {
                             }
                             document.getElementById("section-Demog").classList.remove("isDisabled");
                             document.getElementById("section-proc").classList.remove("isDisabled");
+                            document.getElementById("section-feeling").classList.remove("isDisabled");
                             document.getElementById("section-AE").classList.remove("isDisabled");
                             break;
                         case "1":                            
@@ -209,37 +216,33 @@ $(document).ready(function () {
         $("#section-Demog").css("display", "none");
         $("#btnPrevious").css("display", "block");
         $("#btnNext").css("display", "none");
-        $("#btnSubmit").css("display", "none");
         $("#btnSubmit").css("display", "block");
     })
 
-    //var temp;
-    VisitsArray.forEach(function (Visit, index) {
-        Visit.addEventListener('click', function (e) {
-            e.preventDefault();
-        })
+    $("#btnVisit2Previous").on('click', function (e) {
+        e.preventDefault();
+        $("#section-proc").css("display", "none");
+        $("#section-Demog").css("display", "none");
+        $("#section-feeling").css("display", "inline-flex");
+        $("#section-AE").css("display", "none");
+        $("#btnPrevious").css("display", "none");
+        $("#btnNext").css("display", "none");
+        $("#btnVisit2Previous").css("display", "none");
+        $("#btnVisit2Next").css("display", "block");
+        $("#btnAESubmit").css("display", "none");
     })
 
-    AEVisitsArray.forEach(function (AEVisit, index) {
-        AEVisit.addEventListener('click', function (e) {
-            e.preventDefault();
-            $("#btnPrevious").css("display", "none");
-            $("#btnNext").css("display", "none");
-            $("#btnSubmit").css("display", "none");
-            $("#btnAESubmit").css("display", "none");
-            document.getElementById("section-AE").classList.remove("isDisabled");
-            $("#btnSubmit").css("display", "none");
-            getAEs(index + 2);
-            $("#section-Demog").css("display", "none");
-            $("#section-proc").css("display", "none");
-            $("#section-AE").css("display", "inline-flex");
-            if (index + 2 < VisitTime) {
-                document.getElementById("section-AE").classList.add("isDisabled");
-            } 
-            if (index + 2 == VisitTime) {
-                $("#btnAESubmit").css("display", "block");
-            }
-        })
+    $("#btnVisit2Next").on('click', function (e) {
+        e.preventDefault();
+        $("#section-proc").css("display", "none");
+        $("#section-Demog").css("display", "none");
+        $("#section-feeling").css("display", "none");
+        $("#section-AE").css("display", "inline-flex");
+        $("#btnPrevious").css("display", "none");
+        $("#btnNext").css("display", "none");
+        $("#btnVisit2Previous").css("display", "block");
+        $("#btnVisit2Next").css("display", "none");
+        $("#btnAESubmit").css("display", "block");
     })
 
     DemogVisit0.addEventListener('click', function (e) {
@@ -247,21 +250,70 @@ $(document).ready(function () {
         $("#section-Demog").css("display", "inline-flex");
         $("#section-proc").css("display", "none");
         $("#section-AE").css("display", "none");
+        $("#section-feeling").css("display", "none");
         $("#btnSubmit").css("display", "none");        
         $("#btnPrevious").css("display", "none");
         $("#btnNext").css("display", "block");
     })
-
     ProcVisit0.addEventListener('click', function (e) {
         e.preventDefault();
         $("#section-Demog").css("display", "none");
         $("#section-proc").css("display", "inline-flex");
         $("#section-AE").css("display", "none");
+        $("#section-feeling").css("display", "none");
         //if (VisitTime == 1) {
             $("#btnSubmit").css("display", "block");
         //} 
         $("#btnPrevious").css("display", "block");
         $("#btnNext").css("display", "none");
+    })
+
+    VisitsArray.forEach(function (Visit, index) {
+        Visit.addEventListener('click', function (e) {
+            e.preventDefault();
+        })
+    })
+    AEVisitsArray.forEach(function (AEVisit, index) {
+        AEVisit.addEventListener('click', function (e) {
+            e.preventDefault();
+            $("#btnPrevious").css("display", "none");
+            $("#btnNext").css("display", "none");
+            $("#btnVisit2Previous").css("display", "none");
+            $("#btnVisit2Next").css("display", "none");
+            $("#btnSubmit").css("display", "none");
+            $("#btnAESubmit").css("display", "none");
+            document.getElementById("section-AE").classList.remove("isDisabled");            
+            $("#section-Demog").css("display", "none");
+            $("#section-proc").css("display", "none");
+            $("#section-feeling").css("display", "none");
+            $("#section-AE").css("display", "inline-flex");
+            
+            //if (index + 2 < VisitTime) {
+                //document.getElementById("section-AE").classList.add("isDisabled");
+            //} 
+            //if (index + 2 == VisitTime) {
+                //$("#btnAESubmit").css("display", "block");
+            //}
+            if (index === 1) {
+                $("#btnVisit2Previous").css("display", "block");
+                $("#btnAESubmit").css("display", "block");
+            }
+            getAEs(index + 2);
+        })
+    })
+
+    Satisfaction.addEventListener('click', function (e) {
+        e.preventDefault();
+        $("#section-Demog").css("display", "none");
+        $("#section-proc").css("display", "none");
+        $("#section-AE").css("display", "none");
+        $("#section-feeling").css("display", "inline-flex");
+        $("#btnPrevious").css("display", "none");
+        $("#btnNext").css("display", "none");
+        $("#btnVisit2Previous").css("display", "none");
+        $("#btnVisit2Next").css("display", "block");
+        $("#btnSubmit").css("display", "none");
+        $("#btnAESubmit").css("display", "none");
     })
 
     var buttonpressed;
@@ -282,7 +334,6 @@ $(document).ready(function () {
 
     function Submit() {
         Validator("proc-");
-
         if (!isValid) {
             var result = confirm('There are still some options not selected. Are you sure you want to submit your subject?')
             if (result == false) {
@@ -456,19 +507,22 @@ $(document).ready(function () {
             success: function (data) {
 
                 AllValues = JSON.parse(data);
+                var rr = AllValues[0];
+                //var pickedDemog = (({ Age, Gender, RaceEthni,  ColonPolyp, BiopsyDone, Hemorrhoids, Diverticulitis, Diabetes, Anemia, Hysterectomy, ASA, Kudo, Paris }) => ({
+                //        Age, Gender, RaceEthni, ColonPolyp, BiopsyDone, Hemorrhoids, Diverticulitis, Diabetes, Anemia, Hysterectomy, ASA, Kudo, Paris
+                //    }))(AllValues[0]);      
+                
+                //var pickedproc = (({Randomization, Successful, Comment, Length, Width, Location, Navigating, CleanMargins, DProc, TBegan, TEnded, TCeReached, TLeReached }) => ({
+                //        Randomization, Successful, Comment, Length, Width, Location, Navigating, CleanMargins, DProc, TBegan, TEnded, TCeReached, TLeReached
+                //    }))(AllValues[0]);
 
-                var pickedDemog = (({ Age, Gender, RaceEthni,  ColonPolyp, BiopsyDone, Hemorrhoids, Diverticulitis, Diabetes, Anemia, Hysterectomy, ASA, Kudo, Paris }) => ({
-                        Age, Gender, RaceEthni, ColonPolyp, BiopsyDone, Hemorrhoids, Diverticulitis, Diabetes, Anemia, Hysterectomy, ASA, Kudo, Paris
-                    }))(AllValues[0]);
+                let pickedDemog = { "Age": rr.Age, "Gender": rr.Gender, "RaceEthni": rr.RaceEthni, "ColonPolyp": rr.ColonPolyp, "BiopsyDone": rr.BiopsyDone, "Hemorrhoids": rr.Hemorrhoids, "Diverticulitis": rr.Diverticulitis, "Diabetes": rr.Diabetes, "Anemia": rr.Anemia, "Hysterectomy": rr.Hysterectomy, "ASA": rr.ASA, "Kudo": rr.Kudo, "Paris": rr.Paris };
+                let pickedproc = { "Randomization": rr.Randomization, "Successful": rr.Successful, "Comment": rr.Comment, "Length": rr.Length, "Width": rr.Width, "Location": rr.Location, "Navigating": rr.Navigating, "CleanMargins": rr.CleanMargins, "DProc": rr.DProc, "TBegan": rr.TBegan, "TEnded": rr.TEnded, "TCeReached": rr.TCeReached, "TLeReached": rr.TLeReached};
 
-                var pickedproc = (({Randomization, Successful, Comment, Length, Width, Location, Navigating, CleanMargins, DProc, TBegan, TEnded, TCeReached, TLeReached }) => ({
-                        Randomization, Successful, Comment, Length, Width, Location, Navigating, CleanMargins, DProc, TBegan, TEnded, TCeReached, TLeReached
-                    }))(AllValues[0]);
-
-                var a = pickedDemog;
-                var count = Object.keys(pickedDemog).length;
-                var keys = Object.keys(pickedDemog);
-                var b = keys[0], c = keys[1];
+                //var a = pickedDemog;
+                //var count = Object.keys(pickedDemog).length;
+                //var keys = Object.keys(pickedDemog);
+                //var b = keys[0], c = keys[1];
 
                 getValue(pickedDemog, "Demog-");
                 getValue(pickedproc, "proc-");
@@ -572,18 +626,38 @@ $(document).ready(function () {
     //Validator
     var isValid;
     function Validator(elementsid) {
-        var inputs = document.querySelectorAll('[id ^= ' + elementsid + ']');
+        //var inputs = document.querySelectorAll('[id ^= ' + elementsid + ']');
 
         var aa = document.querySelectorAll('[name ^= ' + elementsid + ']');
+
+        //var inputs = Array.prototype.slice.call(aa);
+        //function splice(arr) {
+        //    var CurrentItemName = "";
+        //    for (var i = arr.length; i--;) {
+        //        if (arr[i].name === CurrentItemName) {
+        //            arr.splice(i, 1);
+        //        }
+        //        CurrentItemName = arr[i].name;
+        //    }
+        //}
+        //splice(inputs);
+
         var array = Array.prototype.slice.call(aa);
-        var newarray = array.filter(function (items) {
-            var count = items.length;
-            for (var i = 1; i < items.length; i++) {
-                var a = items[0].name, b = items[1].name;
-                return items[i].name != items[i - 1].name;
+        var inputs = [];
+        var CurrentItemName = "";
+        //array.forEach((item, index, arr) => {            
+        //    if (item.name != CurrentItemName) {
+        //        inputs.push(arr[index]);
+        //    }
+        //    CurrentItemName = item.name;
+        //});
+
+        array.forEach(function (item, index, arr) {
+            if (item.name != CurrentItemName) {
+                inputs.push(arr[index]);
             }
-        });
-        
+            CurrentItemName = item.name;
+        })
         var messages = document.querySelectorAll('[id ^= "msg-' + elementsid + '"]');
         for (var i = 0; i < inputs.length; i++) {
             messages[i].innerHTML = "";
@@ -617,9 +691,7 @@ $(document).ready(function () {
     }
 
     //fill the input elements
-    function getValue(picked, name) {
-        var d = document.querySelectorAll('[name ^= "Demog-Gender"]')
-        var f = d[0].value, g = d[1].value;
+    function getValue(picked, name) {       
         for (key in picked) {
             var element = document.getElementsByName(name + key); 
             if (element[0].localName == "select" || element[0].type == 'number' || element[0].type == 'date' || element[0].type == 'time' || element[0].localName == "textarea") {
@@ -632,8 +704,6 @@ $(document).ready(function () {
             }
             else if (element[0].type == 'radio') {
                 for (var i = 0; i < element.length; i++) {
-                    var a = element[i].value;
-                    var ddd = myTrim(picked[key]);
                     if (myTrim(picked[key]) == element[i].value) {
                         element[i].checked = true;
                     }
