@@ -8,6 +8,7 @@ namespace WebMVC.Models
     public class Survey
     {
         public int VisitTime { get; set; }
+        public int WhichAE { get; set; }
         public int? UserID { get; set; }
         public string SubjID { get; set; }
         public string Fname { get; set; }
@@ -59,7 +60,6 @@ namespace WebMVC.Models
         public string Severity3 { get; set; }
         public string AEDiscription4 { get; set; }
         public string Severity4 { get; set; }
-
-
+        public float? Satification { get; set; }
     }
 }

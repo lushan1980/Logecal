@@ -2914,6 +2914,7 @@ table {
 }
 .control__label__inline {
     display: inline-block;
+    float: left;
     margin: 0;
     font-weight: 600;
 }

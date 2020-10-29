@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Lumendi";
 }
-<script src="~/assets/scripts/VASSurvey3.js?1026"></script>
+<script src="~/assets/scripts/VASSurvey3.js?1027"></script>
 <!-- BANNER
 ================================================== -->
 <div class="banner banner--small" role="banner">
@@ -39,7 +39,8 @@
                         </div>
                         <button class="dropdown-btn" id="Visit1">Visit 2<i class="fa fa-caret-right"></i></button>
                         <div class="dropdown-container">
-                            <a href="#" id="AEVisit1">Adverse Events</a>
+                            <a href="#" id="Satisfaction">Patient satisfaction</a>
+                            <a href="#" id="AEVisit1">Adverse Events</a>                            
                         </div>
                         <button class="dropdown-btn" id="Visit2">Visit 3<i class="fa fa-caret-right"></i></button>
                         <div class="dropdown-container">
@@ -58,508 +59,529 @@
                     </div>
                 </div>
                 @*right*@
-                <div class="grid__column grid__column--12 grid__column--10--md two-column__section" id="div-Form">
-                    @*Subject ID:*@
-                    <div class="grid__column grid__column--12 grid__column--12--md" style="padding-bottom:50px">
-                        <label for="SubjID" class="control__label control__label__inline control__label--is-required" id="lblSubjID">Subject ID: </label>
-                        <input type="text" pattern="[0-9]{2}-[0-9]{3}" class="control__input__inline" style="width: 30%" id="SubjID" />
+            <div class="grid__column grid__column--12 grid__column--10--md two-column__section" id="div-Form">
+                @*Subject ID:*@
+                <div class="grid__column grid__column--12 grid__column--12--md" style="padding-bottom:50px">
+                    <label for="SubjID" class="control__label control__label__inline control__label--is-required" id="lblSubjID">Subject ID: </label>
+                    <input type="text" pattern="[0-9]{2}-[0-9]{3}" class="control__input__inline" style="width: 30%" id="SubjID" />
+                </div>
+                @*section Demog*@
+                <section class="grid" id="section-Demog">
+                    <div class="grid__column grid__column--12 grid__column--12--md">
+                        <h3>DEMOGRAPHICS</h3>
                     </div>
-                    @*section Demog*@
-                    <section class="grid" id="section-Demog">
+                    @*Demog left*@
+                    <div class="grid__column grid__column--12 grid__column--6--md">
+                        @*Age*@
                         <div class="grid__column grid__column--12 grid__column--12--md">
-                            <h3>DEMOGRAPHICS</h3>
+                            <label for="Demog-age" class="control__label control__label--is-required">Age</label>
+                            <select class="control__select" id="Demog-Age" name="Demog-Age" style="display:inline">
+                                <option value="none" selected=selected disabled=disabled disabled=disabled hidden=hidden>
+                                    --Select an Option--
+                                </option>
+                            </select>
+                            <p id="msg-Demog-age" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         </div>
-                        @*Demog left*@
-                        <div class="grid__column grid__column--12 grid__column--6--md">
-                            @*Age*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-age" class="control__label control__label--is-required">Age</label>
-                                <select class="control__select" id="Demog-Age" name="Demog-Age" style="display:inline">
-                                    <option value="none" selected disabled hidden>
-                                        --Select an Option--
-                                    </option>
-                                </select>
-                                <p id="msg-Demog-age" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-                            @*Gender*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-Gender" class="control__label__inline control__label--is-required">Gender</label>
-                                <fieldset>
-                                    <label for="Male" class="fieldset_label">
-                                        <input type="radio" value="Male" id="Male" name="Demog-Gender" /> Male
-                                    </label>
-                                    <label for="Female" class="fieldset_label">
-                                        <input type="radio" value="Female" id="Female" name="Demog-Gender" /> Female
-                                    </label>
-                                </fieldset>
-                                <p id="msg-Demog-gender" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-                            @*div RaceEthni*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-RaceEthni" class="control__label control__label--is-required">Race/Ethnicity</label>
-                                <fieldset>
-                                    <input type="radio" id="Black" value="African American/Black/Not of Hispanic Origin" name="Demog-RaceEthni" />
-                                    <label for="Black" class="fieldset_label">
-                                        African American/Black/Not of Hispanic Origin
-                                    </label><br>
-
-                                    <input type="radio" id="AmericanIndian" value="American Indian or Alaska Native" name="Demog-RaceEthni" />
-                                    <label for="American Indian or Alaska Native" class="fieldset_label">
-                                        American Indian or Alaska Native
-                                    </label><br>
-
-                                    <input type="radio" id="Asian" value="Asian" name="Demog-RaceEthni" />
-                                    <label for="Asian" class="fieldset_label">
-                                        Asian
-                                    </label><br>
-
-                                    <input type="radio" id="white" value="Caucasian/White/Not of Hispanic Origin" name="Demog-RaceEthni" />
-                                    <label for="AmericanIndian" class="fieldset_label">
-                                        Caucasian/White/Not of Hispanic Origin
-                                    </label><br>
-
-                                    <input type="radio" id="Latino" value="Hispanic or Latino" name="Demog-RaceEthni" />
-                                    <label for="Hispanic" class="fieldset_label">
-                                        Hispanic or Latino
-                                    </label><br>
-
-                                    <input type="radio" id="Hawaiian" value="Native Hawaiian or Other Pacific Islander" name="Demog-RaceEthni" />
-                                    <label for="Hawaiian" class="fieldset_label">
-                                        Native Hawaiian or Other Pacific Islander
-                                    </label><br>
-
-                                    <input type="radio" id ="Other" value="Other" name="Demog-RaceEthni" />
-                                    <label for="Other" class="fieldset_label">
-                                        Other
-                                    </label><br>
-                                </fieldset>
-                                <p id="msg-Demog-RaceEthni" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-                        </div>
-
-                        @*Demog right *@
-                        <div class="grid__column grid__column--12 grid__column--6--md">
-                            @*Previous Colon Polyp?*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-ColonPolyp" class="control__label__inline control__label--is-required">Previous Colon Polyp? </label>
-                                <fieldset>
-                                    <label for="ColonPolypYes" class="fieldset_label"> 
-                                        <input type="radio" id="ColonPolyp1" value="Yes" name="Demog-ColonPolyp" /> Yes
-                                    </label>
-                                    <label for="ColonPolypNo" class="fieldset_label">
-                                        <input type="radio" id="ColonPolyp2" value="No" name="Demog-ColonPolyp" /> No
-                                    </label>
-                                </fieldset>
-                                <p id="msg-Demog-ColonPolyp" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-                            @*Previous Biopsy Done?*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-BiopsyDone" class="control__label__inline control__label--is-required">Previous Biopsy Done? </label>
-                                <fieldset>
-                                    <label for="BiopsyDoneYes" class="fieldset_label">
-                                        <input type="radio" id="BiopsyDone1" value="Yes" name="Demog-BiopsyDone" /> Yes
-                                    </label>
-                                    <label for="BiopsyDoneNo" class="fieldset_label">
-                                        <input type="radio" id="BiopsyDone2" value="No" name="Demog-BiopsyDone" /> No
-                                    </label>
-                                </fieldset>
-                                <p id="msg-Demog-BiopsyDone" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-                            @*Hemorrhoids?*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-Hemorrhoids" class="control__label__inline control__label--is-required">Hemorrhoids? </label>
-                                <fieldset>
-                                    <label for="HemorrhoidsYes" class="fieldset_label">
-                                        <input type="radio" id="Hemorrhoids1" value="Yes" name="Demog-Hemorrhoids" /> Yes
-                                    </label>
-                                    <label for="HemorrhoidsNo" class="fieldset_label">
-                                        <input type="radio" id="Hemorrhoids2" value="No" name="Demog-Hemorrhoids" /> No
-                                    </label>
-                                </fieldset>
-                                <p id="msg-Demog-Hemorrhoids" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-                            @*History of Diverticulitis?*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-Diverticulitis" class="control__label__inline control__label--is-required">History of Diverticulitis? </label>
-                                <fieldset>
-                                    <label for="DiverticulitisYes" class="fieldset_label">
-                                        <input type="radio" id="Diverticulitis1" value="Yes" name="Demog-Diverticulitis" /> Yes
-                                    </label>
-                                    <label for="DiverticulitisNo" class="fieldset_label">
-                                        <input type="radio" id="Diverticulitis2" value="No" name="Demog-Diverticulitis" /> No
-                                    </label>
-                                </fieldset>
-                                <p id="msg-Demog-Diverticulitis" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-                            @*Diabetes? *@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-Diabetes" class="control__label__inline control__label--is-required">Diabetes?  </label>
-                                <fieldset>
-                                    <label for="DiabetesYes" class="fieldset_label">
-                                        <input type="radio" id="Diabetes1" value="Yes" name="Demog-Diabetes" /> Yes
-                                    </label>
-                                    <label for="DiabetesNo" class="fieldset_label">
-                                        <input type="radio" id="Diabetes2" value="No" name="Demog-Diabetes" /> No
-                                    </label>
-                                </fieldset>
-                                <p id="msg-Demog-Diabetes" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-                            @*Anemia? *@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-Anemia" class="control__label__inline control__label--is-required">Anemia?  </label>
-                                <fieldset>
-                                    <label for="AnemiaYes" class="fieldset_label">
-                                        <input type="radio" value="Yes" name="Demog-Anemia" /> Yes
-                                    </label>
-                                    <label for="AnemiaNo" class="fieldset_label">
-                                        <input type="radio" value="No" name="Demog-Anemia" /> No
-                                    </label>
-                                </fieldset>
-                                <p id="msg-Demog-Anemia" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-                            @*Hysterectomy, C-Section, or Tubal Ligation? *@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-Hysterectomy" class="control__label__inline control__label--is-required">Hysterectomy, C-Section, or Tubal Ligation?  </label>
-                                <fieldset>
-                                    <label for="HysterectomyYes" class="fieldset_label">
-                                        <input type="radio" value="Yes" name="Demog-Hysterectomy" /> Yes
-                                    </label>
-                                    <label for="HysterectomyNo" class="fieldset_label">
-                                        <input type="radio" value="No" name="Demog-Hysterectomy" /> No
-                                    </label>
-                                </fieldset>
-                                <p id="msg-Demog-Hysterectomy" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-                            @*ASA Classification: *@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-ASA" class="control__label__inline control__label--is-required">ASA Classification:   </label>
-                                <fieldset>
-                                    <label for="ASA1" class="fieldset_label">
-                                        <input type="radio" value="1" name="Demog-ASA" /> 1
-                                    </label>
-                                    <label for="ASA2" class="fieldset_label">
-                                        <input type="radio" value="2" name="Demog-ASA" /> 2
-                                    </label>
-                                    <label for="ASA3" class="fieldset_label">
-                                        <input type="radio" value="3" name="Demog-ASA" /> 3
-                                    </label>
-                                </fieldset>
-                                <p id="msg-Demog-ASA" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-                            @*Kudo Classification:  *@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-Kudo" class="control__label__inline control__label--is-required">Kudo Classification:    </label>
-                                <fieldset>
-                                    <label for="Kudo1" class="fieldset_label">
-                                        <input type="radio" value="II" name="Demog-Kudo" /> II
-                                    </label>
-                                    <label for="Kudo2" class="fieldset_label">
-                                        <input type="radio"  value="IIA" name="Demog-Kudo" /> IIA
-                                    </label>
-                                    <label for="Kudo3" class="fieldset_label">
-                                        <input type="radio" value="IIIL" name="Demog-Kudo" /> IIIL
-                                    </label>
-                                    <label for="Kudo4" class="fieldset_label">
-                                        <input type="radio" value="IIIS" name="Demog-Kudo" /> IIIS
-                                    </label>
-                                    <label for="Kudo5" class="fieldset_label">
-                                        <input type="radio" value="IV" name="Demog-Kudo" /> IV
-                                    </label>
-                                </fieldset>
-                                <p id="msg-Demog-Kudo" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-                            @*Paris Classification:  *@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="Demog-Paris" class="control__label__inline control__label--is-required">Paris Classification:     </label>
-                                <fieldset>
-                                    <label for="Paris1" class="fieldset_label">
-                                        <input type="radio" value="IIa" name="Demog-Paris" /> IIa
-                                    </label>
-                                    <label for="Paris2" class="fieldset_label">
-                                        <input type="radio" value="IIb" name="Demog-Paris" /> IIb
-                                    </label>
-                                    <label for="Paris3" class="fieldset_label">
-                                        <input type="radio" value="IIa+IIb" name="Demog-Paris" /> IIa+IIb
-                                    </label>
-                                    <label for="Paris4" class="fieldset_label">
-                                        <input type="radio" value="Ip" name="Demog-Paris" /> Ip
-                                    </label>
-                                    <label for="Paris5" class="fieldset_label">
-                                        <input type="radio" value="Is" name="Demog-Paris" /> Is
-                                    </label>
-                                    <label for="Paris4" class="fieldset_label">
-                                        <input type="radio" value="Is+IIa" name="Demog-Paris" /> Is+IIa
-                                    </label>
-                                    <label for="Paris5" class="fieldset_label">
-                                        <input type="radio" value="Is+Ip" name="Demog-Paris" /> Is+Ip
-                                    </label>
-                                </fieldset>
-                                <p id="msg-Demog-Paris" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-                        </div>
-                    </section>
-                    @*section Procedure*@
-                    <section class="grid" id="section-proc" style="display: none">
+                        @*Gender*@
                         <div class="grid__column grid__column--12 grid__column--12--md">
-                            <h3>PROCEDURE</h3>
+                            <label for="Demog-Gender" class="control__label__inline control__label--is-required">Gender</label>
+                            <fieldset>
+                                <label for="Male" class="fieldset_label">
+                                    <input type="radio" value="Male" id="Male" name="Demog-Gender" /> Male
+                                </label>
+                                <label for="Female" class="fieldset_label">
+                                    <input type="radio" value="Female" id="Female" name="Demog-Gender" /> Female
+                                </label>
+                            </fieldset>
+                            <p id="msg-Demog-gender" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         </div>
-                        @*Proc Left*@
-                        <div class="grid__column grid__column--12 grid__column--6--md">
-                            @*Randomization*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-Randomization" class="control__label control__label__inline control__label--is-required">Randomization Group: </label>
-                                <fieldset>
-                                    <label for="Device" class="fieldset_label">
-                                        <input type="radio" value="Device" name="proc-Randomization" /> Device
-                                    </label>
-                                    <label for="Control" class="fieldset_label">
-                                        <input type="radio" value="Control" name="proc-Randomization" /> Control
-                                    </label>
-                                </fieldset>
-                                <p id="msg-proc-Randomization" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-
-                            @*Was Intervention with Device Successful? *@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-Successful" class="control__label control__label__inline control__label--is-required">If device used, was intervention with device successful?  </label>
-                                <fieldset>
-                                    <label for="Successful" class="fieldset_label">
-                                        <input type="radio" value="Yes" name="proc-Successful" /> Yes
-                                    </label>
-                                    <label for="DiviceSuccessfulNo" class="fieldset_label">
-                                        <input type="radio" value="No" name="proc-Successful" /> No
-                                    </label>
-                                </fieldset>
-                                <p id="msg-proc-Successful" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-
-                            @*enter a freehand comment to describe why it was not successful.*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-Comment" class="control__label control__label control__label--is-required">If No, enter a freehand comment to describe why it was not successful.</label>
-                                <textarea class="control__input" id="proc-Comment" name="proc-Comment"></textarea>
-                                <p id="msg-proc-Comment" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-
-                            @*Length of Lesion:*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-Length" class="control__label control__label__inline control__label--is-required">Length of Lesion:</label>
-                                <input type="number" step="0.1" min="0" max="100" class="control__input__inline" id="proc-Length" name="proc-Length"/>cm
-                                <p id="msg-proc-Length" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-
-                            @*Width of Lesion:*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-Width" class="control__label control__label__inline control__label--is-required">Width of Lesion:</label>
-                                <input type="number" step="0.1" min="0" max="100" class="control__input__inline" id="proc-Width" name="proc-Width"/>cm
-                                <p id="msg-proc-Width" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-                        </div>
-
-                        @*Proc Right*@
-                        <div class="grid__column grid__column--12 grid__column--6--md">
-                            @*Lesion Location:*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-LesionLocation" class="control__label control__label--is-required">Lesion Location: </label>
-                                <fieldset>
-                                    <label for="LesionLocation1" class="fieldset_label">
-                                        <input type="radio" value="Appendix" name="proc-Location" /> Appendix
-                                    </label>
-                                    <label for="LesionLocation2" class="fieldset_label">
-                                        <input type="radio" value="Ascending Colon" name="proc-Location" /> Ascending Colon
-                                    </label>
-                                    <label for="LesionLocation3" class="fieldset_label">
-                                        <input type="radio" value="Cecum" name="proc-Location" /> Cecum
-                                    </label>
-                                    <label for="LesionLocation4" class="fieldset_label">
-                                        <input type="radio" value="Descending Colon" name="proc-Location" /> Descending Colon
-                                    </label><br>
-                                    <label for="LesionLocation5" class="fieldset_label">
-                                        <input type="radio" value="Hepatic Flexure" name="proc-Location" /> Hepatic Flexure
-                                    </label>
-                                    <label for="LesionLocation6" class="fieldset_label">
-                                        <input type="radio" value="ICV" name="proc-Location" /> ICV
-                                    </label>
-                                    <label for="LesionLocation7" class="fieldset_label">
-                                        <input type="radio" value="Rectum" name="proc-Location" /> Rectum
-                                    </label>
-                                    <label for="LesionLocation8" class="fieldset_label">
-                                        <input type="radio" value="Sigmoid" name="proc-Location" /> Sigmoid
-                                    </label><br>
-                                    <label for="LesionLocation9" class="fieldset_label">
-                                        <input type="radio" value="Splenic Flexure" name="proc-Location" /> Splenic Flexure
-                                    </label>
-                                    <label for="LesionLocation10" class="fieldset_label">
-                                        <input type="radio" value="Transverse Colon" name="proc-Location" /> Transverse Colon
-                                    </label>
-                                </fieldset>
-                                <p id="msg-proc-Location" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-                            @*Navigating: *@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-Navigating" class="control__label control__label control__label--is-required">Navigating: </label>
-                                <fieldset>
-                                    <label for="Navigating1" class="fieldset_label">
-                                        <input type="radio" value="Difficult" name="proc-Navigating" /> Difficult
-                                    </label>
-                                    <label for="Navigating2" class="fieldset_label">
-                                        <input type="radio" value="Somewhat Difficult" name="proc-Navigating" /> Somewhat Difficult
-                                    </label>
-                                    <label for="Navigating3" class="fieldset_label">
-                                        <input type="radio" value="Somewhat Easy" name="proc-Navigating" /> Somewhat Easy
-                                    </label>
-                                    <label for="Navigating4" class="fieldset_label">
-                                        <input type="radio" value="Easy" name="proc-Navigating" /> Easy
-                                    </label>
-                                </fieldset>
-                                <p id="msg-proc-Navigating" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-
-                            @*Clean Margins?*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-CleanMargins" class="control__label__inline control__label--is-required">Clean Margins?</label>
-                                <fieldset>
-                                    <label for="CleanMarginsYes" class="fieldset_label">
-                                        <input type="radio" value="Yes" name="proc-CleanMargins" /> Yes
-                                    </label>
-                                    <label for="CleanMarginsNo" class="fieldset_label">
-                                        <input type="radio" value="No" name="proc-CleanMargins" /> No
-                                    </label>
-                                </fieldset>
-                                <p id="msg-proc-CleanMargins" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            </div>
-
-                            @*Date of Procedure:*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-DProc" class="control__label control__label__inline control__label--is-required">Date of Procedure: </label>
-                                <input type="date" class="control__input__inline" id="proc-DProc" name="proc-DProc" />
-                            </div>
-                            <p id="msg-proc-TBegan" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            @*Time Case Begin:*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-TBegan" class="control__label control__label__inline control__label--is-required">Time Case Begin: </label>
-                                <input type="time" class="control__input__inline" step="1" id="proc-TBegan" name="proc-TBegan" />
-                            </div>
-                            <p id="msg-proc-TBegan" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            @*Time Case Ended:*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-TEnded" class="control__label control__label__inline control__label--is-required">Time Case Ended: </label>
-                                <input type="time" class="control__input__inline" step="1" id="proc-TEnded" name="proc-TEnded" />
-                            </div>
-                            <p id="msg-proc-TEnded" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            @*Time when Ceum Reached:*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-TCeReached" class="control__label control__label__inline control__label--is-required">Time when Ceum Reached: </label>
-                                <input type="time" class="control__input__inline" step="1" id="proc-TCeReached" name="proc-TCeReached" />
-                            </div>
-                            <p id="msg-proc-TCeReached" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                            @*Time when Lesion Reached:*@
-                            <div class="grid__column grid__column--12 grid__column--12--md">
-                                <label for="proc-TLeReached" class="control__label control__label__inline control__label--is-required">Time when Lesion Reached: </label>
-                                <input type="time" class="control__input__inline" step="1" id="proc-TLeReached" name="proc-TLeReached" />
-                            </div>
-                            <p id="msg-proc-TLeReached" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                        </div>
-
-                    </section>
-                    @*section ADVERSE EVENTS*@
-                    <section class="grid" id="section-AE" style="display: none">
+                        @*div RaceEthni*@
                         <div class="grid__column grid__column--12 grid__column--12--md">
-                            <h3>ADVERSE EVENTS</h3>
+                            <label for="Demog-RaceEthni" class="control__label control__label--is-required">Race/Ethnicity</label>
+                            <fieldset>
+                                <input type="radio" id="Black" value="African American/Black/Not of Hispanic Origin" name="Demog-RaceEthni" />
+                                <label for="Black" class="fieldset_label">
+                                    African American/Black/Not of Hispanic Origin
+                                </label><br />
+
+                                <input type="radio" id="AmericanIndian" value="American Indian or Alaska Native" name="Demog-RaceEthni" />
+                                <label for="American Indian or Alaska Native" class="fieldset_label">
+                                    American Indian or Alaska Native
+                                </label><br />
+
+                                <input type="radio" id="Asian" value="Asian" name="Demog-RaceEthni" />
+                                <label for="Asian" class="fieldset_label">
+                                    Asian
+                                </label><br />
+
+                                <input type="radio" id="white" value="Caucasian/White/Not of Hispanic Origin" name="Demog-RaceEthni" />
+                                <label for="AmericanIndian" class="fieldset_label">
+                                    Caucasian/White/Not of Hispanic Origin
+                                </label><br />
+
+                                <input type="radio" id="Latino" value="Hispanic or Latino" name="Demog-RaceEthni" />
+                                <label for="Hispanic" class="fieldset_label">
+                                    Hispanic or Latino
+                                </label><br />
+
+                                <input type="radio" id="Hawaiian" value="Native Hawaiian or Other Pacific Islander" name="Demog-RaceEthni" />
+                                <label for="Hawaiian" class="fieldset_label">
+                                    Native Hawaiian or Other Pacific Islander
+                                </label><br />
+
+                                <input type="radio" id="Other" value="Other" name="Demog-RaceEthni" />
+                                <label for="Other" class="fieldset_label">
+                                    Other
+                                </label><br />
+                            </fieldset>
+                            <p id="msg-Demog-RaceEthni" style="color:#ff0000; margin:0px; font-style:italic"></p>
                         </div>
-                        <div class="grid__column grid__column--12 grid__column--12--sm">
-                            <label for="AdverseEvent" class="control__label" style="display: inline-block">
-                                Have you encountered any adverse events since the previous assessment?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    @*Demog right *@
+                    <div class="grid__column grid__column--12 grid__column--6--md">
+                        @*Previous Colon Polyp?*@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="Demog-ColonPolyp" class="control__label__inline control__label--is-required">Previous Colon Polyp? </label>
+                            <fieldset>
+                                <label for="ColonPolypYes" class="fieldset_label">
+                                    <input type="radio" id="ColonPolyp1" value="Yes" name="Demog-ColonPolyp" /> Yes
+                                </label>
+                                <label for="ColonPolypNo" class="fieldset_label">
+                                    <input type="radio" id="ColonPolyp2" value="No" name="Demog-ColonPolyp" /> No
+                                </label>
+                            </fieldset>
+                            <p id="msg-Demog-ColonPolyp" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                        @*Previous Biopsy Done?*@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="Demog-BiopsyDone" class="control__label__inline control__label--is-required">Previous Biopsy Done? </label>
+                            <fieldset>
+                                <label for="BiopsyDoneYes" class="fieldset_label">
+                                    <input type="radio" id="BiopsyDone1" value="Yes" name="Demog-BiopsyDone" /> Yes
+                                </label>
+                                <label for="BiopsyDoneNo" class="fieldset_label">
+                                    <input type="radio" id="BiopsyDone2" value="No" name="Demog-BiopsyDone" /> No
+                                </label>
+                            </fieldset>
+                            <p id="msg-Demog-BiopsyDone" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                        @*Hemorrhoids?*@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="Demog-Hemorrhoids" class="control__label__inline control__label--is-required">Hemorrhoids? </label>
+                            <fieldset>
+                                <label for="HemorrhoidsYes" class="fieldset_label">
+                                    <input type="radio" id="Hemorrhoids1" value="Yes" name="Demog-Hemorrhoids" /> Yes
+                                </label>
+                                <label for="HemorrhoidsNo" class="fieldset_label">
+                                    <input type="radio" id="Hemorrhoids2" value="No" name="Demog-Hemorrhoids" /> No
+                                </label>
+                            </fieldset>
+                            <p id="msg-Demog-Hemorrhoids" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                        @*History of Diverticulitis?*@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="Demog-Diverticulitis" class="control__label__inline control__label--is-required">History of Diverticulitis? </label>
+                            <fieldset>
+                                <label for="DiverticulitisYes" class="fieldset_label">
+                                    <input type="radio" id="Diverticulitis1" value="Yes" name="Demog-Diverticulitis" /> Yes
+                                </label>
+                                <label for="DiverticulitisNo" class="fieldset_label">
+                                    <input type="radio" id="Diverticulitis2" value="No" name="Demog-Diverticulitis" /> No
+                                </label>
+                            </fieldset>
+                            <p id="msg-Demog-Diverticulitis" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                        @*Diabetes? *@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="Demog-Diabetes" class="control__label__inline control__label--is-required">Diabetes?  </label>
+                            <fieldset>
+                                <label for="DiabetesYes" class="fieldset_label">
+                                    <input type="radio" id="Diabetes1" value="Yes" name="Demog-Diabetes" /> Yes
+                                </label>
+                                <label for="DiabetesNo" class="fieldset_label">
+                                    <input type="radio" id="Diabetes2" value="No" name="Demog-Diabetes" /> No
+                                </label>
+                            </fieldset>
+                            <p id="msg-Demog-Diabetes" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                        @*Anemia? *@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="Demog-Anemia" class="control__label__inline control__label--is-required">Anemia?  </label>
+                            <fieldset>
+                                <label for="AnemiaYes" class="fieldset_label">
+                                    <input type="radio" value="Yes" name="Demog-Anemia" /> Yes
+                                </label>
+                                <label for="AnemiaNo" class="fieldset_label">
+                                    <input type="radio" value="No" name="Demog-Anemia" /> No
+                                </label>
+                            </fieldset>
+                            <p id="msg-Demog-Anemia" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                        @*Hysterectomy, C-Section, or Tubal Ligation? *@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="Demog-Hysterectomy" class="control__label__inline control__label--is-required">Hysterectomy, C-Section, or Tubal Ligation?  </label>
+                            <fieldset>
+                                <label for="HysterectomyYes" class="fieldset_label">
+                                    <input type="radio" value="Yes" name="Demog-Hysterectomy" /> Yes
+                                </label>
+                                <label for="HysterectomyNo" class="fieldset_label">
+                                    <input type="radio" value="No" name="Demog-Hysterectomy" /> No
+                                </label>
+                            </fieldset>
+                            <p id="msg-Demog-Hysterectomy" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                        @*ASA Classification: *@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="Demog-ASA" class="control__label__inline control__label--is-required">ASA Classification:   </label>
+                            <fieldset>
+                                <label for="ASA1" class="fieldset_label">
+                                    <input type="radio" value="1" name="Demog-ASA" /> 1
+                                </label>
+                                <label for="ASA2" class="fieldset_label">
+                                    <input type="radio" value="2" name="Demog-ASA" /> 2
+                                </label>
+                                <label for="ASA3" class="fieldset_label">
+                                    <input type="radio" value="3" name="Demog-ASA" /> 3
+                                </label>
+                            </fieldset>
+                            <p id="msg-Demog-ASA" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                        @*Kudo Classification:  *@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="Demog-Kudo" class="control__label__inline control__label--is-required">Kudo Classification:    </label>
+                            <fieldset>
+                                <label for="Kudo1" class="fieldset_label">
+                                    <input type="radio" value="II" name="Demog-Kudo" /> II
+                                </label>
+                                <label for="Kudo2" class="fieldset_label">
+                                    <input type="radio" value="IIA" name="Demog-Kudo" /> IIA
+                                </label>
+                                <label for="Kudo3" class="fieldset_label">
+                                    <input type="radio" value="IIIL" name="Demog-Kudo" /> IIIL
+                                </label>
+                                <label for="Kudo4" class="fieldset_label">
+                                    <input type="radio" value="IIIS" name="Demog-Kudo" /> IIIS
+                                </label>
+                                <label for="Kudo5" class="fieldset_label">
+                                    <input type="radio" value="IV" name="Demog-Kudo" /> IV
+                                </label>
+                            </fieldset>
+                            <p id="msg-Demog-Kudo" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                        @*Paris Classification:  *@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="Demog-Paris" class="control__label control__label--is-required">Paris Classification:     </label>
+                            <fieldset>
+                                <label for="Paris1" class="fieldset_label">
+                                    <input type="radio" value="IIa" name="Demog-Paris" /> IIa
+                                </label>
+                                <label for="Paris2" class="fieldset_label">
+                                    <input type="radio" value="IIb" name="Demog-Paris" /> IIb
+                                </label>
+                                <label for="Paris3" class="fieldset_label">
+                                    <input type="radio" value="IIa+IIb" name="Demog-Paris" /> IIa+IIb
+                                </label>
+                                <label for="Paris4" class="fieldset_label">
+                                    <input type="radio" value="Ip" name="Demog-Paris" /> Ip
+                                </label>
+                                <label for="Paris5" class="fieldset_label">
+                                    <input type="radio" value="Is" name="Demog-Paris" /> Is
+                                </label>
+                                <label for="Paris4" class="fieldset_label">
+                                    <input type="radio" value="Is+IIa" name="Demog-Paris" /> Is+IIa
+                                </label>
+                                <label for="Paris5" class="fieldset_label">
+                                    <input type="radio" value="Is+Ip" name="Demog-Paris" /> Is+Ip
+                                </label>
+                            </fieldset>
+                            <p id="msg-Demog-Paris" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                    </div>
+                </section>
+                @*section Procedure*@
+                <section class="grid" id="section-proc" style="display: none">
+                    <div class="grid__column grid__column--12 grid__column--12--md">
+                        <h3>PROCEDURE</h3>
+                    </div>
+                    @*Proc Left*@
+                    <div class="grid__column grid__column--12 grid__column--6--md">
+                        @*Randomization*@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="proc-Randomization" class="control__label control__label__inline control__label--is-required">Randomization Group: </label>
+                            <fieldset>
+                                <label for="Device" class="fieldset_label">
+                                    <input type="radio" value="Device" name="proc-Randomization" /> Device
+                                </label>
+                                <label for="Control" class="fieldset_label">
+                                    <input type="radio" value="Control" name="proc-Randomization" /> Control
+                                </label>
+                            </fieldset>
+                            <p id="msg-proc-Randomization" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+
+                        @*Was Intervention with Device Successful? *@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="proc-Successful" class="control__label control__label--is-required">If device used, was intervention with device successful?  </label>
+                            <fieldset>
+                                <label for="Successful" class="fieldset_label">
+                                    <input type="radio" value="Yes" name="proc-Successful" /> Yes
+                                </label>
+                                <label for="DiviceSuccessfulNo" class="fieldset_label">
+                                    <input type="radio" value="No" name="proc-Successful" /> No
+                                </label>
+                            </fieldset>
+                            <p id="msg-proc-Successful" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+
+                        @*enter a freehand comment to describe why it was not successful.*@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="proc-Comment" class="control__label control__label--is-required">If No, enter a freehand comment to describe why it was not successful.</label>
+                            <textarea class="control__input" id="proc-Comment" name="proc-Comment"></textarea>
+                            <p id="msg-proc-Comment" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+
+                        @*Length of Lesion:*@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="proc-Length" class="control__label control__label__inline control__label--is-required">Length of Lesion:</label>
+                            <input type="number" step="0.1" min="0" max="100" class="control__input__inline" id="proc-Length" name="proc-Length" />cm
+                            <p id="msg-proc-Length" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+
+                        @*Width of Lesion:*@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="proc-Width" class="control__label control__label__inline control__label--is-required">Width of Lesion:</label>
+                            <input type="number" step="0.1" min="0" max="100" class="control__input__inline" id="proc-Width" name="proc-Width" />cm
+                            <p id="msg-proc-Width" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                    </div>
+
+                    @*Proc Right*@
+                    <div class="grid__column grid__column--12 grid__column--6--md">
+                        @*Lesion Location:*@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="proc-LesionLocation" class="control__label control__label--is-required">Lesion Location: </label>
+                            <fieldset>
+                                <label for="LesionLocation1" class="fieldset_label">
+                                    <input type="radio" value="Appendix" name="proc-Location" /> Appendix
+                                </label>
+                                <label for="LesionLocation2" class="fieldset_label">
+                                    <input type="radio" value="Ascending Colon" name="proc-Location" /> Ascending Colon
+                                </label>
+                                <label for="LesionLocation3" class="fieldset_label">
+                                    <input type="radio" value="Cecum" name="proc-Location" /> Cecum
+                                </label>
+                                <label for="LesionLocation4" class="fieldset_label">
+                                    <input type="radio" value="Descending Colon" name="proc-Location" /> Descending Colon
+                                </label><br />
+                                <label for="LesionLocation5" class="fieldset_label">
+                                    <input type="radio" value="Hepatic Flexure" name="proc-Location" /> Hepatic Flexure
+                                </label>
+                                <label for="LesionLocation6" class="fieldset_label">
+                                    <input type="radio" value="ICV" name="proc-Location" /> ICV
+                                </label>
+                                <label for="LesionLocation7" class="fieldset_label">
+                                    <input type="radio" value="Rectum" name="proc-Location" /> Rectum
+                                </label>
+                                <label for="LesionLocation8" class="fieldset_label">
+                                    <input type="radio" value="Sigmoid" name="proc-Location" /> Sigmoid
+                                </label><br />
+                                <label for="LesionLocation9" class="fieldset_label">
+                                    <input type="radio" value="Splenic Flexure" name="proc-Location" /> Splenic Flexure
+                                </label>
+                                <label for="LesionLocation10" class="fieldset_label">
+                                    <input type="radio" value="Transverse Colon" name="proc-Location" /> Transverse Colon
+                                </label>
+                            </fieldset>
+                            <p id="msg-proc-Location" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+                        @*Navigating: *@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="proc-Navigating" class="control__label control__label control__label--is-required">Navigating: </label>
+                            <fieldset>
+                                <label for="Navigating1" class="fieldset_label">
+                                    <input type="radio" value="Difficult" name="proc-Navigating" /> Difficult
+                                </label>
+                                <label for="Navigating2" class="fieldset_label">
+                                    <input type="radio" value="Somewhat Difficult" name="proc-Navigating" /> Somewhat Difficult
+                                </label>
+                                <label for="Navigating3" class="fieldset_label">
+                                    <input type="radio" value="Somewhat Easy" name="proc-Navigating" /> Somewhat Easy
+                                </label>
+                                <label for="Navigating4" class="fieldset_label">
+                                    <input type="radio" value="Easy" name="proc-Navigating" /> Easy
+                                </label>
+                            </fieldset>
+                            <p id="msg-proc-Navigating" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+
+                        @*Clean Margins?*@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="proc-CleanMargins" class="control__label__inline control__label--is-required">Clean Margins?</label>
+                            <fieldset>
+                                <label for="CleanMarginsYes" class="fieldset_label">
+                                    <input type="radio" value="Yes" name="proc-CleanMargins" /> Yes
+                                </label>
+                                <label for="CleanMarginsNo" class="fieldset_label">
+                                    <input type="radio" value="No" name="proc-CleanMargins" /> No
+                                </label>
+                            </fieldset>
+                            <p id="msg-proc-CleanMargins" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        </div>
+
+                        @*Date of Procedure:*@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="proc-DProc" class="control__label control__label__inline control__label--is-required">Date of Procedure: </label>
+                            <input type="date" class="control__input__inline" id="proc-DProc" name="proc-DProc" />
+                        </div>
+                        <p id="msg-proc-TBegan" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        @*Time Case Begin:*@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="proc-TBegan" class="control__label control__label__inline control__label--is-required">Time Case Begin: </label>
+                            <input type="time" class="control__input__inline" step="1" id="proc-TBegan" name="proc-TBegan" />
+                        </div>
+                        <p id="msg-proc-TBegan" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        @*Time Case Ended:*@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="proc-TEnded" class="control__label control__label__inline control__label--is-required">Time Case Ended: </label>
+                            <input type="time" class="control__input__inline" step="1" id="proc-TEnded" name="proc-TEnded" />
+                        </div>
+                        <p id="msg-proc-TEnded" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        @*Time when Ceum Reached:*@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="proc-TCeReached" class="control__label control__label__inline control__label--is-required">Time when Ceum Reached: </label>
+                            <input type="time" class="control__input__inline" step="1" id="proc-TCeReached" name="proc-TCeReached" />
+                        </div>
+                        <p id="msg-proc-TCeReached" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                        @*Time when Lesion Reached:*@
+                        <div class="grid__column grid__column--12 grid__column--12--md">
+                            <label for="proc-TLeReached" class="control__label control__label__inline control__label--is-required">Time when Lesion Reached: </label>
+                            <input type="time" class="control__input__inline" step="1" id="proc-TLeReached" name="proc-TLeReached" />
+                        </div>
+                        <p id="msg-proc-TLeReached" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                    </div>
+
+                </section>
+                @*section feeling*@
+                <section class="grid" id="section-feeling" style="display:none">
+                    <div class="grid__column grid__column--12 grid__column--12--md">
+                        <h2>Patient Satisfaction</h2>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                        <h4>How satisfied are you with the procedure? </h4>
+                        <div class="slidecontainer">
+                            <input type="range" min="0" max="10" value="5" step="any" class="slider" id="Satification" />
+                            <label class="sliderlabelleft">
+                                Extremely Dry
                             </label>
-
-                            <label for="No">
-                                <input type="radio" id="No" value="No" name="AE-AdverseEvent" /> No
-                            </label>
-                            <label for="Yes">
-                                <input type="radio" id="Yes" value="Yes" name="AE-AdverseEvent" /> Yes
+                            <label class="sliderlabelright">
+                                Extremely Hydrated
                             </label>
                         </div>
-                        <p id="msg-AE-AdverseEvent" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                        <div class="grid__column grid__column--12 grid__column--12--sm isDisabled" id="divAEtable">
-                            <table>
-                                <tr>
-                                    <th>#</th>
-                                    <th>ADVERSE EVENT</th>
-                                    <th>SEVERITY</th>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:center">1</td>
-                                    <td width="60%"><input style="border: 0px; width: 100%" id="AdventEvent1" /></td>
-                                    <td style="text-align:center">
-                                        <label for="Mild">
-                                            <input type="radio" id="Mild1" value="Mild" name="SEVERITY1" /> Mild
-                                        </label>
-                                        <label for="Moderate">
-                                            <input type="radio" id="Moderate1" value="Moderate" name="SEVERITY1" /> Moderate
-                                        </label>
-                                        <label for="Severe">
-                                            <input type="radio" id="Severe1" value="Severe" name="SEVERITY1" /> Severe
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:center">2</td>
-                                    <td><input style="border: 0px; width: 100%" id="AdventEvent2" /></td>
-                                    <td style="text-align:center">
-                                        <label for="Mild">
-                                            <input type="radio" id="Mild2" value="Mild" name="SEVERITY2" /> Mild
-                                        </label>
-                                        <label for="Moderate">
-                                            <input type="radio" id="Moderate2" value="Moderate" name="SEVERITY2" /> Moderate
-                                        </label>
-                                        <label for="Severe">
-                                            <input type="radio" id="Severe2" value="Severe" name="SEVERITY2" /> Severe
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:center">3</td>
-                                    <td><input style="border: 0px; width: 100%" id="AdventEvent3" /></td>
-                                    <td style="text-align:center">
-                                        <label for="Mild">
-                                            <input type="radio" id="Mild3" value="Mild" name="SEVERITY3" /> Mild
-                                        </label>
-                                        <label for="Moderate">
-                                            <input type="radio" id="Moderate3" value="Moderate" name="SEVERITY3" /> Moderate
-                                        </label>
-                                        <label for="Severe">
-                                            <input type="radio" id="Severe3" value="Severe" name="SEVERITY3" /> Severe
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:center">...</td>
-                                    <td><input style="border: 0px; width: 100%" id="AdventEvent4" /></td>
-                                    <td style="text-align:center">
-                                        <label for="Mild">
-                                            <input type="radio" id="Mild4" value="Mild" name="SEVERITY4" /> Mild
-                                        </label>
-                                        <label for="Moderate">
-                                            <input type="radio" id="Moderate4" value="Moderate" name="SEVERITY4" /> Moderate
-                                        </label>
-                                        <label for="Severe">
-                                            <input type="radio" id="Severe4" value="Severe" name="SEVERITY4" /> Severe
-                                        </label>
-                                    </td>
-                                </tr>
-                            </table>
-                            <p id="msg-AE-AdverseEventtable" style="color:#ff0000; margin:0px; font-style:italic"></p>
-                        </div>
-                    </section>
-                    @*div button*@
-                    <div class="grid" style="margin-top:30px" id="divButton">
-                        <div class="grid__column grid__column--12 grid__column--12--sm">
-                            <button class="btn btn--previous" id="btnPrevious" style="float: left; display:none">Previous</button>                            
-                            <button class="btn" id="btnNext" style="float: right" type="submit">Next</button>
-                            <button class="btn" id="btnSubmit" type="submit" style="float: right; display: none">Submit</button>
-                            <button class="btn" id="btnAESubmit" type="submit" style="float: right; display: none">Submit</button>
-                        </div>
+                    </div>
+                </section>
+                @*section ADVERSE EVENTS*@
+                <section class="grid" id="section-AE" style="display: none">
+                    <div class="grid__column grid__column--12 grid__column--12--md">
+                        <h3>ADVERSE EVENTS</h3>
+                    </div>
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                        <label for="AdverseEvent" class="control__label" style="display: inline-block">
+                            Have you encountered any adverse events since the previous assessment?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </label>
+
+                        <label for="No">
+                            <input type="radio" id="No" value="No" name="AE-AdverseEvent" /> No
+                        </label>
+                        <label for="Yes">
+                            <input type="radio" id="Yes" value="Yes" name="AE-AdverseEvent" /> Yes
+                        </label>
+                    </div>
+                    <p id="msg-AE-AdverseEvent" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                    <div class="grid__column grid__column--12 grid__column--12--sm isDisabled" id="divAEtable">
+                        <table>
+                            <tr>
+                                <th>#</th>
+                                <th>ADVERSE EVENT</th>
+                                <th>SEVERITY</th>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">1</td>
+                                <td width="60%"><input style="border: 0px; width: 100%" id="AdventEvent1" /></td>
+                                <td style="text-align:center">
+                                    <label for="Mild">
+                                        <input type="radio" id="Mild1" value="Mild" name="SEVERITY1" /> Mild
+                                    </label>
+                                    <label for="Moderate">
+                                        <input type="radio" id="Moderate1" value="Moderate" name="SEVERITY1" /> Moderate
+                                    </label>
+                                    <label for="Severe">
+                                        <input type="radio" id="Severe1" value="Severe" name="SEVERITY1" /> Severe
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">2</td>
+                                <td><input style="border: 0px; width: 100%" id="AdventEvent2" /></td>
+                                <td style="text-align:center">
+                                    <label for="Mild">
+                                        <input type="radio" id="Mild2" value="Mild" name="SEVERITY2" /> Mild
+                                    </label>
+                                    <label for="Moderate">
+                                        <input type="radio" id="Moderate2" value="Moderate" name="SEVERITY2" /> Moderate
+                                    </label>
+                                    <label for="Severe">
+                                        <input type="radio" id="Severe2" value="Severe" name="SEVERITY2" /> Severe
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">3</td>
+                                <td><input style="border: 0px; width: 100%" id="AdventEvent3" /></td>
+                                <td style="text-align:center">
+                                    <label for="Mild">
+                                        <input type="radio" id="Mild3" value="Mild" name="SEVERITY3" /> Mild
+                                    </label>
+                                    <label for="Moderate">
+                                        <input type="radio" id="Moderate3" value="Moderate" name="SEVERITY3" /> Moderate
+                                    </label>
+                                    <label for="Severe">
+                                        <input type="radio" id="Severe3" value="Severe" name="SEVERITY3" /> Severe
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">...</td>
+                                <td><input style="border: 0px; width: 100%" id="AdventEvent4" /></td>
+                                <td style="text-align:center">
+                                    <label for="Mild">
+                                        <input type="radio" id="Mild4" value="Mild" name="SEVERITY4" /> Mild
+                                    </label>
+                                    <label for="Moderate">
+                                        <input type="radio" id="Moderate4" value="Moderate" name="SEVERITY4" /> Moderate
+                                    </label>
+                                    <label for="Severe">
+                                        <input type="radio" id="Severe4" value="Severe" name="SEVERITY4" /> Severe
+                                    </label>
+                                </td>
+                            </tr>
+                        </table>
+                        <p id="msg-AE-AdverseEventtable" style="color:#ff0000; margin:0px; font-style:italic"></p>
+                    </div>
+                </section>
+
+                @*div button*@
+                <div class="grid" style="margin-top:30px" id="divButton">
+                    <div class="grid__column grid__column--12 grid__column--12--sm">
+                        <button class="btn btn--previous" id="btnPrevious" style="float: left; display:none">Previous</button>
+                        <button class="btn" id="btnNext" style="float: right" type="submit">Next</button>
+                        <button class="btn btn--previous" id="btnVisit2Previous" style="float: left; display:none">Previous</button>
+                        <button class="btn" id="btnVisit2Next" style="float: right; display: none" type="submit">Next</button>
+                        <button class="btn" id="btnSubmit" type="submit" style="float: right; display: none">Submit</button>
+                        <button class="btn" id="btnAESubmit" type="submit" style="float: right; display: none">Submit</button>
                     </div>
                 </div>
+            </div>
             </div>
         </form>
     </div>

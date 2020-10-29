@@ -3,10 +3,13 @@
     ViewBag.Title = "VAS";
 }
 
-<!doctype html>
+@*<!doctype html>*@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
 <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Visual Analog Scale</title>
     @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">*@
     @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
@@ -45,7 +48,7 @@
                 <ul class="nav navbar__nav-list">
                     <li class="nav__item"><a href="/Home/About" class="nav__link">About</a></li>
                     <li class="nav__item"><a href="/HOME/services" class="nav__link">Services</a></li>
-                  @*  <li class="nav__item"><a href="/COVID19/Index" class="nav__link">COVID&#8209;19</a></li>*@
+                    @*  <li class="nav__item"><a href="/COVID19/Index" class="nav__link">COVID&#8209;19</a></li>*@
                     <li class="nav__item"><a href="/VAS/SurveyList" class="nav__link">Your&nbsp;Study</a></li>
                     <li class="nav__item"><a href="/HOME/contact" class="nav__link">Contact</a></li>
                     <li class="nav__item nav__item--mobile-only">
@@ -65,7 +68,7 @@
                     </li>
                     <li class="fixed-nav__nav"><a href="/Home/About" class="fixed-nav__link" tabIndex="-1">About</a></li>
                     <li class="fixed-nav__nav"><a href="/Home/services" class="fixed-nav__link" tabIndex="-1">Services</a></li>
-                  @*  <li class="fixed-nav__nav"><a href="/COVID19/Index" class="fixed-nav__link" tabIndex="-1">COVID-19</a></li>*@
+                    @*  <li class="fixed-nav__nav"><a href="/COVID19/Index" class="fixed-nav__link" tabIndex="-1">COVID-19</a></li>*@
                     <li class="fixed-nav__nav"><a href="/VAS/SurveyList" class="fixed-nav__link" tabIndex="-1">Your&nbsp;Study</a></li>
                     <li class="fixed-nav__nav"><a href="/Home/contact" class="fixed-nav__link" tabIndex="-1">Contact</a></li>
                 </ul>
@@ -94,8 +97,8 @@
         </div>
     </footer>
 
-        @Scripts.Render(System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bundles/App", true))
-        @RenderSection("scripts", required: false)
+    @Scripts.Render(System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bundles/App", true))
+    @RenderSection("scripts", required: false)
 </body>
 
 </html>

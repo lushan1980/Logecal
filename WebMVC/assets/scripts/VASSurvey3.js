@@ -254,6 +254,9 @@ $(document).ready(function () {
         $("#btnSubmit").css("display", "none");        
         $("#btnPrevious").css("display", "none");
         $("#btnNext").css("display", "block");
+        $("#btnVisit2Previous").css("display", "none");
+        $("#btnVisit2Next").css("display", "none");
+        $("#btnAESubmit").css("display", "none");
     })
     ProcVisit0.addEventListener('click', function (e) {
         e.preventDefault();
@@ -266,13 +269,32 @@ $(document).ready(function () {
         //} 
         $("#btnPrevious").css("display", "block");
         $("#btnNext").css("display", "none");
+        $("#btnVisit2Previous").css("display", "none");
+        $("#btnVisit2Next").css("display", "none");
+        $("#btnAESubmit").css("display", "none");
     })
 
+    Satisfaction.addEventListener('click', function (e) {
+        e.preventDefault();
+        $("#section-Demog").css("display", "none");
+        $("#section-proc").css("display", "none");
+        $("#section-AE").css("display", "none");
+        $("#section-feeling").css("display", "inline-flex");
+        $("#btnPrevious").css("display", "none");
+        $("#btnNext").css("display", "none");
+        $("#btnVisit2Previous").css("display", "none");
+        $("#btnVisit2Next").css("display", "block");
+        $("#btnSubmit").css("display", "none");
+        $("#btnAESubmit").css("display", "none");
+        document.getElementById("Satification").value = AllValues[0].Satification;
+    })
     VisitsArray.forEach(function (Visit, index) {
         Visit.addEventListener('click', function (e) {
             e.preventDefault();
         })
     })
+
+    var WhichAE;
     AEVisitsArray.forEach(function (AEVisit, index) {
         AEVisit.addEventListener('click', function (e) {
             e.preventDefault();
@@ -292,28 +314,15 @@ $(document).ready(function () {
                 //document.getElementById("section-AE").classList.add("isDisabled");
             //} 
             //if (index + 2 == VisitTime) {
-                //$("#btnAESubmit").css("display", "block");
-            //}
-            if (index === 1) {
-                $("#btnVisit2Previous").css("display", "block");
                 $("#btnAESubmit").css("display", "block");
+            //}
+            if (index === 0) {
+                $("#btnVisit2Previous").css("display", "block");
             }
             getAEs(index + 2);
-        })
-    })
+            WhichAE = index + 2;
 
-    Satisfaction.addEventListener('click', function (e) {
-        e.preventDefault();
-        $("#section-Demog").css("display", "none");
-        $("#section-proc").css("display", "none");
-        $("#section-AE").css("display", "none");
-        $("#section-feeling").css("display", "inline-flex");
-        $("#btnPrevious").css("display", "none");
-        $("#btnNext").css("display", "none");
-        $("#btnVisit2Previous").css("display", "none");
-        $("#btnVisit2Next").css("display", "block");
-        $("#btnSubmit").css("display", "none");
-        $("#btnAESubmit").css("display", "none");
+        })
     })
 
     var buttonpressed;
@@ -428,6 +437,7 @@ $(document).ready(function () {
     }
 
     function AESubmit() {
+        var Satification = document.getElementById("Satification").value
         var AEDiscription1 = document.getElementById('AdventEvent1').value,
             AEDiscription2 = document.getElementById('AdventEvent2').value,
             AEDiscription3 = document.getElementById('AdventEvent3').value,
@@ -442,6 +452,8 @@ $(document).ready(function () {
             object = {
                 SubjID: $('#SubjID').val(),
                 VisitNo: VisitTime,
+                WhichAE: WhichAE,
+                Satification: Satification,
                 AEDiscription1: AEDiscription1,
                 Severity1: severity1,
                 AEDiscription2: AEDiscription2,

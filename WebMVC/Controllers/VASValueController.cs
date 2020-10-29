@@ -1580,6 +1580,16 @@ namespace WebMVC.Controllers
                 });
                 cmd.Parameters.Add(new SqlParameter()
                 {
+                    ParameterName = "WhichAE",
+                    Value = val.WhichAE
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "Satification",
+                    Value = val.Satification
+                });
+                cmd.Parameters.Add(new SqlParameter()
+                {
                     ParameterName = "@AEDiscription1",
                     Value = val.AEDiscription1
                 });
@@ -1774,7 +1784,8 @@ namespace WebMVC.Controllers
                         TLeReached = GetString(rdr["TLeReached"]),
                         VisitNo = (int)GetInt(rdr["VisitNo"]),
                         AEDiscription = GetString(rdr["AEDiscription"]),
-                        Severity = GetString(rdr["Severity"])
+                        Severity = GetString(rdr["Severity"]),
+                        Satification = (float)GetFloat(rdr["Satification"])
                     };
                     AllValueinfo.Add(AllValue);
                 }
