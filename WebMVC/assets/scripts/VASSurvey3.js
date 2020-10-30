@@ -706,7 +706,7 @@ $(document).ready(function () {
     function getValue(picked, name) {       
         for (key in picked) {
             var element = document.getElementsByName(name + key); 
-            if (element[0].localName == "select" || element[0].type == 'number' || element[0].type == 'date' || element[0].type == 'time' || element[0].localName == "textarea") {
+            if (element[0].localName == "select" || element[0].type == 'number' || element[0].type == 'date' || element[0].type == 'time' || element[0].localName == "textarea" || element[0].type == 'text' ) {
                 var ccc = picked[key];
                 if (picked[key] == null || picked[key] == "undefined" || picked[key] == "") {
                     element[0].value = "";
