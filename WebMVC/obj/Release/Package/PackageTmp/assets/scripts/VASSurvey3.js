@@ -61,7 +61,7 @@ $(document).ready(function () {
 
     Summary.addEventListener('click', function (e) {
         e.preventDefault;
-        window.location.replace("/VAS/LumendiSummary" + "?UserID=" + UserID)
+        window.location.replace("/VAS/LumendiSummary" + "?SurveyID=" + SurveyID + "&UserID=" + UserID + "&StudyName=" + StudyName)
     })
 
     SubjID.addEventListener('input', function () { 
@@ -243,6 +243,7 @@ $(document).ready(function () {
         $("#btnVisit2Previous").css("display", "block");
         $("#btnVisit2Next").css("display", "none");
         $("#btnAESubmit").css("display", "block");
+        getAEs(2);
     })
 
     DemogVisit0.addEventListener('click', function (e) {
@@ -449,7 +450,8 @@ $(document).ready(function () {
 
         var object, url;
         
-            object = {
+        object = {
+                UserID: UserID,
                 SubjID: $('#SubjID').val(),
                 VisitNo: VisitTime,
                 WhichAE: WhichAE,

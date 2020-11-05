@@ -1567,7 +1567,11 @@ namespace WebMVC.Controllers
                 };
 
                 con.Open();
-
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "UserID",
+                    Value = val.UserID
+                });
                 cmd.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "SubjID",
@@ -1948,6 +1952,73 @@ namespace WebMVC.Controllers
                         Control = (float)GetFloat(rdr["Control"]),
                         Device = (float)GetFloat(rdr["Device"]),
                         Overall = (float)GetFloat(rdr["Overall"])
+
+                    };
+                    AllValueinfo.Add(AllValue);
+                }
+                con.Close();
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SummarySatification(VASUser user)
+        {
+            List<SatificationSummary> AllValueinfo = new List<SatificationSummary>();
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("SummarySatification", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@UserID",
+                    Value = user.UserID
+                });
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    SatificationSummary AllValue = new SatificationSummary
+                    {
+                        N = (int)GetInt(rdr["N"]),
+                        Mean_SD = GetString(rdr["Mean(SD)"]),
+                        Median = GetFloat(rdr["Median"]),
+                        Min_Max = GetString(rdr["Min, Max"])
+
+                    };
+                    AllValueinfo.Add(AllValue);
+                }
+                con.Close();
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SummaryProcedure()
+        {
+            List<ProcedureSummary> AllValueinfo = new List<ProcedureSummary>();
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("SumarySurgeryTimebyGender", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();            
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    ProcedureSummary AllValue = new ProcedureSummary
+                    {
+                        Gender = GetString(rdr["Gender"]),
+                        Time = GetFloat(rdr["Time"])
 
                     };
                     AllValueinfo.Add(AllValue);

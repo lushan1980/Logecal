@@ -152,7 +152,9 @@
     <Compile Include="Models\CustomHtmlHelepers.cs" />
     <Compile Include="Models\LumendiSummary.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\ProcedureSummary.cs" />
     <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\SatificationSummary.cs" />
     <Compile Include="Models\Survey.cs" />
     <Compile Include="Models\TestSample.cs" />
     <Compile Include="Models\typeplotData.cs" />

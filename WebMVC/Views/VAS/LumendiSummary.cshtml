@@ -2,7 +2,8 @@
 @{
     ViewBag.Title = "LumendiSummary";
 }
-<script src="~/assets/scripts/LumendiSummary.js?1001"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="~/assets/scripts/LumendiSummary.js?11041"></script>
 <!-- BANNER
 ================================================== -->
 <div class="banner banner--small" role="banner">
@@ -26,10 +27,10 @@
                 <div class="grid__column grid__column--12 grid__column--2--md two-column__section two-column__section--blue" id="div-menu">
                     <div class="vertical-menu">
                         <a href="#" id="Summary0" targetLink="Visit0">Demographics</a>
-                        @*<a href="#" id="Summary1">Summary 2</a>
-                            <a href="#" id="Summary2">Summary 3</a>
-                            <a href="#" id="Summary3">Summary 4</a>
-                            <a href="#" id="Summary4">Summary 5</a>*@
+                        <a href="#" id="Summary1">Satification</a>
+                        <a href="#" id="Summary2">Procedure</a>
+                            @*<a href="#" id="Summary3">Summary 4</a>*@
+                            @*<a href="#" id="Summary4">Summary 5</a>*@
                         <a href="#" id="return">Retrun Entry Data</a>
                     </div>
                 </div>
@@ -39,13 +40,19 @@
                     <!--section Demog-->
                     <section class="grid" id="section-Demog">
                         <div class="grid__column grid__column--12 grid__column--12--md" style="padding: 0 100px">
-                            <h3>DEMOGRAPHICS</h3>
-                            <label for="SubjNum" class="control__label control__label__inline" id="lblSubjID">Total of Subject: </label>
-                            <input type="text" class="control__input__inline" style="width: 15%" id="SubjNum" />
-                            <label for="DeviceNum" class="control__label control__label__inline" id="lblSubjID">Total of Device: </label>
-                            <input type="text" class="control__input__inline" style="width: 15%" id="DeviceNum" />
-                            <label for="ControlNum" class="control__label control__label__inline" id="lblSubjID">Total of Control: </label>
-                            <input type="text" class="control__input__inline" style="width: 15%" id="ControlNum" />
+                            <h3>DEMOGRAPHICS SUMMARY</h3>
+                            <label for="SubjNum" class="control__label control__label__inline" id="lblSubjID" style="width:30%">
+                                Total of Subject: <input type="text" class="control__input__inline" style="width: 30%" id="SubjNum" />
+                            </label>
+
+                            <label for="DeviceNum" class="control__label control__label__inline" id="lblSubjID" style="width:30%">
+                                Total of Device: <input type="text" class="control__input__inline" style="width: 30%" id="DeviceNum" />
+                            </label>
+
+                            <label for="ControlNum" class="control__label control__label__inline" id="lblSubjID" style="width:30%">
+                                Total of Control: <input type="text" class="control__input__inline" style="width: 30%" id="ControlNum" />
+                            </label>
+
                             <table id="table">
                                 <tr>
                                     <th>Subject ID</th>
@@ -80,6 +87,31 @@
                                     <th>Overall</th>
                                 </tr>
                             </table>
+                        </div>
+                    </section>
+
+                    <!--section Satification-->
+                    <section class="grid" id="section-Satification" style="display:none">
+                        <div class="grid__column grid__column--12 grid__column--12--md" style="padding: 0 100px">
+                            <h3>SATIFICATION SUMMARY</h3>
+                            <table id="SatificationSummary">
+                                <tr>
+                                    <th>N</th>
+                                    <th>Mean (SD) </th>
+                                    <th>Median</th>
+                                    <th>Min, Max</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!--section Procedure-->
+                    <section class="grid" id="section-Procedure" style="display:none">
+                        <div class="grid__column grid__column--12 grid__column--12--md" style="padding: 0 100px">
+                            <h3>PROCEDURE SUMMARY</h3>
+                            
+                            <center><div id="chartContainer" style="height: 500px; width: 90%;"></div></center>
+                            
                         </div>
                     </section>
 
