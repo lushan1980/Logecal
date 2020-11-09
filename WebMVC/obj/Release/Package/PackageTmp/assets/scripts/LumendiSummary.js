@@ -117,13 +117,82 @@
         e.preventDefault();
         $("#section-Demog").css("display", "inline-flex");
         $("#section-Satification").css("display", "none");
-
+        $("#section-Procedure").css("display", "none");
     })
+
     Summary1.addEventListener('click', function (e) {
         e.preventDefault();
         $("#section-Demog").css("display", "none");
         $("#section-Satification").css("display", "inline-flex");
+        $("#section-Procedure").css("display", "none");
 
+    })
+
+    Summary2.addEventListener('click', function (e) {
+        e.preventDefault();
+        $("#section-Demog").css("display", "none");
+        $("#section-Satification").css("display", "none");
+        $("#section-Procedure").css("display", "inline-flex");
+        //get Procedure Summary
+        $.ajax({
+            type: 'POST',
+            url: "/VASValue/SummaryProcedure",
+            dataType: "json",
+
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                AllValues = JSON.parse(data);
+                var points = AllValues.map(function (val) {
+                    return {                        
+                        label: val.Gender,  
+                        y: [val.Minimum, val.Q1, val.Q3, val.Maximum, val.Median]                      
+                    }
+                });
+                var Means = AllValues.map(function (val) {
+                    return {
+                        label: val.Gender,
+                        y: val.Mean
+                    }
+                });
+
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
+                    //theme: "light1", // "light1", "light2", "dark1", "dark2"
+                    title: {
+                        text: "Surgery time by Gender",
+                        fontSize: 20,
+                    },
+                    
+                    axisY: {
+                        title: "Average Surgery time(mm)"
+                    },
+                    data: [
+                    {
+                        type: "boxAndWhisker", //change type to bar, line, area, pie, etc
+                        //indexLabel: "{y}", //Shows y value on all Data Points
+                        //showInLegend: true, 
+                        upperBoxColor: "#FFC28D",
+                        lowerBoxColor: "#9ECCB8",
+                        color: "black",
+                        dataPoints: points
+                    },
+                    {
+                        type: "scatter",                       
+                        markerType: "cross",
+                        markerSize: 5,
+                        color: "blue",
+                        dataPoints: Means
+                    },]
+                });
+                chart.render();
+
+
+            },
+            error: function () {
+                alert("Something got wrong");
+            }
+        });
     })
     const Return = document.getElementById('return');
     Return.addEventListener('click', function (e) {

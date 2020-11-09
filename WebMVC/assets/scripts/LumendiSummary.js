@@ -146,7 +146,13 @@
                 var points = AllValues.map(function (val) {
                     return {                        
                         label: val.Gender,  
-                        y: val.Time                      
+                        y: [val.Minimum, val.Q1, val.Q3, val.Maximum, val.Median]                      
+                    }
+                });
+                var Means = AllValues.map(function (val) {
+                    return {
+                        label: val.Gender,
+                        y: val.Mean
                     }
                 });
 
@@ -161,13 +167,23 @@
                     axisY: {
                         title: "Average Surgery time(mm)"
                     },
-                    data: [{
-                        type: "column", //change type to bar, line, area, pie, etc
+                    data: [
+                    {
+                        type: "boxAndWhisker", //change type to bar, line, area, pie, etc
                         //indexLabel: "{y}", //Shows y value on all Data Points
                         //showInLegend: true, 
-                        
+                        upperBoxColor: "#FFC28D",
+                        lowerBoxColor: "#9ECCB8",
+                        color: "black",
                         dataPoints: points
-                    }]
+                    },
+                    {
+                        type: "scatter",                       
+                        markerType: "cross",
+                        markerSize: 5,
+                        color: "blue",
+                        dataPoints: Means
+                    },]
                 });
                 chart.render();
 

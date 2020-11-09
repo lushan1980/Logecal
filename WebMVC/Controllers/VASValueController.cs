@@ -2018,7 +2018,12 @@ namespace WebMVC.Controllers
                     ProcedureSummary AllValue = new ProcedureSummary
                     {
                         Gender = GetString(rdr["Gender"]),
-                        Time = GetFloat(rdr["Time"])
+                        Minimum = GetFloat(rdr["Minimum"]),
+                        Q1 = GetFloat(rdr["Q1"]),
+                        Median = GetFloat(rdr["Median"]),
+                        Q3 = GetFloat(rdr["Q3"]),
+                        Maximum = GetFloat(rdr["QuartileMax"]),
+                        Mean = GetFloat(rdr["Mean"])
 
                     };
                     AllValueinfo.Add(AllValue);

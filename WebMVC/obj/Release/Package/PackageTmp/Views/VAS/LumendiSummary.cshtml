@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "LumendiSummary";
 }
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="~/assets/scripts/LumendiSummary.js?11041"></script>
 <!-- BANNER
 ================================================== -->
@@ -27,9 +28,9 @@
                     <div class="vertical-menu">
                         <a href="#" id="Summary0" targetLink="Visit0">Demographics</a>
                         <a href="#" id="Summary1">Satification</a>
-                            @*<a href="#" id="Summary2">Summary 3</a>
-                            <a href="#" id="Summary3">Summary 4</a>
-                            <a href="#" id="Summary4">Summary 5</a>*@
+                        <a href="#" id="Summary2">Procedure</a>
+                            @*<a href="#" id="Summary3">Summary 4</a>*@
+                            @*<a href="#" id="Summary4">Summary 5</a>*@
                         <a href="#" id="return">Retrun Entry Data</a>
                     </div>
                 </div>
@@ -103,6 +104,17 @@
                             </table>
                         </div>
                     </section>
+
+                    <!--section Procedure-->
+                    <section class="grid" id="section-Procedure" style="display:none">
+                        <div class="grid__column grid__column--12 grid__column--12--md" style="padding: 0 100px">
+                            <h3>PROCEDURE SUMMARY</h3>
+                            
+                            <center><div id="chartContainer" style="height: 500px; width: 90%;"></div></center>
+                            
+                        </div>
+                    </section>
+
                 </div>
             </div>
         </form>
