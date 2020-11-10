@@ -2002,6 +2002,7 @@ namespace WebMVC.Controllers
         public JsonResult SummaryProcedure()
         {
             List<ProcedureSummary> AllValueinfo = new List<ProcedureSummary>();
+            List<ProcedureSummary> Outliers = new List<ProcedureSummary>();
             string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
             {
@@ -2024,14 +2025,23 @@ namespace WebMVC.Controllers
                         Q3 = GetFloat(rdr["Q3"]),
                         Maximum = GetFloat(rdr["QuartileMax"]),
                         Mean = GetFloat(rdr["Mean"])
-
                     };
                     AllValueinfo.Add(AllValue);
+                }
+                rdr.NextResult();
+                while (rdr.Read())
+                {
+                    ProcedureSummary AllValue = new ProcedureSummary
+                    {
+                        Gender = GetString(rdr["Gender"]),
+                        SurgeryTime = GetFloat(rdr["SurgeryTime"])
+                    };
+                    Outliers.Add(AllValue);
                 }
                 con.Close();
             }
             JavaScriptSerializer js = new JavaScriptSerializer();
-            return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
+            return Json(js.Serialize(AllValueinfo.Concat(Outliers)), JsonRequestBehavior.AllowGet);
         }
         public ActionResult CountSubj(VASUser user)
         {

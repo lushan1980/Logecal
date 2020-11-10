@@ -14,5 +14,6 @@ namespace WebMVC.Models
         public float? Q3 { get; set; }
         public float? Maximum { get; set; }
         public float? Mean { get; set; }
+        public float? SurgeryTime { get; set; }
     }
 }

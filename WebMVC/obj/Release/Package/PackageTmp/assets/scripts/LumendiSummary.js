@@ -143,19 +143,30 @@
             success: function (data) {
 
                 AllValues = JSON.parse(data);
-                var points = AllValues.map(function (val) {
-                    return {                        
+                var Boxplot = AllValues.slice(0, 2);
+                var Outlier = AllValues.slice(2);
+                var points = Boxplot.map(function (val) {
+                    return {
                         label: val.Gender,  
                         y: [val.Minimum, val.Q1, val.Q3, val.Maximum, val.Median]                      
                     }
                 });
-                var Means = AllValues.map(function (val) {
+                var Means = Boxplot.map(function (val) {
                     return {
                         label: val.Gender,
                         y: val.Mean
                     }
                 });
-
+                var Outliers = Outlier.map(function (val) {
+                    var x;
+                    if (val.Gender == "Male") { x = 0 }
+                    else { x = 1 };
+                    return {
+                        x: x,
+                        label: val.Gender,
+                        y: val.SurgeryTime
+                    }
+                });
                 var chart = new CanvasJS.Chart("chartContainer", {
                     animationEnabled: true,
                     //theme: "light1", // "light1", "light2", "dark1", "dark2"
@@ -163,7 +174,7 @@
                         text: "Surgery time by Gender",
                         fontSize: 20,
                     },
-                    
+                    //dataPointWidth: 200,
                     axisY: {
                         title: "Average Surgery time(mm)"
                     },
@@ -175,7 +186,17 @@
                         upperBoxColor: "#FFC28D",
                         lowerBoxColor: "#9ECCB8",
                         color: "black",
+                        lineThickness: 1, //box plot median line thickness
+                        whiskerThickness: 1, //box plot minimum and maxmum line thickness
+                        stemThickness: 1,  //vertical line thickness
                         dataPoints: points
+                    },
+                    {
+                        type: "scatter",
+                        markerType: "circle",
+                        markerSize: 4,
+                        color: "blue",
+                        dataPoints: Outliers
                     },
                     {
                         type: "scatter",                       
