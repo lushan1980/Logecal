@@ -2043,6 +2043,39 @@ namespace WebMVC.Controllers
             JavaScriptSerializer js = new JavaScriptSerializer();
             return Json(js.Serialize(AllValueinfo.Concat(Outliers)), JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult SummarySurgeryTimebyMonth()
+        {
+            List<ProcedureSummary> AllValueinfo = new List<ProcedureSummary>();
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("SurgeryTimebyMonth", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                con.Open();
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    ProcedureSummary AllValue = new ProcedureSummary
+                    {
+                        MonthProc = GetString(rdr["MonthProc"]),
+                        Mean = GetFloat(rdr["Mean"]),
+                        Std = GetFloat(rdr["Std"]),
+                        Lower = GetFloat(rdr["Lower"]),
+                        Upper = GetFloat(rdr["Upper"])
+                    };
+                    AllValueinfo.Add(AllValue);
+                }
+
+                con.Close();
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult CountSubj(VASUser user)
         {
             List<LumendiSummary> AllValueinfo = new List<LumendiSummary>();

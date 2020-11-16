@@ -133,7 +133,7 @@
         $("#section-Demog").css("display", "none");
         $("#section-Satification").css("display", "none");
         $("#section-Procedure").css("display", "inline-flex");
-        //get Procedure Summary
+        //get Surgery time by Gender Summary
         $.ajax({
             type: 'POST',
             url: "/VASValue/SummaryProcedure",
@@ -214,7 +214,68 @@
                 alert("Something got wrong");
             }
         });
+
+        //get Surgery time by Month Summary
+        $.ajax({
+            type: 'POST',
+            url: "/VASValue/SummarySurgeryTimebyMonth",
+            dataType: "json",
+
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                AllValues = JSON.parse(data);
+
+                var Ranges = AllValues.map(function (val) {
+                    return {
+                        label: val.MonthProc,
+                        y: [val.Lower, val.Upper]
+                    }
+                });
+                var Means = AllValues.map(function (val) {
+                    return {
+                        label: val.MonthProc,
+                        y: val.Mean
+                    }
+                });
+
+                var chart = new CanvasJS.Chart("chartContainer2", {
+                    animationEnabled: true,
+                    //theme: "light1", // "light1", "light2", "dark1", "dark2"
+                    title: {
+                        text: "Surgery time by Month",
+                        fontSize: 20,
+                    },
+                    //dataPointWidth: 200,
+                    axisY: {
+                        title: "Average Surgery time(mm)"
+                    },
+                    data: [
+                        {
+                            type: "line", 
+                            name: "Mean",
+                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y} in",
+                            markerType: "none",
+                            dataPoints: Means
+                        },
+                        {
+                            type: "error", 
+                            name: "Error Range",
+                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y} in",
+                            markerType: "none",
+                            dataPoints: Ranges
+                        }]
+                });
+                chart.render();
+
+
+            },
+            error: function () {
+                alert("Something got wrong");
+            }
+        });
     })
+
     const Return = document.getElementById('return');
     Return.addEventListener('click', function (e) {
         e.preventDefault;
