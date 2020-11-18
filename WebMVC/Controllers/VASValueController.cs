@@ -2062,6 +2062,7 @@ namespace WebMVC.Controllers
                 {
                     ProcedureSummary AllValue = new ProcedureSummary
                     {
+                        Randomization = GetString(rdr["Randomization"]),
                         MonthProc = GetString(rdr["MonthProc"]),
                         Mean = GetFloat(rdr["Mean"]),
                         Std = GetFloat(rdr["Std"]),

@@ -133,7 +133,7 @@
         $("#section-Demog").css("display", "none");
         $("#section-Satification").css("display", "none");
         $("#section-Procedure").css("display", "inline-flex");
-        //get Procedure Summary
+        //get Surgery time by Gender Summary
         $.ajax({
             type: 'POST',
             url: "/VASValue/SummaryProcedure",
@@ -200,8 +200,8 @@
                     },
                     {
                         type: "scatter",                       
-                        markerType: "cross",
-                        markerSize: 5,
+                        markerType: "square",
+                        markerSize: 3,
                         color: "blue",
                         dataPoints: Means
                     },]
@@ -214,7 +214,109 @@
                 alert("Something got wrong");
             }
         });
+
+        //get Surgery time by Month Summary
+        $.ajax({
+            type: 'POST',
+            url: "/VASValue/SummarySurgeryTimebyMonth",
+            dataType: "json",
+
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                AllValues = JSON.parse(data);
+
+                var Device = AllValues.filter(function (el) {
+                    return el.Randomization == 'Device'
+                });
+                var Control = AllValues.filter(function (el) {
+                    return el.Randomization == 'Control'
+                });
+
+                var DeviceRanges = Device.map(function (val) {
+                    return {
+                        label: val.MonthProc,
+                        y: [val.Lower, val.Upper]
+                    }
+                });
+                var DeviceMeans = Device.map(function (val) {
+                    return {
+                        label: val.MonthProc,
+                        y: val.Mean
+                    }
+                });
+                var ControlRanges = Control.map(function (val) {
+                    return {
+                        label: val.MonthProc,
+                        y: [val.Lower, val.Upper]
+                    }
+                });
+                var ControlMeans = Control.map(function (val) {
+                    return {
+                        label: val.MonthProc,
+                        y: val.Mean
+                    }
+                });
+
+                var chart = new CanvasJS.Chart("chartContainer2", {
+                    animationEnabled: true,
+                    //theme: "light1", // "light1", "light2", "dark1", "dark2"
+                    title: {
+                        text: "Surgery time by Month",
+                        fontSize: 20,
+                    },
+                    //dataPointWidth: 200,
+                    axisY: {
+                        title: "Average Surgery time(mm)"
+                    },
+                    data: [
+                        {
+                            type: "line", 
+                            showInLegend: true,
+                            name: "Device Mean",
+                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y} in",
+                            markerType: "circle",
+                            markerSize: 8,
+                            dataPoints: DeviceMeans
+                        },
+                        {
+                            type: "error", 
+                            showInLegend: true,
+                            name: "Device Error Range",
+                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y} in",
+                            markerType: "none",
+                            dataPoints: DeviceRanges
+                        },
+                        {
+                            type: "line",
+                            lineDashType: "dash",
+                            showInLegend: true,
+                            name: "Control Mean",
+                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y} in",
+                            markerType: "square",
+                            markerSize: 8,
+                            dataPoints: ControlMeans
+                        },
+                        {
+                            type: "error",
+                            showInLegend: true,
+                            name: "Control Error Range",
+                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y} in",
+                            markerType: "none",
+                            dataPoints: ControlRanges
+                        }
+                    ]
+                });
+                chart.render();
+
+
+            },
+            error: function () {
+                alert("Something got wrong");
+            }
+        });
     })
+
     const Return = document.getElementById('return');
     Return.addEventListener('click', function (e) {
         e.preventDefault;

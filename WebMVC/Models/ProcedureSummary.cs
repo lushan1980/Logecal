@@ -19,6 +19,7 @@ namespace WebMVC.Models
         public float? Lower { get; set; }
         public float? Upper { get; set; }
         public string MonthProc { get; set; }
+        public string Randomization { get; set; }
 
 
     }

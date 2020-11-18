@@ -200,8 +200,8 @@
                     },
                     {
                         type: "scatter",                       
-                        markerType: "cross",
-                        markerSize: 5,
+                        markerType: "square",
+                        markerSize: 3,
                         color: "blue",
                         dataPoints: Means
                     },]
@@ -226,13 +226,32 @@
 
                 AllValues = JSON.parse(data);
 
-                var Ranges = AllValues.map(function (val) {
+                var Device = AllValues.filter(function (el) {
+                    return el.Randomization == 'Device'
+                });
+                var Control = AllValues.filter(function (el) {
+                    return el.Randomization == 'Control'
+                });
+
+                var DeviceRanges = Device.map(function (val) {
                     return {
                         label: val.MonthProc,
                         y: [val.Lower, val.Upper]
                     }
                 });
-                var Means = AllValues.map(function (val) {
+                var DeviceMeans = Device.map(function (val) {
+                    return {
+                        label: val.MonthProc,
+                        y: val.Mean
+                    }
+                });
+                var ControlRanges = Control.map(function (val) {
+                    return {
+                        label: val.MonthProc,
+                        y: [val.Lower, val.Upper]
+                    }
+                });
+                var ControlMeans = Control.map(function (val) {
                     return {
                         label: val.MonthProc,
                         y: val.Mean
@@ -253,18 +272,40 @@
                     data: [
                         {
                             type: "line", 
-                            name: "Mean",
+                            showInLegend: true,
+                            name: "Device Mean",
                             toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y} in",
-                            markerType: "none",
-                            dataPoints: Means
+                            markerType: "circle",
+                            markerSize: 8,
+                            dataPoints: DeviceMeans
                         },
                         {
                             type: "error", 
-                            name: "Error Range",
+                            showInLegend: true,
+                            name: "Device Error Range",
                             toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y} in",
                             markerType: "none",
-                            dataPoints: Ranges
-                        }]
+                            dataPoints: DeviceRanges
+                        },
+                        {
+                            type: "line",
+                            lineDashType: "dash",
+                            showInLegend: true,
+                            name: "Control Mean",
+                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y} in",
+                            markerType: "square",
+                            markerSize: 8,
+                            dataPoints: ControlMeans
+                        },
+                        {
+                            type: "error",
+                            showInLegend: true,
+                            name: "Control Error Range",
+                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y} in",
+                            markerType: "none",
+                            dataPoints: ControlRanges
+                        }
+                    ]
                 });
                 chart.render();
 
