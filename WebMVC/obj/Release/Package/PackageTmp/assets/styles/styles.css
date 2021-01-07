@@ -2682,6 +2682,13 @@ table {
     font-size: 18px;
     line-height: 1.6;
 }
+.circle-icon {
+    background: transparent;
+    padding: 20px;
+    border: 3px solid white;
+    border-radius: 50%;
+    margin-right: 20px;
+}
 
 .button_icon {
     background-color: transparent;
@@ -5013,6 +5020,15 @@ p {
         width: 1.25em;
         background: url(/assets/images/checkmark-list-item.png) 0 0 no-repeat transparent;
         background-size: 100%;
+    }
+
+.checkmark-list__item__center {
+
+}
+
+    .checkmark-list__item__center:before {
+        left: 30%;
+
     }
 
 .figure {

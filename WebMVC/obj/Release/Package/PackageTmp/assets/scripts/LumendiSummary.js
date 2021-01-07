@@ -236,27 +236,29 @@
                 var DeviceRanges = Device.map(function (val, index) {
                     return {
                         x: index + 0.2,
-                        label: val.MonthProc,
-                        y: [val.Lower, val.Upper]
+                        y: [val.Lower, val.Upper],
+                        label: val.MonthProc
+                        
                     }
                 });
                 var DeviceMeans = Device.map(function (val, index) {
                     return {
                         x: index + 0.2,
-                        label: val.MonthProc,
-                        y: val.Mean
+                        y: val.Mean,
+                        label: val.MonthProc
+                        
                     }
                 });
                 var ControlRanges = Control.map(function (val, index) {
                     return {
-                        //x: index - 0.1,
+                        x: index - 0.2,
                         label: val.MonthProc,
                         y: [val.Lower, val.Upper]
                     }
                 });
                 var ControlMeans = Control.map(function (val, index) {
                     return {
-                        //x: index - 0.1,
+                        x: index - 0.2,
                         label: val.MonthProc,
                         y: val.Mean
                     }
@@ -270,8 +272,18 @@
                         fontSize: 20,
                     },
                     //dataPointWidth: 200,
+                    axisX: {
+                        interval: 1,
+                        minimum: -0.6,
+                        crosshair: {
+                            enabled: true
+                        }
+                    },
                     axisY: {
-                        title: "Average Surgery time(mm)"
+                        title: "Average Surgery time(mm)",
+                        crosshair: {
+                            enabled: true
+                        }
                     },
                     data: [
                         {
