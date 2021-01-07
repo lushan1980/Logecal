@@ -233,26 +233,32 @@
                     return el.Randomization == 'Control'
                 });
 
-                var DeviceRanges = Device.map(function (val) {
+                var DeviceRanges = Device.map(function (val, index) {
                     return {
+                        x: index + 0.2,
+                        y: [val.Lower, val.Upper],
+                        label: val.MonthProc
+                        
+                    }
+                });
+                var DeviceMeans = Device.map(function (val, index) {
+                    return {
+                        x: index + 0.2,
+                        y: val.Mean,
+                        label: val.MonthProc
+                        
+                    }
+                });
+                var ControlRanges = Control.map(function (val, index) {
+                    return {
+                        x: index - 0.2,
                         label: val.MonthProc,
                         y: [val.Lower, val.Upper]
                     }
                 });
-                var DeviceMeans = Device.map(function (val) {
+                var ControlMeans = Control.map(function (val, index) {
                     return {
-                        label: val.MonthProc,
-                        y: val.Mean
-                    }
-                });
-                var ControlRanges = Control.map(function (val) {
-                    return {
-                        label: val.MonthProc,
-                        y: [val.Lower, val.Upper]
-                    }
-                });
-                var ControlMeans = Control.map(function (val) {
-                    return {
+                        x: index - 0.2,
                         label: val.MonthProc,
                         y: val.Mean
                     }
@@ -266,15 +272,25 @@
                         fontSize: 20,
                     },
                     //dataPointWidth: 200,
+                    axisX: {
+                        interval: 1,
+                        minimum: -0.6,
+                        crosshair: {
+                            enabled: true
+                        }
+                    },
                     axisY: {
-                        title: "Average Surgery time(mm)"
+                        title: "Average Surgery time(mm)",
+                        crosshair: {
+                            enabled: true
+                        }
                     },
                     data: [
                         {
                             type: "line", 
                             showInLegend: true,
                             name: "Device Mean",
-                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y} in",
+                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y}",
                             markerType: "circle",
                             markerSize: 8,
                             dataPoints: DeviceMeans
@@ -283,7 +299,7 @@
                             type: "error", 
                             showInLegend: true,
                             name: "Device Error Range",
-                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y} in",
+                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y}",
                             markerType: "none",
                             dataPoints: DeviceRanges
                         },
@@ -292,7 +308,7 @@
                             lineDashType: "dash",
                             showInLegend: true,
                             name: "Control Mean",
-                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y} in",
+                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y}",
                             markerType: "square",
                             markerSize: 8,
                             dataPoints: ControlMeans
@@ -301,7 +317,7 @@
                             type: "error",
                             showInLegend: true,
                             name: "Control Error Range",
-                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y} in",
+                            toolTipContent: "<b>{label}</b><br><span style=\"color:#4F81BC\">{name}</span>: {y}",
                             markerType: "none",
                             dataPoints: ControlRanges
                         }
