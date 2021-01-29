@@ -85,5 +85,10 @@ namespace WebMVC.Controllers
         {
             return View();
         }
+
+        public ActionResult Data()
+        {
+            return View();
+        }
     }
 }

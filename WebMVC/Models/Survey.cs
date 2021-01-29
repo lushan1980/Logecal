@@ -61,5 +61,8 @@ namespace WebMVC.Models
         public string AEDiscription4 { get; set; }
         public string Severity4 { get; set; }
         public float? Satification { get; set; }
+
+        public string MonthProc { get; set; }
+        public int? SurgeryTime { get; set; }
     }
 }

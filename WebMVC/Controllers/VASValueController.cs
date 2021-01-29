@@ -2044,6 +2044,35 @@ namespace WebMVC.Controllers
             return Json(js.Serialize(AllValueinfo.Concat(Outliers)), JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetData()
+        {
+            List<Survey> AllValueinfo = new List<Survey>();
+            string CS = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("SurgeryTime", con);
+
+                con.Open();
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Survey AllValue = new Survey
+                    {                        
+                        SubjID = GetString(rdr["SubjID"]),
+                        Randomization = GetString(rdr["Randomization"]),
+                        MonthProc = GetString(rdr["MonthProc"]),
+                        DProc = GetString(rdr["DProc"]),
+                        SurgeryTime = (int)GetInt(rdr["SurgeryTime"])
+                    };
+                    AllValueinfo.Add(AllValue);
+                }
+                con.Close();
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            return Json(js.Serialize(AllValueinfo), JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult SummarySurgeryTimebyMonth()
         {
             List<ProcedureSummary> AllValueinfo = new List<ProcedureSummary>();

@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVC", "WebMVC.csproj", "
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonApplication2", "..\..\..\PythonDemo\PythonApplication2\PythonApplication2\PythonApplication2.pyproj", "{91DCBF79-AE3D-47E6-81D2-A3C288F70C95}"
 EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "WebProject1", "..\..\..\PythonDemo\WebProject1\WebProject1.pyproj", "{D5FBFA96-0488-4CBC-9FAB-B0CD78747FDA}"
-EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "FlaskWebProject1", "..\..\..\PythonDemo\FlaskWebProject1\FlaskWebProject1.pyproj", "{BAE284FD-E6CF-4D99-BF5A-1929630395D6}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "WebProject1", "..\..\..\PythonDemo\WebProject1\WebProject1.pyproj", "{0D7FF3A6-940C-453D-810F-EA92D15B68CE}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonApplication1", "..\..\..\PythonDemo\PythonApplication1\PythonApplication1.pyproj", "{5B77A18D-8ECC-4D84-A4F2-3452B42DB377}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +25,16 @@ Global
 		{04786841-A291-42F5-AF5C-573F38453091}.Release|Any CPU.Build.0 = Release|Any CPU
 		{91DCBF79-AE3D-47E6-81D2-A3C288F70C95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91DCBF79-AE3D-47E6-81D2-A3C288F70C95}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5FBFA96-0488-4CBC-9FAB-B0CD78747FDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5FBFA96-0488-4CBC-9FAB-B0CD78747FDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5FBFA96-0488-4CBC-9FAB-B0CD78747FDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5FBFA96-0488-4CBC-9FAB-B0CD78747FDA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BAE284FD-E6CF-4D99-BF5A-1929630395D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BAE284FD-E6CF-4D99-BF5A-1929630395D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAE284FD-E6CF-4D99-BF5A-1929630395D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAE284FD-E6CF-4D99-BF5A-1929630395D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D7FF3A6-940C-453D-810F-EA92D15B68CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D7FF3A6-940C-453D-810F-EA92D15B68CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D7FF3A6-940C-453D-810F-EA92D15B68CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D7FF3A6-940C-453D-810F-EA92D15B68CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B77A18D-8ECC-4D84-A4F2-3452B42DB377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B77A18D-8ECC-4D84-A4F2-3452B42DB377}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -208,6 +208,7 @@
     <Content Include="assets\scripts\Admin.js" />
     <Content Include="assets\scripts\App.js" />
     <Content Include="assets\scripts\ContactForm.js" />
+    <Content Include="assets\scripts\GetData.js" />
     <Content Include="assets\scripts\LumendiSummary.js" />
     <Content Include="assets\scripts\ResetPwd.js" />
     <Content Include="assets\scripts\Signin.js" />
@@ -446,6 +447,7 @@
     <Content Include="Views\VAS\LumendiSummary.cshtml" />
     <Content Include="Views\VAS\Admin.cshtml" />
     <Content Include="Views\VAS\DataAdmin.cshtml" />
+    <Content Include="Views\VAS\Data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
